@@ -1,4 +1,4 @@
-import {MusicGenre} from '../Basics/MusicGenre';
+import {MusicGenre} from '../Clases base/MusicGenre';
 
 export abstract class Manager<T extends MusicGenre> {
   protected collection: Set<T> = new Set<T>();

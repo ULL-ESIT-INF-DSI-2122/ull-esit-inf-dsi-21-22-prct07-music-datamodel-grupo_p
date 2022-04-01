@@ -1,4 +1,4 @@
-import {Album, Artist, Group, Song, MusicGenre} from '../Basics/MusicGenre';
+import {Album, Artist, Group, Song, MusicGenre} from '../Clases base/MusicGenre';
 import {Manager} from './Manager';
 import lowdb = require('lowdb');
 import FileSync = require('lowdb/adapters/FileSync');

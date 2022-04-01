@@ -1,5 +1,5 @@
 import * as inquirer from 'inquirer';
-import {MusicGenre} from '../Basics/MusicGenre';
+import {MusicGenre} from '../Clases base/MusicGenre';
 import {MusicGenresManager} from '../Managers/MusicGenresManager';
 import {promptUser} from './MainMenu';
 
