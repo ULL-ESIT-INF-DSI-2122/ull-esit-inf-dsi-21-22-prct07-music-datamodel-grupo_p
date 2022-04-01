@@ -8,9 +8,9 @@ import {Reproduccion} from './Reproduccion';
  */
 
 export class Song {
-  constructor(readonly name: string, readonly author: string,
-      readonly duration: Duracion, readonly genres: Genre[],
-      readonly datePublication: Date, readonly isSingle: boolean,
+  constructor(private name: string, private author: string,
+      private duration: Duracion, private genres: Genre[],
+      private datePublication: Date, private isSingle: boolean,
       private reproductions: Reproduccion[]) {
   }
 

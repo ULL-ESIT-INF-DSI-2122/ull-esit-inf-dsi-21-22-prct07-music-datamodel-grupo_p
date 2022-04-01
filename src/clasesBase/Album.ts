@@ -4,9 +4,9 @@ import {Group} from './Group';
 import {Artist} from './Artist';
 
 export class Album {
-  constructor(readonly name: string, readonly whoPublishes: (Group|Artist),
-    readonly publicationYear: number, readonly genres: Genre[],
-    readonly songs: Song[]) {
+  constructor(private name: string, private whoPublishes: (Group|Artist),
+    private publicationYear: number, private genres: Genre[],
+    private songs: Song[]) {
   }
   public print(): string {
     return (`ALBUM ${this.name}
