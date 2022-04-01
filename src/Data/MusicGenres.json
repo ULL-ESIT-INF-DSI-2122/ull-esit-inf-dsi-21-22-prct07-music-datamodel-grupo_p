@@ -1,0 +1,29 @@
+{
+  "genres": [
+    {
+      "name": "Pop",
+      "musicians": [
+        "Rolling Stones"
+      ],
+      "albums": [
+        "Threaller",
+        "Abbey Road"
+      ],
+      "songs": [
+        "Despacito"
+      ]
+    },
+    {
+      "name": "Rap",
+      "musicians": [
+        "Rolling Stones"
+      ],
+      "albums": [
+        "Threaller"
+      ],
+      "songs": [
+        "Imagine"
+      ]
+    }
+  ]
+}
