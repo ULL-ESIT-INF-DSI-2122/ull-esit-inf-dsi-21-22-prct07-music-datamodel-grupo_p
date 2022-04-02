@@ -71,6 +71,15 @@ export class Playlist {
     this.genres = g;
   }
   */
+  addSong(newSong: Song): void {
+    if (this.songs.find((m) => m === newSong) === undefined) {
+      this.songs.push(newSong);
+    }
+  }
+  deleteSong(song: Song): void {
+    const index = this.songs.indexOf(song);
+    this.songs.splice(index, 1);
+  }
 
   setGenres(genres: Genre[]): void {
     this.genres = genres;

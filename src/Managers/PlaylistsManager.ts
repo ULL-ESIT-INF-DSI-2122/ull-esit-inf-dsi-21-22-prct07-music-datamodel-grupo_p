@@ -51,6 +51,12 @@ export class PlaylistsManager extends Manager<Playlist> {
     });
     this.storePlaylists();
   }
+  removeSong(song: Song) {
+    this.collection.forEach((element) => {
+      element.deleteSong(song);
+    });
+    this.storePlaylists();
+  }
   storePlaylists() {
     this.database.set('playlists', [...this.collection.values()]).write();
   }
