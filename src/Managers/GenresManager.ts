@@ -59,7 +59,7 @@ export class GenresManager extends Manager<Genre> {
       if (genres.find((g) => g === element.getName()) !== undefined) {
         element.addMusician(musician);
       } else {
-        element.removeMusician(musician);
+        element.deleteMusician(musician);
       }
     });
     this.storeGenres();
@@ -67,7 +67,7 @@ export class GenresManager extends Manager<Genre> {
 
   removeMusician(musician: Artist|Group) {
     this.collection.forEach((element) => {
-      element.removeMusician(musician);
+      element.deleteMusician(musician);
     });
     this.storeGenres();
   }

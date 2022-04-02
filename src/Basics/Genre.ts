@@ -30,7 +30,7 @@ export class Genre {
       this.musicians.push(newMusician);
     }
   }
-  removeMusician(musician: Group|Artist): void {
+  deleteMusician(musician: Group|Artist): void {
     const index = this.musicians.indexOf(musician);
     this.musicians.splice(index, 1);
   }
