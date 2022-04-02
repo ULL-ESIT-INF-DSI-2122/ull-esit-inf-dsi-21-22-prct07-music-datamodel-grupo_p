@@ -1,9 +1,9 @@
-export type Group = string;
-export type Artist = string;
-export type Album = string;
-export type Song = string;
+import {Album} from './Album';
+import {Artist} from './Artist';
+import {Group} from './Group';
+import {Song} from './Song';
 
-export class MusicGenre {
+export class Genre {
   constructor(private name: string, private musicians: (Group|Artist)[],
               private albums: Album[], private songs: Song[]) {
   }
@@ -25,12 +25,12 @@ export class MusicGenre {
   setMusicians(musicians: (Group|Artist)[]): void {
     this.musicians = musicians;
   }
-  addMusician(newMusician: Group|Artist) {
+  addMusician(newMusician: Group|Artist): void {
     if (this.musicians.find((m) => m === newMusician) === undefined) {
       this.musicians.push(newMusician);
     }
   }
-  removeMusician(musician: Group|Artist) {
+  removeMusician(musician: Group|Artist): void {
     const index = this.musicians.indexOf(musician);
     this.musicians.splice(index, 1);
   }
@@ -40,8 +40,8 @@ export class MusicGenre {
   setSongs(songs: Song[]): void {
     this.songs = songs;
   }
-  showInfo() {
-    console.log(`${this.name}\n  -Groups/Artists: ${this.musicians}\n`+
-                `  -Albums: ${this.albums}\n  -Songs: ${this.songs}`);
+  showInfo(): void {
+    console.log(`${this.name}\n  -Grupos/Artistas: ${this.musicians}\n`+
+                `  -Álbums: ${this.albums}\n  -Canciones: ${this.songs}`);
   }
 }

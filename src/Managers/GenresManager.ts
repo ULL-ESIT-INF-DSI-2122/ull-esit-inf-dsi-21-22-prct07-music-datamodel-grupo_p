@@ -1,36 +1,40 @@
-import {Album, Artist, Group, Song, MusicGenre} from '../Clases base/MusicGenre';
+import {Genre} from '../Basics/Genre';
 import {Manager} from './Manager';
 import lowdb = require('lowdb');
 import FileSync = require('lowdb/adapters/FileSync');
+import {Group} from '../Basics/Group';
+import {Artist} from '../Basics/Artist';
+import {Album} from '../Basics/Album';
+import {Song} from '../Basics/Song';
 type schemaType = {
     genres: { name: string; musicians: (Group|Artist)[]; albums: Album[], songs: Song[] }[]
 };
-export class MusicGenresManager extends Manager<MusicGenre> {
-  private static musicGenresManager: MusicGenresManager;
+export class GenresManager extends Manager<Genre> {
+  private static genresManager: GenresManager;
   private database: lowdb.LowdbSync<schemaType>;
   private constructor() {
     super();
-    this.database = lowdb(new FileSync('src/Data/MusicGenres.json'));
+    this.database = lowdb(new FileSync('src/Data/Genres.json'));
     if (this.database.has('genres').value()) {
       let dbItems = this.database.get('genres').value();
-      dbItems.forEach((item) => this.collection.add(new MusicGenre(
+      dbItems.forEach((item) => this.collection.add(new Genre(
           item.name, item.musicians, item.albums, item.songs,
       )));
     }
   }
 
-  public static getMusicGenresManager(): MusicGenresManager {
-    if (!MusicGenresManager.musicGenresManager) {
-      MusicGenresManager.musicGenresManager = new MusicGenresManager();
+  public static getGenresManager(): GenresManager {
+    if (!GenresManager.genresManager) {
+      GenresManager.genresManager = new GenresManager();
     }
-    return MusicGenresManager.musicGenresManager;
+    return GenresManager.genresManager;
   }
 
-  addMusicGenre(genre: MusicGenre): void {
+  addGenre(genre: Genre): void {
     this.collection.add(genre);
     this.storeGenres();
   }
-  removeMusicGenre(genre: MusicGenre): void {
+  removeGenre(genre: Genre): void {
     this.collection.forEach((element) => {
       if (element.getName() === genre.getName()) {
         this.collection.delete(element);
@@ -38,7 +42,7 @@ export class MusicGenresManager extends Manager<MusicGenre> {
     });
     this.storeGenres();
   }
-  editMusicGenre(genre: MusicGenre, newName: string, newMusicians: (Group|Artist)[],
+  editGenre(genre: Genre, newName: string, newMusicians: (Group|Artist)[],
       newAlbums: Album[], newSongs: Song[] ): void {
     this.collection.forEach((element) => {
       if (element.getName() === genre.getName()) {
