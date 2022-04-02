@@ -1,26 +1,29 @@
 /* eslint-disable no-unused-vars */
 import * as inquirer from 'inquirer';
-import {MusicGenre} from '../Clases base/MusicGenre';
-import {MusicGenresManager} from '../Managers/MusicGenresManager';
-import {promptMusicGenres} from './MusicGenresMenu';
+import {promptGenres} from './GenresMenu';
+import {promptPlaylists} from './PlaylistsMenu';
 
 // require('events').EventEmitter.defaultMaxListeners = 0;
 
 enum Commands {
-    MusicGenres = 'Music Genres',
-    Quit = 'Quit'
+    MusicGenres = 'Géneros',
+    Playlists = 'Playlists',
+    Quit = 'Salir'
 }
 export function promptUser(): void {
   console.clear();
   inquirer.prompt({
     type: 'list',
     name: 'command',
-    message: 'Choose option',
-    choices: ['Music Genres', 'Quit'],
+    message: 'Menú principal',
+    choices: Object.values(Commands),
   }).then((answers) => {
     switch (answers['command']) {
       case Commands.MusicGenres:
-        promptMusicGenres();
+        promptGenres();
+        break;
+      case Commands.Playlists:
+        promptPlaylists();
         break;
     }
   });

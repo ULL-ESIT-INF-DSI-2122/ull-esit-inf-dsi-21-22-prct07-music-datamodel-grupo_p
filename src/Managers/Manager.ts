@@ -1,11 +1,11 @@
-import {MusicGenre} from '../Clases base/MusicGenre';
+import {Genre} from '../Basics/Genre';
+import {Playlist} from '../Basics/Playlist';
 
-export abstract class Manager<T extends MusicGenre> {
+export abstract class Manager<T extends Genre|Playlist> {
   protected collection: Set<T> = new Set<T>();
   getCollection(): Set<T> {
     return this.collection;
   }
-  /*
   getList(): string[] {
     let options: string[] = [];
     this.collection.forEach((element) => {
@@ -13,11 +13,19 @@ export abstract class Manager<T extends MusicGenre> {
     });
     return options;
   }
-  */
   exists(value: string): boolean {
     let exists: boolean = false;
     this.collection.forEach((element) => {
       if (value === element.getName()) {
+        exists = true;
+      }
+    });
+    return exists;
+  }
+  anotherOneWithThatName(value: string, element?: T): boolean {
+    let exists: boolean = false;
+    this.collection.forEach((c) => {
+      if (value === c.getName() && c !== element) {
         exists = true;
       }
     });
