@@ -1,6 +1,4 @@
-import {Artist} from './Artist';
-import {Genre} from './Genre';
-import {Group} from './Group';
+
 import {Duration} from './Playlist';
 /**
  * Clase que representa una cancion
@@ -9,16 +7,25 @@ import {Duration} from './Playlist';
  */
 
 export class Song {
-  constructor(readonly name: string, readonly author: Group|Artist,
-      readonly duration: Duration, readonly genres: Genre[],
+  constructor(readonly name: string, readonly author: string,
+      readonly duration: Duration, readonly genres: string[],
       readonly datePublication: Date, readonly isSingle: boolean,
       private reproductions: number) {
   }
 
-  public getReproduction(): number {
+  getName(): string {
+    return this.name;
+  }
+  getDuration(): Duration {
+    return this.duration;
+  }
+  getReproduction(): number {
     return this.reproductions;
   }
-  public monthlyReproductions(): number {
+  getGenres():string[] {
+    return this.genres;
+  }
+  monthlyReproductions(): number {
     const actualDate: Date = new Date(Date.now());
     const difference: number = actualDate.getTime() -
       this.datePublication.getTime();
@@ -27,7 +34,7 @@ export class Song {
     // media de reproducciones por mes
     return this.getReproduction() / monthDifference;
   }
-  public print(): string {
+  print(): string {
     return (`CANCION ${this.name}
     Autor: ${this.author}
     Duracion: ${this.duration}

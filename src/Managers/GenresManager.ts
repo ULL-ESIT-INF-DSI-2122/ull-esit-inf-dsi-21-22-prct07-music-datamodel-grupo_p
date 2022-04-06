@@ -50,6 +50,9 @@ export class GenresManager extends Manager<Genre> {
     });
     this.storeGenres();
   }
+  getGenreByName(name:string): Genre|undefined {
+    return ([...this.collection.values()].find((genre) => genre.getName() === name));
+  }
   // ====================
   updateMusician(musician: string, genres: string[]): void {
     this.collection.forEach((element) => {

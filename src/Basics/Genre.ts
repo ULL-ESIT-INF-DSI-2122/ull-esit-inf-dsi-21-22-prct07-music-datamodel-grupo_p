@@ -54,8 +54,10 @@ export class Genre {
     const index = this.songs.indexOf(song);
     this.songs.splice(index, 1);
   }
-  showInfo(): void {
-    console.log(`${this.name}\n  -Grupos/Artistas: ${this.musicians}\n`+
-                `  -Álbums: ${this.albums}\n  -Canciones: ${this.songs}`);
+  showInfo(): string {
+    const info: string = `${this.name}\n  -Grupos/Artistas: ${this.musicians}\n`+
+    `  -Álbums: ${this.albums}\n  -Canciones: ${this.songs}`;
+    console.log(info);
+    return info;
   }
 }
