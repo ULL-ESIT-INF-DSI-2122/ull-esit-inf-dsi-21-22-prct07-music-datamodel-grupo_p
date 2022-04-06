@@ -2,12 +2,8 @@ import {Genre} from '../Basics/Genre';
 import {Manager} from './Manager';
 import lowdb = require('lowdb');
 import FileSync = require('lowdb/adapters/FileSync');
-import {Group} from '../Basics/Group';
-import {Artist} from '../Basics/Artist';
-import {Album} from '../Basics/Album';
-import {Song} from '../Basics/Song';
 type schemaType = {
-    genres: { name: string; musicians: (Group|Artist)[]; albums: Album[], songs: Song[] }[]
+    genres: { name: string; musicians: string[]; albums: string[], songs: string[] }[]
 };
 export class GenresManager extends Manager<Genre> {
   private static genresManager: GenresManager;
@@ -42,8 +38,8 @@ export class GenresManager extends Manager<Genre> {
     });
     this.storeGenres();
   }
-  editGenre(genre: Genre, newName: string, newMusicians: (Group|Artist)[],
-      newAlbums: Album[], newSongs: Song[] ): void {
+  editGenre(genre: Genre, newName: string, newMusicians: string[],
+      newAlbums: string[], newSongs: string[] ): void {
     this.collection.forEach((element) => {
       if (element.getName() === genre.getName()) {
         element.setName(newName);
@@ -54,23 +50,63 @@ export class GenresManager extends Manager<Genre> {
     });
     this.storeGenres();
   }
-  updateMusician(musician: Artist|Group, genres: string[]): void {
+  getGenreByName(name:string): Genre|undefined {
+    return ([...this.collection.values()].find((genre) => genre.getName() === name));
+  }
+  // ====================
+  updateMusician(musician: string, genres: string[]): void {
     this.collection.forEach((element) => {
       if (genres.find((g) => g === element.getName()) !== undefined) {
         element.addMusician(musician);
       } else {
-        element.removeMusician(musician);
+        element.deleteMusician(musician);
       }
     });
     this.storeGenres();
   }
 
-  removeMusician(musician: Artist|Group) {
+  removeMusician(musician: string) {
     this.collection.forEach((element) => {
-      element.removeMusician(musician);
+      element.deleteMusician(musician);
     });
     this.storeGenres();
   }
+
+  updateAlbum(album: string, genres: string[]): void {
+    this.collection.forEach((element) => {
+      if (genres.find((g) => g === element.getName()) !== undefined) {
+        element.addAlbum(album);
+      } else {
+        element.deleteAlbum(album);
+      }
+    });
+    this.storeGenres();
+  }
+
+  removeAlbum(album: string) {
+    this.collection.forEach((element) => {
+      element.deleteAlbum(album);
+    });
+    this.storeGenres();
+  }
+  updateSong(song: string, genres: string[]): void {
+    this.collection.forEach((element) => {
+      if (genres.find((g) => g === element.getName()) !== undefined) {
+        element.addSong(song);
+      } else {
+        element.deleteSong(song);
+      }
+    });
+    this.storeGenres();
+  }
+
+  removeSong(song: string) {
+    this.collection.forEach((element) => {
+      element.deleteSong(song);
+    });
+    this.storeGenres();
+  }
+  // ====================
 
   storeGenres() {
     this.database.set('genres', [...this.collection.values()]).write();

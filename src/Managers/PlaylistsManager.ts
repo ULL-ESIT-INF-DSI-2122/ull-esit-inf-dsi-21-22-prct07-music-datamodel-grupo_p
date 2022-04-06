@@ -46,8 +46,14 @@ export class PlaylistsManager extends Manager<Playlist> {
       if (element.getName() === playlist.getName()) {
         element.setName(newName);
         element.setSongs(newSongs);
-        element.setGenres(newGenres);
+        // element.setGenres(newGenres);
       }
+    });
+    this.storePlaylists();
+  }
+  removeSong(song: Song) {
+    this.collection.forEach((element) => {
+      element.deleteSong(song);
     });
     this.storePlaylists();
   }

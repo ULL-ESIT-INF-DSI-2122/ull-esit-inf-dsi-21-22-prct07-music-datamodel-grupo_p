@@ -8,6 +8,10 @@ export class Group {
       private albums: Album[]) {
   }
 
+  getName(): string {
+    return this.name;
+  }
+
   public getArtists(): Artist[] {
     return this.artists;
   }

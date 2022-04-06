@@ -8,6 +8,10 @@ export class Artist {
       private genres: Genre[], private albums: Album[], private songs: Song[]) {
   }
 
+  getName(): string {
+    return this.name;
+  }
+
   public getGroups(): Group[] {
     return this.groups;
   }
