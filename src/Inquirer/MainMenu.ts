@@ -1,5 +1,5 @@
 /* eslint-disable no-unused-vars */
-import * as inquirer from 'inquirer';
+var inquirer = require('inquirer');
 import {promptGenres} from './GenresMenu';
 import {promptPlaylists} from './PlaylistsMenu';
 
