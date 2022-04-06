@@ -1,6 +1,6 @@
 /* eslint-disable no-unused-vars */
 import * as inquirer from 'inquirer';
-import {MusicGenre} from '../Clases base/MusicGenre';
+import {MusicGenre} from '../clasesBase/MusicGenre';
 import {MusicGenresManager} from '../Managers/MusicGenresManager';
 import {promptMusicGenres} from './MusicGenresMenu';
 

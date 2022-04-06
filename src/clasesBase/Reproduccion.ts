@@ -1,4 +1,7 @@
 export class Reproduccion {
-  constructor(readonly fecha: Date) {
+  constructor(private fecha: Date) {
+  }
+  getReproduction(): Date {
+    return this.fecha;
   }
 }

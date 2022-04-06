@@ -1,5 +1,5 @@
-import {MusicGenre, Song} from './MusicGenre';
-
+import {MusicGenre} from './MusicGenre';
+import {Song} from './Song';
 export type Duration = [number, number];
 
 

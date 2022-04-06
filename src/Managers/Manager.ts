@@ -1,6 +1,6 @@
-import {MusicGenre} from '../Clases base/MusicGenre';
+import {BasicData} from '../interfaces/basicData';
 
-export abstract class Manager<T extends MusicGenre> {
+export abstract class Manager<T extends BasicData> {
   protected collection: Set<T> = new Set<T>();
   getCollection(): Set<T> {
     return this.collection;
