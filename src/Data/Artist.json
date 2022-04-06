@@ -1,0 +1,34 @@
+{
+  "artists": [
+    {
+      "name": "Ed Sheeran",
+      "groups": [
+      ],
+      "genres": [
+        "pop",
+        "dance-pop"
+      ],
+      "albums": [
+        ""
+      ],
+      "songs": [
+        "Shivers"
+      ]
+    },
+    {
+      "name": "Micheal Jackson",
+      "groups": [
+      ],
+      "genres": [
+        "pop"
+      ],
+      "albums": [
+        "Thriller"
+      ],
+      "songs": [
+        "Thriller",
+        "Beat it"
+      ]
+    }
+  ]
+}

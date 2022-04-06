@@ -1,6 +1,7 @@
-import {Genre} from './Genre';
+import {MusicGenre} from './MusicGenre';
 import {Duracion} from './Duracion';
 import {Reproduccion} from './Reproduccion';
+import {Artist} from './MusicGenre';
 /**
  * Clase que representa una cancion
  * Tiene asociados los siguientes datos: nombre, autor,
@@ -8,12 +9,17 @@ import {Reproduccion} from './Reproduccion';
  */
 
 export class Song {
-  constructor(readonly name: string, readonly author: string,
-      readonly duration: Duracion, readonly genres: Genre[],
-      readonly datePublication: Date, readonly isSingle: boolean,
+  constructor(private name: string, private author: Artist,
+      private duration: Duracion, private genres: MusicGenre[],
+      private datePublication: Date, private isSingle: boolean,
       private reproductions: Reproduccion[]) {
   }
-
+  public getName(): string {
+    return this.name;
+  }
+  public setName(newName: string): void {
+    this.name = newName;
+  }
   public getReproduction(): number {
     return this.reproductions.length;
   }
@@ -28,6 +34,15 @@ export class Song {
     const monthDifference: number = difference / (1000 * 3600 * 24 * 30);
     // media de reproducciones por mes
     return this.getReproduction() / monthDifference;
+  }
+  public getGenres(): MusicGenre[] {
+    return this.genres;
+  }
+  public setGenres(newGenres:MusicGenre[]): void {
+    this.genres = newGenres;
+  }
+  public addGenre(newGenre: MusicGenre) {
+    this.genres.push(newGenre);
   }
   public print(): string {
     return (`CANCION ${this.name}

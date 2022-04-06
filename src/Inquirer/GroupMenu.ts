@@ -1,10 +1,10 @@
 import * as inquirer from 'inquirer';
-import {MusicGenre} from '../clasesBase/MusicGenre';
-import {MusicGenresManager} from '../Managers/MusicGenresManager';
+import {GroupsManager} from '../Managers/GroupsManager';
+import {Group} from '../clasesBase/Group';
 import {promptUser} from './MainMenu';
 
-export function promptMusicGenres(): void {
-  const manager = MusicGenresManager.getMusicGenresManager();
+export function promptGroup(): void {
+  const manager = GroupsManager.getGroupManager();
   let options: string[] = ['Add new genre +'];
   // options.concat(manager.getList());
   manager.getCollection().forEach((element) => {
@@ -19,24 +19,24 @@ export function promptMusicGenres(): void {
     choices: options,
   }).then((answers) => {
     switch (answers['command']) {
-      case 'Add new genre +':
-        promptAddGenre();
+      case 'Add new group +':
+        promptAddGroup();
         break;
       case 'Back':
         promptUser();
         break;
       default:
-        let genre: MusicGenre = manager.searchByName(answers['command']);
-        promptGenre(genre);
+        let group: Group = manager.searchByName(answers['command']);
+        promptGroups(group);
         break;
     }
   });
 }
 
-function promptGenre(genre: MusicGenre): void {
-  const manager = MusicGenresManager.getMusicGenresManager();
+function promptGroups(group: Group): void {
+  const manager = GroupsManager.getGroupManager();
   console.clear();
-  genre.showInfo();
+  group.showInfo();
   inquirer.prompt({
     type: 'list',
     name: 'command',
@@ -45,37 +45,29 @@ function promptGenre(genre: MusicGenre): void {
   }).then((answers) => {
     switch (answers['command']) {
       case 'Edit':
-        promptEditGenre(genre);
+        promptEditGroup(group);
         break;
       case 'Remove':
-        manager.removeMusicGenre(genre);
+        manager.removeGroup(group);
         /*
         ArtistsManager.getArtistsManager().removeGenre(genre);
         GroupsManager.getGroupsManager().removeGenre(genre);
         AlbumsManager.getAlbumsManager().removeGenre(genre);
         SongsManager.getSongsManager().removeGenre(genre);
         */
-        promptMusicGenres();
+        promptGroup();
         break;
       default:
-        promptMusicGenres();
+        promptGroup();
         break;
     }
   },
   );
 }
 
-function promptAddGenre(): void {
-  const manager = MusicGenresManager.getMusicGenresManager();
-  let musicians: string[] = ['Rolling Stones', 'Michael Jackson'];
-  let albums: string[] = ['Threaller', 'Abbey Road'];
-  let songs: string[] = ['Imagine', 'Despacito'];
-  /*
-  let musicians: string[] = ArtistsManager.getArtistsManager().getList();
-  musicians.concat(GroupsManager.getGroupsManager().getList());
-  let albums: string[] = AlbumsManager.getAlbumsManager().getList();
-  let songs: string[] = SongsManager.getSongsManager().getList();
-  */
+function promptAddGroup(): void {
+  const manager = GroupsManager.getGroupManager();
+
   console.clear();
   const questions = [
     {
@@ -85,19 +77,31 @@ function promptAddGenre(): void {
       validate(value: string) {
         let val: boolean | string = true;
         if (manager.exists(value)) {
-          val = 'Error: ya existe un género con ese nombre.';
+          val = 'Error: ya existe un grupo con ese nombre.';
         }
         return val;
       },
     },
     {
       type: 'checkbox',
-      message: 'Elige artistas/grupos:',
-      name: 'musicians',
-      choices: musicians,
+      message: 'Elige artistas:',
+      name: 'artists',
+      choices: artists,
       validate(answer: string[]) {
         if (answer.length < 1) {
-          return 'Debes elegir al menos un artista/grupo';
+          return 'Debes elegir al menos un artista';
+        }
+        return true;
+      },
+    },
+    {
+      type: 'input',
+      message: 'Introduzca el año de creacion: ',
+      name: 'year',
+      choices: year,
+      validate(answer: number) {
+        if (typeof answer != 'number') {
+          return 'Debes introducir un año valido.';
         }
         return true;
       },
@@ -116,36 +120,33 @@ function promptAddGenre(): void {
     },
     {
       type: 'checkbox',
-      message: 'Elige canciones:',
-      name: 'songs',
-      choices: songs,
+      message: 'Elige generos:',
+      name: 'genres',
+      choices: genres,
       validate(answer: string[]) {
         if (answer.length < 1) {
-          return 'Debes elegir al menos una canción.';
+          return 'Debes elegir al menos un genero.';
         }
         return true;
       },
     },
   ];
   inquirer.prompt(questions).then((answers) => {
-    const newGenre: MusicGenre = new MusicGenre(answers.name, answers.musicians,
-        answers.albums, answers.songs);
-    manager.addMusicGenre(newGenre);
+    const newGroup: Group = new Group(answers.name, answers.artist, answers.year,
+        answers.genre, answers.album);
+    manager.addGroup(newGroup);
     /*
     ArtistsManager.getArtistsManager().updateGenre(newGenre, answers.musicians);
     GroupsManager.getGroupsManager().updateGenre(newGenre, answers.musicians);
     AlbumsManager.getAlbumsManager().updateGenre(newGenre, answers.albums);
     SongsManager.getSongsManager().updateGenre(newGenre, answers.songs);
     */
-    promptMusicGenres();
+    promptGroup();
   });
 }
 
-function promptEditGenre(genre: MusicGenre): void {
-  const manager = MusicGenresManager.getMusicGenresManager();
-  let musicians: string[] = ['Rolling Stones', 'Michael Jackson'];
-  let albums: string[] = ['Threaller', 'Abbey Road'];
-  let songs: string[] = ['Imagine', 'Despacito'];
+function promptEditGroup(group: Group): void {
+  const manager = GroupsManager.getGroupManager();
   /*
   let musicians: string[] = ArtistsManager.getArtistsManager().getList();
   musicians.concat(GroupsManager.getGroupsManager().getList());
@@ -157,13 +158,13 @@ function promptEditGenre(genre: MusicGenre): void {
     {
       type: 'input',
       name: 'name',
-      message: 'Genre\'s name:',
-      default: genre.getName(),
+      message: 'Group name:',
+      default: group.getName(),
       validate(value: string) {
         let val: boolean | string = true;
         manager.getCollection().forEach((element) => {
-          if (value === element.getName() && genre !== element) {
-            val = 'Error: ya existe un género con ese nombre.';
+          if (value === element.getName() && group !== element) {
+            val = 'Error: ya existe un grupo con ese nombre.';
           }
         });
         return val;
@@ -171,13 +172,38 @@ function promptEditGenre(genre: MusicGenre): void {
     },
     {
       type: 'checkbox',
-      message: 'Elige artistas/grupos:',
-      name: 'musicians',
-      choices: musicians,
-      default: genre.getMusicians(),
+      message: 'Elige artistas:',
+      name: 'artist',
+      choices: artist,
+      default: group.getArtists(),
       validate(answer: string[]) {
         if (answer.length < 1) {
-          return 'Debes elegir al menos un artista/grupo';
+          return 'Debes elegir al menos un artista.';
+        }
+        return true;
+      },
+    },
+    {
+      type: 'cinput',
+      message: 'Introduzca el año de creacion:',
+      name: 'year',
+      choices: year,
+      validate(answer: number) {
+        if (typeof answer != 'number') {
+          return 'Introduzca un año valido.';
+        }
+        return true;
+      },
+    },
+    {
+      type: 'checkbox',
+      message: 'Elige generos:',
+      name: 'genres',
+      choices: genre,
+      default: group.getGenres(),
+      validate(answer: string[]) {
+        if (answer.length < 1) {
+          return 'Debes elegir al menos una canción.';
         }
         return true;
       },
@@ -187,7 +213,7 @@ function promptEditGenre(genre: MusicGenre): void {
       message: 'Elige álbums:',
       name: 'albums',
       choices: albums,
-      default: genre.getAlbums(),
+      default: group.getAlbums(),
       validate(answer: string[]) {
         if (answer.length < 1) {
           return 'Debes elegir al menos un álbum.';
@@ -195,32 +221,20 @@ function promptEditGenre(genre: MusicGenre): void {
         return true;
       },
     },
-    {
-      type: 'checkbox',
-      message: 'Elige canciones:',
-      name: 'songs',
-      choices: songs,
-      default: genre.getSongs(),
-      validate(answer: string[]) {
-        if (answer.length < 1) {
-          return 'Debes elegir al menos una canción.';
-        }
-        return true;
-      },
-    },
   ];
   inquirer.prompt(questions).then((answers) => {
-    genre.setName(answers.name);
-    genre.setMusicians(answers.musicians);
-    genre.setAlbums(answers.albums);
-    genre.setSongs(answers.songs);
-    manager.storeGenres();
+    group.setName(answers.name);
+    group.setArtists(answers.musicians);
+    group.setYearCreation(answers.year);
+    group.setGenres(answers.genre);
+    group.setAlbums(answers.albums);
+    manager.storeGroups();
     /*
     ArtistsManager.getArtistsManager().updateGenre(newGenre, answers.musicians);
     GroupsManager.getGroupsManager().updateGenre(newGenre, answers.musicians);
     AlbumsManager.getAlbumsManager().updateGenre(newGenre, answers.albums);
     SongsManager.getSongsManager().updateGenre(newGenre, answers.songs);
     */
-    promptMusicGenres();
+    promptGroup();
   });
 }
