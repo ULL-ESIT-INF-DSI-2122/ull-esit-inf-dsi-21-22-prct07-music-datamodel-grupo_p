@@ -8,13 +8,22 @@ export class Group {
       private albums: Album[]) {
   }
 
-  getName(): string {
+  public getName(): string {
     return this.name;
   }
-
   public getArtists(): Artist[] {
     return this.artists;
   }
+  public getGenres(): Genre[] {
+    return this.genres;
+  }
+  public getAlbums(): Album[] {
+    return this.albums;
+  }
+  public getYear(): number {
+    return this.yearCreation;
+  }
+
   public addArtist(newArtist: Artist): void {
     this.artists.push(newArtist);
   }
@@ -22,9 +31,6 @@ export class Group {
     this.artists = this.artists.filter((elemento) => elemento !== artistDelete);
   }
 
-  public getGenres(): Genre[] {
-    return this.genres;
-  }
   public addGenre(newGenre: Genre): void {
     this.genres.push(newGenre);
   }
@@ -32,9 +38,6 @@ export class Group {
     this.genres = this.genres.filter((elemento) => elemento !== genreDelete);
   }
 
-  public getAlbums(): Album[] {
-    return this.albums;
-  }
   public addAlbums(newAlbum: Album): void {
     this.albums.push(newAlbum);
   }
