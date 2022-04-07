@@ -1,6 +1,8 @@
 import * as inquirer from 'inquirer';
 import {Playlist} from '../Basics/Playlist';
+import {Song} from '../Basics/Song';
 import {PlaylistsManager} from '../Managers/PlaylistsManager';
+import {SongsManager} from '../Managers/SongsManager';
 import {promptUser} from './MainMenu';
 
 export function promptPlaylists(): void {
@@ -73,10 +75,8 @@ function promptRemovePlaylist(playlist: Playlist) {
 
 function promptAddPlaylist(): void {
   const manager: PlaylistsManager = PlaylistsManager.getPlaylistManager();
-  const songs: string[] = ['Imagine', 'Despacito'];
-  /*
+  // const songs: string[] = ['Imagine', 'Despacito'];
   const songs: string[] = SongsManager.getSongsManager().getList();
-  */
   console.clear();
   const questions = [
     {
@@ -105,17 +105,19 @@ function promptAddPlaylist(): void {
     },
   ];
   inquirer.prompt(questions).then((answers) => {
-    manager.addPlaylist(new Playlist(answers.name, answers.songs));
+    let songs: Song[] = [];
+    answers.songs.forEach((element: string) => {
+      songs.push(SongsManager.getSongsManager().getSongByName(element) as Song);
+    });
+    manager.addPlaylist(new Playlist(answers.name, songs));
     promptPlaylists();
   });
 }
 
 function promptEditPlaylist(playlist: Playlist): void {
   const manager: PlaylistsManager = PlaylistsManager.getPlaylistManager();
-  const songs: string[] = ['Imagine', 'Despacito'];
-  /*
+  // const songs: string[] = ['Imagine', 'Despacito'];
   const songs: string[] = SongsManager.getSongsManager().getList();
-  */
   console.clear();
   const questions = [
     {

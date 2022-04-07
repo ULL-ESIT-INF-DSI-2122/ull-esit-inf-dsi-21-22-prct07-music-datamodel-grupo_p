@@ -41,6 +41,7 @@ export class Group {
   public removeAlbum(albumDelete: Album): void {
     this.albums = this.albums.filter((elemento) => elemento !== albumDelete);
   }
+  /*
   // suma de oyentes de las canciones de sus albunes
   public getNumberListenersMonthly(): number {
     let listeners:number = 0;
@@ -50,5 +51,5 @@ export class Group {
       });
     });
     return listeners;
-  }
+  }*/
 }

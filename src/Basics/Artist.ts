@@ -52,6 +52,7 @@ export class Artist {
     this.songs = this.songs.filter((elemento) => elemento !== songDelete);
   }
   // ---------- //
+  /*
   public getNumberListenersMonthly(): number {
     let listenersGroups: number = 0;
     let listenerSongs: number = 0;
@@ -63,5 +64,5 @@ export class Artist {
     });
 
     return listenerSongs + listenersGroups;
-  }
+  }*/
 }

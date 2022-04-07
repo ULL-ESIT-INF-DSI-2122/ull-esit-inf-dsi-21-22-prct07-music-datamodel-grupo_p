@@ -13,7 +13,7 @@ export class Playlist {
     let minuts: number = 0;
     let seconds: number = 0;
     let genres: Genre[] = [];
-    this.songs.forEach((s) => {
+    this.songs.forEach((s: Song) => {
       minuts += s.getDuration()[0];
       seconds += s.getDuration()[1];
       s.getGenres().forEach((g) => {

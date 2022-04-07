@@ -1,17 +1,4 @@
 {
   "playlists": [
-    {
-      "name": "Mi lista",
-      "songs": [
-        "Imagine",
-        "Despacito"
-      ],
-      "systemPlaylist": false,
-      "genres": [],
-      "duration": [
-        0,
-        0
-      ]
-    }
   ]
 }
