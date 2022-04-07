@@ -1,14 +1,14 @@
-import {Artist} from '../clasesBase/Artist';
-import {Group} from '../clasesBase/Group';
-import {MusicGenre} from '../clasesBase/MusicGenre';
-import {Album} from '../clasesBase/Album';
+import {Artist} from '../Basics/Artist';
+import {Group} from '../Basics/Group';
+import {Genre} from '../Basics/Genre';
+import {Album} from '../Basics/Album';
 import {Manager} from './Manager';
 import lowdb = require('lowdb');
 import FileSync = require('lowdb/adapters/FileSync');
 
 
 type schemaType = {
-    groups: { name: string; artists: Artist[], yearCreation: number, genres: MusicGenre[], albums: Album[] }[]
+    groups: { name: string; artists: Artist[], yearCreation: number, genres: Genre[], albums: Album[] }[]
 };
 
 export class GroupsManager extends Manager<Group> {
@@ -36,10 +36,12 @@ export class GroupsManager extends Manager<Group> {
   storeGroups() {
     this.database.set('groups', [...this.collection.values()]).write();
   }
+
   addGroup(group: Group): void {
     this.collection.add(group);
     this.storeGroups();
   }
+
   removeGroup(group: Group): void {
     this.collection.forEach((element) => {
       if (element.getName() === group.getName()) {
@@ -50,7 +52,7 @@ export class GroupsManager extends Manager<Group> {
   }
 
   editGroup(group: Group, newName: string, newArtists: Artist[], newYear: number,
-      newGenres: MusicGenre[], newAlbums: Album[] ): void {
+      newGenres: Genre[], newAlbums: Album[] ): void {
     this.collection.forEach((element) => {
       if (element.getName() === group.getName()) {
         element.setName(newName);
@@ -62,30 +64,32 @@ export class GroupsManager extends Manager<Group> {
     });
     this.storeGroups();
   }
+  printDetails(): void {
+  }
   /*
-  editName(artista: Artist, newName: string): void {
-    artista.setName(newName);
+  editName(group: Group, newName: string): void {
+    group.setName(newName);
   }
-  editYear(artista: Artist, newYear: number) {
-    artista.setYearCreation(newYear);
+  editYear(group: Group, newYear: number) {
+    group.setYearCreation(newYear);
   }
-  addGenre(artista: Artist, newGenre: MusicGenre): void {
-    artista.addGenre(newGenre);
+  addGenre(group: Group, newGenre: Genre): void {
+    group.addGenre(newGenre);
   }
-  deleteGenre(artista: Artist, nameGenre: MusicGenre): void {
-    artista.removeGenre(nameGenre);
+  deleteGenre(group: Group, nameGenre: Genre): void {
+    group.removeGenre(nameGenre);
   }
-  addGroup(artista: Artist, newGroup: Group): void {
-    artista.addGroup(newGroup);
+  addArtist(group: Group, newArtist: Artist): void {
+    group.addArtist(newArtist);
   }
-  deleteGroup(artista: Artist, group: Group): void {
-    artista.removeGroup(group);
+  deleteArtist(group: Group, artist: Artist): void {
+    group.removeArtist(artist);
   }
-  addAlbum(artista: Artist, newAlbum: Album) {
-    artista.addAlbum(newAlbum);
+  addAlbum(group: Group, newAlbum: Album) {
+    group.addAlbum(newAlbum);
   }
-  removeAlbum(artista: Artist, album: Album) {
-    artista.removeAlbum(album);
+  removeAlbum(group: Group, album: Album) {
+    group.removeAlbum(album);
   }
   */
 }

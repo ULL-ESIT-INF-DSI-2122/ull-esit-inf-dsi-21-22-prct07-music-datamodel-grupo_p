@@ -1,15 +1,15 @@
-import {Artist} from '../clasesBase/Artist';
-import {Group} from '../clasesBase/Group';
-import {MusicGenre} from '../clasesBase/MusicGenre';
-import {Album} from '../clasesBase/Album';
-import {Song} from '../clasesBase/Song';
+import {Artist} from '../Basics/Artist';
+import {Group} from '../Basics/Group';
+import {Genre} from '../Basics/Genre';
+import {Album} from '../Basics/Album';
+import {Song} from '../Basics/Song';
 import {Manager} from './Manager';
 import lowdb = require('lowdb');
 import FileSync = require('lowdb/adapters/FileSync');
 
 
 type schemaType = {
-    artists: { name: string; groups: Group[]; genres: MusicGenre[], albums: Album[], songs: Song[] }[]
+    artists: { name: string; groups: Group[]; genres: Genre[], albums: Album[], songs: Song[] }[]
 };
 
 export class ArtistManager extends Manager<Artist> {
@@ -37,6 +37,7 @@ export class ArtistManager extends Manager<Artist> {
   private storeArtist() {
     this.database.set('artists', [...this.collection.values()]).write();
   }
+
   addArtist(artist: Artist): void {
     this.collection.add(artist);
     this.storeArtist();
@@ -51,7 +52,7 @@ export class ArtistManager extends Manager<Artist> {
     this.storeArtist();
   }
 
-  editArtist(artist: Artist, newName: string, newGroups: Group[], newGenres: MusicGenre[],
+  editArtist(artist: Artist, newName: string, newGroups: Group[], newGenres: Genre[],
       newAlbums: Album[], newSongs: Song[] ): void {
     this.collection.forEach((element) => {
       if (element.getName() === artist.getName()) {
@@ -68,10 +69,10 @@ export class ArtistManager extends Manager<Artist> {
   editName(artista: Artist, newName: string): void {
     artista.setName(newName);
   }
-  addGenre(artista: Artist, newGenre: MusicGenre): void {
+  addGenre(artista: Artist, newGenre: Genre): void {
     artista.addGenre(newGenre);
   }
-  deleteGenre(artista: Artist, nameGenre: MusicGenre): void {
+  deleteGenre(artista: Artist, nameGenre: Genre): void {
     artista.removeGenre(nameGenre);
   }
   addGroup(artista: Artist, newGroup: Group): void {

@@ -1,9 +1,9 @@
 import * as inquirer from 'inquirer';
 import {GroupsManager} from '../Managers/GroupsManager';
-import {Group} from '../clasesBase/Group';
+import {Group} from '../Basics/Group';
 import {promptUser} from './MainMenu';
 
-export function promptGroup(): void {
+export function promptGroups(): void {
   const manager = GroupsManager.getGroupManager();
   let options: string[] = ['Add new genre +'];
   // options.concat(manager.getList());
@@ -33,7 +33,7 @@ export function promptGroup(): void {
   });
 }
 
-function promptGroups(group: Group): void {
+function promptGroup(group: Group): void {
   const manager = GroupsManager.getGroupManager();
   console.clear();
   group.showInfo();

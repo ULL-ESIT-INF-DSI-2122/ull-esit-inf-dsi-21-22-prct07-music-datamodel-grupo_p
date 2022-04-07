@@ -1,90 +1,103 @@
 import * as inquirer from 'inquirer';
-import {MusicGenre} from '../clasesBase/MusicGenre';
-import {MusicGenresManager} from '../Managers/MusicGenresManager';
+import {Genre} from '../Basics/Genre';
+import {GenresManager} from '../Managers/GenresManager';
 import {promptUser} from './MainMenu';
 
-export function promptMusicGenres(): void {
-  const manager = MusicGenresManager.getMusicGenresManager();
-  let options: string[] = ['Add new genre +'];
-  // options.concat(manager.getList());
-  manager.getCollection().forEach((element) => {
-    options.push(element.getName());
-  });
-  options.push('Back');
+export function promptGenres(): void {
+  const manager: GenresManager = GenresManager.getGenresManager();
+  let options: string[] = ['Nuevo género +'];
+  options = options.concat(manager.getList());
+  options.push('Volver');
   console.clear();
   inquirer.prompt({
     type: 'list',
     name: 'command',
-    message: 'Choose option',
+    message: 'Géneros',
     choices: options,
   }).then((answers) => {
     switch (answers['command']) {
-      case 'Add new genre +':
+      case 'Nuevo género +':
         promptAddGenre();
         break;
-      case 'Back':
+      case 'Volver':
         promptUser();
         break;
       default:
-        let genre: MusicGenre = manager.searchByName(answers['command']);
+        const genre: Genre = manager.searchByName(answers['command']);
         promptGenre(genre);
         break;
     }
   });
 }
 
-function promptGenre(genre: MusicGenre): void {
-  const manager = MusicGenresManager.getMusicGenresManager();
+function promptGenre(genre: Genre): void {
   console.clear();
   genre.showInfo();
   inquirer.prompt({
     type: 'list',
     name: 'command',
-    message: 'Choose option',
-    choices: ['Edit', 'Remove', 'Back'],
+    message: 'Opciones',
+    choices: ['Editar', 'Eliminar', 'Volver'],
   }).then((answers) => {
     switch (answers['command']) {
-      case 'Edit':
+      case 'Editar':
         promptEditGenre(genre);
         break;
-      case 'Remove':
-        manager.removeMusicGenre(genre);
+      case 'Eliminar':
+        promptRemoveGenre(genre);
         /*
         ArtistsManager.getArtistsManager().removeGenre(genre);
         GroupsManager.getGroupsManager().removeGenre(genre);
         AlbumsManager.getAlbumsManager().removeGenre(genre);
         SongsManager.getSongsManager().removeGenre(genre);
+        PlaylistsManager.getPlaylistsManager().updateGenre();
         */
-        promptMusicGenres();
         break;
       default:
-        promptMusicGenres();
+        promptGenres();
         break;
     }
   },
   );
 }
 
+function promptRemoveGenre(genre: Genre) {
+  const manager: GenresManager = GenresManager.getGenresManager();
+  console.clear();
+  inquirer
+      .prompt([
+        {
+          name: 'eliminar',
+          type: 'confirm',
+          message: '¿Seguro que quieres eliminar este género?',
+        },
+      ])
+      .then((answer) => {
+        if (answer.eliminar) manager.removeGenre(genre);
+        promptGenres();
+      });
+}
+
 function promptAddGenre(): void {
-  const manager = MusicGenresManager.getMusicGenresManager();
-  let musicians: string[] = ['Rolling Stones', 'Michael Jackson'];
-  let albums: string[] = ['Threaller', 'Abbey Road'];
-  let songs: string[] = ['Imagine', 'Despacito'];
+  const manager: GenresManager = GenresManager.getGenresManager();
+  const musicians: string[] = ['Rolling Stones', 'Michael Jackson'];
+  const albums: string[] = ['Threaller', 'Abbey Road'];
+  const songs: string[] = ['Imagine', 'Despacito'];
   /*
   let musicians: string[] = ArtistsManager.getArtistsManager().getList();
-  musicians.concat(GroupsManager.getGroupsManager().getList());
-  let albums: string[] = AlbumsManager.getAlbumsManager().getList();
-  let songs: string[] = SongsManager.getSongsManager().getList();
+  musicians = musicians.concat(GroupsManager.getGroupsManager().getList());
+  const albums: string[] = AlbumsManager.getAlbumsManager().getList();
+  const songs: string[] = SongsManager.getSongsManager().getList();
   */
   console.clear();
   const questions = [
     {
       type: 'input',
       name: 'name',
-      message: 'Genre\'s name:',
+      message: 'Nombre del género:',
       validate(value: string) {
         let val: boolean | string = true;
-        if (manager.exists(value)) {
+        if (manager.anotherOneWithThatName(value)) {
           val = 'Error: ya existe un género con ese nombre.';
         }
         return val;
@@ -128,44 +141,43 @@ function promptAddGenre(): void {
     },
   ];
   inquirer.prompt(questions).then((answers) => {
-    const newGenre: MusicGenre = new MusicGenre(answers.name, answers.musicians,
+    const newGenre: Genre = new Genre(answers.name, answers.musicians,
         answers.albums, answers.songs);
-    manager.addMusicGenre(newGenre);
+    manager.addGenre(newGenre);
     /*
     ArtistsManager.getArtistsManager().updateGenre(newGenre, answers.musicians);
     GroupsManager.getGroupsManager().updateGenre(newGenre, answers.musicians);
     AlbumsManager.getAlbumsManager().updateGenre(newGenre, answers.albums);
     SongsManager.getSongsManager().updateGenre(newGenre, answers.songs);
+    PlaylistsManager.getPlaylistsManager().updateGenre();
     */
-    promptMusicGenres();
+    promptGenres();
   });
 }
 
-function promptEditGenre(genre: MusicGenre): void {
-  const manager = MusicGenresManager.getMusicGenresManager();
-  let musicians: string[] = ['Rolling Stones', 'Michael Jackson'];
-  let albums: string[] = ['Threaller', 'Abbey Road'];
-  let songs: string[] = ['Imagine', 'Despacito'];
+function promptEditGenre(genre: Genre): void {
+  const manager: GenresManager = GenresManager.getGenresManager();
+  const musicians: string[] = ['Rolling Stones', 'Michael Jackson'];
+  const albums: string[] = ['Threaller', 'Abbey Road'];
+  const songs: string[] = ['Imagine', 'Despacito'];
   /*
   let musicians: string[] = ArtistsManager.getArtistsManager().getList();
-  musicians.concat(GroupsManager.getGroupsManager().getList());
-  let albums: string[] = AlbumsManager.getAlbumsManager().getList();
-  let songs: string[] = SongsManager.getSongsManager().getList();
+  musicians = musicians.concat(GroupsManager.getGroupsManager().getList());
+  const albums: string[] = AlbumsManager.getAlbumsManager().getList();
+  const songs: string[] = SongsManager.getSongsManager().getList();
   */
   console.clear();
   const questions = [
     {
       type: 'input',
       name: 'name',
-      message: 'Genre\'s name:',
+      message: 'Nombre del género:',
       default: genre.getName(),
       validate(value: string) {
         let val: boolean | string = true;
-        manager.getCollection().forEach((element) => {
-          if (value === element.getName() && genre !== element) {
-            val = 'Error: ya existe un género con ese nombre.';
-          }
-        });
+        if (manager.anotherOneWithThatName(value, genre)) {
+          val = 'Error: ya existe un género con ese nombre.';
+        }
         return val;
       },
     },
@@ -220,7 +232,8 @@ function promptEditGenre(genre: MusicGenre): void {
     GroupsManager.getGroupsManager().updateGenre(newGenre, answers.musicians);
     AlbumsManager.getAlbumsManager().updateGenre(newGenre, answers.albums);
     SongsManager.getSongsManager().updateGenre(newGenre, answers.songs);
+    PlaylistsManager.getPlaylistsManager().updateGenre();
     */
-    promptMusicGenres();
+    promptGenres();
   });
 }

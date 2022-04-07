@@ -1,0 +1,17 @@
+{
+  "genres": [
+    {
+      "name": "Reggeaton",
+      "musicians": [
+        "Rolling Stones"
+      ],
+      "albums": [
+        "Threaller"
+      ],
+      "songs": [
+        "Imagine",
+        "Despacito"
+      ]
+    }
+  ]
+}

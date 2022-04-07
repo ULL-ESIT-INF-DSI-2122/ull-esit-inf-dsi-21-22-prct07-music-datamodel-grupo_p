@@ -1,13 +1,13 @@
 import {Group} from './Group';
-import {MusicGenre} from './MusicGenre';
+import {Genre} from './Genre';
 import {Album} from './Album';
 import {Song} from './Song';
-import {basicData} from '../interfaces/interfaces';
+import {BasicData} from '../Interfaces/BasicData';
 
 
-export class Artist implements basicData {
+export class Artist implements BasicData {
   constructor(private name: string, private groups: Group[],
-      private genres: MusicGenre[], private albums: Album[], private songs: Song[]) {
+      private genres: Genre[], private albums: Album[], private songs: Song[]) {
   }
 
   public getName(): string {
@@ -29,16 +29,16 @@ export class Artist implements basicData {
     this.groups = this.groups.filter((elemento) => elemento !== groupDelete);
   }
 
-  public getGenres(): MusicGenre[] {
+  public getGenres(): Genre[] {
     return this.genres;
   }
-  public setGenres(newGenres:MusicGenre[]): void {
+  public setGenres(newGenres:Genre[]): void {
     this.genres = newGenres;
   }
-  public addGenre(newGenre: MusicGenre) {
+  public addGenre(newGenre: Genre) {
     this.genres.push(newGenre);
   }
-  public removeGenre(genreDelete: MusicGenre) {
+  public removeGenre(genreDelete: Genre) {
     this.genres = this.genres.filter((elemento) => elemento !== genreDelete);
   }
 
@@ -67,7 +67,7 @@ export class Artist implements basicData {
   public removeSong(songDelete: Song) {
     this.songs = this.songs.filter((elemento) => elemento !== songDelete);
   }
-  // ---------- //
+  /*
   public getNumberListenersMonthly(): number {
     let listenersGroups: number = 0;
     let listenerSongs: number = 0;
@@ -78,8 +78,8 @@ export class Artist implements basicData {
       listenerSongs += song.monthlyReproductions();
     });
     return listenerSongs + listenersGroups;
-  }
-  public showInfo(): void {
+  }*/
+  public showInfo(): string {
     let info: string = `ARTISTA ${this.name}
     Nombre: ${this.getName()}
     Grupos: ${this.getGroups().forEach((grupo) => {
@@ -94,6 +94,7 @@ export class Artist implements basicData {
     Canciones: ${this.getSongs().forEach((song) => {
     return song.getName();
   })}`;
-    console.log(info);
+    // console.log(info);
+    return info;
   }
 }

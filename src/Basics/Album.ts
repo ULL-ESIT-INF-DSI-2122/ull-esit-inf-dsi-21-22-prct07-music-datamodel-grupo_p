@@ -1,11 +1,11 @@
 import {Song} from './Song';
-import {MusicGenre} from './MusicGenre';
+import {Genre} from './Genre';
 import {Group} from './Group';
 import {Artist} from './Artist';
 
 export class Album {
   constructor(private name: string, private whoPublishes: (Group|Artist),
-    private publicationYear: number, private genres: MusicGenre[],
+    private publicationYear: number, private genres: Genre[],
     private songs: Song[]) {
   }
 
@@ -22,16 +22,16 @@ export class Album {
     this.publicationYear = year;
   }
 
-  public getGenres(): MusicGenre[] {
+  public getGenres(): Genre[] {
     return this.genres;
   }
-  public setGenres(newGenres:MusicGenre[]): void {
+  public setGenres(newGenres:Genre[]): void {
     this.genres = newGenres;
   }
-  public addGenre(newGenre: MusicGenre) {
+  public addGenre(newGenre: Genre) {
     this.genres.push(newGenre);
   }
-  public removeGenre(genreDelete: MusicGenre) {
+  public removeGenre(genreDelete: Genre) {
     this.genres = this.genres.filter((elemento) => elemento !== genreDelete);
   }
 
@@ -49,7 +49,7 @@ export class Album {
   }
 
 
-  public print(): string {
+  public showInfo(): string {
     return (`ALBUM ${this.name}
     Artista o grupo que lo publico: ${this.whoPublishes}
     Año de publicacion: ${this.publicationYear}

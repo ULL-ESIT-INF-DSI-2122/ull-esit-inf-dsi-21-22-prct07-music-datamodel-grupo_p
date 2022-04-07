@@ -1,0 +1,13 @@
+{
+  "songs": [
+      {
+          "name": "Despacito",
+          "author": "Luis Fonsi",
+          "duration": [3, 45],
+          "genres": ["Reggeaton"],     
+          "datePublication": "2018-03-16",  
+          "isSingle": true,
+          "reproductions": 510000
+      }
+  ]
+}

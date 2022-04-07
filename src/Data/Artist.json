@@ -2,8 +2,7 @@
   "artists": [
     {
       "name": "Ed Sheeran",
-      "groups": [
-      ],
+      "groups": [],
       "genres": [
         "pop",
         "dance-pop"
@@ -17,8 +16,7 @@
     },
     {
       "name": "Micheal Jackson",
-      "groups": [
-      ],
+      "groups": [],
       "genres": [
         "pop"
       ],
@@ -28,6 +26,22 @@
       "songs": [
         "Thriller",
         "Beat it"
+      ]
+    },
+    {
+      "name": "camilo",
+      "groups": [
+        "g2"
+      ],
+      "genres": [
+        "gru2",
+        "gru3"
+      ],
+      "albums": [
+        "Threaller"
+      ],
+      "songs": [
+        "Imagine"
       ]
     }
   ]

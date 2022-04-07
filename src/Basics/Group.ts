@@ -1,11 +1,11 @@
 import {Album} from './Album';
 import {Artist} from './Artist';
-import {MusicGenre} from './MusicGenre';
-import {basicData} from '../interfaces/interfaces';
+import {Genre} from './Genre';
+import {BasicData} from '../Interfaces/BasicData';
 
-export class Group implements basicData {
+export class Group implements BasicData {
   constructor(private name: string, private artists: Artist[],
-      private yearCreation: number, private genres: MusicGenre[],
+      private yearCreation: number, private genres: Genre[],
       private albums: Album[]) {
   }
 
@@ -33,16 +33,16 @@ export class Group implements basicData {
   public setYearCreation(newYear: number): void {
     this.yearCreation = newYear;
   }
-  public getGenres(): MusicGenre[] {
+  public getGenres(): Genre[] {
     return this.genres;
   }
-  public addGenre(newGenre: MusicGenre): void {
+  public addGenre(newGenre: Genre): void {
     this.genres.push(newGenre);
   }
-  public removeGenre(genreDelete: MusicGenre): void {
+  public removeGenre(genreDelete: Genre): void {
     this.genres = this.genres.filter((elemento) => elemento !== genreDelete);
   }
-  public setGenres(newGenres:MusicGenre[]): void {
+  public setGenres(newGenres:Genre[]): void {
     this.genres = newGenres;
   }
 
@@ -58,6 +58,7 @@ export class Group implements basicData {
   public removeAlbum(albumDelete: Album): void {
     this.albums = this.albums.filter((elemento) => elemento !== albumDelete);
   }
+  /*
   // suma de oyentes de las canciones de sus albunes
   public getNumberListenersMonthly(): number {
     let listeners:number = 0;
@@ -68,7 +69,8 @@ export class Group implements basicData {
     });
     return listeners;
   }
-  public showInfo(): void {
+  */
+  public showInfo(): string {
     let info: string = `GRUPO ${this.name}
     Nombre: ${this.getName()}
     Artistas: ${this.getArtists().forEach((artist) => {
@@ -81,6 +83,7 @@ export class Group implements basicData {
     return album.getName();
   }))}
     Año creacion: ${this.getYearCreation()})}`;
-    console.log(info);
+    // console.log(info);
+    return info;
   }
 }

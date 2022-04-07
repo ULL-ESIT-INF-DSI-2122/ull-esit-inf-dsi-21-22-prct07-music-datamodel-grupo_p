@@ -1,4 +1,5 @@
-export interface basicData {
+export interface BasicData {
   getName(): string;
   setName(newName:string): void;
+  showInfo(): string;
 }
