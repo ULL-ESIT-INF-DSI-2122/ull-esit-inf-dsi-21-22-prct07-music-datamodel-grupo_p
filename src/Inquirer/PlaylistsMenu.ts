@@ -149,7 +149,11 @@ function promptEditPlaylist(playlist: Playlist): void {
   ];
   inquirer.prompt(questions).then((answers) => {
     playlist.setName(answers.name);
-    playlist.setSongs(answers.songs);
+    let songs: Song[] = [];
+    answers.songs.forEach((element: string) => {
+      songs.push(SongsManager.getSongsManager().getSongByName(element) as Song);
+    });
+    playlist.setSongs(songs);
     manager.storePlaylists();
     promptPlaylists();
   });

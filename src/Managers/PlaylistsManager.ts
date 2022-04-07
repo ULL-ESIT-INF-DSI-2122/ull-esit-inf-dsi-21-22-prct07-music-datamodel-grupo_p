@@ -16,9 +16,9 @@ export class PlaylistsManager extends Manager<Playlist> {
     this.database = lowdb(new FileSync('src/Data/Playlists.json'));
     if (this.database.has('playlists').value()) {
       let dbItems = this.database.get('playlists').value();
-      dbItems.forEach((item) => this.collection.add(new Playlist(
-          item.name, item.songs, item.systemPlaylist,
-      )));
+      dbItems.forEach((item) => {
+        this.collection.add(new Playlist(item.name, [new Song('Despacito', 'Luis Fonsi', [2, 2], ['Reggeaton'], new Date('02-34-2001'), true, 1200)], item.systemPlaylist));
+      });
     }
   }
 

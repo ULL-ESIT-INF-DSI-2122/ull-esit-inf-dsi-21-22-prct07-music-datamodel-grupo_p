@@ -1,3 +1,4 @@
+import {BasicData} from '../Interfaces/BasicData';
 import {GenresManager} from '../Managers/GenresManager';
 import {Genre} from './Genre';
 import {Song} from './Song';
@@ -5,25 +6,15 @@ import {Song} from './Song';
 export type Duration = [number, number];
 
 
-export class Playlist {
+export class Playlist implements BasicData {
   private genres: Genre[];
   private duration: Duration;
   constructor(private name: string, private songs: Song[],
               private systemPlaylist: boolean = false) {
-    let minuts: number = 0;
-    let seconds: number = 0;
-    let genres: Genre[] = [];
-    this.songs.forEach((s: Song) => {
-      minuts += s.getDuration()[0];
-      seconds += s.getDuration()[1];
-      s.getGenres().forEach((g) => {
-        if ((genres.find((x: Genre) => x.getName() === g)) === undefined) {
-          genres.push(GenresManager.getGenresManager().getGenreByName(g) as Genre);
-        }
-      });
-    });
-    this.genres = genres;
-    this.duration = [Math.trunc(minuts/60), minuts%60 + Math.trunc(seconds/60)];
+    this.genres = [];
+    this.duration = [0, 0];
+    this.recalculateDuration();
+    this.updateGenres();
   }
   getName(): string {
     return this.name;

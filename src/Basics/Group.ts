@@ -1,9 +1,10 @@
+import {BasicData} from '../Interfaces/BasicData';
 import {Album} from './Album';
 import {Artist} from './Artist';
 import {Genre} from './Genre';
 
-export class Group {
-  constructor(readonly name: string, private artists: Artist[],
+export class Group implements BasicData {
+  constructor(private name: string, private artists: Artist[],
       readonly yearCreation: number, private genres: Genre[],
       private albums: Album[]) {
   }
@@ -11,7 +12,9 @@ export class Group {
   getName(): string {
     return this.name;
   }
-
+  setName(newName: string): void {
+    this.name = newName;
+  }
   public getArtists(): Artist[] {
     return this.artists;
   }

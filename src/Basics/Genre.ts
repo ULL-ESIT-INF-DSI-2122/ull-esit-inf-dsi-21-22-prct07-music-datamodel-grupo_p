@@ -1,5 +1,6 @@
+import {BasicData} from '../Interfaces/BasicData';
 
-export class Genre {
+export class Genre implements BasicData {
   constructor(private name: string, private musicians: string[],
       private albums: string[], private songs: string[]) {
   }

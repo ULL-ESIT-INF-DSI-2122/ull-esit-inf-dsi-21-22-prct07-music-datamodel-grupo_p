@@ -9,13 +9,21 @@ export type Duration = [number, number];
 export class Song implements BasicData {
   constructor(private name: string, private author: string,
       private duration: Duration, private genres: string[],
-      private datePublication: Date, private isSingle: boolean,
+      private publicationDate: Date, private isSingle: boolean,
       private reproductions: number) {
   }
 
   public getDuration(): Duration {
     return this.duration;
   }
+
+  public getPublicationDate() {
+    return this.publicationDate;
+  }
+  public getIsSingle() {
+    return this.isSingle;
+  }
+
 
   /**
    * Devuelve el nombre de la cancion.
