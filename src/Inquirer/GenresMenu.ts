@@ -1,6 +1,9 @@
 import * as inquirer from 'inquirer';
 import {Genre} from '../Basics/Genre';
+import {AlbumManager} from '../Managers/AlbumManager';
+import {ArtistManager} from '../Managers/ArtistManager';
 import {GenreManager} from '../Managers/GenreManager';
+import {GroupManager} from '../Managers/GroupManager';
 import {PlaylistManager} from '../Managers/PlaylistManager';
 import {SongManager} from '../Managers/SongManager';
 import {promptUser} from './MainMenu';
@@ -71,12 +74,10 @@ function promptRemoveGenre(genre: Genre) {
         if (answer.eliminar) {
           manager.removeGenre(genre);
           SongManager.getSongManager().removeGenre(genre);
+          AlbumManager.getAlbumManager().removeGenre(genre);
+          ArtistManager.getArtistManager().removeGenre(genre);
+          GroupManager.getGroupManager().removeGenre(genre);
           PlaylistManager.getPlaylistManager().updateGenre();
-          /*
-        ArtistsManager.getArtistsManager().removeGenre(genre);
-        GroupsManager.getGroupsManager().removeGenre(genre);
-        AlbumsManager.getAlbumsManager().removeGenre(genre);
-        */
         }
         promptGenres();
       });
@@ -84,13 +85,9 @@ function promptRemoveGenre(genre: Genre) {
 
 function promptAddGenre(): void {
   const manager: GenreManager = GenreManager.getGenreManager();
-  const musicians: string[] = ['Rolling Stones', 'Michael Jackson'];
-  const albums: string[] = ['Threaller', 'Abbey Road'];
-  /*
-  let musicians: string[] = ArtistsManager.getArtistsManager().getList();
-  musicians = musicians.concat(GroupsManager.getGroupsManager().getList());
-  const albums: string[] = AlbumsManager.getAlbumsManager().getList();
-  */
+  let musicians: string[] = ArtistManager.getArtistManager().getList();
+  musicians = musicians.concat(GroupManager.getGroupManager().getList());
+  const albums: string[] = AlbumManager.getAlbumManager().getList();
   const songs: string[] = SongManager.getSongManager().getList();
   console.clear();
   const questions = [
@@ -147,12 +144,10 @@ function promptAddGenre(): void {
     const newGenre: Genre = new Genre(answers.name, answers.musicians,
         answers.albums, answers.songs);
     manager.addGenre(newGenre);
-    /*
-    ArtistsManager.getArtistsManager().updateGenre(newGenre, answers.musicians);
-    GroupsManager.getGroupsManager().updateGenre(newGenre, answers.musicians);
-    AlbumsManager.getAlbumsManager().updateGenre(newGenre, answers.albums);
-    */
     SongManager.getSongManager().updateGenre(newGenre, answers.songs);
+    AlbumManager.getAlbumManager().updateGenre(newGenre, answers.albums);
+    ArtistManager.getArtistManager().updateGenre(newGenre, answers.musicians);
+    GroupManager.getGroupManager().updateGenre(newGenre, answers.musicians);
     PlaylistManager.getPlaylistManager().updateGenre();
     promptGenres();
   });
@@ -160,13 +155,9 @@ function promptAddGenre(): void {
 
 function promptEditGenre(genre: Genre): void {
   const manager: GenreManager = GenreManager.getGenreManager();
-  const musicians: string[] = ['Rolling Stones', 'Michael Jackson'];
-  const albums: string[] = ['Threaller', 'Abbey Road'];
-  /*
-  let musicians: string[] = ArtistsManager.getArtistsManager().getList();
-  musicians = musicians.concat(GroupsManager.getGroupsManager().getList());
-  const albums: string[] = AlbumsManager.getAlbumsManager().getList();
-  */
+  let musicians: string[] = ArtistManager.getArtistManager().getList();
+  musicians = musicians.concat(GroupManager.getGroupManager().getList());
+  const albums: string[] = AlbumManager.getAlbumManager().getList();
   const songs: string[] = SongManager.getSongManager().getList();
   console.clear();
   const questions = [
@@ -229,12 +220,11 @@ function promptEditGenre(genre: Genre): void {
     genre.setAlbums(answers.albums);
     genre.setSongs(answers.songs);
     manager.storeGenres();
-    /*
-    ArtistsManager.getArtistsManager().updateGenre(newGenre, answers.musicians);
-    GroupsManager.getGroupsManager().updateGenre(newGenre, answers.musicians);
-    AlbumsManager.getAlbumsManager().updateGenre(newGenre, answers.albums);
-    */
+
     SongManager.getSongManager().updateGenre(genre, answers.songs);
+    AlbumManager.getAlbumManager().updateGenre(genre, answers.albums);
+    ArtistManager.getArtistManager().updateGenre(genre, answers.musicians);
+    GroupManager.getGroupManager().updateGenre(genre, answers.musicians);
     PlaylistManager.getPlaylistManager().updateGenre();
     promptGenres();
   });

@@ -2,8 +2,21 @@ import {Genre} from '../Basics/Genre';
 import {Manager} from './Manager';
 import lowdb = require('lowdb');
 import FileSync = require('lowdb/adapters/FileSync');
+import {GroupInterface} from '../Interfaces/GroupInterface';
+import {ArtistInterface} from '../Interfaces/ArtistInterface';
+import {AlbumInterface} from '../Interfaces/AlbumInterface';
+import {SongInterface} from '../Interfaces/SongInterface';
+import {Artist} from '../Basics/Artist';
+import {Group} from '../Basics/Group';
+import {Album} from '../Basics/Album';
+import {Song} from '../Basics/Song';
+
 type schemaType = {
-    genres: { name: string; musicians: string[]; albums: string[], songs: string[] }[]
+    genres: {
+      name: string;
+      musicians: (GroupInterface|ArtistInterface)[];
+      albums: AlbumInterface[],
+      songs: SongInterface[] }[]
 };
 export class GenreManager extends Manager<Genre> {
   private static genresManager: GenreManager;
@@ -13,9 +26,7 @@ export class GenreManager extends Manager<Genre> {
     this.database = lowdb(new FileSync('src/Data/Genres.json'));
     if (this.database.has('genres').value()) {
       let dbItems = this.database.get('genres').value();
-      dbItems.forEach((item) => this.collection.add(new Genre(
-          item.name, item.musicians, item.albums, item.songs,
-      )));
+      dbItems.forEach((item) => this.collection.add(Genre.deserialize(item)));
     }
   }
 
@@ -38,8 +49,8 @@ export class GenreManager extends Manager<Genre> {
     });
     this.storeGenres();
   }
-  editGenre(genre: Genre, newName: string, newMusicians: string[],
-      newAlbums: string[], newSongs: string[] ): void {
+  editGenre(genre: Genre, newName: string, newMusicians: (Group|Artist)[],
+      newAlbums: Album[], newSongs: Song[] ): void {
     this.collection.forEach((element) => {
       if (element.getName() === genre.getName()) {
         element.setName(newName);
@@ -53,60 +64,6 @@ export class GenreManager extends Manager<Genre> {
   getGenreByName(name:string): Genre|undefined {
     return ([...this.collection.values()].find((genre) => genre.getName() === name));
   }
-  // ====================
-  updateMusician(musician: string, genres: string[]): void {
-    this.collection.forEach((element) => {
-      if (genres.find((g) => g === element.getName()) !== undefined) {
-        element.addMusician(musician);
-      } else {
-        element.deleteMusician(musician);
-      }
-    });
-    this.storeGenres();
-  }
-
-  removeMusician(musician: string) {
-    this.collection.forEach((element) => {
-      element.deleteMusician(musician);
-    });
-    this.storeGenres();
-  }
-
-  updateAlbum(album: string, genres: string[]): void {
-    this.collection.forEach((element) => {
-      if (genres.find((g) => g === element.getName()) !== undefined) {
-        element.addAlbum(album);
-      } else {
-        element.deleteAlbum(album);
-      }
-    });
-    this.storeGenres();
-  }
-
-  removeAlbum(album: string) {
-    this.collection.forEach((element) => {
-      element.deleteAlbum(album);
-    });
-    this.storeGenres();
-  }
-  updateSong(song: string, genres: string[]): void {
-    this.collection.forEach((element) => {
-      if (genres.find((g) => g === element.getName()) !== undefined) {
-        element.addSong(song);
-      } else {
-        element.deleteSong(song);
-      }
-    });
-    this.storeGenres();
-  }
-
-  removeSong(song: string) {
-    this.collection.forEach((element) => {
-      element.deleteSong(song);
-    });
-    this.storeGenres();
-  }
-  // ====================
 
   storeGenres() {
     this.database.set('genres', [...this.collection.values()]).write();

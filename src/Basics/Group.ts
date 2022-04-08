@@ -1,11 +1,14 @@
 import {BasicData} from '../Interfaces/BasicData';
+import {GroupInterface} from '../Interfaces/GroupInterface';
+import {AlbumManager} from '../Managers/AlbumManager';
+import {ArtistManager} from '../Managers/ArtistManager';
 import {Album} from './Album';
 import {Artist} from './Artist';
 import {Genre} from './Genre';
 
 export class Group implements BasicData {
   constructor(private name: string, private artists: Artist[],
-      readonly yearCreation: number, private genres: Genre[],
+      readonly yearCreation: number, private genres: string[],
       private albums: Album[]) {
   }
 
@@ -25,14 +28,19 @@ export class Group implements BasicData {
     this.artists = this.artists.filter((elemento) => elemento !== artistDelete);
   }
 
-  public getGenres(): Genre[] {
+  public getGenres(): string[] {
     return this.genres;
   }
-  public addGenre(newGenre: Genre): void {
-    this.genres.push(newGenre);
+  public removeGenre(genre: Genre): void {
+    const index = this.genres.indexOf(genre.getName());
+    if (index !== -1) {
+      this.genres.splice(index, 1);
+    }
   }
-  public removeGenre(genreDelete: Genre): void {
-    this.genres = this.genres.filter((elemento) => elemento !== genreDelete);
+  public addGenre(genre: Genre): void {
+    if (this.genres.find((x) => x === genre.getName()) === undefined) {
+      this.genres.push(genre.getName());
+    }
   }
 
   public getAlbums(): Album[] {
@@ -44,6 +52,19 @@ export class Group implements BasicData {
   public removeAlbum(albumDelete: Album): void {
     this.albums = this.albums.filter((elemento) => elemento !== albumDelete);
   }
+
+  public static deserialize(group: GroupInterface): Group {
+    let artists: Artist[] = [];
+    let albums: Album[] = [];
+    group.artists.forEach((a) =>
+      artists.push(ArtistManager.getArtistManager().getArtistByName(a.name) as Artist),
+    );
+    group.albums.forEach((a) =>
+      albums.push(AlbumManager.getAlbumManager().getAlbumByName(a.name) as Album),
+    );
+    return new Group(group.name, artists, group.yearCreation, group.genres, albums);
+  }
+
   /*
   // suma de oyentes de las canciones de sus albunes
   public getNumberListenersMonthly(): number {

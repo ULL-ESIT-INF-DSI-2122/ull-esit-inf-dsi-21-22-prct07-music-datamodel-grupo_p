@@ -40,10 +40,4 @@ export abstract class Manager<T extends BasicData> {
   remove(element: T): void {
     this.collection.delete(element);
   }
-  showInOrder(): void {
-    const ordenedArray: T[] = Array.from(this.collection).sort((a, b) => a.getName().localeCompare(b.getName()));
-    ordenedArray.forEach((element) => {
-      console.log(element);
-    });
-  }
 }

@@ -1,10 +1,10 @@
 /* eslint-disable no-unused-vars */
 import * as inquirer from 'inquirer';
+import {GenreManager} from '../Managers/GenreManager';
 import {PlaylistManager} from '../Managers/PlaylistManager';
 import {SongManager} from '../Managers/SongManager';
 import {promptGenres} from './GenresMenu';
 import {promptPlaylists} from './PlaylistsMenu';
-import {promptSongs} from './SongsMenu';
 
 // require('events').EventEmitter.defaultMaxListeners = 0;
 
@@ -26,9 +26,6 @@ export function promptUser(): void {
       case Commands.Genres:
         promptGenres();
         break;
-      case Commands.Songs:
-        promptSongs();
-        break;
       case Commands.Playlists:
         promptPlaylists();
         break;
@@ -37,5 +34,6 @@ export function promptUser(): void {
 }
 
 SongManager.getSongManager();
+GenreManager.getGenreManager();
 PlaylistManager.getPlaylistManager();
 promptUser();
