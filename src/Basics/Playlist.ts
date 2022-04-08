@@ -79,12 +79,6 @@ export class Playlist implements BasicData {
     });
   }
 
-  showInfo(order: Order): string {
-    const info: string = `${this.name}\n  -Géneros: ${this.getGenresNames()}\n  -Playlist original: ${(this.systemPlaylist ? 'Sí' : 'No')}\n`+
-       `  -Duración: ${this.duration[0]}h ${this.duration[1]}min\n  -Canciones:\n    ${this.getSongsNames(order).join('\n    ')}\n`;
-    console.log(info);
-    return info;
-  }
   getSongsNames(order: Order = 0): string[] {
     switch (order) {
       case 0:
@@ -226,6 +220,14 @@ export class Playlist implements BasicData {
     });
     return songsNames;
   }
+
+  showInfo(order: Order): string {
+    const info: string = `${this.name}\n  -Géneros: ${this.getGenresNames()}\n  -Playlist original: ${(this.systemPlaylist ? 'Sí' : 'No')}\n`+
+       `  -Duración: ${this.duration[0]}h ${this.duration[1]}min\n  -Canciones:\n    ${this.getSongsNames(order).join('\n    ')}\n`;
+    console.log(info);
+    return info;
+  }
+
   private getGenresNames(): string[] {
     let genresNames: string[] = [];
     this.genres.forEach((genre) => {

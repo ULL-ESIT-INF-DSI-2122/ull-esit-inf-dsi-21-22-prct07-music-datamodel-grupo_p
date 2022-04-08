@@ -10,7 +10,7 @@ type schemaType = {
     groups: {
         name: string,
         artists: ArtistInterface[],
-        yearCreation: number,
+        fundationYear: number,
         genres: string[],
         albums: AlbumInterface[]}[]
 };

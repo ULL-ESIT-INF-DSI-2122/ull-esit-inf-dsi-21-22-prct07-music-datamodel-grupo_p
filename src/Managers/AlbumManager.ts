@@ -1,17 +1,12 @@
 import {Manager} from './Manager';
 import lowdb = require('lowdb');
 import FileSync = require('lowdb/adapters/FileSync');
-import {SongInterface} from '../Interfaces/SongInterface';
 import {Album} from '../Basics/Album';
 import {Genre} from '../Basics/Genre';
+import {AlbumInterface} from '../Interfaces/AlbumInterface';
 
 type schemaType = {
-    albums: {
-        name: string,
-        whoPublishes: string,
-        publicationYear: number,
-        genres: string[],
-        songs: SongInterface[] }[]
+    albums: AlbumInterface[]
 };
 export class AlbumManager extends Manager<Album> {
   private static albumManager: AlbumManager;

@@ -8,7 +8,7 @@ import {Genre} from './Genre';
 
 export class Group implements BasicData {
   constructor(private name: string, private artists: Artist[],
-      readonly yearCreation: number, private genres: string[],
+      readonly fundationYear: number, private genres: string[],
       private albums: Album[]) {
   }
 
@@ -62,7 +62,7 @@ export class Group implements BasicData {
     group.albums.forEach((a) =>
       albums.push(AlbumManager.getAlbumManager().getAlbumByName(a.name) as Album),
     );
-    return new Group(group.name, artists, group.yearCreation, group.genres, albums);
+    return new Group(group.name, artists, group.fundationYear, group.genres, albums);
   }
 
   /*

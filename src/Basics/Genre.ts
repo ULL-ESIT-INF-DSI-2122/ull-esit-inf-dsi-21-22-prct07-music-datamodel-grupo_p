@@ -1,12 +1,10 @@
 import {BasicData} from '../Interfaces/BasicData';
 import {GenreInterface} from '../Interfaces/GenreInterface';
-import {ArtistInterface} from '../Interfaces/ArtistInterface';
 import {SongManager} from '../Managers/SongManager';
 import {Album} from './Album';
 import {Artist} from './Artist';
 import {Group} from './Group';
 import {Song} from './Song';
-import {GroupInterface} from '../Interfaces/GroupInterface';
 import {AlbumManager} from '../Managers/AlbumManager';
 import {ArtistManager} from '../Managers/ArtistManager';
 import {GroupManager} from '../Managers/GroupManager';
@@ -67,10 +65,33 @@ export class Genre implements BasicData {
     this.songs.splice(index, 1);
   }
   showInfo(): string {
-    const info: string = `${this.name}\n  -Grupos/Artistas: ${this.musicians}\n`+
-    `  -Álbums: ${this.albums}\n  -Canciones: ${this.songs}`;
+    const info: string = `${this.name}\n  -Grupos/Artistas:\n    ${this.getMusiciansNames().join('\n    ')}\n`+
+    `  -Álbums:\n    ${this.getAlbumsNames().join('\n    ')}\n  -Canciones:\n    ${this.getSongsNames().join('\n    ')}\n`;
     console.log(info);
     return info;
+  }
+
+  private getMusiciansNames(): string[] {
+    let musiciansNames: string[] = [];
+    this.musicians.forEach((musician) => {
+      musiciansNames.push(musician.getName());
+    });
+    return musiciansNames;
+  }
+
+  private getAlbumsNames(): string[] {
+    let albumsNames: string[] = [];
+    this.albums.forEach((album) => {
+      albumsNames.push(album.getName());
+    });
+    return albumsNames;
+  }
+  private getSongsNames(): string[] {
+    let songsNames: string[] = [];
+    this.songs.forEach((song) => {
+      songsNames.push(song.getName());
+    });
+    return songsNames;
   }
 
   public static deserialize(genre: GenreInterface): Genre {
@@ -84,9 +105,9 @@ export class Genre implements BasicData {
       albums.push(AlbumManager.getAlbumManager().getAlbumByName(a.name) as Album),
     );
     genre.musicians.forEach((m) => {
-      if (m instanceof ArtistInterface) {
+      if ('groups' in m) {
         musicians.push(ArtistManager.getArtistManager().getArtistByName(m.name) as Artist);
-      } else if (m instanceof GroupInterface) {
+      } else {
         musicians.push(GroupManager.getGroupManager().getGroupByName(m.name) as Group);
       }
     });
