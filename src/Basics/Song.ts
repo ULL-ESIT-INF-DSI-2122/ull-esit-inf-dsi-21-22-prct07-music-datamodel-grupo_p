@@ -1,4 +1,5 @@
 import {BasicData} from '../Interfaces/BasicData';
+import {Genre} from './Genre';
 /**
  * Clase que representa una cancion
  * Tiene asociados los siguientes datos: nombre, autor,
@@ -44,19 +45,30 @@ export class Song implements BasicData {
    * Devuelve el nombre del autor de la canción
    * @returns author como string
    */
-  public getNameAuthor(): string {
+  public getAuthorName(): string {
     return this.author;
   }
   /**
    * Devuelve el número de reproducciones que tiene la canción
    * @returns la longitud del array reproductions
    */
-  public getReproduction(): number {
+  public getReproductions(): number {
     return this.reproductions;
   }
 
   public getGenres():string[] {
     return this.genres;
+  }
+  public removeGenre(genre: Genre): void {
+    const index = this.genres.indexOf(genre.getName());
+    if (index !== -1) {
+      this.genres.splice(index, 1);
+    }
+  }
+  public addGenre(genre: Genre): void {
+    if (this.genres.find((x) => x === genre.getName()) === undefined) {
+      this.genres.push(genre.getName());
+    }
   }
 
   /*
@@ -82,12 +94,14 @@ export class Song implements BasicData {
    * Devuelve los datos de la canción
    * @returns datos de la canción como string
    */
-  public print(): string {
-    return (`CANCION ${this.getName()}
+  public showInfo(): string {
+    const info: string = `${this.getName()}
     Autor: ${this.author}
     Duracion: ${this.duration}
     Genero/s: ${this.genres}
     Single: ${(this.isSingle ? 'Si' : 'No')}
-    Numero de reproducciones: ${this.reproductions}`);
+    Numero de reproducciones: ${this.reproductions}`;
+    console.log(info);
+    return info;
   }
 }

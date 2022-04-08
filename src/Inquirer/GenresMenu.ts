@@ -1,10 +1,12 @@
 import * as inquirer from 'inquirer';
 import {Genre} from '../Basics/Genre';
-import {GenresManager} from '../Managers/GenresManager';
+import {GenreManager} from '../Managers/GenreManager';
+import {PlaylistManager} from '../Managers/PlaylistManager';
+import {SongManager} from '../Managers/SongManager';
 import {promptUser} from './MainMenu';
 
 export function promptGenres(): void {
-  const manager: GenresManager = GenresManager.getGenresManager();
+  const manager: GenreManager = GenreManager.getGenreManager();
   let options: string[] = ['Nuevo género +'];
   options = options.concat(manager.getList());
   options.push('Volver');
@@ -45,13 +47,6 @@ function promptGenre(genre: Genre): void {
         break;
       case 'Eliminar':
         promptRemoveGenre(genre);
-        /*
-        ArtistsManager.getArtistsManager().removeGenre(genre);
-        GroupsManager.getGroupsManager().removeGenre(genre);
-        AlbumsManager.getAlbumsManager().removeGenre(genre);
-        SongsManager.getSongsManager().removeGenre(genre);
-        PlaylistsManager.getPlaylistsManager().updateGenre();
-        */
         break;
       default:
         promptGenres();
@@ -62,7 +57,7 @@ function promptGenre(genre: Genre): void {
 }
 
 function promptRemoveGenre(genre: Genre) {
-  const manager: GenresManager = GenresManager.getGenresManager();
+  const manager: GenreManager = GenreManager.getGenreManager();
   console.clear();
   inquirer
       .prompt([
@@ -73,22 +68,30 @@ function promptRemoveGenre(genre: Genre) {
         },
       ])
       .then((answer) => {
-        if (answer.eliminar) manager.removeGenre(genre);
+        if (answer.eliminar) {
+          manager.removeGenre(genre);
+          SongManager.getSongManager().removeGenre(genre);
+          PlaylistManager.getPlaylistManager().updateGenre();
+          /*
+        ArtistsManager.getArtistsManager().removeGenre(genre);
+        GroupsManager.getGroupsManager().removeGenre(genre);
+        AlbumsManager.getAlbumsManager().removeGenre(genre);
+        */
+        }
         promptGenres();
       });
 }
 
 function promptAddGenre(): void {
-  const manager: GenresManager = GenresManager.getGenresManager();
+  const manager: GenreManager = GenreManager.getGenreManager();
   const musicians: string[] = ['Rolling Stones', 'Michael Jackson'];
   const albums: string[] = ['Threaller', 'Abbey Road'];
-  const songs: string[] = ['Imagine', 'Despacito'];
   /*
   let musicians: string[] = ArtistsManager.getArtistsManager().getList();
   musicians = musicians.concat(GroupsManager.getGroupsManager().getList());
   const albums: string[] = AlbumsManager.getAlbumsManager().getList();
-  const songs: string[] = SongsManager.getSongsManager().getList();
   */
+  const songs: string[] = SongManager.getSongManager().getList();
   console.clear();
   const questions = [
     {
@@ -148,24 +151,23 @@ function promptAddGenre(): void {
     ArtistsManager.getArtistsManager().updateGenre(newGenre, answers.musicians);
     GroupsManager.getGroupsManager().updateGenre(newGenre, answers.musicians);
     AlbumsManager.getAlbumsManager().updateGenre(newGenre, answers.albums);
-    SongsManager.getSongsManager().updateGenre(newGenre, answers.songs);
-    PlaylistsManager.getPlaylistsManager().updateGenre();
     */
+    SongManager.getSongManager().updateGenre(newGenre, answers.songs);
+    PlaylistManager.getPlaylistManager().updateGenre();
     promptGenres();
   });
 }
 
 function promptEditGenre(genre: Genre): void {
-  const manager: GenresManager = GenresManager.getGenresManager();
+  const manager: GenreManager = GenreManager.getGenreManager();
   const musicians: string[] = ['Rolling Stones', 'Michael Jackson'];
   const albums: string[] = ['Threaller', 'Abbey Road'];
-  const songs: string[] = ['Imagine', 'Despacito'];
   /*
   let musicians: string[] = ArtistsManager.getArtistsManager().getList();
   musicians = musicians.concat(GroupsManager.getGroupsManager().getList());
   const albums: string[] = AlbumsManager.getAlbumsManager().getList();
-  const songs: string[] = SongsManager.getSongsManager().getList();
   */
+  const songs: string[] = SongManager.getSongManager().getList();
   console.clear();
   const questions = [
     {
@@ -231,9 +233,9 @@ function promptEditGenre(genre: Genre): void {
     ArtistsManager.getArtistsManager().updateGenre(newGenre, answers.musicians);
     GroupsManager.getGroupsManager().updateGenre(newGenre, answers.musicians);
     AlbumsManager.getAlbumsManager().updateGenre(newGenre, answers.albums);
-    SongsManager.getSongsManager().updateGenre(newGenre, answers.songs);
-    PlaylistsManager.getPlaylistsManager().updateGenre();
     */
+    SongManager.getSongManager().updateGenre(genre, answers.songs);
+    PlaylistManager.getPlaylistManager().updateGenre();
     promptGenres();
   });
 }

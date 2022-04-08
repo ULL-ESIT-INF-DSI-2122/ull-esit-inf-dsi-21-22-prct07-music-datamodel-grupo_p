@@ -4,12 +4,14 @@ import lowdb = require('lowdb');
 import FileSync = require('lowdb/adapters/FileSync');
 import {Song} from '../Basics/Song';
 import {Playlist} from '../Basics/Playlist';
+import {SongInterface} from '../Interfaces/SongInterface';
 
 type schemaType = {
-    playlists: { name: string, songs: Song[], systemPlaylist: boolean}[]
+    playlists: { name: string, songs: SongInterface[], systemPlaylist: boolean}[]
 };
-export class PlaylistsManager extends Manager<Playlist> {
-  private static playlistsManager: PlaylistsManager;
+
+export class PlaylistManager extends Manager<Playlist> {
+  private static playlistsManager: PlaylistManager;
   private database: lowdb.LowdbSync<schemaType>;
   private constructor() {
     super();
@@ -17,16 +19,16 @@ export class PlaylistsManager extends Manager<Playlist> {
     if (this.database.has('playlists').value()) {
       let dbItems = this.database.get('playlists').value();
       dbItems.forEach((item) => {
-        this.collection.add(new Playlist(item.name, [new Song('Despacito', 'Luis Fonsi', [2, 2], ['Reggeaton'], new Date('02-34-2001'), true, 1200)], item.systemPlaylist));
+        this.collection.add(Playlist.deserialize(item));
       });
     }
   }
 
-  public static getPlaylistManager(): PlaylistsManager {
-    if (!PlaylistsManager.playlistsManager) {
-      PlaylistsManager.playlistsManager = new PlaylistsManager();
+  public static getPlaylistManager(): PlaylistManager {
+    if (!PlaylistManager.playlistsManager) {
+      PlaylistManager.playlistsManager = new PlaylistManager();
     }
-    return PlaylistsManager.playlistsManager;
+    return PlaylistManager.playlistsManager;
   }
 
   addPlaylist(playlist: Playlist): void {
@@ -46,7 +48,6 @@ export class PlaylistsManager extends Manager<Playlist> {
       if (element.getName() === playlist.getName()) {
         element.setName(newName);
         element.setSongs(newSongs);
-        // element.setGenres(newGenres);
       }
     });
     this.storePlaylists();
@@ -54,6 +55,12 @@ export class PlaylistsManager extends Manager<Playlist> {
   removeSong(song: Song) {
     this.collection.forEach((element) => {
       element.deleteSong(song);
+    });
+    this.storePlaylists();
+  }
+  updateGenre() {
+    this.collection.forEach((playlist) => {
+      playlist.updateGenres();
     });
     this.storePlaylists();
   }

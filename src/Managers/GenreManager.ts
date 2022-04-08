@@ -5,8 +5,8 @@ import FileSync = require('lowdb/adapters/FileSync');
 type schemaType = {
     genres: { name: string; musicians: string[]; albums: string[], songs: string[] }[]
 };
-export class GenresManager extends Manager<Genre> {
-  private static genresManager: GenresManager;
+export class GenreManager extends Manager<Genre> {
+  private static genresManager: GenreManager;
   private database: lowdb.LowdbSync<schemaType>;
   private constructor() {
     super();
@@ -19,11 +19,11 @@ export class GenresManager extends Manager<Genre> {
     }
   }
 
-  public static getGenresManager(): GenresManager {
-    if (!GenresManager.genresManager) {
-      GenresManager.genresManager = new GenresManager();
+  public static getGenreManager(): GenreManager {
+    if (!GenreManager.genresManager) {
+      GenreManager.genresManager = new GenreManager();
     }
-    return GenresManager.genresManager;
+    return GenreManager.genresManager;
   }
 
   addGenre(genre: Genre): void {

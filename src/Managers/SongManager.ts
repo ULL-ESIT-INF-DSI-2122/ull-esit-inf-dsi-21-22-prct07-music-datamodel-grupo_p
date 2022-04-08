@@ -3,6 +3,7 @@ import {Song} from '../Basics/Song';
 import {Manager} from './Manager';
 import lowdb = require('lowdb');
 import FileSync = require('lowdb/adapters/FileSync');
+import {Genre} from '../Basics/Genre';
 
 
 type schemaType = {
@@ -11,8 +12,8 @@ type schemaType = {
         reproductions: number}[]
 };
 
-export class SongsManager extends Manager<Song> {
-  private static SongManager: SongsManager;
+export class SongManager extends Manager<Song> {
+  private static SongManager: SongManager;
   private database: lowdb.LowdbSync<schemaType>;
   private constructor() {
     super();
@@ -32,12 +33,32 @@ export class SongsManager extends Manager<Song> {
    * Patron Singlenton
    * @returns la única instancia de la clase SongManager
    */
-  public static getSongsManager(): SongsManager {
-    if (!SongsManager.SongManager) {
-      SongsManager.SongManager = new SongsManager();
+  public static getSongManager(): SongManager {
+    if (!SongManager.SongManager) {
+      SongManager.SongManager = new SongManager();
     }
-    return SongsManager.SongManager;
+    return SongManager.SongManager;
   }
+
+  removeGenre(genre: Genre) {
+    this.collection.forEach((song) => {
+      song.removeGenre(genre);
+    });
+    this.storeSong();
+  }
+
+  updateGenre(genre: Genre, songs: string[]) {
+    this.collection.forEach((song) => {
+      if (songs.find((x) => x === song.getName()) !== undefined) {
+        song.addGenre(genre);
+      } else {
+        song.removeGenre(genre);
+      }
+    });
+    this.storeSong();
+  }
+
+
   /**
    * Alamacena la información de la canción de acuerdo a lo
    * especificado en la schemaType.

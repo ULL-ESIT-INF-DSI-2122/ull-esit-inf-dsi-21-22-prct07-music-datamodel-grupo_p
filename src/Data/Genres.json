@@ -1,6 +1,18 @@
 {
   "genres": [
     {
+      "name": "Rock",
+      "musicians": [
+        "Rolling Stones"
+      ],
+      "albums": [
+        "Threaller"
+      ],
+      "songs": [
+        "Plan A"
+      ]
+    },
+    {
       "name": "Reggeaton",
       "musicians": [
         "Rolling Stones"
@@ -9,7 +21,6 @@
         "Threaller"
       ],
       "songs": [
-        "Imagine",
         "Despacito"
       ]
     }

@@ -1,3 +1,66 @@
 {
-  "playlists": []
+  "playlists": [
+    {
+      "name": "Prueba",
+      "songs": [
+        {
+          "name": "Despacito",
+          "author": "Luis Fonsi",
+          "duration": [
+            3,
+            45
+          ],
+          "genres": [
+            "Reggeaton"
+          ],
+          "isSingle": true,
+          "reproductions": 510000
+        },
+        {
+          "name": "Plan A",
+          "author": "Paulo Londra",
+          "duration": [
+            2,
+            35
+          ],
+          "genres": [
+            "Rock"
+          ],
+          "isSingle": false,
+          "reproductions": 110000
+        }
+      ],
+      "systemPlaylist": false,
+      "genres": [
+        {
+          "name": "Reggeaton",
+          "musicians": [
+            "Rolling Stones"
+          ],
+          "albums": [
+            "Threaller"
+          ],
+          "songs": [
+            "Despacito"
+          ]
+        },
+        {
+          "name": "Rock",
+          "musicians": [
+            "Rolling Stones"
+          ],
+          "albums": [
+            "Threaller"
+          ],
+          "songs": [
+            "Plan A"
+          ]
+        }
+      ],
+      "duration": [
+        0,
+        6
+      ]
+    }
+  ]
 }

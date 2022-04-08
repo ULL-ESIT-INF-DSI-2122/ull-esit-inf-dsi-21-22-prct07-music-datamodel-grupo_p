@@ -1,13 +1,30 @@
 {
-    "songs": [
-        {
-            "name": "Despacito",
-            "author": "Luis Fonsi",
-            "duration": [3, 45],
-            "genres": ["Reggeaton"],     
-            "datePublication": "2018-03-16",  
-            "isSingle": true,
-            "reproductions": 510000
-        }
-    ]
+  "songs": [
+    {
+      "name": "Despacito",
+      "author": "Luis Fonsi",
+      "duration": [
+        3,
+        45
+      ],
+      "genres": [
+        "Reggeaton"
+      ],
+      "isSingle": true,
+      "reproductions": 510000
+    },
+    {
+      "name": "Plan A",
+      "author": "Paulo Londra",
+      "duration": [
+        2,
+        35
+      ],
+      "genres": [
+        "Rock"
+      ],
+      "isSingle": false,
+      "reproductions": 110000
+    }
+  ]
 }
