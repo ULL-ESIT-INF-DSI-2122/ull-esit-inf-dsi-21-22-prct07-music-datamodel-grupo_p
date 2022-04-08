@@ -2,21 +2,14 @@ import {Genre} from '../Basics/Genre';
 import {Manager} from './Manager';
 import lowdb = require('lowdb');
 import FileSync = require('lowdb/adapters/FileSync');
-import {GroupInterface} from '../Interfaces/GroupInterface';
-import {ArtistInterface} from '../Interfaces/ArtistInterface';
-import {AlbumInterface} from '../Interfaces/AlbumInterface';
-import {SongInterface} from '../Interfaces/SongInterface';
 import {Artist} from '../Basics/Artist';
 import {Group} from '../Basics/Group';
 import {Album} from '../Basics/Album';
 import {Song} from '../Basics/Song';
+import {GenreInterface} from '../Interfaces/GenreInterface';
 
 type schemaType = {
-    genres: {
-      name: string;
-      musicians: (GroupInterface|ArtistInterface)[];
-      albums: AlbumInterface[],
-      songs: SongInterface[] }[]
+    genres: GenreInterface[]
 };
 export class GenreManager extends Manager<Genre> {
   private static genresManager: GenreManager;

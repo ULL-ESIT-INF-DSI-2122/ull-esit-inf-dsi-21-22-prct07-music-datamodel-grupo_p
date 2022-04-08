@@ -1,15 +1,13 @@
-import {Duration} from '../Basics/Song';
 import {Song} from '../Basics/Song';
 import {Manager} from './Manager';
 import lowdb = require('lowdb');
 import FileSync = require('lowdb/adapters/FileSync');
 import {Genre} from '../Basics/Genre';
+import {SongInterface} from '../Interfaces/SongInterface';
 
 
 type schemaType = {
-    songs: { name: string; author: string; duration: Duration, genres: string[],
-        datePublication: Date, isSingle: boolean,
-        reproductions: number}[]
+    songs: SongInterface[]
 };
 
 export class SongManager extends Manager<Song> {
@@ -21,7 +19,7 @@ export class SongManager extends Manager<Song> {
     if (this.database.has('songs').value()) {
       let dbItems = this.database.get('songs').value();
       dbItems.forEach((item) => this.collection.add(new Song(item.name, item.author, item.duration,
-          item.genres, item.datePublication, item.isSingle, item.reproductions,
+          item.genres, item.publicationDate, item.isSingle, item.reproductions,
       )));
     }
   }

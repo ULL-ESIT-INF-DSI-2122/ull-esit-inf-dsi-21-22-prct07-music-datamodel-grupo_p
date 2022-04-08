@@ -4,10 +4,10 @@ import lowdb = require('lowdb');
 import FileSync = require('lowdb/adapters/FileSync');
 import {Song} from '../Basics/Song';
 import {Playlist} from '../Basics/Playlist';
-import {SongInterface} from '../Interfaces/SongInterface';
+import {PlaylistInterface} from '../Interfaces/PlaylistInterface';
 
 type schemaType = {
-    playlists: { name: string, songs: SongInterface[], systemPlaylist: boolean}[]
+    playlists: PlaylistInterface[]
 };
 
 export class PlaylistManager extends Manager<Playlist> {

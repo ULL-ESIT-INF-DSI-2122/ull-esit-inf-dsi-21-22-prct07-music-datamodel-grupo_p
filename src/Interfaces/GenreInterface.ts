@@ -4,5 +4,8 @@ import {GroupInterface} from './GroupInterface';
 import {SongInterface} from './SongInterface';
 
 export interface GenreInterface {
-    name: string, musicians: (GroupInterface|ArtistInterface)[], albums: AlbumInterface[], songs: SongInterface[]
+    name: string,
+    musicians: (GroupInterface|ArtistInterface)[],
+    albums: AlbumInterface[],
+    songs: SongInterface[]
 }
