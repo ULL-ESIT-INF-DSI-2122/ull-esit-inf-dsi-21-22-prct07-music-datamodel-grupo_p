@@ -18,7 +18,7 @@
           "reproductions": 3200000
         }
       ],
-      "systemPlaylist": false,
+      "systemPlaylist": true,
       "genres": [
         {
           "name": "Pop",
@@ -266,7 +266,7 @@
           "reproductions": 10700000
         }
       ],
-      "systemPlaylist": false,
+      "systemPlaylist": true,
       "genres": [
         {
           "name": "Rock",
