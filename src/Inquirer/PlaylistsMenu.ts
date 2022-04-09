@@ -1,5 +1,5 @@
 import * as inquirer from 'inquirer';
-import {Playlist} from '../Basics/Playlist';
+import {Order, Playlist} from '../Basics/Playlist';
 import {Song} from '../Basics/Song';
 import {PlaylistManager} from '../Managers/PlaylistManager';
 import {SongManager} from '../Managers/SongManager';
@@ -31,7 +31,6 @@ export function promptPlaylists(): void {
     }
   });
 }
-export type Order = 0|1|2|3|4|5|6|7|8|9|10|11;
 
 function promptPlaylist(playlist: Playlist, order: Order = 0): void {
   console.clear();

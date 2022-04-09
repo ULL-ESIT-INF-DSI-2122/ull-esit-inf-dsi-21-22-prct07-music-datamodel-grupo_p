@@ -44,6 +44,34 @@
           "publicationDate": "2012-04-16",
           "isSingle": false,
           "reproductions": 4500000
+        },
+        {
+          "name": "One More Night",
+          "author": "Maroon 5",
+          "duration": [
+            3,
+            39
+          ],
+          "genres": [
+            "Pop"
+          ],
+          "publicationDate": "2012-06-19",
+          "isSingle": false,
+          "reproductions": 1530000
+        },
+        {
+          "name": "Daylight",
+          "author": "Maroon 5",
+          "duration": [
+            3,
+            45
+          ],
+          "genres": [
+            "Pop"
+          ],
+          "publicationDate": "2012-11-27",
+          "isSingle": true,
+          "reproductions": 2000000
         }
       ]
     },
@@ -93,6 +121,20 @@
         "Pop"
       ],
       "songs": [
+        {
+          "name": "Lost Stars",
+          "author": "Adam Levine",
+          "duration": [
+            3,
+            16
+          ],
+          "genres": [
+            "Pop"
+          ],
+          "publicationDate": "2014-06-30",
+          "isSingle": true,
+          "reproductions": 3200000
+        },
         {
           "name": "Lost Stars",
           "author": "Adam Levine",

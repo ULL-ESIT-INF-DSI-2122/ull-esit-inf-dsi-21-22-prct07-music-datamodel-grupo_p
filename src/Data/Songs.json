@@ -15,6 +15,34 @@
       "reproductions": 4500000
     },
     {
+      "name": "One More Night",
+      "author": "Maroon 5",
+      "duration": [
+        3,
+        39
+      ],
+      "genres": [
+        "Pop"
+      ],
+      "publicationDate": "2012-06-19",
+      "isSingle": false,
+      "reproductions": 1530000
+    },
+    {
+      "name": "Daylight",
+      "author": "Maroon 5",
+      "duration": [
+        3,
+        45
+      ],
+      "genres": [
+        "Pop"
+      ],
+      "publicationDate": "2012-11-27",
+      "isSingle": true,
+      "reproductions": 2000000
+    },
+    {
       "name": "Lost Stars",
       "author": "Adam Levine",
       "duration": [
@@ -27,6 +55,20 @@
       "publicationDate": "2014-06-30",
       "isSingle": true,
       "reproductions": 3200000
+    },
+    {
+      "name": "A Higher Place",
+      "author": "Adam Levine",
+      "duration": [
+        3,
+        11
+      ],
+      "genres": [
+        "Pop"
+      ],
+      "publicationDate": "2014-07-07",
+      "isSingle": false,
+      "reproductions": 1860000
     },
     {
       "name": "Satisfaction",
