@@ -1,19 +1,19 @@
 {
   "albums": [
     {
-      "name": "Aftermath",
+      "name": "Out Of Our Heads",
       "whoPublishes": "The Rolling Stones",
-      "publicationYear": 1966,
+      "publicationYear": 1965,
       "genres": [
         "Rock"
       ],
       "songs": [
         {
-          "name": "Paint It, Black",
+          "name": "Satisfaction",
           "author": "The Rolling Stones",
           "duration": [
             3,
-            45
+            51
           ],
           "genres": [
             "Rock"
@@ -41,6 +41,7 @@
           "genres": [
             "Pop"
           ],
+          "publicationDate": "2012-04-16",
           "isSingle": false,
           "reproductions": 4500000
         }
@@ -64,8 +65,23 @@
           "genres": [
             "Rock"
           ],
+          "publicationDate": "2001-11-19",
           "isSingle": true,
-          "reproductions": 4300000
+          "reproductions": 4500000
+        },
+        {
+          "name": "Visions of paradise",
+          "author": "Mick Jagger",
+          "duration": [
+            4,
+            2
+          ],
+          "genres": [
+            "Rock"
+          ],
+          "publicationDate": "2001-11-19",
+          "isSingle": false,
+          "reproductions": 2750000
         }
       ]
     },
@@ -78,7 +94,7 @@
       ],
       "songs": [
         {
-          "name": "Lost stars",
+          "name": "Lost Stars",
           "author": "Adam Levine",
           "duration": [
             3,
@@ -87,6 +103,7 @@
           "genres": [
             "Pop"
           ],
+          "publicationDate": "2014-06-30",
           "isSingle": true,
           "reproductions": 3200000
         }

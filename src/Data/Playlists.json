@@ -1,33 +1,21 @@
 {
   "playlists": [
     {
-      "name": "Mi lista",
+      "name": "MiLista",
       "songs": [
         {
-          "name": "Payphone",
-          "author": "Maroon 5",
+          "name": "Lost Stars",
+          "author": "Adam Levine",
           "duration": [
             3,
-            51
+            16
           ],
           "genres": [
             "Pop"
           ],
-          "isSingle": false,
-          "reproductions": 4500000
-        },
-        {
-          "name": "Paint It, Black",
-          "author": "The Rolling Stones",
-          "duration": [
-            3,
-            45
-          ],
-          "genres": [
-            "Rock"
-          ],
-          "isSingle": false,
-          "reproductions": 10700000
+          "publicationDate": "2014-06-30",
+          "isSingle": true,
+          "reproductions": 3200000
         }
       ],
       "systemPlaylist": false,
@@ -35,6 +23,57 @@
         {
           "name": "Pop",
           "musicians": [
+            {
+              "name": "Adam Levine",
+              "groups": [
+                "Maroon 5"
+              ],
+              "genres": [
+                "Pop"
+              ],
+              "albums": [
+                {
+                  "name": "Begin Again",
+                  "whoPublishes": "Adam Levine",
+                  "publicationYear": 2014,
+                  "genres": [
+                    "Pop"
+                  ],
+                  "songs": [
+                    {
+                      "name": "Lost Stars",
+                      "author": "Adam Levine",
+                      "duration": [
+                        3,
+                        16
+                      ],
+                      "genres": [
+                        "Pop"
+                      ],
+                      "publicationDate": "2014-06-30",
+                      "isSingle": true,
+                      "reproductions": 3200000
+                    }
+                  ]
+                }
+              ],
+              "songs": [
+                {
+                  "name": "Lost Stars",
+                  "author": "Adam Levine",
+                  "duration": [
+                    3,
+                    16
+                  ],
+                  "genres": [
+                    "Pop"
+                  ],
+                  "publicationDate": "2014-06-30",
+                  "isSingle": true,
+                  "reproductions": 3200000
+                }
+              ]
+            },
             {
               "name": "Maroon 5",
               "artists": [
@@ -56,7 +95,7 @@
                       ],
                       "songs": [
                         {
-                          "name": "Lost stars",
+                          "name": "Lost Stars",
                           "author": "Adam Levine",
                           "duration": [
                             3,
@@ -65,6 +104,7 @@
                           "genres": [
                             "Pop"
                           ],
+                          "publicationDate": "2014-06-30",
                           "isSingle": true,
                           "reproductions": 3200000
                         }
@@ -73,7 +113,7 @@
                   ],
                   "songs": [
                     {
-                      "name": "Lost stars",
+                      "name": "Lost Stars",
                       "author": "Adam Levine",
                       "duration": [
                         3,
@@ -82,6 +122,7 @@
                       "genres": [
                         "Pop"
                       ],
+                      "publicationDate": "2014-06-30",
                       "isSingle": true,
                       "reproductions": 3200000
                     }
@@ -111,59 +152,11 @@
                       "genres": [
                         "Pop"
                       ],
+                      "publicationDate": "2012-04-16",
                       "isSingle": false,
                       "reproductions": 4500000
                     }
                   ]
-                }
-              ]
-            },
-            {
-              "name": "Adam Levine",
-              "groups": [
-                "Maroon 5"
-              ],
-              "genres": [
-                "Pop"
-              ],
-              "albums": [
-                {
-                  "name": "Begin Again",
-                  "whoPublishes": "Adam Levine",
-                  "publicationYear": 2014,
-                  "genres": [
-                    "Pop"
-                  ],
-                  "songs": [
-                    {
-                      "name": "Lost stars",
-                      "author": "Adam Levine",
-                      "duration": [
-                        3,
-                        16
-                      ],
-                      "genres": [
-                        "Pop"
-                      ],
-                      "isSingle": true,
-                      "reproductions": 3200000
-                    }
-                  ]
-                }
-              ],
-              "songs": [
-                {
-                  "name": "Lost stars",
-                  "author": "Adam Levine",
-                  "duration": [
-                    3,
-                    16
-                  ],
-                  "genres": [
-                    "Pop"
-                  ],
-                  "isSingle": true,
-                  "reproductions": 3200000
                 }
               ]
             }
@@ -187,6 +180,7 @@
                   "genres": [
                     "Pop"
                   ],
+                  "publicationDate": "2012-04-16",
                   "isSingle": false,
                   "reproductions": 4500000
                 }
@@ -201,7 +195,7 @@
               ],
               "songs": [
                 {
-                  "name": "Lost stars",
+                  "name": "Lost Stars",
                   "author": "Adam Levine",
                   "duration": [
                     3,
@@ -210,6 +204,7 @@
                   "genres": [
                     "Pop"
                   ],
+                  "publicationDate": "2014-06-30",
                   "isSingle": true,
                   "reproductions": 3200000
                 }
@@ -227,11 +222,12 @@
               "genres": [
                 "Pop"
               ],
+              "publicationDate": "2012-04-16",
               "isSingle": false,
               "reproductions": 4500000
             },
             {
-              "name": "Lost stars",
+              "name": "Lost Stars",
               "author": "Adam Levine",
               "duration": [
                 3,
@@ -240,14 +236,120 @@
               "genres": [
                 "Pop"
               ],
+              "publicationDate": "2014-06-30",
               "isSingle": true,
               "reproductions": 3200000
             }
           ]
-        },
+        }
+      ],
+      "duration": [
+        0,
+        3
+      ]
+    },
+    {
+      "name": "MyPlaylist",
+      "songs": [
+        {
+          "name": "Satisfaction",
+          "author": "The Rolling Stones",
+          "duration": [
+            3,
+            51
+          ],
+          "genres": [
+            "Rock"
+          ],
+          "publicationDate": "1965-06-06",
+          "isSingle": false,
+          "reproductions": 10700000
+        }
+      ],
+      "systemPlaylist": false,
+      "genres": [
         {
           "name": "Rock",
           "musicians": [
+            {
+              "name": "Mick Jagger",
+              "groups": [
+                "The Rolling Stones"
+              ],
+              "genres": [
+                "Rock"
+              ],
+              "albums": [
+                {
+                  "name": "Goddess in the Doorway",
+                  "whoPublishes": "Mick Jagger",
+                  "publicationYear": 2001,
+                  "genres": [
+                    "Rock"
+                  ],
+                  "songs": [
+                    {
+                      "name": "God gave me everything",
+                      "author": "Mick Jagger",
+                      "duration": [
+                        3,
+                        34
+                      ],
+                      "genres": [
+                        "Rock"
+                      ],
+                      "publicationDate": "2001-11-19",
+                      "isSingle": true,
+                      "reproductions": 4500000
+                    },
+                    {
+                      "name": "Visions of paradise",
+                      "author": "Mick Jagger",
+                      "duration": [
+                        4,
+                        2
+                      ],
+                      "genres": [
+                        "Rock"
+                      ],
+                      "publicationDate": "2001-11-19",
+                      "isSingle": false,
+                      "reproductions": 2750000
+                    }
+                  ]
+                }
+              ],
+              "songs": [
+                {
+                  "name": "God gave me everything",
+                  "author": "Mick Jagger",
+                  "duration": [
+                    3,
+                    34
+                  ],
+                  "genres": [
+                    "Rock"
+                  ],
+                  "publicationDate": "2001-11-19",
+                  "isSingle": true,
+                  "reproductions": 4500000
+                },
+                {
+                  "name": "Visions of paradise",
+                  "author": "Mick Jagger",
+                  "duration": [
+                    4,
+                    2
+                  ],
+                  "genres": [
+                    "Rock"
+                  ],
+                  "publicationDate": "2001-11-19",
+                  "isSingle": false,
+                  "reproductions": 2750000
+                }
+              ]
+            },
             {
               "name": "The Rolling Stones",
               "artists": [
@@ -278,8 +380,23 @@
                           "genres": [
                             "Rock"
                           ],
+                          "publicationDate": "2001-11-19",
                           "isSingle": true,
-                          "reproductions": 4300000
+                          "reproductions": 4500000
+                        },
+                        {
+                          "name": "Visions of paradise",
+                          "author": "Mick Jagger",
+                          "duration": [
+                            4,
+                            2
+                          ],
+                          "genres": [
+                            "Rock"
+                          ],
+                          "publicationDate": "2001-11-19",
+                          "isSingle": false,
+                          "reproductions": 2750000
                         }
                       ]
                     }
@@ -295,109 +412,79 @@
                       "genres": [
                         "Rock"
                       ],
+                      "publicationDate": "2001-11-19",
                       "isSingle": true,
-                      "reproductions": 4300000
+                      "reproductions": 4500000
+                    },
+                    {
+                      "name": "Visions of paradise",
+                      "author": "Mick Jagger",
+                      "duration": [
+                        4,
+                        2
+                      ],
+                      "genres": [
+                        "Rock"
+                      ],
+                      "publicationDate": "2001-11-19",
+                      "isSingle": false,
+                      "reproductions": 2750000
                     }
                   ]
                 }
               ],
               "fundationYear": 1999,
-              "genres": [],
+              "genres": [
+                "Rock"
+              ],
               "albums": [
                 {
-                  "name": "Aftermath",
+                  "name": "Out Of Our Heads",
                   "whoPublishes": "The Rolling Stones",
-                  "publicationYear": 1966,
+                  "publicationYear": 1965,
                   "genres": [
                     "Rock"
                   ],
                   "songs": [
                     {
-                      "name": "Paint It, Black",
+                      "name": "Satisfaction",
                       "author": "The Rolling Stones",
                       "duration": [
                         3,
-                        45
+                        51
                       ],
                       "genres": [
                         "Rock"
                       ],
+                      "publicationDate": "1965-06-06",
                       "isSingle": false,
                       "reproductions": 10700000
                     }
                   ]
                 }
               ]
-            },
-            {
-              "name": "Mick Jagger",
-              "groups": [
-                "The Rolling Stones"
-              ],
-              "genres": [
-                "Rock"
-              ],
-              "albums": [
-                {
-                  "name": "Goddess in the Doorway",
-                  "whoPublishes": "Mick Jagger",
-                  "publicationYear": 2001,
-                  "genres": [
-                    "Rock"
-                  ],
-                  "songs": [
-                    {
-                      "name": "God gave me everything",
-                      "author": "Mick Jagger",
-                      "duration": [
-                        3,
-                        34
-                      ],
-                      "genres": [
-                        "Rock"
-                      ],
-                      "isSingle": true,
-                      "reproductions": 4300000
-                    }
-                  ]
-                }
-              ],
-              "songs": [
-                {
-                  "name": "God gave me everything",
-                  "author": "Mick Jagger",
-                  "duration": [
-                    3,
-                    34
-                  ],
-                  "genres": [
-                    "Rock"
-                  ],
-                  "isSingle": true,
-                  "reproductions": 4300000
-                }
-              ]
             }
           ],
           "albums": [
             {
-              "name": "Aftermath",
+              "name": "Out Of Our Heads",
               "whoPublishes": "The Rolling Stones",
-              "publicationYear": 1966,
+              "publicationYear": 1965,
               "genres": [
                 "Rock"
               ],
               "songs": [
                 {
-                  "name": "Paint It, Black",
+                  "name": "Satisfaction",
                   "author": "The Rolling Stones",
                   "duration": [
                     3,
-                    45
+                    51
                   ],
                   "genres": [
                     "Rock"
                   ],
+                  "publicationDate": "1965-06-06",
                   "isSingle": false,
                   "reproductions": 10700000
                 }
@@ -421,23 +508,39 @@
                   "genres": [
                     "Rock"
                   ],
+                  "publicationDate": "2001-11-19",
                   "isSingle": true,
-                  "reproductions": 4300000
+                  "reproductions": 4500000
+                },
+                {
+                  "name": "Visions of paradise",
+                  "author": "Mick Jagger",
+                  "duration": [
+                    4,
+                    2
+                  ],
+                  "genres": [
+                    "Rock"
+                  ],
+                  "publicationDate": "2001-11-19",
+                  "isSingle": false,
+                  "reproductions": 2750000
                 }
               ]
             }
           ],
           "songs": [
             {
-              "name": "Paint It, Black",
+              "name": "Satisfaction",
               "author": "The Rolling Stones",
               "duration": [
                 3,
-                45
+                51
               ],
               "genres": [
                 "Rock"
               ],
+              "publicationDate": "1965-06-06",
               "isSingle": false,
               "reproductions": 10700000
             },
@@ -451,15 +554,30 @@
               "genres": [
                 "Rock"
               ],
+              "publicationDate": "2001-11-19",
               "isSingle": true,
-              "reproductions": 4300000
+              "reproductions": 4500000
+            },
+            {
+              "name": "Visions of paradise",
+              "author": "Mick Jagger",
+              "duration": [
+                4,
+                2
+              ],
+              "genres": [
+                "Rock"
+              ],
+              "publicationDate": "2001-11-19",
+              "isSingle": false,
+              "reproductions": 2750000
             }
           ]
         }
       ],
       "duration": [
         0,
-        7
+        3
       ]
     }
   ]

@@ -1,81 +1,109 @@
 import 'mocha';
 import {expect} from 'chai';
 import {Genre} from '../../src/Basics/Genre';
+import {ArtistManager} from '../../src/Managers/ArtistManager';
+import {AlbumManager} from '../../src/Managers/AlbumManager';
+import {SongManager} from '../../src/Managers/SongManager';
+import {Artist} from '../../src/Basics/Artist';
+import {GroupManager} from '../../src/Managers/GroupManager';
+import {Song} from '../../src/Basics/Song';
+import {Group} from '../../src/Basics/Group';
+import {Album} from '../../src/Basics/Album';
 
 describe('Pruebas de la clase Genre', () => {
-  let rap: Genre;
+  let testGenre: Genre;
+  let levine: Artist;
+  let rolling: Group;
+  let overexposed: Album;
+  let heads: Album;
+  let lost: Song;
+  let satisfaction: Song;
+  let artistManager: ArtistManager;
+  let groupManager: GroupManager;
+  let albumManager: AlbumManager;
+  let songManager: SongManager;
   before(function() {
-    rap = new Genre('Rap', ['Eminem'], ['Relapse'], ['Rap God']);
+    artistManager = ArtistManager.getArtistManager();
+    groupManager = GroupManager.getGroupManager();
+    albumManager = AlbumManager.getAlbumManager();
+    songManager = SongManager.getSongManager();
+    levine = artistManager.getArtistByName('Adam Levine') as Artist;
+    rolling = groupManager.getGroupByName('The Rolling Stones') as Group;
+    overexposed = albumManager.getAlbumByName('Overexposed') as Album;
+    heads = albumManager.getAlbumByName('Out Of Our Heads') as Album;
+    lost = songManager.getSongByName('Lost Stars') as Song;
+    satisfaction = songManager.getSongByName('Satisfaction') as Song;
+    testGenre = new Genre('Test Genre', [levine], [overexposed], [lost]);
   });
-  it('new Genre(\'Pop\', [\'Michael Jackson\'], [\'Thriller\'], [\'Billie Jean\']) is not equal null', () => {
-    expect(new Genre('Pop', ['Michael Jackson'], ['Thriller'], ['Billie Jean'])).not.to.be.equal(null);
+  it(`new Genre('Test Genre', [levine], [overexposed], [lost]) is not equal null`, () => {
+    expect(new Genre('Test Genre', [levine], [overexposed], [lost])).not.to.be.equal(null);
   });
-  it('rap.getName() returns \'Rap\'', () => {
-    expect(rap.getName()).to.be.equal('Rap');
+  it(`testGenre.getName() returns 'Test Genre'`, () => {
+    expect(testGenre.getName()).to.be.equal('Test Genre');
   });
-  it('rap.setName(\'rap\') sets the name to \'rap\'', () => {
-    rap.setName('rap');
-    expect(rap.getName()).to.be.equal('rap');
+  it(`testGenre.setName('GenreForTest') sets the name to 'GenreForTest'`, () => {
+    testGenre.setName('GenreForTest');
+    expect(testGenre.getName()).to.be.equal('GenreForTest');
   });
-  it('rap.getMusicians() returns [\'Eminem\']', () => {
-    expect(rap.getMusicians()).to.be.eql(['Eminem']);
+  it('testGenre.getMusicians() returns levine', () => {
+    expect(testGenre.getMusicians()).to.be.eql([levine]);
   });
-  it('rap.setMusicians([\'Tupac\']) sets the musician array to [\'Tupac\']', () => {
-    rap.setMusicians(['Tupac']);
-    expect(rap.getMusicians()).to.be.eql(['Tupac']);
+  it('testGenre.setMusicians([rolling]) sets the musician array to [rolling]', () => {
+    testGenre.setMusicians([rolling]);
+    expect(testGenre.getMusicians()).to.be.eql([rolling]);
   });
-  it('rap.addMusician(\'Eminem\') adds \'Eminem\' to the musician array', () => {
-    rap.addMusician('Eminem');
-    expect(rap.getMusicians()).to.be.eql(['Tupac', 'Eminem']);
+  it('testGenre.addMusician(levine) adds levine to the musician array', () => {
+    testGenre.addMusician(levine);
+    expect(testGenre.getMusicians()).to.be.eql([rolling, levine]);
   });
-  it('rap.addMusician(\'Eminem\') not adds \'Eminem\' to the musician array', () => {
-    rap.addMusician('Eminem');
-    expect(rap.getMusicians()).to.be.eql(['Tupac', 'Eminem']);
+  it('testGenre.addMusician(levine) not adds levine to the musician array', () => {
+    testGenre.addMusician(levine);
+    expect(testGenre.getMusicians()).to.be.eql([rolling, levine]);
   });
-  it('rap.deleteMusician(\'Tupac\') deletes \'Tupac\' from the musician array', () => {
-    rap.deleteMusician('Tupac');
-    expect(rap.getMusicians()).to.be.eql(['Eminem']);
+  it('testGenre.deleteMusician(rolling) deletes rolling from the musician array', () => {
+    testGenre.deleteMusician(rolling);
+    expect(testGenre.getMusicians()).to.be.eql([levine]);
   });
-  it('rap.getAlbums() returns [\'Relapse\']', () => {
-    expect(rap.getAlbums()).to.be.eql(['Relapse']);
+  it('testGenre.getAlbums() returns [overexposed]', () => {
+    expect(testGenre.getAlbums()).to.be.eql([overexposed]);
   });
-  it('rap.setAlbums([\'Kamikaze\']) sets the album array to [\'Kamikaze\']', () => {
-    rap.setAlbums(['Kamikaze']);
-    expect(rap.getAlbums()).to.be.eql(['Kamikaze']);
+  it('testGenre.setAlbums([heads]) sets the album array to [heads]', () => {
+    testGenre.setAlbums([heads]);
+    expect(testGenre.getAlbums()).to.be.eql([heads]);
   });
-  it('rap.addAlbum(\'Relapse\') adds \'Relapse\' to the album array', () => {
-    rap.addAlbum('Relapse');
-    expect(rap.getAlbums()).to.be.eql(['Kamikaze', 'Relapse']);
+  it('testGenre.addAlbum(overexposed) adds overexposed to the album array', () => {
+    testGenre.addAlbum(overexposed);
+    expect(testGenre.getAlbums()).to.be.eql([heads, overexposed]);
   });
-  it('rap.addAlbum(\'Relapse\') not adds \'Relapse\' to the album array', () => {
-    rap.addAlbum('Relapse');
-    expect(rap.getAlbums()).to.be.eql(['Kamikaze', 'Relapse']);
+  it('testGenre.addAlbum(overexposed) not adds overexposed to the album array', () => {
+    testGenre.addAlbum(overexposed);
+    expect(testGenre.getAlbums()).to.be.eql([heads, overexposed]);
   });
-  it('rap.deleteAlbum(\'Kamikaze\') deletes \'Kamikaze\' from the album array', () => {
-    rap.deleteAlbum('Kamikaze');
-    expect(rap.getAlbums()).to.be.eql(['Relapse']);
+  it('testGenre.deleteAlbum(heads) deletes heads from the album array', () => {
+    testGenre.deleteAlbum(heads);
+    expect(testGenre.getAlbums()).to.be.eql([overexposed]);
   });
-  it('rap.getSongs() returns [\'Rap God\']', () => {
-    expect(rap.getSongs()).to.be.eql(['Rap God']);
+  it('testGenre.getSongs() returns [lost]', () => {
+    expect(testGenre.getSongs()).to.be.eql([lost]);
   });
-  it('rap.setSongs([\'Venom\']) sets the song array to [\'Kamikaze\']', () => {
-    rap.setSongs(['Venom']);
-    expect(rap.getSongs()).to.be.eql(['Venom']);
+  it('testGenre.setSongs([satisfaction]) sets the song array to [satisfaction]', () => {
+    testGenre.setSongs([satisfaction]);
+    expect(testGenre.getSongs()).to.be.eql([satisfaction]);
   });
-  it('rap.addSong(\'Rap God\') adds \'Rap God\' to the song array', () => {
-    rap.addSong('Rap God');
-    expect(rap.getSongs()).to.be.eql(['Venom', 'Rap God']);
+  it('testGenre.addSong(lost) adds lost to the song array', () => {
+    testGenre.addSong(lost);
+    expect(testGenre.getSongs()).to.be.eql([satisfaction, lost]);
   });
-  it('rap.addSong(\'Rap God\') not adds \'Rap God\' to the song array', () => {
-    rap.addSong('Rap God');
-    expect(rap.getSongs()).to.be.eql(['Venom', 'Rap God']);
+  it('testGenre.addSong(lost) not adds lost to the song array', () => {
+    testGenre.addSong(lost);
+    expect(testGenre.getSongs()).to.be.eql([satisfaction, lost]);
   });
-  it('rap.deleteSong(\'Venom\') deletes \'Venom\' from the song array', () => {
-    rap.deleteSong('Venom');
-    expect(rap.getSongs()).to.be.eql(['Rap God']);
+  it('testGenre.deleteSong(satisfaction) deletes satisfaction from the song array', () => {
+    testGenre.deleteSong(satisfaction);
+    expect(testGenre.getSongs()).to.be.eql([lost]);
   });
-  it('rap.showInfo()', () => {
-    expect(rap.showInfo()).to.be.equal(`rap\n  -Grupos/Artistas: Eminem\n`+
-    `  -Álbums: Relapse\n  -Canciones: Rap God`);
+  it('testGenre.showInfo()', () => {
+    expect(testGenre.showInfo()).to.be.equal(`GenreForTest\n  -Grupos/Artistas:\n    Adam Levine\n`+
+    `  -Álbums:\n    Overexposed\n  -Canciones:\n    Lost Stars\n`);
   });
 });

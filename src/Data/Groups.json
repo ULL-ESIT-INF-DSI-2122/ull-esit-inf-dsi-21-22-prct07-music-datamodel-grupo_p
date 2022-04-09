@@ -12,11 +12,34 @@
             "Pop"
           ],
           "albums": [
-            null
+            {
+              "name": "Begin Again",
+              "whoPublishes": "Adam Levine",
+              "publicationYear": 2014,
+              "genres": [
+                "Pop"
+              ],
+              "songs": [
+                {
+                  "name": "Lost Stars",
+                  "author": "Adam Levine",
+                  "duration": [
+                    3,
+                    16
+                  ],
+                  "genres": [
+                    "Pop"
+                  ],
+                  "publicationDate": "2014-06-30",
+                  "isSingle": true,
+                  "reproductions": 3200000
+                }
+              ]
+            }
           ],
           "songs": [
             {
-              "name": "Lost stars",
+              "name": "Lost Stars",
               "author": "Adam Levine",
               "duration": [
                 3,
@@ -25,6 +48,7 @@
               "genres": [
                 "Pop"
               ],
+              "publicationDate": "2014-06-30",
               "isSingle": true,
               "reproductions": 3200000
             }
@@ -54,6 +78,7 @@
               "genres": [
                 "Pop"
               ],
+              "publicationDate": "2012-04-16",
               "isSingle": false,
               "reproductions": 4500000
             }
@@ -73,7 +98,44 @@
             "Rock"
           ],
           "albums": [
-            null
+            {
+              "name": "Goddess in the Doorway",
+              "whoPublishes": "Mick Jagger",
+              "publicationYear": 2001,
+              "genres": [
+                "Rock"
+              ],
+              "songs": [
+                {
+                  "name": "God gave me everything",
+                  "author": "Mick Jagger",
+                  "duration": [
+                    3,
+                    34
+                  ],
+                  "genres": [
+                    "Rock"
+                  ],
+                  "publicationDate": "2001-11-19",
+                  "isSingle": true,
+                  "reproductions": 4500000
+                },
+                {
+                  "name": "Visions of paradise",
+                  "author": "Mick Jagger",
+                  "duration": [
+                    4,
+                    2
+                  ],
+                  "genres": [
+                    "Rock"
+                  ],
+                  "publicationDate": "2001-11-19",
+                  "isSingle": false,
+                  "reproductions": 2750000
+                }
+              ]
+            }
           ],
           "songs": [
             {
@@ -86,29 +148,46 @@
               "genres": [
                 "Rock"
               ],
+              "publicationDate": "2001-11-19",
               "isSingle": true,
-              "reproductions": 4300000
+              "reproductions": 4500000
+            },
+            {
+              "name": "Visions of paradise",
+              "author": "Mick Jagger",
+              "duration": [
+                4,
+                2
+              ],
+              "genres": [
+                "Rock"
+              ],
+              "publicationDate": "2001-11-19",
+              "isSingle": false,
+              "reproductions": 2750000
             }
           ]
         }
       ],
       "fundationYear": 1999,
-      "genres": [],
+      "genres": [
+        "Rock"
+      ],
       "albums": [
         {
-          "name": "Aftermath",
+          "name": "Out Of Our Heads",
           "whoPublishes": "The Rolling Stones",
-          "publicationYear": 1966,
+          "publicationYear": 1965,
           "genres": [
             "Rock"
           ],
           "songs": [
             {
-              "name": "Paint It, Black",
+              "name": "Satisfaction",
               "author": "The Rolling Stones",
               "duration": [
                 3,
-                45
+                51
               ],
               "genres": [
                 "Rock"

@@ -1,5 +1,9 @@
 import * as inquirer from 'inquirer';
+import {Album} from '../Basics/Album';
+import {Artist} from '../Basics/Artist';
 import {Genre} from '../Basics/Genre';
+import {Group} from '../Basics/Group';
+import {Song} from '../Basics/Song';
 import {AlbumManager} from '../Managers/AlbumManager';
 import {ArtistManager} from '../Managers/ArtistManager';
 import {GenreManager} from '../Managers/GenreManager';
@@ -85,8 +89,9 @@ function promptRemoveGenre(genre: Genre) {
 
 function promptAddGenre(): void {
   const manager: GenreManager = GenreManager.getGenreManager();
-  let musicians: string[] = ArtistManager.getArtistManager().getList();
-  musicians = musicians.concat(GroupManager.getGroupManager().getList());
+  const artists: string[] = ArtistManager.getArtistManager().getList();
+  const groups: string[] = GroupManager.getGroupManager().getList();
+  const musicians = artists.concat(groups);
   const albums: string[] = AlbumManager.getAlbumManager().getList();
   const songs: string[] = SongManager.getSongManager().getList();
   console.clear();
@@ -141,8 +146,23 @@ function promptAddGenre(): void {
     },
   ];
   inquirer.prompt(questions).then((answers) => {
-    const newGenre: Genre = new Genre(answers.name, answers.musicians,
-        answers.albums, answers.songs);
+    let musicians: (Group|Artist)[] = [];
+    let albums: Album[] = [];
+    let songs: Song[] = [];
+    answers.musicians.forEach((m: string) => {
+      if (artists.indexOf(m) !== -1) {
+        musicians.push(ArtistManager.getArtistManager().getArtistByName(m) as Artist);
+      } else {
+        musicians.push(GroupManager.getGroupManager().getGroupByName(m) as Group);
+      }
+    });
+    answers.albums.forEach((a: string) => {
+      albums.push(AlbumManager.getAlbumManager().getAlbumByName(a) as Album);
+    });
+    answers.songs.forEach((s: string) => {
+      songs.push(SongManager.getSongManager().getSongByName(s) as Song);
+    });
+    const newGenre: Genre = new Genre(answers.name, musicians, albums, songs);
     manager.addGenre(newGenre);
     SongManager.getSongManager().updateGenre(newGenre, answers.songs);
     AlbumManager.getAlbumManager().updateGenre(newGenre, answers.albums);
@@ -155,8 +175,9 @@ function promptAddGenre(): void {
 
 function promptEditGenre(genre: Genre): void {
   const manager: GenreManager = GenreManager.getGenreManager();
-  let musicians: string[] = ArtistManager.getArtistManager().getList();
-  musicians = musicians.concat(GroupManager.getGroupManager().getList());
+  const artists: string[] = ArtistManager.getArtistManager().getList();
+  const groups: string[] = GroupManager.getGroupManager().getList();
+  const musicians = artists.concat(groups);
   const albums: string[] = AlbumManager.getAlbumManager().getList();
   const songs: string[] = SongManager.getSongManager().getList();
   console.clear();
@@ -179,7 +200,7 @@ function promptEditGenre(genre: Genre): void {
       message: 'Elige artistas/grupos:',
       name: 'musicians',
       choices: musicians,
-      default: genre.getMusicians(),
+      default: genre.getMusiciansNames(),
       validate(answer: string[]) {
         if (answer.length < 1) {
           return 'Debes elegir al menos un artista/grupo';
@@ -192,7 +213,7 @@ function promptEditGenre(genre: Genre): void {
       message: 'Elige álbums:',
       name: 'albums',
       choices: albums,
-      default: genre.getAlbums(),
+      default: genre.getAlbumsNames(),
       validate(answer: string[]) {
         if (answer.length < 1) {
           return 'Debes elegir al menos un álbum.';
@@ -205,7 +226,7 @@ function promptEditGenre(genre: Genre): void {
       message: 'Elige canciones:',
       name: 'songs',
       choices: songs,
-      default: genre.getSongs(),
+      default: genre.getSongsNames(),
       validate(answer: string[]) {
         if (answer.length < 1) {
           return 'Debes elegir al menos una canción.';
@@ -215,10 +236,26 @@ function promptEditGenre(genre: Genre): void {
     },
   ];
   inquirer.prompt(questions).then((answers) => {
+    let musicians: (Group|Artist)[] = [];
+    let albums: Album[] = [];
+    let songs: Song[] = [];
+    answers.musicians.forEach((m: string) => {
+      if (artists.indexOf(m) !== -1) {
+        musicians.push(ArtistManager.getArtistManager().getArtistByName(m) as Artist);
+      } else {
+        musicians.push(GroupManager.getGroupManager().getGroupByName(m) as Group);
+      }
+    });
+    answers.albums.forEach((a: string) => {
+      albums.push(AlbumManager.getAlbumManager().getAlbumByName(a) as Album);
+    });
+    answers.songs.forEach((s: string) => {
+      songs.push(SongManager.getSongManager().getSongByName(s) as Song);
+    });
     genre.setName(answers.name);
-    genre.setMusicians(answers.musicians);
-    genre.setAlbums(answers.albums);
-    genre.setSongs(answers.songs);
+    genre.setMusicians(musicians);
+    genre.setAlbums(albums);
+    genre.setSongs(songs);
     manager.storeGenres();
 
     SongManager.getSongManager().updateGenre(genre, answers.songs);

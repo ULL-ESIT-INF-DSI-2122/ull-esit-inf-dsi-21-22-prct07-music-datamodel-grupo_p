@@ -27,8 +27,23 @@
               "genres": [
                 "Rock"
               ],
+              "publicationDate": "2001-11-19",
               "isSingle": true,
-              "reproductions": 4300000
+              "reproductions": 4500000
+            },
+            {
+              "name": "Visions of paradise",
+              "author": "Mick Jagger",
+              "duration": [
+                4,
+                2
+              ],
+              "genres": [
+                "Rock"
+              ],
+              "publicationDate": "2001-11-19",
+              "isSingle": false,
+              "reproductions": 2750000
             }
           ]
         }
@@ -44,8 +59,23 @@
           "genres": [
             "Rock"
           ],
+          "publicationDate": "2001-11-19",
           "isSingle": true,
-          "reproductions": 4300000
+          "reproductions": 4500000
+        },
+        {
+          "name": "Visions of paradise",
+          "author": "Mick Jagger",
+          "duration": [
+            4,
+            2
+          ],
+          "genres": [
+            "Rock"
+          ],
+          "publicationDate": "2001-11-19",
+          "isSingle": false,
+          "reproductions": 2750000
         }
       ]
     },
@@ -67,7 +97,7 @@
           ],
           "songs": [
             {
-              "name": "Lost stars",
+              "name": "Lost Stars",
               "author": "Adam Levine",
               "duration": [
                 3,
@@ -76,6 +106,7 @@
               "genres": [
                 "Pop"
               ],
+              "publicationDate": "2014-06-30",
               "isSingle": true,
               "reproductions": 3200000
             }
@@ -84,7 +115,7 @@
       ],
       "songs": [
         {
-          "name": "Lost stars",
+          "name": "Lost Stars",
           "author": "Adam Levine",
           "duration": [
             3,
@@ -93,6 +124,7 @@
           "genres": [
             "Pop"
           ],
+          "publicationDate": "2014-06-30",
           "isSingle": true,
           "reproductions": 3200000
         }

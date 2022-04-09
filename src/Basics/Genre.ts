@@ -71,7 +71,7 @@ export class Genre implements BasicData {
     return info;
   }
 
-  private getMusiciansNames(): string[] {
+  getMusiciansNames(): string[] {
     let musiciansNames: string[] = [];
     this.musicians.forEach((musician) => {
       musiciansNames.push(musician.getName());
@@ -79,14 +79,14 @@ export class Genre implements BasicData {
     return musiciansNames;
   }
 
-  private getAlbumsNames(): string[] {
+  getAlbumsNames(): string[] {
     let albumsNames: string[] = [];
     this.albums.forEach((album) => {
       albumsNames.push(album.getName());
     });
     return albumsNames;
   }
-  private getSongsNames(): string[] {
+  getSongsNames(): string[] {
     let songsNames: string[] = [];
     this.songs.forEach((song) => {
       songsNames.push(song.getName());

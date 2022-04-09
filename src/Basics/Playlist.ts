@@ -85,22 +85,18 @@ export class Playlist implements BasicData {
         this.songs.sort(function(a, b) {
           if (a.getName() < b.getName()) {
             return -1;
-          }
-          if (a.getName() > b.getName()) {
+          } else {
             return 1;
           }
-          return 0;
         });
         break;
       case 1:
         this.songs.sort(function(a, b) {
           if (a.getName() > b.getName()) {
             return -1;
-          }
-          if (a.getName() < b.getName()) {
+          } else {
             return 1;
           }
-          return 0;
         });
         break;
       case 2:
@@ -221,7 +217,7 @@ export class Playlist implements BasicData {
     return songsNames;
   }
 
-  showInfo(order: Order): string {
+  showInfo(order: Order = 0): string {
     const info: string = `${this.name}\n  -Géneros: ${this.getGenresNames()}\n  -Playlist original: ${(this.systemPlaylist ? 'Sí' : 'No')}\n`+
        `  -Duración: ${this.duration[0]}h ${this.duration[1]}min\n  -Canciones:\n    ${this.getSongsNames(order).join('\n    ')}\n`;
     console.log(info);
@@ -230,7 +226,7 @@ export class Playlist implements BasicData {
 
   private getGenresNames(): string[] {
     let genresNames: string[] = [];
-    this.genres.forEach((genre) => {
+    this.genres.map((genre) => {
       genresNames.push(genre.getName());
     });
     return genresNames;

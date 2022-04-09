@@ -129,18 +129,30 @@ export function promptSelectOrder(playlist: Playlist) {
 function promptRemovePlaylist(playlist: Playlist) {
   const manager: PlaylistManager = PlaylistManager.getPlaylistManager();
   console.clear();
-  inquirer
-      .prompt([
-        {
-          name: 'eliminar',
-          type: 'confirm',
-          message: '¿Seguro que quieres eliminar esta playlist?',
-        },
-      ])
-      .then((answer) => {
-        if (answer.eliminar) manager.removePlaylist(playlist);
-        promptPlaylists();
-      });
+  if (!playlist.getSystemPlaylist()) {
+    inquirer
+        .prompt([
+          {
+            name: 'eliminar',
+            type: 'confirm',
+            message: '¿Seguro que quieres eliminar esta playlist?',
+          },
+        ])
+        .then((answer) => {
+          if (answer.eliminar) manager.removePlaylist(playlist);
+          promptPlaylists();
+        });
+  } else {
+    inquirer.prompt({
+      type: 'list',
+      name: 'command',
+      message: 'Error: no se pueden eliminar playlists creadas por el sistema',
+      choices: ['Volver'],
+    }).then((answers) => {
+      promptPlaylist(playlist);
+    },
+    );
+  }
 }
 
 function promptAddPlaylist(): void {
