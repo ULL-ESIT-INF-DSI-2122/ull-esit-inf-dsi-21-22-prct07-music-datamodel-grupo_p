@@ -1,11 +1,11 @@
 import {Group} from './Group';
 import {Album} from './Album';
 import {Song} from './Song';
-import {genrer} from './MusicGenre';
+import {Genre} from './Genre';
 
 export class Artist {
   constructor(readonly name: string, private groups: Group[],
-      private genres: genrer[], private albums: Album[], private songs: Song[]) {
+      private genres: Genre[], private albums: Album[], private songs: Song[]) {
   }
 
   public getName(): string {
@@ -21,13 +21,13 @@ export class Artist {
     this.groups = this.groups.filter((elemento) => elemento !== groupDelete);
   }
 
-  public getGenres(): genrer[] {
+  public getGenres(): Genre[] {
     return this.genres;
   }
-  public addGenre(newGenre: genrer) {
+  public addGenre(newGenre: Genre) {
     this.genres.push(newGenre);
   }
-  public removeGenre(genreDelete: genrer) {
+  public removeGenre(genreDelete: Genre) {
     this.genres = this.genres.filter((elemento) => elemento !== genreDelete);
   }
 

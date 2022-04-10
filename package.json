@@ -32,7 +32,9 @@
   },
   "dependencies": {
     "inquirer": "^7.3.3",
-    "lowdb": "^1.0.0"
+    "inquirer-date-prompt": "^2.0.1",
+    "lowdb": "^1.0.0",
+    "rxjs": "^7.5.5"
   },
   "directories": {
     "test": "test"

@@ -1,0 +1,38 @@
+{
+    "songs" : [
+        {
+            "name": "vivir",
+            "author": "fer",
+            "duration": [
+                2,
+                5
+            ],
+            "genres": [
+                "rock"
+            ],
+            "datePublication": "30-01-2014",
+            "isSingle": true,
+            "reproductions": [
+                "30-01-2014",
+                "30-03-2015"
+            ]
+        },
+        {
+            "name": "volar",
+            "author": "fer",
+            "duration": [
+                2,
+                5
+            ],
+            "genres": [
+                "pop"
+            ],
+            "datePublication": "30-01-2014",
+            "isSingle": true,
+            "reproductions": [
+                "30-01-2014",
+                "30-03-2015"
+            ]
+        }
+    ]
+}

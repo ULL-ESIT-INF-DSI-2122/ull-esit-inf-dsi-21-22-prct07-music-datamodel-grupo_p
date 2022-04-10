@@ -1,11 +1,10 @@
-import {BasicData} from '../interfaces/basicData';
+import {BasicData} from '../Interfaces/BasicData';
 
 export abstract class Manager<T extends BasicData> {
   protected collection: Set<T> = new Set<T>();
   getCollection(): Set<T> {
     return this.collection;
   }
-  /*
   getList(): string[] {
     let options: string[] = [];
     this.collection.forEach((element) => {
@@ -13,7 +12,6 @@ export abstract class Manager<T extends BasicData> {
     });
     return options;
   }
-  */
   exists(value: string): boolean {
     let exists: boolean = false;
     this.collection.forEach((element) => {

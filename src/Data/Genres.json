@@ -1,0 +1,41 @@
+{
+  "genres": [
+    {
+      "name": "lupa",
+      "musicians": [
+        "Rolling Stones",
+        "Michael Jackson"
+      ],
+      "albums": [
+        "Threaller"
+      ],
+      "songs": [
+        "Imagine"
+      ]
+    },
+    {
+      "name": "roc",
+      "musicians": [
+        "Michael Jackson"
+      ],
+      "albums": [
+        "Abbey Road"
+      ],
+      "songs": [
+        "Imagine"
+      ]
+    },
+    {
+      "name": "pop",
+      "musicians": [
+        "Michael Jackson"
+      ],
+      "albums": [
+        "Threaller"
+      ],
+      "songs": [
+        "Imagine"
+      ]
+    }
+  ]
+}

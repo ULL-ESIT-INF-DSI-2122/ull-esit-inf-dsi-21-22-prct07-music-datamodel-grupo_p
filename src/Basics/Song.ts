@@ -1,16 +1,20 @@
-import {BasicData} from '../interfaces/basicData';
-import {genrer} from './MusicGenre';
+import {BasicData} from '../Interfaces/BasicData';
+import {Genre} from './Genre';
 import {Reproduccion} from './Reproduccion';
+
+/**
+ * Duration de la canción como tipo,
+ * representando los minnutos y segundos.
+ */
+export type Duration = [number, number];
 /**
  * Clase que representa una cancion
  * Tiene asociados los siguientes datos: nombre, autor,
  * duracion, genero/s, numero de reproducciones y si es un single
  */
-
-export type Duration = [number, number];
 export class Song implements BasicData {
   constructor(private name: string, private author: string,
-      private duration: Duration, private genres: genrer[],
+      private duration: Duration, private genres: Genre[],
       private datePublication: Date, private isSingle: boolean,
       private reproductions: Reproduccion[]) {
   }
@@ -37,11 +41,73 @@ export class Song implements BasicData {
     return this.author;
   }
   /**
+   * Método setter para el author
+   * @param newName de autor de tipo string
+   */
+  public setNameAuthor(newName: string): void {
+    this.author = newName;
+  }
+  /**
+   * Método getter de la duración de la canción
+   * @returns tipo Duration
+   */
+  public getDuration(): Duration {
+    return this.duration;
+  }
+  /**
+   * Método setter para la nueva duración de la canción.
+   * @param newDuraction de tipo Duration
+   */
+  public setDuration(newDuraction: Duration): void {
+    this.duration = newDuraction;
+  }
+  /**
+   * Método getter de los generos a los que pertence la canción.
+   * @returns genres como tipo Genre
+   */
+  public getGenres(): Genre[] {
+    return this.genres;
+  }
+  /**
+   * Método setter para los nuevos generos
+   * que pertenece la canción.
+   * @param newGenres de tipo Genre
+   */
+  public setGenres(newGenres: Genre[]): void {
+    this.genres = newGenres;
+  }
+  public getDatePublication(): Date {
+    return this.datePublication;
+  }
+  public setDatePublication(duration: Date): void {
+    this.datePublication = duration;
+  }
+  /**
+   * Devuelve true si es sigle.
+   * @returns un valor boleano
+   */
+     public getIsSigle(): boolean {
+      return this.isSingle;
+    }
+  /**
+   * Método setter de si es single o no la canción.
+   * @param newValor tipo boleano.
+   */
+  public setIsSingle(newValor: boolean): void {
+    this.isSingle = newValor;
+  }
+  /**
    * Devuelve el número de reproducciones que tiene la canción
    * @returns la longitud del array reproductions
    */
   public getReproduction(): number {
     return this.reproductions.length;
+  }/**
+   * Método setter
+   * @param reproduction de tipo Reproduccion
+   */
+  public setReproductions(reproduction: Reproduccion[]): void {
+    this.reproductions = reproduction;
   }
 
   public playSong(): void {
