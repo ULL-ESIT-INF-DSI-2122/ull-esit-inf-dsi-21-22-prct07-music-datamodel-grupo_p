@@ -1,14 +1,17 @@
-import {Artist} from '../Basics/Artist';
 import {Group} from '../Basics/Group';
-import {Genre} from '../Basics/Genre';
-import {Album} from '../Basics/Album';
 import {Manager} from './Manager';
 import lowdb = require('lowdb');
 import FileSync = require('lowdb/adapters/FileSync');
-
+import {ArtistInterface} from '../Interfaces/ArtistInterface';
+import {AlbumInterface} from '../Interfaces/AlbumInterface';
+import {Artist} from '../Basics/Artist';
+import {Album} from '../Basics/Album';
+import {AlbumManager} from './AlbumManager';
+import {GenreManager} from './GenreManager';
+import {ArtistManager} from './ArtistManager';
 
 type schemaType = {
-    groups: { name: string; artists: Artist[], yearCreation: number, genres: Genre[], albums: Album[] }[]
+    groups: { name: string; artists: ArtistInterface[], yearCreation: number, genres: string[], albums: AlbumInterface[] }[]
 };
 
 export class GroupsManager extends Manager<Group> {
@@ -20,10 +23,12 @@ export class GroupsManager extends Manager<Group> {
     this.database = lowdb(new FileSync('src/Data/Group.json'));
     if (this.database.has('groups').value()) {
       let dbItems = this.database.get('groups').value();
-      dbItems.forEach((item) => this.collection.add(new Group(
-          item.name, item.artists, item.yearCreation, item.genres, item.albums,
-      )));
+      dbItems.forEach((item) => this.collection.add(Group.deserialize(item)));
     }
+  }
+
+  private storeGroups() {
+    this.database.set('groups', [...this.collection.values()]).write();
   }
 
   public static getGroupManager(): GroupsManager {
@@ -33,16 +38,37 @@ export class GroupsManager extends Manager<Group> {
     return GroupsManager.groupManager;
   }
 
-  storeGroups() {
-    this.database.set('groups', [...this.collection.values()]).write();
-  }
-
   addGroup(group: Group): void {
     this.collection.add(group);
     this.storeGroups();
   }
 
   removeGroup(group: Group): void {
+    // Delete group from albums
+    const objAlbumManager:AlbumManager = AlbumManager.getAlbumManager();
+    const groupAlbums: Album[] = group.getAlbums();
+    groupAlbums.forEach((album) => {
+      objAlbumManager.deleteAlbum(album);
+    });
+
+    // Delet group from genres
+    const objGenreManager:GenreManager = GenreManager.getGenreManager();
+    const genreNames: string[] = group.getGenres();
+    genreNames.forEach((genreName) => {
+      let genre = objGenreManager.searchByName(genreName);
+      genre.deleteMusician(group); // If group is not in list it won't do anything
+      if (genre.getMusicians().length == 0) {
+        objGenreManager.removeGenre(genre);
+      }
+    });
+
+    // Delete artist from group
+    const objArtistManager:ArtistManager = ArtistManager.getArtistsManager();
+    const groupArtists: Artist[] = group.getArtists();
+    groupArtists.forEach((artist) => {
+      objArtistManager.removeArtist(artist);
+    });
+
     this.collection.forEach((element) => {
       if (element.getName() === group.getName()) {
         this.collection.delete(element);
@@ -52,44 +78,10 @@ export class GroupsManager extends Manager<Group> {
   }
 
   editGroup(group: Group, newName: string, newArtists: Artist[], newYear: number,
-      newGenres: Genre[], newAlbums: Album[] ): void {
-    this.collection.forEach((element) => {
-      if (element.getName() === group.getName()) {
-        element.setName(newName);
-        element.setYearCreation(newYear);
-        element.setGenres(newGenres);
-        element.setArtists(newArtists);
-        element.setAlbums(newAlbums);
-      }
-    });
+      newGenres: string[], newAlbums: Album[] ): void {
+    // ARTISTA Y ALBUM???
+    this.removeGroup(group);
+    this.addGroup(new Group(newName, newArtists, newYear, newGenres, newAlbums));
     this.storeGroups();
   }
-  printDetails(): void {
-  }
-  /*
-  editName(group: Group, newName: string): void {
-    group.setName(newName);
-  }
-  editYear(group: Group, newYear: number) {
-    group.setYearCreation(newYear);
-  }
-  addGenre(group: Group, newGenre: Genre): void {
-    group.addGenre(newGenre);
-  }
-  deleteGenre(group: Group, nameGenre: Genre): void {
-    group.removeGenre(nameGenre);
-  }
-  addArtist(group: Group, newArtist: Artist): void {
-    group.addArtist(newArtist);
-  }
-  deleteArtist(group: Group, artist: Artist): void {
-    group.removeArtist(artist);
-  }
-  addAlbum(group: Group, newAlbum: Album) {
-    group.addAlbum(newAlbum);
-  }
-  removeAlbum(group: Group, album: Album) {
-    group.removeAlbum(album);
-  }
-  */
 }

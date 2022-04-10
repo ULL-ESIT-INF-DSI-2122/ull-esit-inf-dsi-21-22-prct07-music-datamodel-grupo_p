@@ -1,5 +1,5 @@
 export interface BasicData {
   getName(): string;
   setName(newName:string): void;
-  showInfo(): string;
+  showInfo(): void;
 }

@@ -1,3 +1,466 @@
 {
-  "playlists": []
+  "playlists": [
+    {
+      "name": "Mi lista",
+      "songs": [
+        {
+          "name": "Payphone",
+          "author": "Maroon 5",
+          "duration": [
+            3,
+            51
+          ],
+          "genres": [
+            "Pop"
+          ],
+          "isSingle": false,
+          "reproductions": 4500000
+        },
+        {
+          "name": "Paint It, Black",
+          "author": "The Rolling Stones",
+          "duration": [
+            3,
+            45
+          ],
+          "genres": [
+            "Rock"
+          ],
+          "isSingle": false,
+          "reproductions": 10700000
+        }
+      ],
+      "systemPlaylist": false,
+      "genres": [
+        {
+          "name": "Pop",
+          "musicians": [
+            {
+              "name": "Maroon 5",
+              "artists": [
+                {
+                  "name": "Adam Levine",
+                  "groups": [
+                    "Maroon 5"
+                  ],
+                  "genres": [
+                    "Pop"
+                  ],
+                  "albums": [
+                    {
+                      "name": "Begin Again",
+                      "whoPublishes": "Adam Levine",
+                      "publicationYear": 2014,
+                      "genres": [
+                        "Pop"
+                      ],
+                      "songs": [
+                        {
+                          "name": "Lost stars",
+                          "author": "Adam Levine",
+                          "duration": [
+                            3,
+                            16
+                          ],
+                          "genres": [
+                            "Pop"
+                          ],
+                          "isSingle": true,
+                          "reproductions": 3200000
+                        }
+                      ]
+                    }
+                  ],
+                  "songs": [
+                    {
+                      "name": "Lost stars",
+                      "author": "Adam Levine",
+                      "duration": [
+                        3,
+                        16
+                      ],
+                      "genres": [
+                        "Pop"
+                      ],
+                      "isSingle": true,
+                      "reproductions": 3200000
+                    }
+                  ]
+                }
+              ],
+              "fundationYear": 1999,
+              "genres": [
+                "Pop"
+              ],
+              "albums": [
+                {
+                  "name": "Overexposed",
+                  "whoPublishes": "Maroon 5",
+                  "publicationYear": 2012,
+                  "genres": [
+                    "Pop"
+                  ],
+                  "songs": [
+                    {
+                      "name": "Payphone",
+                      "author": "Maroon 5",
+                      "duration": [
+                        3,
+                        51
+                      ],
+                      "genres": [
+                        "Pop"
+                      ],
+                      "isSingle": false,
+                      "reproductions": 4500000
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "name": "Adam Levine",
+              "groups": [
+                "Maroon 5"
+              ],
+              "genres": [
+                "Pop"
+              ],
+              "albums": [
+                {
+                  "name": "Begin Again",
+                  "whoPublishes": "Adam Levine",
+                  "publicationYear": 2014,
+                  "genres": [
+                    "Pop"
+                  ],
+                  "songs": [
+                    {
+                      "name": "Lost stars",
+                      "author": "Adam Levine",
+                      "duration": [
+                        3,
+                        16
+                      ],
+                      "genres": [
+                        "Pop"
+                      ],
+                      "isSingle": true,
+                      "reproductions": 3200000
+                    }
+                  ]
+                }
+              ],
+              "songs": [
+                {
+                  "name": "Lost stars",
+                  "author": "Adam Levine",
+                  "duration": [
+                    3,
+                    16
+                  ],
+                  "genres": [
+                    "Pop"
+                  ],
+                  "isSingle": true,
+                  "reproductions": 3200000
+                }
+              ]
+            }
+          ],
+          "albums": [
+            {
+              "name": "Overexposed",
+              "whoPublishes": "Maroon 5",
+              "publicationYear": 2012,
+              "genres": [
+                "Pop"
+              ],
+              "songs": [
+                {
+                  "name": "Payphone",
+                  "author": "Maroon 5",
+                  "duration": [
+                    3,
+                    51
+                  ],
+                  "genres": [
+                    "Pop"
+                  ],
+                  "isSingle": false,
+                  "reproductions": 4500000
+                }
+              ]
+            },
+            {
+              "name": "Begin Again",
+              "whoPublishes": "Adam Levine",
+              "publicationYear": 2014,
+              "genres": [
+                "Pop"
+              ],
+              "songs": [
+                {
+                  "name": "Lost stars",
+                  "author": "Adam Levine",
+                  "duration": [
+                    3,
+                    16
+                  ],
+                  "genres": [
+                    "Pop"
+                  ],
+                  "isSingle": true,
+                  "reproductions": 3200000
+                }
+              ]
+            }
+          ],
+          "songs": [
+            {
+              "name": "Payphone",
+              "author": "Maroon 5",
+              "duration": [
+                3,
+                51
+              ],
+              "genres": [
+                "Pop"
+              ],
+              "isSingle": false,
+              "reproductions": 4500000
+            },
+            {
+              "name": "Lost stars",
+              "author": "Adam Levine",
+              "duration": [
+                3,
+                16
+              ],
+              "genres": [
+                "Pop"
+              ],
+              "isSingle": true,
+              "reproductions": 3200000
+            }
+          ]
+        },
+        {
+          "name": "Rock",
+          "musicians": [
+            {
+              "name": "The Rolling Stones",
+              "artists": [
+                {
+                  "name": "Mick Jagger",
+                  "groups": [
+                    "The Rolling Stones"
+                  ],
+                  "genres": [
+                    "Rock"
+                  ],
+                  "albums": [
+                    {
+                      "name": "Goddess in the Doorway",
+                      "whoPublishes": "Mick Jagger",
+                      "publicationYear": 2001,
+                      "genres": [
+                        "Rock"
+                      ],
+                      "songs": [
+                        {
+                          "name": "God gave me everything",
+                          "author": "Mick Jagger",
+                          "duration": [
+                            3,
+                            34
+                          ],
+                          "genres": [
+                            "Rock"
+                          ],
+                          "isSingle": true,
+                          "reproductions": 4300000
+                        }
+                      ]
+                    }
+                  ],
+                  "songs": [
+                    {
+                      "name": "God gave me everything",
+                      "author": "Mick Jagger",
+                      "duration": [
+                        3,
+                        34
+                      ],
+                      "genres": [
+                        "Rock"
+                      ],
+                      "isSingle": true,
+                      "reproductions": 4300000
+                    }
+                  ]
+                }
+              ],
+              "fundationYear": 1999,
+              "genres": [],
+              "albums": [
+                {
+                  "name": "Aftermath",
+                  "whoPublishes": "The Rolling Stones",
+                  "publicationYear": 1966,
+                  "genres": [
+                    "Rock"
+                  ],
+                  "songs": [
+                    {
+                      "name": "Paint It, Black",
+                      "author": "The Rolling Stones",
+                      "duration": [
+                        3,
+                        45
+                      ],
+                      "genres": [
+                        "Rock"
+                      ],
+                      "isSingle": false,
+                      "reproductions": 10700000
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "name": "Mick Jagger",
+              "groups": [
+                "The Rolling Stones"
+              ],
+              "genres": [
+                "Rock"
+              ],
+              "albums": [
+                {
+                  "name": "Goddess in the Doorway",
+                  "whoPublishes": "Mick Jagger",
+                  "publicationYear": 2001,
+                  "genres": [
+                    "Rock"
+                  ],
+                  "songs": [
+                    {
+                      "name": "God gave me everything",
+                      "author": "Mick Jagger",
+                      "duration": [
+                        3,
+                        34
+                      ],
+                      "genres": [
+                        "Rock"
+                      ],
+                      "isSingle": true,
+                      "reproductions": 4300000
+                    }
+                  ]
+                }
+              ],
+              "songs": [
+                {
+                  "name": "God gave me everything",
+                  "author": "Mick Jagger",
+                  "duration": [
+                    3,
+                    34
+                  ],
+                  "genres": [
+                    "Rock"
+                  ],
+                  "isSingle": true,
+                  "reproductions": 4300000
+                }
+              ]
+            }
+          ],
+          "albums": [
+            {
+              "name": "Aftermath",
+              "whoPublishes": "The Rolling Stones",
+              "publicationYear": 1966,
+              "genres": [
+                "Rock"
+              ],
+              "songs": [
+                {
+                  "name": "Paint It, Black",
+                  "author": "The Rolling Stones",
+                  "duration": [
+                    3,
+                    45
+                  ],
+                  "genres": [
+                    "Rock"
+                  ],
+                  "isSingle": false,
+                  "reproductions": 10700000
+                }
+              ]
+            },
+            {
+              "name": "Goddess in the Doorway",
+              "whoPublishes": "Mick Jagger",
+              "publicationYear": 2001,
+              "genres": [
+                "Rock"
+              ],
+              "songs": [
+                {
+                  "name": "God gave me everything",
+                  "author": "Mick Jagger",
+                  "duration": [
+                    3,
+                    34
+                  ],
+                  "genres": [
+                    "Rock"
+                  ],
+                  "isSingle": true,
+                  "reproductions": 4300000
+                }
+              ]
+            }
+          ],
+          "songs": [
+            {
+              "name": "Paint It, Black",
+              "author": "The Rolling Stones",
+              "duration": [
+                3,
+                45
+              ],
+              "genres": [
+                "Rock"
+              ],
+              "isSingle": false,
+              "reproductions": 10700000
+            },
+            {
+              "name": "God gave me everything",
+              "author": "Mick Jagger",
+              "duration": [
+                3,
+                34
+              ],
+              "genres": [
+                "Rock"
+              ],
+              "isSingle": true,
+              "reproductions": 4300000
+            }
+          ]
+        }
+      ],
+      "duration": [
+        0,
+        7
+      ]
+    }
+  ]
 }

@@ -1,4 +1,3 @@
-import {Duration} from '../Basics/Song';
 import {Song} from '../Basics/Song';
 import {Manager} from './Manager';
 import lowdb = require('lowdb');
@@ -6,7 +5,7 @@ import FileSync = require('lowdb/adapters/FileSync');
 
 
 type schemaType = {
-    songs: { name: string; author: string; duration: Duration, genres: string[],
+    songs: { name: string; author: string; duration: number, genres: string[],
         datePublication: Date, isSingle: boolean,
         reproductions: number}[]
 };

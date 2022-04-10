@@ -14,8 +14,13 @@ export abstract class Manager<T extends BasicData> {
     return options;
   }
   searchByName(name:string): T {
-    return [...this.collection.values()].find((g) =>
+    let valor: T = [...this.collection.values()].find((g) =>
       g.getName() === name) as T;
+    if (valor) {
+      return valor;
+    } else {
+      throw new Error(`Fallo al encontrar el objeto ${name}`);
+    }
   }
 
   protected add(element: T): void {
@@ -38,6 +43,7 @@ export abstract class Manager<T extends BasicData> {
     });
     return exists;
   }
+
   /*
   showInOrder(): void {
     const ordenedArray: T[] = Array.from(this.collection).sort((a, b) => a.getName().localeCompare(b.getName()));

@@ -1,5 +1,8 @@
+import {Order} from '../Inquirer/PlaylistsMenu';
 import {BasicData} from '../Interfaces/BasicData';
-import {GenresManager} from '../Managers/GenresManager';
+import {PlaylistInterface} from '../Interfaces/PlaylistInterface';
+import {GenreManager} from '../Managers/GenreManager';
+import {SongManager} from '../Managers/SongManager';
 import {Genre} from './Genre';
 import {Song} from './Song';
 
@@ -11,20 +14,10 @@ export class Playlist implements BasicData {
   private duration: Duration;
   constructor(private name: string, private songs: Song[],
               private systemPlaylist: boolean = false) {
-    let minuts: number = 0;
-    let seconds: number = 0;
-    let genres: Genre[] = [];
-    this.songs.forEach((s: Song) => {
-      minuts += s.getDuration()[0];
-      seconds += s.getDuration()[1];
-      s.getGenres().forEach((g) => {
-        if ((genres.find((x: Genre) => x.getName() === g)) === undefined) {
-          genres.push(GenresManager.getGenresManager().getGenreByName(g) as Genre);
-        }
-      });
-    });
-    this.genres = genres;
-    this.duration = [Math.trunc(minuts/60), minuts%60 + Math.trunc(seconds/60)];
+    this.genres = [];
+    this.duration = [0, 0];
+    this.recalculateDuration();
+    this.updateGenres();
   }
   getName(): string {
     return this.name;
@@ -75,35 +68,185 @@ export class Playlist implements BasicData {
     this.duration = [Math.trunc(minuts/60), minuts%60 + Math.trunc(seconds/60)];
   }
 
-  private updateGenres() {
+  updateGenres() {
     this.genres = [];
     this.songs.forEach((s) => {
       s.getGenres().forEach((g) => {
         if ((this.genres.find((x: Genre) => x.getName() === g)) === undefined) {
-          this.genres.push(GenresManager.getGenresManager().getGenreByName(g) as Genre);
+          this.genres.push(GenreManager.getGenreManager().getGenreByName(g) as Genre);
         }
       });
     });
   }
 
-  showInfo(): string {
-    const info: string = `${this.name}\n  -Géneros: ${this.getGenresNames()}\n  -Canciones: ${this.getSongsNames()}\n`+
-       `  -Playlist original: ${(this.systemPlaylist ? 'Sí' : 'No')}\n  -Duración: ${this.duration[0]}h ${this.duration[1]}min\n`;
-    console.log(info);
-    return info;
-  }
-  private getSongsNames(): string[] {
+  getSongsNames(order: Order = 0): string[] {
+    switch (order) {
+      case 0:
+        this.songs.sort(function(a, b) {
+          if (a.getName() < b.getName()) {
+            return -1;
+          }
+          if (a.getName() > b.getName()) {
+            return 1;
+          }
+          return 0;
+        });
+        break;
+      case 1:
+        this.songs.sort(function(a, b) {
+          if (a.getName() > b.getName()) {
+            return -1;
+          }
+          if (a.getName() < b.getName()) {
+            return 1;
+          }
+          return 0;
+        });
+        break;
+      case 2:
+        this.songs.sort(function(a, b) {
+          if (a.getAuthorName() < b.getAuthorName()) {
+            return -1;
+          }
+          if (a.getAuthorName() > b.getAuthorName()) {
+            return 1;
+          }
+          return 0;
+        });
+        break;
+      case 3:
+        this.songs.sort(function(a, b) {
+          if (a.getAuthorName() > b.getAuthorName()) {
+            return -1;
+          }
+          if (a.getAuthorName() < b.getAuthorName()) {
+            return 1;
+          }
+          return 0;
+        });
+        break;
+      case 4:
+        this.songs.sort(function(a, b) {
+          if (a.getPublicationDate() < b.getPublicationDate()) {
+            return -1;
+          }
+          if (a.getPublicationDate() > b.getPublicationDate()) {
+            return 1;
+          }
+          return 0;
+        });
+        break;
+      case 5:
+        this.songs.sort(function(a, b) {
+          if (a.getPublicationDate() > b.getPublicationDate()) {
+            return -1;
+          }
+          if (a.getPublicationDate() < b.getPublicationDate()) {
+            return 1;
+          }
+          return 0;
+        });
+        break;
+      case 6:
+        this.songs.sort(function(a, b) {
+          if ((a.getDuration()[0]*60 + a.getDuration()[1]) < (b.getDuration()[0]*60 + b.getDuration()[1])) {
+            return -1;
+          }
+          if ((a.getDuration()[0]*60 + a.getDuration()[1]) > (b.getDuration()[0]*60 + b.getDuration()[1])) {
+            return 1;
+          }
+          return 0;
+        });
+        break;
+      case 7:
+        this.songs.sort(function(a, b) {
+          if ((a.getDuration()[0]*60 + a.getDuration()[1]) > (b.getDuration()[0]*60 + b.getDuration()[1])) {
+            return -1;
+          }
+          if ((a.getDuration()[0]*60 + a.getDuration()[1]) < (b.getDuration()[0]*60 + b.getDuration()[1])) {
+            return 1;
+          }
+          return 0;
+        });
+        break;
+      case 8:
+        this.songs.sort(function(a, b) {
+          if (a.getGenres()[0] < b.getGenres()[0]) {
+            return -1;
+          }
+          if (a.getGenres()[0] > b.getGenres()[0]) {
+            return 1;
+          }
+          return 0;
+        });
+        break;
+      case 9:
+        this.songs.sort(function(a, b) {
+          if (a.getGenres()[0] > b.getGenres()[0]) {
+            return -1;
+          }
+          if (a.getGenres()[0] < b.getGenres()[0]) {
+            return 1;
+          }
+          return 0;
+        });
+        break;
+      case 10:
+        this.songs.sort(function(a, b) {
+          if (a.getReproductions() < b.getReproductions()) {
+            return -1;
+          }
+          if (a.getReproductions() > b.getReproductions()) {
+            return 1;
+          }
+          return 0;
+        });
+        break;
+      case 11:
+        this.songs.sort(function(a, b) {
+          if (a.getReproductions() > b.getReproductions()) {
+            return -1;
+          }
+          if (a.getReproductions() < b.getReproductions()) {
+            return 1;
+          }
+          return 0;
+        });
+        break;
+    }
     let songsNames: string[] = [];
     this.songs.forEach((song) => {
       songsNames.push(song.getName());
     });
     return songsNames;
   }
+
+  showInfo(): void {
+    const info: string = `${this.name}\n  -Géneros: ${this.getGenresNames()}\n  -Playlist original: ${(this.systemPlaylist ? 'Sí' : 'No')}\n`+
+       `  -Duración: ${this.duration[0]}h ${this.duration[1]}min\n  -Canciones:\n    ${this.getSongsNames(order).join('\n    ')}\n`;
+    console.log(info);
+  }
+
   private getGenresNames(): string[] {
     let genresNames: string[] = [];
     this.genres.forEach((genre) => {
       genresNames.push(genre.getName());
     });
     return genresNames;
+  }
+
+  public static deserialize(playlist: PlaylistInterface): Playlist {
+    let songs: Song[] = [];
+    playlist.songs.forEach((s) =>
+      songs.push(SongManager.getSongManager().getSongByName(s.name) as Song),
+    );
+    return new Playlist(playlist.name, songs, playlist.systemPlaylist);
+  }
+
+  public getMusicians(): (Artist | Groups)[] {
+    const songsObjs = this.getSongs().map((songName) => SongManager.getSongManager().searchByName(songName));
+    const artistLists = songsObjs.map((song) => song.getArtists());
+    const artistList = artistLists.reduce((acumulated, newList) => acumulated.concat(newList));
+    return artistList;
   }
 }

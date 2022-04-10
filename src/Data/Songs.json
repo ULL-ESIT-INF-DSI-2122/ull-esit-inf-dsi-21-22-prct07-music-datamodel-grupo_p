@@ -1,13 +1,56 @@
 {
   "songs": [
-      {
-          "name": "Despacito",
-          "author": "Luis Fonsi",
-          "duration": [3, 45],
-          "genres": ["Reggeaton"],     
-          "datePublication": "2018-03-16",  
-          "isSingle": true,
-          "reproductions": 510000
-      }
+    {
+      "name": "Payphone",
+      "author": "Maroon 5",
+      "duration": [
+        3,
+        51
+      ],
+      "genres": [
+        "Pop"
+      ],
+      "isSingle": false,
+      "reproductions": 4500000
+    },
+    {
+      "name": "Lost stars",
+      "author": "Adam Levine",
+      "duration": [
+        3,
+        16
+      ],
+      "genres": [
+        "Pop"
+      ],
+      "isSingle": true,
+      "reproductions": 3200000
+    },
+    {
+      "name": "Paint It, Black",
+      "author": "The Rolling Stones",
+      "duration": [
+        3,
+        45
+      ],
+      "genres": [
+        "Rock"
+      ],
+      "isSingle": false,
+      "reproductions": 10700000
+    },
+    {
+      "name": "God gave me everything",
+      "author": "Mick Jagger",
+      "duration": [
+        3,
+        34
+      ],
+      "genres": [
+        "Rock"
+      ],
+      "isSingle": true,
+      "reproductions": 4300000
+    }
   ]
 }

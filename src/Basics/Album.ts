@@ -2,10 +2,11 @@ import {Song} from './Song';
 import {Genre} from './Genre';
 import {Group} from './Group';
 import {Artist} from './Artist';
+import {BasicData} from '../Interfaces/BasicData';
 
-export class Album {
-  constructor(private name: string, private whoPublishes: (Group|Artist),
-    private publicationYear: number, private genres: Genre[],
+export class Album implements BasicData {
+  constructor(private name: string, private whoPublishes: string,
+    private publicationYear: number, private genres: string[],
     private songs: Song[]) {
   }
 
@@ -22,16 +23,16 @@ export class Album {
     this.publicationYear = year;
   }
 
-  public getGenres(): Genre[] {
+  public getGenres(): string[] {
     return this.genres;
   }
-  public setGenres(newGenres:Genre[]): void {
+  public setGenres(newGenres:string[]): void {
     this.genres = newGenres;
   }
-  public addGenre(newGenre: Genre) {
+  public addGenre(newGenre: string) {
     this.genres.push(newGenre);
   }
-  public removeGenre(genreDelete: Genre) {
+  public removeGenre(genreDelete: string) {
     this.genres = this.genres.filter((elemento) => elemento !== genreDelete);
   }
 
@@ -48,6 +49,12 @@ export class Album {
     this.songs = this.songs.filter((elemento) => elemento !== songDelete);
   }
 
+  public getWho(): string {
+    return this.whoPublishes;
+  }
+  public setWho(whoPublishes: string): void {
+    this.whoPublishes = whoPublishes;
+  }
 
   public showInfo(): string {
     return (`ALBUM ${this.name}

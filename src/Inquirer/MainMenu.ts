@@ -1,6 +1,7 @@
 import * as inquirer from 'inquirer';
-import {promptGenres} from './GenresMenu';
-import {promptPlaylists} from './PlaylistMenu';
+import {exit} from 'process';
+// import {promptGenres} from './GenresMenu';
+// import {promptPlaylists} from './PlaylistMenu';
 import {promptArtists} from './ArtistsMenu';
 import {promptGroups} from './GroupMenu';
 
@@ -11,6 +12,7 @@ enum Commands {
     Playlists = 'Playlists',
     Artist = 'Artistas',
     Groups = 'Grupos',
+    Songs = 'Canciones',
     Quit = 'Salir'
 }
 
@@ -23,20 +25,23 @@ export function promptUser(): void {
     choices: Object.values(Commands),
   }).then((answers) => {
     if (answers['command'] == Commands.Quit) {
-      promptUser();
+      exit();
     }
     switch (answers['command']) {
       case Commands.MusicGenres:
-        promptGenres();
+        // promptGenres();
         break;
       case Commands.Playlists:
-        promptPlaylists();
+        // promptPlaylists();
         break;
       case Commands.Artist:
         promptArtists();
         break;
       case Commands.Groups:
         promptGroups();
+        break;
+      case Commands.Songs:
+        // promptSongs();
         break;
     }
   });

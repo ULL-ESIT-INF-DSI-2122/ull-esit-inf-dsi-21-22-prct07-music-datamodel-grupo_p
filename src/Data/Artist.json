@@ -1,47 +1,101 @@
 {
   "artists": [
     {
-      "name": "Ed Sheeran",
-      "groups": [],
-      "genres": [
-        "pop",
-        "dance-pop"
-      ],
-      "albums": [
-        ""
-      ],
-      "songs": [
-        "Shivers"
-      ]
-    },
-    {
-      "name": "Micheal Jackson",
-      "groups": [],
-      "genres": [
-        "pop"
-      ],
-      "albums": [
-        "Thriller"
-      ],
-      "songs": [
-        "Thriller",
-        "Beat it"
-      ]
-    },
-    {
-      "name": "camilo",
+      "name": "Mick Jagger",
       "groups": [
-        "g2"
+        "The Rolling Stones"
       ],
       "genres": [
-        "gru2",
-        "gru3"
+        "Rock"
       ],
       "albums": [
-        "Threaller"
+        {
+          "name": "Goddess in the Doorway",
+          "whoPublishes": "Mick Jagger",
+          "publicationYear": 2001,
+          "genres": [
+            "Rock"
+          ],
+          "songs": [
+            {
+              "name": "God gave me everything",
+              "author": "Mick Jagger",
+              "duration": [
+                3,
+                34
+              ],
+              "genres": [
+                "Rock"
+              ],
+              "isSingle": true,
+              "reproductions": 4300000
+            }
+          ]
+        }
       ],
       "songs": [
-        "Imagine"
+        {
+          "name": "God gave me everything",
+          "author": "Mick Jagger",
+          "duration": [
+            3,
+            34
+          ],
+          "genres": [
+            "Rock"
+          ],
+          "isSingle": true,
+          "reproductions": 4300000
+        }
+      ]
+    },
+    {
+      "name": "Adam Levine",
+      "groups": [
+        "Maroon 5"
+      ],
+      "genres": [
+        "Pop"
+      ],
+      "albums": [
+        {
+          "name": "Begin Again",
+          "whoPublishes": "Adam Levine",
+          "publicationYear": 2014,
+          "genres": [
+            "Pop"
+          ],
+          "songs": [
+            {
+              "name": "Lost stars",
+              "author": "Adam Levine",
+              "duration": [
+                3,
+                16
+              ],
+              "genres": [
+                "Pop"
+              ],
+              "isSingle": true,
+              "reproductions": 3200000
+            }
+          ]
+        }
+      ],
+      "songs": [
+        {
+          "name": "Lost stars",
+          "author": "Adam Levine",
+          "duration": [
+            3,
+            16
+          ],
+          "genres": [
+            "Pop"
+          ],
+          "isSingle": true,
+          "reproductions": 3200000
+        }
       ]
     }
   ]

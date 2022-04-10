@@ -1,8 +1,12 @@
 import * as inquirer from 'inquirer';
 import {Artist} from '../Basics/Artist';
 import {ArtistManager} from '../Managers/ArtistManager';
+import {SongsManager} from '../Managers/SongManager';
+import {AlbumManager} from '../Managers/AlbumManager';
+import {GenreManager} from '../Managers/GenreManager';
 import {promptUser} from './MainMenu';
-
+import {GroupsManager} from '../Managers/GroupsManager';
+import {PlaylistManager} from '../Managers/ArtisttManager';
 
 /*
 * AÑADIR - BORRAR - MODIFICAR
@@ -14,7 +18,13 @@ enum options {
   Edit = 'Edit artista',
   Back = 'Back'
 }
+
 const manager = ArtistManager.getArtistsManager();
+const songs: string[] = SongsManager.getSongsManager().getList();
+const albums: string[] = AlbumManager.getAlbumManager().getList();
+const genres: string[] = GenreManager.getGenreManager().getList();
+const groups: string[] = GroupsManager.getGroupManager().getList();
+const pleylists: string[] = PlaylistManager.getPlaylistManager().getList();
 
 export function promptArtists(): void {
   console.clear();
@@ -22,7 +32,7 @@ export function promptArtists(): void {
   inquirer.prompt({
     type: 'list',
     name: 'command',
-    message: 'Esscoja que quiere hacer:',
+    message: 'Escoja que quiere hacer:',
     choices: Object.values(options),
   }).then((answers) => {
     switch (answers['command']) {
@@ -36,7 +46,9 @@ export function promptArtists(): void {
         promptRemoveArtist();
         break;
       case options.Show:
-        manager.showData();
+        // manager.showData();
+        prompShowData();
+        promptArtists();
         break;
       case options.Back:
         promptUser();
@@ -50,11 +62,6 @@ export function promptArtists(): void {
 
 function promptAddArtist(): void {
   console.clear();
-
-  let albums: string[] = ['Threaller', 'Abbey Road'];
-  let songs: string[] = ['Imagine', 'Despacito'];
-  let groups: string[] = ['gru1', 'gru2', 'gru3'];
-  let genres: string[]= ['g1', 'g2', 'g3'];
 
   const questions = [
     {
@@ -106,21 +113,21 @@ function promptAddArtist(): void {
       },
     },
     {
-      type: 'checkbox',
-      message: 'Elige canciones:',
-      name: 'songs',
-      choices: songs,
-      validate(answer: string[]) {
-        if (answer.length < 1) {
-          return 'Debes elegir al menos una canción.';
+      type: 'input',
+      name: 'song',
+      message: 'Song name:',
+      validate(value: string) {
+        let val: boolean | string = true;
+        if (SongsManager.getSongsManager().exists(value)) {
+          val = 'Error: ya existe una cancion con ese nombre.';
         }
-        return true;
+        return val;
       },
     },
   ];
   inquirer.prompt(questions).then((answers) => {
     const newArtist: Artist = new Artist(answers.name, answers.genre, answers.groups,
-        answers.albums, answers.songs);
+        answers.albums, [], answers.song);
     manager.addArtist(newArtist);
     promptArtists();
   });
@@ -139,7 +146,7 @@ function promptRemoveArtist(): void {
       {
         name: 'remove',
         type: 'confirm',
-        message: '¿Seguro que quieres eliminar este género?',
+        message: '¿Eliminar artista?',
       },
     ]).then((answer) => {
       if (answer.eliminar) {
@@ -153,11 +160,6 @@ function promptRemoveArtist(): void {
 
 function promptEditArtist(): void {
   console.clear();
-
-  let albums: string[] = ['Threaller', 'Abbey Road'];
-  let songs: string[] = ['Imagine', 'Despacito'];
-  let genres: string[]= ['g1', 'g2', 'g3'];
-  let groups: string[] = ['gru1', 'gru2', 'gru3'];
 
   let artistList: string[] = [];
   artistList.concat(manager.getList());
@@ -176,6 +178,15 @@ function promptEditArtist(): void {
         name: 'newName',
         message: 'Artist new name:',
         default: artist.getName(),
+        validate(value: string) {
+          let val: boolean | string = true;
+          manager.getCollection().forEach((element) => {
+            if (value === element.getName() && artist !== element) {
+              val = 'Error: ya existe un artista con ese nombre.';
+            }
+          });
+          return val;
+        },
       },
       {
         type: 'checkbox',
@@ -213,3 +224,187 @@ function promptEditArtist(): void {
   });
 }
 
+enum visualizationMode {
+  byTitle = 'Ver por titulo de cancion',
+  byName = 'Ver por nombre de album',
+  byPlaylist = 'Ver por pleylists asociadas',
+}
+
+function prompShowData() {
+  console.clear();
+
+  inquirer.prompt({
+    type: 'list',
+    name: 'artist',
+    message: 'Escoja el artista que quiere ver:',
+    choices: manager.getList(),
+  }).then((answers) => {
+    let artist: Artist = manager.searchByName(answers.artist);
+    inquirer.prompt({
+      type: 'list',
+      name: 'visualization',
+      message: 'Que quiere ver',
+      choices: Object.values(visualizationMode),
+    }).then((answers) => {
+      switch (answers['visualization']) {
+        case visualizationMode.byTitle:
+          promptShowSongs(artist);
+          break;
+        case visualizationMode.byName:
+          promptShowAlbums(artist);
+          break;
+        case visualizationMode.byPlaylist:
+          promptShowPleyList(artist);
+          break;
+        default:
+          promptArtists();
+          break;
+      }
+    });
+  });
+}
+
+enum modeShowSong {
+  title = 'Mostrar canciones por titulo',
+  repro = 'Mostrar por numero de reproducciones',
+  single = 'Mostrar solo los singles'
+}
+
+function promptShowSongs(artist: Artist) {
+  console.clear();
+
+  inquirer.prompt({
+    type: 'list',
+    name: 'mode',
+    message: 'Como quiere ver los datos?',
+    choices: Object.values(modeShowSong),
+  }).then((answers) => {
+    switch (answers['mode']) {
+      case modeShowSong.title:
+        inquirer.prompt({
+          type: 'list',
+          name: 'order',
+          message: 'Orden?',
+          choices: ['Ascendente', 'Descendente'],
+        }).then((answers) => {
+          switch (answers['order']) {
+            case 'Ascendente':
+              artist.showSongsOrder();
+              break;
+            case 'Descendente':
+              artist.showSongsOrder(false);
+              break;
+          }
+        });
+        break;
+      case modeShowSong.repro:
+        inquirer.prompt({
+          type: 'list',
+          name: 'order',
+          message: 'Orden?',
+          choices: ['Ascendente', 'Descendente'],
+        }).then((answers) => {
+          switch (answers['order']) {
+            case 'Ascendente':
+              artist.showByReproductions();
+              break;
+            case 'Descendente':
+              artist.showByReproductions(false);
+              break;
+          }
+        });
+        break;
+      case modeShowSong.single:
+        artist.showSingles();
+        break;
+    }
+  });
+}
+
+enum modeShowAlbum {
+  name = 'Mostrar albunes por nombre',
+  year = 'Mostrar por año de lanzamiento',
+}
+
+function promptShowAlbums(artist: Artist) {
+  console.clear();
+
+  inquirer.prompt({
+    type: 'list',
+    name: 'mode',
+    message: 'Como quiere ver los datos?',
+    choices: Object.values(modeShowAlbum),
+  }).then((answers) => {
+    switch (answers['mode']) {
+      case modeShowAlbum.name:
+        inquirer.prompt({
+          type: 'list',
+          name: 'order',
+          message: 'Orden?',
+          choices: ['Ascendente', 'Descendente'],
+        }).then((answers) => {
+          switch (answers['order']) {
+            case 'Ascendente':
+              artist.showAlbumOrder();
+              break;
+            case 'Descendente':
+              artist.showAlbumOrder(false);
+              break;
+          }
+        });
+        break;
+      case modeShowAlbum.year:
+        inquirer.prompt({
+          type: 'list',
+          name: 'order',
+          message: 'Orden?',
+          choices: ['Ascendente', 'Descendente'],
+        }).then((answers) => {
+          switch (answers['order']) {
+            case 'Ascendente':
+              artist.showAlbumYearOrder();
+              break;
+            case 'Descendente':
+              artist.showAlbumYearOrder(false);
+              break;
+          }
+        });
+        break;
+    }
+  });
+}
+
+enum modeShowPleyList {
+  name = 'Mostrar playlist por nombre',
+}
+
+function promptShowPleyList(artist: Artist) {
+  console.clear();
+
+  inquirer.prompt({
+    type: 'list',
+    name: 'mode',
+    message: 'Como quiere ver los datos?',
+    choices: Object.values(modeShowPleyList),
+  }).then((answers) => {
+    switch (answers['mode']) {
+      case modeShowPleyList.name:
+        inquirer.prompt({
+          type: 'list',
+          name: 'order',
+          message: 'Orden?',
+          choices: ['Ascendente', 'Descendente'],
+        }).then((answers) => {
+          switch (answers['order']) {
+            case 'Ascendente':
+              artist.showPlayListAsociate();
+              break;
+            case 'Descendente':
+              artist.showPlayListAsociate();
+              break;
+          }
+        });
+        break;
+    }
+  });
+}

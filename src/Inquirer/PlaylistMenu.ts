@@ -1,12 +1,12 @@
 import * as inquirer from 'inquirer';
 import {Playlist} from '../Basics/Playlist';
 import {Song} from '../Basics/Song';
-import {PlaylistsManager} from '../Managers/PlaylistManager';
-import {SongsManager} from '../Managers/SongManager';
+import {PlaylistManager} from '../Managers/PlaylistManager';
+import {SongManager} from '../Managers/SongManager';
 import {promptUser} from './MainMenu';
 
 export function promptPlaylists(): void {
-  const manager: PlaylistsManager = PlaylistsManager.getPlaylistManager();
+  const manager: PlaylistManager = PlaylistManager.getPlaylistManager();
   let options: string[] = ['Nueva playlist +'];
   options = options.concat(manager.getList());
   options.push('Volver');
@@ -31,17 +31,21 @@ export function promptPlaylists(): void {
     }
   });
 }
+export type Order = 0|1|2|3|4|5|6|7|8|9|10|11;
 
-function promptPlaylist(playlist: Playlist): void {
+function promptPlaylist(playlist: Playlist, order: Order = 0): void {
   console.clear();
-  playlist.showInfo();
+  playlist.showInfo(order);
   inquirer.prompt({
     type: 'list',
     name: 'command',
     message: 'Opciones',
-    choices: ['Editar', 'Eliminar', 'Volver'],
+    choices: ['Ordenar canciones', 'Editar', 'Eliminar', 'Volver'],
   }).then((answers) => {
     switch (answers['command']) {
+      case 'Ordenar canciones':
+        promptSelectOrder(playlist);
+        break;
       case 'Editar':
         promptEditPlaylist(playlist);
         break;
@@ -56,8 +60,74 @@ function promptPlaylist(playlist: Playlist): void {
   );
 }
 
+export function promptSelectOrder(playlist: Playlist) {
+  console.clear();
+  inquirer.prompt({
+    type: 'list',
+    name: 'command',
+    message: 'Opciones',
+    choices: [
+      'Alfabéticamente por título ascendente',
+      'Alfabéticamente por título descendente',
+      'Alfabéticamente por nombre del grupo/artista ascendente',
+      'Alfabéticamente por nombre del grupo/artista descendente',
+      'Por fecha de lanzamiento ascendente',
+      'Por fecha de lanzamiento descendente',
+      'Por duración ascendente',
+      'Por duración descendente',
+      'Alfabéticamente por género músical principal ascendente',
+      'Alfabéticamente por género músical principal descendente',
+      'Por número de reproducciones ascendente',
+      'Por número de reproducciones descendente',
+      'Volver'],
+  }).then((answers) => {
+    switch (answers['command']) {
+      case 'Alfabéticamente por título ascendente':
+        promptPlaylist(playlist, 0);
+        break;
+      case 'Alfabéticamente por título descendente':
+        promptPlaylist(playlist, 1);
+        break;
+      case 'Alfabéticamente por nombre del grupo/artista ascendente':
+        promptPlaylist(playlist, 2);
+        break;
+      case 'Alfabéticamente por nombre del grupo/artista descendente':
+        promptPlaylist(playlist, 3);
+        break;
+      case 'Por fecha de lanzamiento ascendente':
+        promptPlaylist(playlist, 4);
+        break;
+      case 'Por fecha de lanzamiento descendente':
+        promptPlaylist(playlist, 5);
+        break;
+      case 'Por duración ascendente':
+        promptPlaylist(playlist, 6);
+        break;
+      case 'Por duración descendente':
+        promptPlaylist(playlist, 7);
+        break;
+      case 'Alfabéticamente por género músical principal ascendente':
+        promptPlaylist(playlist, 8);
+        break;
+      case 'Alfabéticamente por género músical principal descendente':
+        promptPlaylist(playlist, 9);
+        break;
+      case 'Por número de reproducciones ascendente':
+        promptPlaylist(playlist, 10);
+        break;
+      case 'Por número de reproducciones descendente':
+        promptPlaylist(playlist, 11);
+        break;
+      default:
+        promptPlaylist(playlist);
+        break;
+    }
+  },
+  );
+}
+
 function promptRemovePlaylist(playlist: Playlist) {
-  const manager: PlaylistsManager = PlaylistsManager.getPlaylistManager();
+  const manager: PlaylistManager = PlaylistManager.getPlaylistManager();
   console.clear();
   inquirer
       .prompt([
@@ -74,9 +144,98 @@ function promptRemovePlaylist(playlist: Playlist) {
 }
 
 function promptAddPlaylist(): void {
-  const manager: PlaylistsManager = PlaylistsManager.getPlaylistManager();
-  // const songs: string[] = ['Imagine', 'Despacito'];
-  const songs: string[] = SongsManager.getSongsManager().getList();
+  console.clear();
+  inquirer.prompt({
+    type: 'list',
+    name: 'command',
+    message: 'Opciones',
+    choices: ['Desde 0', 'A partir de una playlist pre-existente', 'Volver'],
+  }).then((answers) => {
+    switch (answers['command']) {
+      case 'Desde 0':
+        promptAddNewPlaylist();
+        break;
+      case 'A partir de una playlist pre-existente':
+        promptSelectPreexistingPlaylist();
+        break;
+      default:
+        promptPlaylists();
+        break;
+    }
+  },
+  );
+}
+
+
+function promptSelectPreexistingPlaylist(): void {
+  const manager: PlaylistManager = PlaylistManager.getPlaylistManager();
+  let options: string[] = manager.getList();
+  options.push('Volver');
+  console.clear();
+  inquirer.prompt({
+    type: 'list',
+    name: 'command',
+    message: 'Playlists',
+    choices: options,
+  }).then((answers) => {
+    switch (answers['command']) {
+      case 'Volver':
+        promptAddPlaylist();
+        break;
+      default:
+        let playlist: Playlist = manager.searchByName(answers['command']);
+        promptAddPlaylistFromPreexisting(playlist);
+        break;
+    }
+  });
+}
+
+function promptAddPlaylistFromPreexisting(playlist: Playlist) {
+  const manager: PlaylistManager = PlaylistManager.getPlaylistManager();
+  const songs: string[] = SongManager.getSongManager().getList();
+  console.clear();
+  const questions = [
+    {
+      type: 'input',
+      name: 'name',
+      message: 'Nombre de la playlist:',
+      validate(value: string) {
+        let val: boolean | string = true;
+        if (manager.anotherOneWithThatName(value)) {
+          val = 'Error: ya existe un género con ese nombre.';
+        }
+        return val;
+      },
+    },
+    {
+      type: 'checkbox',
+      message: 'Elige canciones:',
+      name: 'songs',
+      choices: songs,
+      default: playlist.getSongsNames(),
+      validate(answer: string[]) {
+        if (answer.length < 1) {
+          return 'Debes elegir al menos una canción.';
+        }
+        return true;
+      },
+    },
+  ];
+  inquirer.prompt(questions).then((answers) => {
+    let songs: Song[] = [];
+    answers.songs.forEach((element: string) => {
+      songs.push(SongManager.getSongManager().getSongByName(element) as Song);
+    });
+    manager.addPlaylist(new Playlist(answers.name, songs));
+    manager.storePlaylists();
+    promptPlaylists();
+  });
+}
+
+
+function promptAddNewPlaylist(): void {
+  const manager: PlaylistManager = PlaylistManager.getPlaylistManager();
+  const songs: string[] = SongManager.getSongManager().getList();
   console.clear();
   const questions = [
     {
@@ -107,7 +266,7 @@ function promptAddPlaylist(): void {
   inquirer.prompt(questions).then((answers) => {
     let songs: Song[] = [];
     answers.songs.forEach((element: string) => {
-      songs.push(SongsManager.getSongsManager().getSongByName(element) as Song);
+      songs.push(SongManager.getSongManager().getSongByName(element) as Song);
     });
     manager.addPlaylist(new Playlist(answers.name, songs));
     promptPlaylists();
@@ -115,9 +274,8 @@ function promptAddPlaylist(): void {
 }
 
 function promptEditPlaylist(playlist: Playlist): void {
-  const manager: PlaylistsManager = PlaylistsManager.getPlaylistManager();
-  // const songs: string[] = ['Imagine', 'Despacito'];
-  const songs: string[] = SongsManager.getSongsManager().getList();
+  const manager: PlaylistManager = PlaylistManager.getPlaylistManager();
+  const songs: string[] = SongManager.getSongManager().getList();
   console.clear();
   const questions = [
     {
@@ -138,7 +296,7 @@ function promptEditPlaylist(playlist: Playlist): void {
       message: 'Elige canciones:',
       name: 'songs',
       choices: songs,
-      default: playlist.getSongs(),
+      default: playlist.getSongsNames(),
       validate(answer: string[]) {
         if (answer.length < 1) {
           return 'Debes elegir al menos una canción.';
@@ -149,7 +307,11 @@ function promptEditPlaylist(playlist: Playlist): void {
   ];
   inquirer.prompt(questions).then((answers) => {
     playlist.setName(answers.name);
-    playlist.setSongs(answers.songs);
+    let songs: Song[] = [];
+    answers.songs.forEach((element: string) => {
+      songs.push(SongManager.getSongManager().getSongByName(element) as Song);
+    });
+    playlist.setSongs(songs);
     manager.storePlaylists();
     promptPlaylists();
   });
