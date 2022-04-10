@@ -1,0 +1,48 @@
+import {Song} from './Song';
+import {BasicData} from './BasicData';
+import {AlbumInterface} from '../Interfaces/AlbumInterface';
+import {SongManager} from '../Managers/SongManager';
+import {Genre} from './Genre';
+
+export class Album extends BasicData {
+  constructor(name: string, readonly whoPublishes: string,
+    readonly publicationYear: number, readonly genres: string[],
+    readonly songs: Song[]) {
+    super(name);
+  }
+  getSongs(): Song[] {
+    return this.songs;
+  }
+
+  getYear() {
+    return this.publicationYear;
+  }
+
+  public showInfo(): string {
+    return (`ALBUM ${this.name}
+    Artista o grupo que lo publico: ${this.whoPublishes}
+    Año de publicacion: ${this.publicationYear}
+    Generos que contiene este album: ${this.genres}
+    Canciones de este genero: ${this.songs}`);
+  }
+
+  public removeGenre(genre: Genre): void {
+    const index = this.genres.indexOf(genre.getName());
+    if (index !== -1) {
+      this.genres.splice(index, 1);
+    }
+  }
+  public addGenre(genre: Genre): void {
+    if (this.genres.find((x) => x === genre.getName()) === undefined) {
+      this.genres.push(genre.getName());
+    }
+  }
+
+  public static deserialize(album: AlbumInterface): Album {
+    let songs: Song[] = [];
+    album.songs.forEach((s) =>
+      songs.push(SongManager.getSongManager().searchByName(s.name) as Song),
+    );
+    return new Album(album.name, album.whoPublishes, album.publicationYear, album.genres, songs);
+  }
+}

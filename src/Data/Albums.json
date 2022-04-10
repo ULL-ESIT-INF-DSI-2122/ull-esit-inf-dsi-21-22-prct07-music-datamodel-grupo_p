@@ -1,0 +1,132 @@
+{
+  "albums": [
+    {
+      "name": "Overexposed",
+      "whoPublishes": "Maroon 5",
+      "publicationYear": 2012,
+      "genres": [
+        "Pop"
+      ],
+      "songs": [
+        {
+          "name": "Payphone",
+          "author": "Maroon 5",
+          "duration": [
+            3,
+            51
+          ],
+          "genres": [
+            "Pop"
+          ],
+          "publicationDate": "2012-04-16",
+          "isSingle": false,
+          "reproductions": 4500000
+        },
+        {
+          "name": "One More Night",
+          "author": "Maroon 5",
+          "duration": [
+            3,
+            39
+          ],
+          "genres": [
+            "Pop"
+          ],
+          "publicationDate": "2012-06-19",
+          "isSingle": false,
+          "reproductions": 1530000
+        },
+        {
+          "name": "Daylight",
+          "author": "Maroon 5",
+          "duration": [
+            3,
+            45
+          ],
+          "genres": [
+            "Pop"
+          ],
+          "publicationDate": "2012-11-27",
+          "isSingle": true,
+          "reproductions": 2000000
+        }
+      ]
+    },
+    {
+      "name": "Goddess in the Doorway",
+      "whoPublishes": "Mick Jagger",
+      "publicationYear": 2001,
+      "genres": [
+        "Rock"
+      ],
+      "songs": [
+        {
+          "name": "God gave me everything",
+          "author": "Mick Jagger",
+          "duration": [
+            3,
+            34
+          ],
+          "genres": [
+            "Rock"
+          ],
+          "publicationDate": "2001-11-19",
+          "isSingle": true,
+          "reproductions": 4500000
+        },
+        {
+          "name": "Visions of paradise",
+          "author": "Mick Jagger",
+          "duration": [
+            4,
+            2
+          ],
+          "genres": [
+            "Rock"
+          ],
+          "publicationDate": "2001-11-19",
+          "isSingle": false,
+          "reproductions": 2750000
+        }
+      ]
+    },
+    {
+      "name": "Begin Again",
+      "whoPublishes": "Adam Levine",
+      "publicationYear": 2014,
+      "genres": [
+        "Pop"
+      ],
+      "songs": [
+        {
+          "name": "Lost Stars",
+          "author": "Adam Levine",
+          "duration": [
+            3,
+            16
+          ],
+          "genres": [
+            "Pop"
+          ],
+          "publicationDate": "2014-06-30",
+          "isSingle": true,
+          "reproductions": 3200000
+        },
+        {
+          "name": "Lost Stars",
+          "author": "Adam Levine",
+          "duration": [
+            3,
+            16
+          ],
+          "genres": [
+            "Pop"
+          ],
+          "publicationDate": "2014-06-30",
+          "isSingle": true,
+          "reproductions": 3200000
+        }
+      ]
+    }
+  ]
+}
