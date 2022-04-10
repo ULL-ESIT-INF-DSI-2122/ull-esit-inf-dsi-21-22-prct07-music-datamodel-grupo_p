@@ -1,10 +1,11 @@
 import * as inquirer from 'inquirer';
-import {Group} from '../Basics/Group';
+import {Group} from '../Basics/Group/Group';
 import {promptUser} from './MainMenu';
 import {ArtistManager} from '../Managers/ArtistManager';
 import {AlbumManager} from '../Managers/AlbumManager';
 import {GenreManager} from '../Managers/GenreManager';
-import {GroupsManager} from '../Managers/GroupsManager';
+import {GroupManager} from '../Managers/GroupManager';
+import {GroupShow} from '../Basics/Group/GroupShow';
 
 enum options {
   Show = 'Show Data Base',
@@ -14,11 +15,10 @@ enum options {
   Back = 'Back'
 }
 
-const manager = GroupsManager.getGroupManager();
+const manager = GroupManager.getGroupManager();
 const albums: string[] = AlbumManager.getAlbumManager().getList();
 const genres: string[] = GenreManager.getGenreManager().getList();
 const artists: string[] = ArtistManager.getArtistsManager().getList();
-const pleylists: string[] = PlaylistManager.getPlaylistManager().getList();
 
 export function promptGroups(): void {
   console.clear();
@@ -240,26 +240,27 @@ function prompShowData() {
 
   inquirer.prompt({
     type: 'list',
-    name: 'artist',
-    message: 'Escoja el artista que quiere ver:',
+    name: 'group',
+    message: 'Escoja el grupo que quiere ver:',
     choices: manager.getList(),
   }).then((answers) => {
-    let group: Group = manager.searchByName(answers.artist);
+    let group: Group = manager.searchByName(answers.group);
     inquirer.prompt({
       type: 'list',
       name: 'visualization',
       message: 'Que quiere ver',
       choices: Object.values(visualizationMode),
     }).then((answers) => {
+      let groupShow: GroupShow = new GroupShow(group);
       switch (answers['visualization']) {
         case visualizationMode.byTitle:
-          promptShowSongs(group);
+          promptShowSongs(groupShow);
           break;
         case visualizationMode.byName:
-          promptShowAlbums(group);
+          promptShowAlbums(groupShow);
           break;
         case visualizationMode.byPlaylist:
-          promptShowPleyList(group);
+          promptShowPleyList(groupShow);
           break;
         default:
           promptGroups();
@@ -275,7 +276,7 @@ enum modeShowSong {
   single = 'Mostrar solo los singles'
 }
 
-function promptShowSongs(group: Group) {
+function promptShowSongs(group: GroupShow) {
   console.clear();
 
   inquirer.prompt({
@@ -331,7 +332,7 @@ enum modeShowAlbum {
   year = 'Mostrar por año de lanzamiento',
 }
 
-function promptShowAlbums(group: Group) {
+function promptShowAlbums(group: GroupShow) {
   console.clear();
 
   inquirer.prompt({
@@ -383,7 +384,7 @@ enum modeShowPleyList {
   name = 'Mostrar playlist por nombre',
 }
 
-function promptShowPleyList(group: Group) {
+function promptShowPleyList(group: GroupShow) {
   console.clear();
 
   inquirer.prompt({

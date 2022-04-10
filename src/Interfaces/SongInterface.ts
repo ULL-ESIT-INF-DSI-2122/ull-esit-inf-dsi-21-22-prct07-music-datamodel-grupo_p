@@ -1,8 +1,10 @@
+type Duration = [number, number];
+
 
 export interface SongInterface {
   name: string;
   author: string;
-  duration: number;
+  duration: Duration;
   genres: string[];
   datePublication: Date;
   isSingle: boolean;

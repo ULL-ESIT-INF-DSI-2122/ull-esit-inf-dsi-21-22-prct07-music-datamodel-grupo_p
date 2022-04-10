@@ -1,16 +1,14 @@
 import * as inquirer from 'inquirer';
-import {Artist} from '../Basics/Artist';
+import {Artist} from '../Basics/Artist/Artist';
 import {ArtistManager} from '../Managers/ArtistManager';
 import {SongsManager} from '../Managers/SongManager';
 import {AlbumManager} from '../Managers/AlbumManager';
 import {GenreManager} from '../Managers/GenreManager';
 import {promptUser} from './MainMenu';
-import {GroupsManager} from '../Managers/GroupsManager';
-import {PlaylistManager} from '../Managers/ArtisttManager';
+import {GroupManager} from '../Managers/GroupManager';
+import {ArtistShow} from '../Basics/Artist/ArtistShow';
 
-/*
-* AÑADIR - BORRAR - MODIFICAR
-*/
+
 enum options {
   Show = 'Show Data Base',
   Add = 'Add new artist+',
@@ -23,8 +21,7 @@ const manager = ArtistManager.getArtistsManager();
 const songs: string[] = SongsManager.getSongsManager().getList();
 const albums: string[] = AlbumManager.getAlbumManager().getList();
 const genres: string[] = GenreManager.getGenreManager().getList();
-const groups: string[] = GroupsManager.getGroupManager().getList();
-const pleylists: string[] = PlaylistManager.getPlaylistManager().getList();
+const groups: string[] = GroupManager.getGroupManager().getList();
 
 export function promptArtists(): void {
   console.clear();
@@ -246,15 +243,16 @@ function prompShowData() {
       message: 'Que quiere ver',
       choices: Object.values(visualizationMode),
     }).then((answers) => {
+      let showArtist: ArtistShow = new ArtistShow(artist);
       switch (answers['visualization']) {
         case visualizationMode.byTitle:
-          promptShowSongs(artist);
+          promptShowSongs(showArtist);
           break;
         case visualizationMode.byName:
-          promptShowAlbums(artist);
+          promptShowAlbums(showArtist);
           break;
         case visualizationMode.byPlaylist:
-          promptShowPleyList(artist);
+          promptShowPleyList(showArtist);
           break;
         default:
           promptArtists();
@@ -270,7 +268,7 @@ enum modeShowSong {
   single = 'Mostrar solo los singles'
 }
 
-function promptShowSongs(artist: Artist) {
+function promptShowSongs(artist: ArtistShow) {
   console.clear();
 
   inquirer.prompt({
@@ -326,7 +324,7 @@ enum modeShowAlbum {
   year = 'Mostrar por año de lanzamiento',
 }
 
-function promptShowAlbums(artist: Artist) {
+function promptShowAlbums(artist: ArtistShow) {
   console.clear();
 
   inquirer.prompt({
@@ -378,7 +376,7 @@ enum modeShowPleyList {
   name = 'Mostrar playlist por nombre',
 }
 
-function promptShowPleyList(artist: Artist) {
+function promptShowPleyList(artist: ArtistShow) {
   console.clear();
 
   inquirer.prompt({

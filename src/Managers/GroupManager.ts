@@ -1,11 +1,11 @@
-import {Group} from '../Basics/Group';
+import {Group} from '../Basics/Group/Group';
 import {Manager} from './Manager';
 import lowdb = require('lowdb');
 import FileSync = require('lowdb/adapters/FileSync');
 import {ArtistInterface} from '../Interfaces/ArtistInterface';
 import {AlbumInterface} from '../Interfaces/AlbumInterface';
-import {Artist} from '../Basics/Artist';
-import {Album} from '../Basics/Album';
+import {Artist} from '../Basics/Artist/Artist';
+import {Album} from '../Basics/Album/Album';
 import {AlbumManager} from './AlbumManager';
 import {GenreManager} from './GenreManager';
 import {ArtistManager} from './ArtistManager';
@@ -14,8 +14,8 @@ type schemaType = {
     groups: { name: string; artists: ArtistInterface[], yearCreation: number, genres: string[], albums: AlbumInterface[] }[]
 };
 
-export class GroupsManager extends Manager<Group> {
-  private static groupManager: GroupsManager;
+export class GroupManager extends Manager<Group> {
+  private static groupManager: GroupManager;
   private database: lowdb.LowdbSync<schemaType>;
 
   private constructor() {
@@ -31,11 +31,11 @@ export class GroupsManager extends Manager<Group> {
     this.database.set('groups', [...this.collection.values()]).write();
   }
 
-  public static getGroupManager(): GroupsManager {
-    if (!GroupsManager.groupManager) {
-      GroupsManager.groupManager = new GroupsManager();
+  public static getGroupManager(): GroupManager {
+    if (!GroupManager.groupManager) {
+      GroupManager.groupManager = new GroupManager();
     }
-    return GroupsManager.groupManager;
+    return GroupManager.groupManager;
   }
 
   addGroup(group: Group): void {
@@ -83,5 +83,16 @@ export class GroupsManager extends Manager<Group> {
     this.removeGroup(group);
     this.addGroup(new Group(newName, newArtists, newYear, newGenres, newAlbums));
     this.storeGroups();
+  }
+  public static deserialize(group: GroupInterface): Group {
+    let managerArtist = ArtistManager.getArtistsManager();
+    let managerAlbum = AlbumManager.getAlbumManager();
+    let artists: Artist[] = group.artists.map((artistName) => {
+      return managerArtist.searchByName(artistName.name);
+    });
+    let albums: Album[] = group.albums.map((albumName) => {
+      return managerAlbum.searchByName(albumName.name);
+    });
+    return new Group(group.name, artists, group.yearCreation, group.genres, albums);
   }
 }

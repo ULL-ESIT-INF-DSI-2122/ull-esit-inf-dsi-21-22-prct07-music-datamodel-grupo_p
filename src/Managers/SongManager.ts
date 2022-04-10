@@ -1,17 +1,19 @@
-import {Song} from '../Basics/Song';
+import {Song} from '../Basics/Song/Song';
 import {Manager} from './Manager';
 import lowdb = require('lowdb');
 import FileSync = require('lowdb/adapters/FileSync');
+import {SongInterface} from '../Interfaces/SongInterface';
 
+type Duration = [number, number];
 
 type schemaType = {
-    songs: { name: string; author: string; duration: number, genres: string[],
+    songs: { name: string; author: string; duration: Duration, genres: string[],
         datePublication: Date, isSingle: boolean,
         reproductions: number}[]
 };
 
-export class SongsManager extends Manager<Song> {
-  private static SongManager: SongsManager;
+export class SongManager extends Manager<Song> {
+  private static SongManager: SongManager;
   private database: lowdb.LowdbSync<schemaType>;
   private constructor() {
     super();
@@ -31,11 +33,13 @@ export class SongsManager extends Manager<Song> {
    * Patron Singlenton
    * @returns la única instancia de la clase SongManager
    */
-  public static getSongsManager(): SongsManager {
-    if (!SongsManager.SongManager) {
-      SongsManager.SongManager = new SongsManager();
+  public static getSongManager(): SongManager {
+    if (!SongManager.SongManager) {
+      SongManager.SongManager = new SongManager();
     }
-    return SongsManager.SongManager;
+    return SongManager.SongManager;
+  }
+  addSong(song: Song): void {
   }
   /**
    * Alamacena la información de la canción de acuerdo a lo
@@ -43,5 +47,9 @@ export class SongsManager extends Manager<Song> {
    */
   storeSong() {
     this.database.set('songs', [...this.collection.values()]).write();
+  }
+  // CONVERTIR A OBJETO DATS DEL JSON
+  public static deserialize(song: SongInterface): Song {
+    return new Song(song.name, song.author, song.duration, song.genres, song.datePublication, song.isSingle, song.reproductions);
   }
 }

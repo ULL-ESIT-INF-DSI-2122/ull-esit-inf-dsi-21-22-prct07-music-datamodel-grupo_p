@@ -2,7 +2,7 @@ import {Manager} from './Manager';
 import lowdb = require('lowdb');
 import FileSync = require('lowdb/adapters/FileSync');
 import {SongInterface} from '../Interfaces/SongInterface';
-import {Album} from '../Basics/Album';
+import {Album} from '../Basics/Album/Album';
 import {Genre} from '../Basics/Genre';
 
 type schemaType = {

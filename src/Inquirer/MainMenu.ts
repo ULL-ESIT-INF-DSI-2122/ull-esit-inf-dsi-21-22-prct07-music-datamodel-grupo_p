@@ -13,6 +13,7 @@ enum Commands {
     Artist = 'Artistas',
     Groups = 'Grupos',
     Songs = 'Canciones',
+    Albums = 'Albunes',
     Quit = 'Salir'
 }
 
@@ -41,8 +42,10 @@ export function promptUser(): void {
         promptGroups();
         break;
       case Commands.Songs:
-        // promptSongs();
+        promptSongs();
         break;
+      case Commands.Albums:
+        promptAlbum();
     }
   });
 }

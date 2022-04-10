@@ -1,6 +1,6 @@
-import {Artist} from '../Basics/Artist';
-import {Song} from '../Basics/Song';
-import {Album} from '../Basics/Album';
+import {Artist} from '../Basics/Artist/Artist';
+import {Song} from '../Basics/Song/Song';
+import {Album} from '../Basics/Album/Album';
 import {Manager} from './Manager';
 import lowdb = require('lowdb');
 import FileSync = require('lowdb/adapters/FileSync');
@@ -8,7 +8,7 @@ import {AlbumInterface} from '../Interfaces/AlbumInterface';
 import {SongInterface} from '../Interfaces/SongInterface';
 import {AlbumManager} from './AlbumManager';
 import {SongsManager} from './SongManager';
-import {GroupsManager} from './GroupsManager';
+import {GroupsManager} from './GroupManager';
 import {GenreManager} from './GenreManager';
 
 
@@ -122,5 +122,17 @@ export class ArtistManager extends Manager<Artist> {
       newSongs.forEach((song) => song.setAuthor(newName));
     }
     this.storeArtist();
+  }
+
+  public static deserialize(artist: ArtistInterface): Artist {
+    let managerSong = SongsManager.getSongsManager();
+    let managerAlbum = AlbumManager.getAlbumManager();
+    let songs: Song[] = artist.songs.map((songName) => {
+      return managerSong.searchByName(songName.name);
+    });
+    let albums: Album[] = artist.albums.map((albumName) => {
+      return managerAlbum.searchByName(albumName.name);
+    });
+    return new Artist(artist.name, artist.groups, artist.genres, albums, songs);
   }
 }

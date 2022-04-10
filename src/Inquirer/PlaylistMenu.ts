@@ -1,6 +1,6 @@
 import * as inquirer from 'inquirer';
-import {Playlist} from '../Basics/Playlist';
-import {Song} from '../Basics/Song';
+import {Playlist} from '../Basics/Playlist/Playlist';
+import {Song} from '../Basics/Song/Song';
 import {PlaylistManager} from '../Managers/PlaylistManager';
 import {SongManager} from '../Managers/SongManager';
 import {promptUser} from './MainMenu';

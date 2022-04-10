@@ -2,8 +2,8 @@ import {Genre} from '../Basics/Genre';
 import {Manager} from './Manager';
 import lowdb = require('lowdb');
 import FileSync = require('lowdb/adapters/FileSync');
-import {Song} from '../Basics/Song';
-import {Playlist} from '../Basics/Playlist';
+import {Song} from '../Basics/Song/Song';
+import {Playlist} from '../Basics/Playlist/Playlist';
 import {PlaylistInterface} from '../Interfaces/PlaylistInterface';
 
 type schemaType = {

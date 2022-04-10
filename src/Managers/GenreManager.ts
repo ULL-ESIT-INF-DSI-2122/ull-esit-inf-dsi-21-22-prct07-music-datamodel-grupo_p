@@ -2,10 +2,10 @@ import {Genre} from '../Basics/Genre';
 import {Manager} from './Manager';
 import lowdb = require('lowdb');
 import FileSync = require('lowdb/adapters/FileSync');
-import {Artist} from '../Basics/Artist';
-import {Group} from '../Basics/Group';
-import {Album} from '../Basics/Album';
-import {Song} from '../Basics/Song';
+import {Artist} from '../Basics/Artist/Artist';
+import {Group} from '../Basics/Group/Group';
+import {Album} from '../Basics/Album/Album';
+import {Song} from '../Basics/Song/Song';
 import {GenreInterface} from '../Interfaces/GenreInterface';
 
 type schemaType = {
@@ -60,5 +60,24 @@ export class GenreManager extends Manager<Genre> {
 
   storeGenres() {
     this.database.set('genres', [...this.collection.values()]).write();
+  }
+  public static deserialize(genre: GenreInterface): Genre {
+    let musicians: (Group|Artist)[] = [];
+    let albums: Album[] = [];
+    let songs: Song[] = [];
+    genre.songs.forEach((s) =>
+      songs.push(SongManager.getSongManager().getSongByName(s.name) as Song),
+    );
+    genre.albums.forEach((a) =>
+      albums.push(AlbumManager.getAlbumManager().getAlbumByName(a.name) as Album),
+    );
+    genre.musicians.forEach((m) => {
+      if ('groups' in m) {
+        musicians.push(ArtistManager.getArtistManager().getArtistByName(m.name) as Artist);
+      } else {
+        musicians.push(GroupManager.getGroupManager().getGroupByName(m.name) as Group);
+      }
+    });
+    return new Genre(genre.name, musicians, albums, songs);
   }
 }
