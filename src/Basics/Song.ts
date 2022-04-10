@@ -33,6 +33,9 @@ export class Song extends BasicData {
   public getAuthorName(): string {
     return this.author;
   }
+  public setAuthorName(newAuthor: string): void {
+    this.author = newAuthor;
+  }
   /**
    * Devuelve el número de reproducciones que tiene la canción
    * @returns la longitud del array reproductions

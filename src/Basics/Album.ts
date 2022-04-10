@@ -11,6 +11,10 @@ export class Album extends BasicData {
     super(name);
   }
 
+  getYear() {
+    return this.publicationYear;
+  }
+
   public showInfo(): string {
     return (`ALBUM ${this.name}
     Artista o grupo que lo publico: ${this.whoPublishes}

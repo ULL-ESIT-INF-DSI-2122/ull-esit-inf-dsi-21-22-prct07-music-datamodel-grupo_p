@@ -284,6 +284,14 @@ export class Playlist extends BasicData {
     return info;
   }
 
+
+  public getMusicians(): string[] {
+    const artistList: string[] = this.getSongs().map((song) => song.getAuthorName());
+    // const artistList = artistLists.reduce((acumulated, newList) => acumulated.concat(newList));
+    return artistList;
+  }
+
+
   /**
    * Devuelve los nombres de los géneros de la playlist.
    * @returns Devuelve un array con los nombres de los géneros de la playlist.

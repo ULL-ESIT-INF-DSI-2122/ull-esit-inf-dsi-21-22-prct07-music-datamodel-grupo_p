@@ -5,6 +5,8 @@ import {ArtistInterface} from '../Interfaces/ArtistInterface';
 import {SongManager} from '../Managers/SongManager';
 import {AlbumManager} from '../Managers/AlbumManager';
 import {Genre} from './Genre';
+import {PlaylistManager} from '../Managers/PlaylistManager';
+import {Playlist} from './Playlist';
 
 export class Artist extends BasicData {
   constructor(name: string, private groups: string[],
@@ -83,4 +85,82 @@ export class Artist extends BasicData {
 
     return listenerSongs + listenersGroups;
   }*/
+
+  public showInfo(): void {
+    let info: string = `ARTISTA ${this.getName()}
+    Nombre: ${this.getName()}
+    Grupos: ${this.getGroups()}
+    Genero/s: ${this.getGenres()}
+    Albums: ${this.getAlbums().map((album) => {
+    return album.getName();
+  })}
+    Canciones: ${this.getSongs().map((song) => {
+    return song.getName();
+  })}`;
+    console.log(info);
+  }
+
+  showSongsOrder(ascending: boolean = true): void {
+    let nameList: string[] = this.getSongs().map((song) => song.getName());
+    nameList = nameList.sort();
+    if (ascending) {
+      console.log(nameList.join('\n  '));
+    } else {
+      console.log(nameList.reverse().join('\n  '));
+    }
+  }
+
+  showAlbumOrder(ascending: boolean = true): void {
+    let nameList: string[] = this.getAlbums().map((album) => {
+      return album.getName();
+    });
+    nameList = nameList.sort();
+    if (ascending) {
+      console.log(nameList.join('\n  '));
+    } else {
+      console.log(nameList.reverse().join('\n  '));
+    }
+  }
+
+  showAlbumYearOrder(ascending: boolean = true): void {
+    let albums = this.getAlbums().sort((albumA, albumB) => {
+      return albumA.getYear() - albumB.getYear();
+    });
+    let albumNames: string[] = albums.map((album) => {
+      return album.getName();
+    });
+    if (ascending) {
+      console.log(albumNames.join('\n  '));
+    } else {
+      console.log(albumNames.reverse().join('\n  '));
+    }
+  }
+
+  showSingles(): void {
+    let songs: Song[] = this.getSongs().filter((song) => song.getIsSingle());
+    let single: string[] = songs.map((song) => {
+      return song.getName();
+    });
+    console.log(single.join('\n  '));
+  }
+
+  showByReproductions(ascending: boolean = true): void {
+    let songs = this.getSongs().sort((songA, songB) => {
+      return songA.getReproductions() - songB.getReproductions();
+    });
+    let songsNames: string[] = songs.map((song) => {
+      return song.getName();
+    });
+    if (ascending) {
+      console.log(songsNames.join('\n  '));
+    } else {
+      console.log(songsNames.reverse().join('\n  '));
+    }
+  }
+
+  showPlayListAsociate(): void {
+    const playLists: Playlist[] = Array.from(PlaylistManager.getPlaylistManager().getCollection());
+    const playListsWithAuthor = playLists.filter((playList) => playList.getMusicians().includes(this.getName()));
+    console.log(playListsWithAuthor.join('\n  '));
+  }
 }

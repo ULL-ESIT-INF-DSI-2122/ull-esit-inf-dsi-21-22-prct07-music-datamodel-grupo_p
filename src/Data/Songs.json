@@ -1,20 +1,6 @@
 {
   "songs": [
     {
-      "name": "Payphone",
-      "author": "Maroon 5",
-      "duration": [
-        3,
-        51
-      ],
-      "genres": [
-        "Pop"
-      ],
-      "publicationDate": "2012-04-16",
-      "isSingle": false,
-      "reproductions": 4500000
-    },
-    {
       "name": "One More Night",
       "author": "Maroon 5",
       "duration": [
