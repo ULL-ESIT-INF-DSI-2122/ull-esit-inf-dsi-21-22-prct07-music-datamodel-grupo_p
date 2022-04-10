@@ -1,4 +1,4 @@
-import {Genre} from '../Basics/Genre';
+import {Genre} from '../Basics/Genre/Genre';
 import {Manager} from './Manager';
 import lowdb = require('lowdb');
 import FileSync = require('lowdb/adapters/FileSync');

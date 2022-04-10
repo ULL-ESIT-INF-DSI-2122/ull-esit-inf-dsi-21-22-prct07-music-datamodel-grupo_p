@@ -29,11 +29,11 @@ export abstract class Manager<T extends BasicData> {
   protected remove(element: T): void {
     this.collection.delete(element);
   }
-
+  /*
   showData(): void {
     this.getCollection().forEach((item) => item.showInfo());
   }
-
+  */
   exists(value: string): boolean {
     let exists: boolean = false;
     this.collection.forEach((element) => {

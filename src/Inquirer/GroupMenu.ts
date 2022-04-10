@@ -40,7 +40,6 @@ export function promptGroups(): void {
         promptRemoveGroup();
         break;
       case options.Show:
-        // manager.showData();
         prompShowData();
         break;
       case options.Back:
@@ -217,12 +216,6 @@ function promptEditGroup(): void {
       group.setYearCreation(answers.year);
       group.setGenres(answers.genre);
       group.setAlbums(answers.albums);
-      /*
-      ArtistsManager.getArtistsManager().updateGenre(newGenre, answers.musicians);
-      GroupsManager.getGroupsManager().updateGenre(newGenre, answers.musicians);
-      AlbumsManager.getAlbumsManager().updateGenre(newGenre, answers.albums);
-      SongsManager.getSongsManager().updateGenre(newGenre, answers.songs);
-      */
       promptGroups();
     });
   });
@@ -233,6 +226,7 @@ enum visualizationMode {
   byTitle = 'Ver por titulo de cancion',
   byName = 'Ver por nombre de album',
   byPlaylist = 'Ver por pleylists asociadas',
+  back = 'Volver'
 }
 
 function prompShowData() {
@@ -273,7 +267,8 @@ function prompShowData() {
 enum modeShowSong {
   title = 'Mostrar canciones por titulo',
   repro = 'Mostrar por numero de reproducciones',
-  single = 'Mostrar solo los singles'
+  single = 'Mostrar solo los singles',
+  back = 'Volver'
 }
 
 function promptShowSongs(group: GroupShow) {
@@ -330,6 +325,7 @@ function promptShowSongs(group: GroupShow) {
 enum modeShowAlbum {
   name = 'Mostrar albunes por nombre',
   year = 'Mostrar por año de lanzamiento',
+  back = 'Volver'
 }
 
 function promptShowAlbums(group: GroupShow) {
@@ -373,6 +369,9 @@ function promptShowAlbums(group: GroupShow) {
             case 'Descendente':
               group.showAlbumYearOrder(false);
               break;
+            default:
+              promptShowData(group);
+              break;
           }
         });
         break;
@@ -382,6 +381,7 @@ function promptShowAlbums(group: GroupShow) {
 
 enum modeShowPleyList {
   name = 'Mostrar playlist por nombre',
+  back = 'Volver'
 }
 
 function promptShowPleyList(group: GroupShow) {
@@ -406,6 +406,9 @@ function promptShowPleyList(group: GroupShow) {
               group.showPlayListAsociate();
               break;
             case 'Descendente':
+              break;
+            case modeShowPleyList.back:
+              promptShowPleyList(group);
               break;
           }
         });

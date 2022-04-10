@@ -72,18 +72,7 @@ export class Group implements BasicData {
   public removeAlbum(albumDelete: Album): void {
     this.albums = this.albums.filter((elemento) => elemento !== albumDelete);
   }
-  /*
-  // suma de oyentes de las canciones de sus albunes
-  public getNumberListenersMonthly(): number {
-    let listeners:number = 0;
-    this.getAlbums().forEach((album) => {
-      album.getSongs().forEach((song) => {
-        listeners += song.monthlyReproductions();
-      });
-    });
-    return listeners;
-  }
-
+/*
   public static deserialize(group: GroupInterface): Group {
     let managerArtist = ArtistManager.getArtistsManager();
     let managerAlbum = AlbumManager.getAlbumManager();
@@ -94,5 +83,5 @@ export class Group implements BasicData {
       return managerAlbum.searchByName(albumName.name);
     });
     return new Group(group.name, artists, group.yearCreation, group.genres, albums);
-  } */
+  }*/
 }

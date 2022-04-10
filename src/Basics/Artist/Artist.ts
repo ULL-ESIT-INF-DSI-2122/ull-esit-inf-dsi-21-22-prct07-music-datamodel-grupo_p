@@ -2,7 +2,7 @@ import {Album} from '../Album/Album';
 import {Song} from '../Song/Song';
 import {BasicData} from '../../Interfaces/BasicData';
 // import {ArtistInterface} from '../../Interfaces/ArtistInterface';
-import {SongsManager} from '../../Managers/SongManager';
+import {SongManager} from '../../Managers/SongManager';
 // import {AlbumManager} from '../../Managers/AlbumManager';
 
 
@@ -11,9 +11,9 @@ export class Artist implements BasicData {
       private genres: string[], private albums: Album[], private songs: Song[] = [], newSongName: string = '' ) {
     // We create the new songs with dummy attributes for now
     if (newSongName != '') {
-      const mySong = new Song(newSongName, this.getName(), 0, [], new Date('0-0-0'), true, 0);
+      const mySong = new Song(newSongName, this.getName(), [0, 0], [], new Date('0-0-0'), true, 0);
       this.songs.push(mySong);
-      SongsManager.getSongsManager().addSong(mySong);
+      SongManager.getSongManager().addSong(mySong);
     }
   }
 

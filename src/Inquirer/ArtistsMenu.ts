@@ -139,20 +139,10 @@ function promptRemoveArtist(): void {
     message: 'Escoja el artista que quiere eliminar:',
     choices: manager.getList(),
   }).then((answers) => {
-    inquirer.prompt([
-      {
-        name: 'remove',
-        type: 'confirm',
-        message: '¿Eliminar artista?',
-      },
-    ]).then((answer) => {
-      if (answer.eliminar) {
-        let artist: Artist = manager.searchByName(answers.artistRemove);
-        manager.deleteArtist(artist);
-      }
-      promptArtists();
-    });
+    let artist: Artist = manager.searchByName(answers.artistRemove);
+    manager.deleteArtist(artist);
   });
+  promptArtists();
 }
 
 function promptEditArtist(): void {

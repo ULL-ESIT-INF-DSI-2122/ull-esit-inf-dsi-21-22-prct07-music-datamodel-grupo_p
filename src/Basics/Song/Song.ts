@@ -35,8 +35,8 @@ export class Song implements BasicData {
     return this.reproductions;
   }
   public getArtists(): string[] {
-    const artists: string[] = ArtistManager.getArtistsManager().getList();
-    const objArtist: Artist[] = artists.map((name) => ArtistManager.getArtistsManager().searchByName(name));
+    const artists: string[] = ArtistManager.getArtistManager().getList();
+    const objArtist: Artist[] = artists.map((name) => ArtistManager.getArtistManager().searchByName(name));
     let artistAsociate: Artist[] = objArtist.filter((artist) => artist.getSongs().includes(this));
     return artistAsociate.map((artistObj) => artistObj.getName());
   }

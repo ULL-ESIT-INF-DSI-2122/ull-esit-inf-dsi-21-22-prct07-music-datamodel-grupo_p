@@ -1,7 +1,7 @@
 import {BasicData} from '../../Interfaces/BasicData';
 import {PlaylistInterface} from '../../Interfaces/PlaylistInterface';
 import {GenreManager} from '../../Managers/GenreManager';
-import {SongsManager} from '../../Managers/SongManager';
+import {SongManager} from '../../Managers/SongManager';
 import {Song} from '../Song/Song';
 import {Genre} from '../Genre/Genre';
 
@@ -316,7 +316,7 @@ export class Playlist implements BasicData {
   public static deserialize(playlist: PlaylistInterface): Playlist {
     let songs: Song[] = [];
     playlist.songs.forEach((s) =>
-      songs.push(SongsManager.getSongsManager().getSongByName(s.name) as Song),
+      songs.push(SongManager.getSongManager().getSongByName(s.name) as Song),
     );
     return new Playlist(playlist.name, songs, playlist.systemPlaylist);
   }

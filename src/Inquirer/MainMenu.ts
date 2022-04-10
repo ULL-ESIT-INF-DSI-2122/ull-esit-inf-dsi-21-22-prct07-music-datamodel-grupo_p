@@ -4,7 +4,12 @@ import {exit} from 'process';
 // import {promptPlaylists} from './PlaylistMenu';
 import {promptArtists} from './ArtistsMenu';
 import {promptGroups} from './GroupMenu';
-
+import {AlbumManager} from '../Managers/AlbumManager';
+import {SongManager} from '../Managers/SongManager';
+import {GroupManager} from '../Managers/GroupManager';
+import {GenreManager} from '../Managers/GenreManager';
+import {ArtistManager} from '../Managers/ArtistManager';
+import {PlaylistManager} from '../Managers/PlaylistManager';
 // require('events').EventEmitter.defaultMaxListeners = 0;
 
 enum Commands {
@@ -50,3 +55,15 @@ export function promptUser(): void {
   });
 }
 promptUser();
+
+export function run():void {
+  SongManager.getSongManager();
+  AlbumManager.getAlbumManager();
+  ArtistManager.getArtistManager();
+  GroupManager.getGroupManager();
+  GenreManager.getGenreManager();
+  PlaylistManager.getPlaylistManager();
+  promptUser();
+}
+
+run();

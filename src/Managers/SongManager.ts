@@ -50,7 +50,19 @@ export class SongManager extends Manager<Song> {
     this.storeSong();
   }
 
-  public editSong(song:Song): void {
+  editSong(newName: string, newAuthor: string, newDuration: Duration, newGenre: string[],
+      newDAtePublication: Date, changeSingle: boolean, repro: number): void {
+    this.collection.forEach((element) => {
+      if (element.getName() === newName) {
+        element.setName(newName);
+        element.setAuthor(newAuthor);
+        element.setDuration(newDuration);
+        element.setGenres(newGenre);
+        element.setDatePublication(newDAtePublication);
+        element.setIsSingle(changeSingle);
+        element.setReproductions(repro);
+      }
+    });
     this.storeSong();
   }
 
@@ -58,3 +70,5 @@ export class SongManager extends Manager<Song> {
     return new Song(song.name, song.author, song.duration, song.genres, song.datePublication, song.isSingle, song.reproductions);
   }
 }
+
+
