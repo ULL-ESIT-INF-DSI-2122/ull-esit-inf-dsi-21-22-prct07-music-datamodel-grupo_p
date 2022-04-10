@@ -11,7 +11,7 @@ import {Playlist} from './Playlist';
 
 export class Group extends BasicData {
   constructor(name: string, private artists: Artist[],
-      readonly fundationYear: number, private genres: string[],
+      private fundationYear: number, private genres: string[],
       private albums: Album[]) {
     super(name);
   }

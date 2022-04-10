@@ -40,7 +40,7 @@ export function promptGroups(): void {
         promptRemoveGroup();
         break;
       case options.Show:
-        prompShowData();
+        promptShowData();
         break;
       case options.Back:
         promptUser();
@@ -229,7 +229,7 @@ enum visualizationMode {
   back = 'Volver'
 }
 
-function prompShowData() {
+function promptShowData() {
   console.clear();
 
   inquirer.prompt({
