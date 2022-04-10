@@ -10,6 +10,9 @@ export class Album extends BasicData {
     readonly songs: Song[]) {
     super(name);
   }
+  getSongs(): Song[] {
+    return this.songs;
+  }
 
   getYear() {
     return this.publicationYear;

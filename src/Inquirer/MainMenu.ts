@@ -8,6 +8,7 @@ import {PlaylistManager} from '../Managers/PlaylistManager';
 import {SongManager} from '../Managers/SongManager';
 import {promptArtists} from './ArtistMenu';
 import {promptGenres} from './GenresMenu';
+import {promptGroups} from './GroupMain';
 import {promptPlaylists} from './PlaylistsMenu';
 
 /**
@@ -16,6 +17,7 @@ import {promptPlaylists} from './PlaylistsMenu';
 export enum Commands {
     Genres = 'Géneros',
     Artists = 'Artistas',
+    Groups = 'Grupos',
     Playlists = 'Playlists',
     Quit = 'Salir'
 }
@@ -36,6 +38,9 @@ export function promptUser(): void {
         break;
       case Commands.Artists:
         promptArtists();
+        break;
+      case Commands.Groups:
+        promptGroups();
         break;
       case Commands.Playlists:
         promptPlaylists();
