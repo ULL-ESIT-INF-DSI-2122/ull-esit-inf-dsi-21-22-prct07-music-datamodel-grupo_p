@@ -7,10 +7,10 @@ import FileSync = require('lowdb/adapters/FileSync');
 import {AlbumInterface} from '../Interfaces/AlbumInterface';
 import {SongInterface} from '../Interfaces/SongInterface';
 import {AlbumManager} from './AlbumManager';
-import {SongsManager} from './SongManager';
-import {GroupsManager} from './GroupManager';
+import {SongManager} from './SongManager';
+import {GroupManager} from './GroupManager';
 import {GenreManager} from './GenreManager';
-
+import {ArtistInterface} from '../Interfaces/ArtistInterface';
 
 type schemaType = {
     artists: { name: string; groups: string[]; genres: string[], albums: AlbumInterface[], songs: SongInterface[] }[]
@@ -25,7 +25,7 @@ export class ArtistManager extends Manager<Artist> {
     this.database = lowdb(new FileSync('src/Data/Artist.json'));
     if (this.database.has('artists').value()) {
       let dbItems = this.database.get('artists').value();
-      dbItems.forEach((item) => this.collection.add(Artist.deserialize(item)));
+      dbItems.forEach((item) => this.collection.add(ArtistManager.deserialize(item)));
     }
   }
 
@@ -33,15 +33,15 @@ export class ArtistManager extends Manager<Artist> {
     this.database.set('artists', [...this.collection.values()]).write();
   }
 
-  public static getArtistsManager(): ArtistManager {
+  public static getArtistManager(): ArtistManager {
     if (!ArtistManager.artistManager) {
       ArtistManager.artistManager = new ArtistManager();
     }
     return ArtistManager.artistManager;
   }
 
-  addArtist(artist: Artist): void {
-    let groups = artist.getGroups().map((groupName) => GroupsManager.getGroupManager().searchByName(groupName));
+  public addArtist(artist: Artist): void {
+    let groups = artist.getGroups().map((groupName) => GroupManager.getGroupManager().searchByName(groupName));
     groups.forEach((group) => {
       group.addArtist(artist);
     });
@@ -51,35 +51,33 @@ export class ArtistManager extends Manager<Artist> {
       genre.addMusician(artist);
     });
 
-    artist.getAlbums().forEach((album) => {
-      album.addWhoPublishes(artist);
-    });
-
     this.collection.add(artist);
     this.storeArtist();
   }
 
-  removeArtist(artist: Artist, deleteSongs: boolean = true): void {
+  public deleteArtist(artist: Artist, deleteSongs: boolean = true): void {
     // Delete artists albums
     const objAlbumManager:AlbumManager = AlbumManager.getAlbumManager();
     const artistAlbums: Album[] = artist.getAlbums();
     const artistAlbumsNames: string[] = artistAlbums.map((album) => album.getName());
     artistAlbumsNames.forEach((albumName) => {
-      objAlbumManager.deleteAlbum(albumName);
+      let album: Album = objAlbumManager.searchByName(albumName);
+      objAlbumManager.deleteAlbum(album);
     });
 
     // Delete artists songs
     if (deleteSongs) {
-      const objSongManager:SongsManager = SongsManager.getSongsManager();
+      const objSongManager:SongManager = SongManager.getSongManager();
       const artistSongs: Song[] = artist.getSongs();
       const artistSongsNames: string[] = artistSongs.map((song) => song.getName());
       artistSongsNames.forEach((songName) => {
-        objSongManager.deleteSong(songName);
+        let song: Song = objSongManager.searchByName(songName);
+        objSongManager.deleteSong(song);
       });
     }
 
     // Grupos
-    const objGroupManager:GroupsManager = GroupsManager.getGroupManager();
+    const objGroupManager:GroupManager = GroupManager.getGroupManager();
     const groupNames: string[] = artist.getGroups();
     groupNames.forEach((groupName) => {
       let group = objGroupManager.searchByName(groupName);
@@ -109,15 +107,15 @@ export class ArtistManager extends Manager<Artist> {
     this.storeArtist();
   }
 
-  editArtist(artist: Artist, newName: string, newGroups: string[], newGenres: string[],
+  public editArtist(artist: Artist, newName: string, newGroups: string[], newGenres: string[],
       newAlbums: Album[], newSongs: Song[] ): void {
     const originalSongs = artist.getSongs();
     const originalArtistName = artist.getName();
-    this.removeArtist(artist, false);
+    this.deleteArtist(artist, false);
     this.addArtist(new Artist(newName, newGroups, newGenres, newAlbums, newSongs));
     const newSongsNames = newSongs.map((song) => song.getName());
     const originalSongsToDelete = originalSongs.filter((song) => !newSongsNames.includes(song.getName()));
-    originalSongsToDelete.forEach((song) => SongsManager.getSongsManager().removeSong(song));
+    originalSongsToDelete.forEach((song) => SongManager.getSongManager().deleteSong(song));
     if (originalArtistName != newName) {
       newSongs.forEach((song) => song.setAuthor(newName));
     }
@@ -125,7 +123,7 @@ export class ArtistManager extends Manager<Artist> {
   }
 
   public static deserialize(artist: ArtistInterface): Artist {
-    let managerSong = SongsManager.getSongsManager();
+    let managerSong = SongManager.getSongManager();
     let managerAlbum = AlbumManager.getAlbumManager();
     let songs: Song[] = artist.songs.map((songName) => {
       return managerSong.searchByName(songName.name);

@@ -18,7 +18,7 @@ enum options {
 const manager = GroupManager.getGroupManager();
 const albums: string[] = AlbumManager.getAlbumManager().getList();
 const genres: string[] = GenreManager.getGenreManager().getList();
-const artists: string[] = ArtistManager.getArtistsManager().getList();
+const artists: string[] = ArtistManager.getArtistManager().getList();
 
 export function promptGroups(): void {
   console.clear();

@@ -9,6 +9,7 @@ import {Album} from '../Basics/Album/Album';
 import {AlbumManager} from './AlbumManager';
 import {GenreManager} from './GenreManager';
 import {ArtistManager} from './ArtistManager';
+import {GroupInterface} from '../Interfaces/GroupInterface';
 
 type schemaType = {
     groups: { name: string; artists: ArtistInterface[], yearCreation: number, genres: string[], albums: AlbumInterface[] }[]
@@ -23,7 +24,7 @@ export class GroupManager extends Manager<Group> {
     this.database = lowdb(new FileSync('src/Data/Group.json'));
     if (this.database.has('groups').value()) {
       let dbItems = this.database.get('groups').value();
-      dbItems.forEach((item) => this.collection.add(Group.deserialize(item)));
+      dbItems.forEach((item) => this.collection.add(GroupManager.deserialize(item)));
     }
   }
 
@@ -38,12 +39,12 @@ export class GroupManager extends Manager<Group> {
     return GroupManager.groupManager;
   }
 
-  addGroup(group: Group): void {
+  public addGroup(group: Group): void {
     this.collection.add(group);
     this.storeGroups();
   }
 
-  removeGroup(group: Group): void {
+  public removeGroup(group: Group): void {
     // Delete group from albums
     const objAlbumManager:AlbumManager = AlbumManager.getAlbumManager();
     const groupAlbums: Album[] = group.getAlbums();
@@ -63,10 +64,10 @@ export class GroupManager extends Manager<Group> {
     });
 
     // Delete artist from group
-    const objArtistManager:ArtistManager = ArtistManager.getArtistsManager();
+    const objArtistManager:ArtistManager = ArtistManager.getArtistManager();
     const groupArtists: Artist[] = group.getArtists();
     groupArtists.forEach((artist) => {
-      objArtistManager.removeArtist(artist);
+      objArtistManager.deleteArtist(artist);
     });
 
     this.collection.forEach((element) => {
@@ -77,15 +78,16 @@ export class GroupManager extends Manager<Group> {
     this.storeGroups();
   }
 
-  editGroup(group: Group, newName: string, newArtists: Artist[], newYear: number,
+  public editGroup(group: Group, newName: string, newArtists: Artist[], newYear: number,
       newGenres: string[], newAlbums: Album[] ): void {
     // ARTISTA Y ALBUM???
     this.removeGroup(group);
     this.addGroup(new Group(newName, newArtists, newYear, newGenres, newAlbums));
     this.storeGroups();
   }
+
   public static deserialize(group: GroupInterface): Group {
-    let managerArtist = ArtistManager.getArtistsManager();
+    let managerArtist = ArtistManager.getArtistManager();
     let managerAlbum = AlbumManager.getAlbumManager();
     let artists: Artist[] = group.artists.map((artistName) => {
       return managerArtist.searchByName(artistName.name);

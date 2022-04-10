@@ -42,10 +42,10 @@ export function promptUser(): void {
         promptGroups();
         break;
       case Commands.Songs:
-        promptSongs();
+        // promptSongs();
         break;
       case Commands.Albums:
-        promptAlbum();
+        // promptAlbum();
     }
   });
 }

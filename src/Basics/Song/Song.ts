@@ -40,6 +40,28 @@ export class Song implements BasicData {
     let artistAsociate: Artist[] = objArtist.filter((artist) => artist.getSongs().includes(this));
     return artistAsociate.map((artistObj) => artistObj.getName());
   }
+  // SETTERS
+  public setName(newName: string): void {
+    this.name = newName;
+  }
+  public setAuthor(newAuthor: string): void {
+    this.author = newAuthor;
+  }
+  public setDuration(newDuration: Duration): void {
+    this.duration = newDuration;
+  }
+  public setGenres(newGenres: string[]): void {
+    this.genres = newGenres;
+  }
+  public setDatePublication(newDate: Date): void {
+    this.datePublication = newDate;
+  }
+  public setIsSingle(single: boolean): void {
+    this.single = single;
+  }
+  public setReproductions(repro: number): void {
+    this.reproductions = repro;
+  }
   // ADD elements in ATRIBUTES
   public addGenre(nameGenre: string): void {
     this.genres.push(nameGenre);

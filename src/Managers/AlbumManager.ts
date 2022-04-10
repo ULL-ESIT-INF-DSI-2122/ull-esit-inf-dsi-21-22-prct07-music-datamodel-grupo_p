@@ -3,7 +3,7 @@ import lowdb = require('lowdb');
 import FileSync = require('lowdb/adapters/FileSync');
 import {SongInterface} from '../Interfaces/SongInterface';
 import {Album} from '../Basics/Album/Album';
-import {Genre} from '../Basics/Genre';
+import {Genre} from '../Basics/Genre/Genre';
 
 type schemaType = {
     albums: {
@@ -21,7 +21,7 @@ export class AlbumManager extends Manager<Album> {
     this.database = lowdb(new FileSync('src/Data/Albums.json'));
     if (this.database.has('albums').value()) {
       let dbItems = this.database.get('albums').value();
-      dbItems.forEach((item) => this.collection.add(Album.deserialize(item)));
+      dbItems.forEach((item) => this.collection.add(AlbumManager.deserialize(item)));
     }
   }
 
@@ -58,7 +58,7 @@ export class AlbumManager extends Manager<Album> {
     this.database.set('albums', [...this.collection.values()]).write();
   }
 
-  deleteAlbum(albumName: string): void {
+  deleteAlbum(album: Album): void {
     console.log('TODO delteAlbum');
   }
 }

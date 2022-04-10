@@ -1,7 +1,7 @@
 import * as inquirer from 'inquirer';
 import {Artist} from '../Basics/Artist/Artist';
 import {ArtistManager} from '../Managers/ArtistManager';
-import {SongsManager} from '../Managers/SongManager';
+import {SongManager} from '../Managers/SongManager';
 import {AlbumManager} from '../Managers/AlbumManager';
 import {GenreManager} from '../Managers/GenreManager';
 import {promptUser} from './MainMenu';
@@ -17,8 +17,8 @@ enum options {
   Back = 'Back'
 }
 
-const manager = ArtistManager.getArtistsManager();
-const songs: string[] = SongsManager.getSongsManager().getList();
+const manager = ArtistManager.getArtistManager();
+const songs: string[] = SongManager.getSongManager().getList();
 const albums: string[] = AlbumManager.getAlbumManager().getList();
 const genres: string[] = GenreManager.getGenreManager().getList();
 const groups: string[] = GroupManager.getGroupManager().getList();
@@ -115,7 +115,7 @@ function promptAddArtist(): void {
       message: 'Song name:',
       validate(value: string) {
         let val: boolean | string = true;
-        if (SongsManager.getSongsManager().exists(value)) {
+        if (SongManager.getSongManager().exists(value)) {
           val = 'Error: ya existe una cancion con ese nombre.';
         }
         return val;
@@ -148,7 +148,7 @@ function promptRemoveArtist(): void {
     ]).then((answer) => {
       if (answer.eliminar) {
         let artist: Artist = manager.searchByName(answers.artistRemove);
-        manager.removeArtist(artist);
+        manager.deleteArtist(artist);
       }
       promptArtists();
     });

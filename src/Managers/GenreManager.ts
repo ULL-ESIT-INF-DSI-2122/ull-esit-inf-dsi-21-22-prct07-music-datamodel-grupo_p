@@ -1,4 +1,4 @@
-import {Genre} from '../Basics/Genre';
+import {Genre} from '../Basics/Genre/Genre';
 import {Manager} from './Manager';
 import lowdb = require('lowdb');
 import FileSync = require('lowdb/adapters/FileSync');
@@ -7,6 +7,10 @@ import {Group} from '../Basics/Group/Group';
 import {Album} from '../Basics/Album/Album';
 import {Song} from '../Basics/Song/Song';
 import {GenreInterface} from '../Interfaces/GenreInterface';
+import {GroupManager} from './GroupManager';
+import {ArtistManager} from './ArtistManager';
+import {SongManager} from './SongManager';
+import {AlbumManager} from './AlbumManager';
 
 type schemaType = {
     genres: GenreInterface[]
@@ -19,7 +23,7 @@ export class GenreManager extends Manager<Genre> {
     this.database = lowdb(new FileSync('src/Data/Genres.json'));
     if (this.database.has('genres').value()) {
       let dbItems = this.database.get('genres').value();
-      dbItems.forEach((item) => this.collection.add(Genre.deserialize(item)));
+      dbItems.forEach((item) => this.collection.add(GenreManager.deserialize(item)));
     }
   }
 
@@ -61,6 +65,7 @@ export class GenreManager extends Manager<Genre> {
   storeGenres() {
     this.database.set('genres', [...this.collection.values()]).write();
   }
+
   public static deserialize(genre: GenreInterface): Genre {
     let musicians: (Group|Artist)[] = [];
     let albums: Album[] = [];

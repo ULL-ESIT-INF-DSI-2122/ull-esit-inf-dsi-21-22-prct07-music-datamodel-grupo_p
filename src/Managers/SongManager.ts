@@ -25,30 +25,35 @@ export class SongManager extends Manager<Song> {
       )));
     }
   }
+  private storeSong() {
+    this.database.set('songs', [...this.collection.values()]).write();
+  }
 
-  getSongByName(name:string): Song|undefined {
+  public getSongByName(name:string): Song|undefined {
     return ([...this.collection.values()].find((song) => song.getName() === name));
   }
-  /**
-   * Patron Singlenton
-   * @returns la única instancia de la clase SongManager
-   */
+
   public static getSongManager(): SongManager {
     if (!SongManager.SongManager) {
       SongManager.SongManager = new SongManager();
     }
     return SongManager.SongManager;
   }
-  addSong(song: Song): void {
+
+  public addSong(song: Song): void {
+    this.collection.add(song);
+    this.storeSong();
   }
-  /**
-   * Alamacena la información de la canción de acuerdo a lo
-   * especificado en la schemaType.
-   */
-  storeSong() {
-    this.database.set('songs', [...this.collection.values()]).write();
+
+  public deleteSong(song: Song): void {
+    this.collection.delete(song);
+    this.storeSong();
   }
-  // CONVERTIR A OBJETO DATS DEL JSON
+
+  public editSong(song:Song): void {
+    this.storeSong();
+  }
+
   public static deserialize(song: SongInterface): Song {
     return new Song(song.name, song.author, song.duration, song.genres, song.datePublication, song.isSingle, song.reproductions);
   }
