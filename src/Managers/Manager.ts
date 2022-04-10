@@ -63,12 +63,14 @@ export abstract class Manager<T extends BasicData> {
    * @param element Elemento a eliminar.
    */
   remove(element: T): void {
-    this.collection.forEach((x) => {
-      if (x.getName() === element.getName()) {
-        this.collection.delete(element);
-      }
-    });
-    this.store();
+    if (element) {
+      this.collection.forEach((x) => {
+        if (x.getName() === element.getName()) {
+          this.collection.delete(element);
+        }
+      });
+      this.store();
+    }
   }
   /**
    * Guarda los datos en la base de datos.

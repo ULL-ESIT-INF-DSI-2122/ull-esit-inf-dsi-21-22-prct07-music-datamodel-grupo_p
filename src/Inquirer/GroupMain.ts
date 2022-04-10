@@ -67,7 +67,7 @@ export function promptGroups(): void {
     choices: options,
   }).then((answers) => {
     switch (answers['command']) {
-      case 'Nuevo artista +':
+      case 'Nuevo group +':
         promptAddGroup();
         break;
       case 'Volver':
@@ -75,6 +75,8 @@ export function promptGroups(): void {
         break;
       default:
         const group: Group = manager.searchByName(answers['command']);
+        // console.log(answers['command']);
+        // promptSync('prueba');
         promptGroup(group);
         break;
     }
@@ -128,7 +130,7 @@ function promptAddGroup(): void {
       type: 'checkbox',
       name: 'artist',
       message: 'Choice artist:',
-      choices: genres,
+      choices: artists,
       validate(value: string[]) {
         if (value.length < 1) {
           return 'Debes elegir al menos un artista para el grupo.';
@@ -174,15 +176,14 @@ function promptAddGroup(): void {
   ];
   inquirer.prompt(questions).then((answers) => {
     let albums: Album[] = [];
-    answers.album.forEach((albumName: string) => {
+    answers.albums.forEach((albumName: string) => {
       albums.push(AlbumManager.getAlbumManager().searchByName(albumName));
     });
     let artist: Artist[] = [];
     answers.artist.forEach((artistName: string) => {
       artist.push(ArtistManager.getArtistManager().searchByName(artistName));
     });
-    const newGroup: Group = new Group(answers.name, answers.genre, answers.groups,
-        answers.albums, answers.songs);
+    const newGroup: Group = new Group(answers.name, artist, answers.year, answers.genre, albums);
     manager.addGroup(newGroup);
     promptGroups();
   });
@@ -267,6 +268,7 @@ function promptEditGroup(group: Group): void {
       type: 'input',
       message: 'Introduzca el año de creacion:',
       name: 'year',
+      default: group.getFundationYear(),
       validate(value: number) {
         if (value < 1 || value > 9999) {
           return 'Introduce un año válido.';
@@ -290,11 +292,16 @@ function promptEditGroup(group: Group): void {
     },
   ];
   inquirer.prompt(questions).then((answers) => {
-    group.setName(answers.name);
-    group.setArtists(answers.musicians);
-    group.setYearCreation(answers.year);
-    group.setGenres(answers.genre);
-    group.setAlbums(answers.albums);
+    let albums: Album[] = [];
+    answers.albums.forEach((albumName: string) => {
+      albums.push(AlbumManager.getAlbumManager().searchByName(albumName));
+    });
+    let artist: Artist[] = [];
+    answers.artist.forEach((artistName: string) => {
+      artist.push(ArtistManager.getArtistManager().searchByName(artistName));
+    });
+    manager.editGroup(group, answers.name, artist, answers.year, answers.genre, albums);
+    promptSync('prueba');
     promptGroups();
   });
 }
@@ -467,8 +474,9 @@ function promptShowAlbums(group: Group) {
   });
 }
 
-enum modeShowPleyList {
+enum modeShowPlayList {
   name = 'Mostrar playlist asociadas',
+  back = 'Volver'
 }
 
 function promptShowPleyList(group: Group) {
@@ -478,10 +486,10 @@ function promptShowPleyList(group: Group) {
     type: 'list',
     name: 'mode',
     message: 'Como quiere ver los datos?',
-    choices: Object.values(modeShowPleyList),
+    choices: Object.values(modeShowPlayList),
   }).then((answers) => {
     switch (answers['mode']) {
-      case modeShowPleyList.name:
+      case modeShowPlayList.name:
         inquirer.prompt({
           type: 'list',
           name: 'order',

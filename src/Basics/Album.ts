@@ -4,40 +4,59 @@ import {AlbumInterface} from '../Interfaces/AlbumInterface';
 import {SongManager} from '../Managers/SongManager';
 import {Genre} from './Genre';
 
+
 export class Album extends BasicData {
-  constructor(name: string, readonly whoPublishes: string,
-    readonly publicationYear: number, readonly genres: string[],
-    readonly songs: Song[]) {
+  constructor(name: string, private publisher: string,
+    private publicationYear: number, private genres: string[],
+    private songs: Song[]) {
     super(name);
   }
-  getSongs(): Song[] {
-    return this.songs;
-  }
 
-  getYear() {
+  // GETTERS
+  public getPublisher(): string {
+    return this.publisher;
+  }
+  public getYear(): number {
     return this.publicationYear;
   }
-
-  public showInfo(): string {
-    return (`ALBUM ${this.name}
-    Artista o grupo que lo publico: ${this.whoPublishes}
-    Año de publicacion: ${this.publicationYear}
-    Generos que contiene este album: ${this.genres}
-    Canciones de este genero: ${this.songs}`);
+  public getGenres(): string[] {
+    return this.genres;
   }
-
+  public getSongs(): Song[] {
+    return this.songs;
+  }
+  // SETTERS
+  public setPublisher(newPublisher: string): void {
+    this.publisher = newPublisher;
+  }
+  public setYear(year: number): void {
+    this.publicationYear = year;
+  }
+  public setGenres(newGenres: string[]): void {
+    this.genres = newGenres;
+  }
+  public setSongs(newSongs: Song[]): void {
+    this.songs = newSongs;
+  }
+  // ADDS
+  public addGenre(genre: Genre): void {
+    if (this.genres.find((x) => x === genre.getName()) === undefined) {
+      this.genres.push(genre.getName());
+    }
+  }
+  public addSong(newSong: Song) {
+    this.songs.push(newSong);
+  }
+  // REMOVES
   public removeGenre(genre: Genre): void {
     const index = this.genres.indexOf(genre.getName());
     if (index !== -1) {
       this.genres.splice(index, 1);
     }
   }
-  public addGenre(genre: Genre): void {
-    if (this.genres.find((x) => x === genre.getName()) === undefined) {
-      this.genres.push(genre.getName());
-    }
+  public removeSong(songDelete: Song) {
+    this.songs = this.songs.filter((elemento) => elemento !== songDelete);
   }
-
   public static deserialize(album: AlbumInterface): Album {
     let songs: Song[] = [];
     album.songs.forEach((s) =>
