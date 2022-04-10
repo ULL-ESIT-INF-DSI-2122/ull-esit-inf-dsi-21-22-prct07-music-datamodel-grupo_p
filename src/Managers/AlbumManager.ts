@@ -27,15 +27,11 @@ export class AlbumManager extends Manager<Album> {
     return AlbumManager.albumManager;
   }
 
-  getAlbumByName(name:string): Album|undefined {
-    return ([...this.collection.values()].find((album) => album.getName() === name));
-  }
-
   removeGenre(genre: Genre) {
     this.collection.forEach((album) => {
       album.removeGenre(genre);
     });
-    this.storeAlbums();
+    this.store();
   }
 
   updateGenre(genre: Genre, albums: string[]) {
@@ -46,10 +42,10 @@ export class AlbumManager extends Manager<Album> {
         album.removeGenre(genre);
       }
     });
-    this.storeAlbums();
+    this.store();
   }
 
-  storeAlbums() {
+  store() {
     this.database.set('albums', [...this.collection.values()]).write();
   }
 }

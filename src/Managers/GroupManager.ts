@@ -27,15 +27,11 @@ export class GroupManager extends Manager<Group> {
     return GroupManager.groupManager;
   }
 
-  getGroupByName(name:string): Group|undefined {
-    return ([...this.collection.values()].find((album) => album.getName() === name));
-  }
-
   removeGenre(genre: Genre) {
     this.collection.forEach((group) => {
       group.removeGenre(genre);
     });
-    this.storeGroups();
+    this.store();
   }
 
   updateGenre(genre: Genre, groups: string[]) {
@@ -46,11 +42,11 @@ export class GroupManager extends Manager<Group> {
         group.removeGenre(genre);
       }
     });
-    this.storeGroups();
+    this.store();
   }
 
 
-  storeGroups() {
+  store() {
     this.database.set('groups', [...this.collection.values()]).write();
   }
 }

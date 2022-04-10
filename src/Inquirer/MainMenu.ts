@@ -9,14 +9,18 @@ import {SongManager} from '../Managers/SongManager';
 import {promptGenres} from './GenresMenu';
 import {promptPlaylists} from './PlaylistsMenu';
 
-// require('events').EventEmitter.defaultMaxListeners = 0;
-
-enum Commands {
+/**
+ * Enumeración de las opciones del menú principal.
+ */
+export enum Commands {
     Genres = 'Géneros',
     Songs = 'Canciones',
     Playlists = 'Playlists',
     Quit = 'Salir'
 }
+/**
+ * Despliega el menú principal.
+ */
 export function promptUser(): void {
   console.clear();
   inquirer.prompt({
@@ -35,11 +39,17 @@ export function promptUser(): void {
     }
   });
 }
+/**
+ * Inicia el programa.
+ */
+export function run():void {
+  SongManager.getSongManager();
+  AlbumManager.getAlbumManager();
+  ArtistManager.getArtistManager();
+  GroupManager.getGroupManager();
+  GenreManager.getGenreManager();
+  PlaylistManager.getPlaylistManager();
+  promptUser();
+}
 
-SongManager.getSongManager();
-AlbumManager.getAlbumManager();
-ArtistManager.getArtistManager();
-GroupManager.getGroupManager();
-GenreManager.getGenreManager();
-PlaylistManager.getPlaylistManager();
-promptUser();
+run();

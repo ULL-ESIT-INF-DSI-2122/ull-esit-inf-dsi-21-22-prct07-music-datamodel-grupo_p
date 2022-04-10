@@ -25,28 +25,28 @@
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>22/22</span>
+                <span class='fraction'>14/14</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>4/4</span>
+                <span class='fraction'>2/2</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>9/9</span>
+                <span class='fraction'>4/4</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>20/20</span>
+                <span class='fraction'>13/13</span>
             </div>
         
             
@@ -110,7 +110,13 @@
 <a name='L45'></a><a href='#L45'>45</a>
 <a name='L46'></a><a href='#L46'>46</a>
 <a name='L47'></a><a href='#L47'>47</a>
-<a name='L48'></a><a href='#L48'>48</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
+<a name='L48'></a><a href='#L48'>48</a>
+<a name='L49'></a><a href='#L49'>49</a>
+<a name='L50'></a><a href='#L50'>50</a>
+<a name='L51'></a><a href='#L51'>51</a>
+<a name='L52'></a><a href='#L52'>52</a>
+<a name='L53'></a><a href='#L53'>53</a>
+<a name='L54'></a><a href='#L54'>54</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
@@ -119,7 +125,23 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -130,26 +152,16 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">55x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">57x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">55x</span>
+<span class="cline-any cline-yes">57x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">85x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -163,19 +175,38 @@ import lowdb = require('lowdb');
 import FileSync = require('lowdb/adapters/FileSync');
 import {GenreInterface} from '../Interfaces/GenreInterface';
 &nbsp;
+/**
+ * Tipo para almacenar géneros mediante Lowdb.
+ */
 type schemaType = {
     genres: GenreInterface[]
 };
+&nbsp;
+/**
+ * Clase para gestionar los géneros.
+ */
 export class GenreManager extends Manager&lt;Genre&gt; {
+  /**
+   * Instancia de la clase `GenreManager`.
+   */
   private static genresManager: GenreManager;
+  /**
+   * Base de datos de los géneros.
+   */
   private database: lowdb.LowdbSync&lt;schemaType&gt;;
+  /**
+   * Constructor de la clase `GenreManager`.
+   */
   private constructor() {
     super();
     this.database = lowdb(new FileSync('src/Data/Genres.json'));
     let dbItems = this.database.get('genres').value();
     dbItems.forEach((item) =&gt; this.collection.add(Genre.deserialize(item)));
   }
-&nbsp;
+  /**
+   * Devuelve la instancia de la clase `GenreManager`.
+   * @returns Devuelve la única instancia de la clase.
+   */
   public static getGenreManager(): GenreManager {
     if (!GenreManager.genresManager) {
       GenreManager.genresManager = new GenreManager();
@@ -183,23 +214,10 @@ export class GenreManager extends Manager&lt;Genre&gt; {
     return GenreManager.genresManager;
   }
 &nbsp;
-  addGenre(genre: Genre): void {
-    this.collection.add(genre);
-    this.storeGenres();
-  }
-  removeGenre(genre: Genre): void {
-    this.collection.forEach((element) =&gt; {
-      if (element.getName() === genre.getName()) {
-        this.collection.delete(element);
-      }
-    });
-    this.storeGenres();
-  }
-  getGenreByName(name:string): Genre|undefined {
-    return ([...this.collection.values()].find((genre) =&gt; genre.getName() === name));
-  }
-&nbsp;
-  storeGenres() {
+  /**
+   * Guarda los géneros en la base de datos.
+   */
+  store() {
     this.database.set('genres', [...this.collection.values()]).write();
   }
 }
@@ -211,7 +229,7 @@ export class GenreManager extends Manager&lt;Genre&gt; {
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at Sat Apr 09 2022 18:54:36 GMT+0000 (Coordinated Universal Time)
+                at Sun Apr 10 2022 14:27:34 GMT+0000 (Coordinated Universal Time)
             </div>
         <script src="../prettify.js"></script>
         <script>

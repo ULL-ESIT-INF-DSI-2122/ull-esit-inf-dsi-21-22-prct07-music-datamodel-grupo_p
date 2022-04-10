@@ -12,6 +12,9 @@ import {PlaylistManager} from '../Managers/PlaylistManager';
 import {SongManager} from '../Managers/SongManager';
 import {promptUser} from './MainMenu';
 
+/**
+ * Despliega el menú de los géneros.
+ */
 export function promptGenres(): void {
   const manager: GenreManager = GenreManager.getGenreManager();
   let options: string[] = ['Nuevo género +'];
@@ -39,7 +42,11 @@ export function promptGenres(): void {
   });
 }
 
-function promptGenre(genre: Genre): void {
+/**
+ * Despliega el menú de un género en concreto.
+ * @param genre Género del cuál se despliega el menú.
+ */
+export function promptGenre(genre: Genre): void {
   console.clear();
   genre.showInfo();
   inquirer.prompt({
@@ -63,7 +70,11 @@ function promptGenre(genre: Genre): void {
   );
 }
 
-function promptRemoveGenre(genre: Genre) {
+/**
+ * Muestra una pregunta de confirmación para eliminar un género.
+ * @param genre Género a eliminar.
+ */
+export function promptRemoveGenre(genre: Genre) {
   const manager: GenreManager = GenreManager.getGenreManager();
   console.clear();
   inquirer
@@ -76,7 +87,7 @@ function promptRemoveGenre(genre: Genre) {
       ])
       .then((answer) => {
         if (answer.eliminar) {
-          manager.removeGenre(genre);
+          manager.remove(genre);
           SongManager.getSongManager().removeGenre(genre);
           AlbumManager.getAlbumManager().removeGenre(genre);
           ArtistManager.getArtistManager().removeGenre(genre);
@@ -87,7 +98,10 @@ function promptRemoveGenre(genre: Genre) {
       });
 }
 
-function promptAddGenre(): void {
+/**
+ * Despliega el menú para crear un nuevo género.
+ */
+export function promptAddGenre(): void {
   const manager: GenreManager = GenreManager.getGenreManager();
   const artists: string[] = ArtistManager.getArtistManager().getList();
   const groups: string[] = GroupManager.getGroupManager().getList();
@@ -151,19 +165,19 @@ function promptAddGenre(): void {
     let songs: Song[] = [];
     answers.musicians.forEach((m: string) => {
       if (artists.indexOf(m) !== -1) {
-        musicians.push(ArtistManager.getArtistManager().getArtistByName(m) as Artist);
+        musicians.push(ArtistManager.getArtistManager().searchByName(m));
       } else {
-        musicians.push(GroupManager.getGroupManager().getGroupByName(m) as Group);
+        musicians.push(GroupManager.getGroupManager().searchByName(m));
       }
     });
     answers.albums.forEach((a: string) => {
-      albums.push(AlbumManager.getAlbumManager().getAlbumByName(a) as Album);
+      albums.push(AlbumManager.getAlbumManager().searchByName(a));
     });
     answers.songs.forEach((s: string) => {
-      songs.push(SongManager.getSongManager().getSongByName(s) as Song);
+      songs.push(SongManager.getSongManager().searchByName(s));
     });
     const newGenre: Genre = new Genre(answers.name, musicians, albums, songs);
-    manager.addGenre(newGenre);
+    manager.add(newGenre);
     SongManager.getSongManager().updateGenre(newGenre, answers.songs);
     AlbumManager.getAlbumManager().updateGenre(newGenre, answers.albums);
     ArtistManager.getArtistManager().updateGenre(newGenre, answers.musicians);
@@ -173,7 +187,11 @@ function promptAddGenre(): void {
   });
 }
 
-function promptEditGenre(genre: Genre): void {
+/**
+ * Despliega el menú para editar un género.
+ * @param genre Género a editar.
+ */
+export function promptEditGenre(genre: Genre): void {
   const manager: GenreManager = GenreManager.getGenreManager();
   const artists: string[] = ArtistManager.getArtistManager().getList();
   const groups: string[] = GroupManager.getGroupManager().getList();
@@ -241,22 +259,22 @@ function promptEditGenre(genre: Genre): void {
     let songs: Song[] = [];
     answers.musicians.forEach((m: string) => {
       if (artists.indexOf(m) !== -1) {
-        musicians.push(ArtistManager.getArtistManager().getArtistByName(m) as Artist);
+        musicians.push(ArtistManager.getArtistManager().searchByName(m));
       } else {
-        musicians.push(GroupManager.getGroupManager().getGroupByName(m) as Group);
+        musicians.push(GroupManager.getGroupManager().searchByName(m));
       }
     });
     answers.albums.forEach((a: string) => {
-      albums.push(AlbumManager.getAlbumManager().getAlbumByName(a) as Album);
+      albums.push(AlbumManager.getAlbumManager().searchByName(a));
     });
     answers.songs.forEach((s: string) => {
-      songs.push(SongManager.getSongManager().getSongByName(s) as Song);
+      songs.push(SongManager.getSongManager().searchByName(s));
     });
     genre.setName(answers.name);
     genre.setMusicians(musicians);
     genre.setAlbums(albums);
     genre.setSongs(songs);
-    manager.storeGenres();
+    manager.store();
 
     SongManager.getSongManager().updateGenre(genre, answers.songs);
     AlbumManager.getAlbumManager().updateGenre(genre, answers.albums);

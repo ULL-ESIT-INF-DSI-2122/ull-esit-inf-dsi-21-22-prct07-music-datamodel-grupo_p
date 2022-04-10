@@ -23,10 +23,6 @@ export class SongManager extends Manager<Song> {
       )));
     }
   }
-
-  getSongByName(name:string): Song|undefined {
-    return ([...this.collection.values()].find((song) => song.getName() === name));
-  }
   /**
    * Patron Singlenton
    * @returns la única instancia de la clase SongManager
@@ -42,7 +38,7 @@ export class SongManager extends Manager<Song> {
     this.collection.forEach((song) => {
       song.removeGenre(genre);
     });
-    this.storeSong();
+    this.store();
   }
 
   updateGenre(genre: Genre, songs: string[]) {
@@ -53,7 +49,7 @@ export class SongManager extends Manager<Song> {
         song.removeGenre(genre);
       }
     });
-    this.storeSong();
+    this.store();
   }
 
 
@@ -61,7 +57,7 @@ export class SongManager extends Manager<Song> {
    * Alamacena la información de la canción de acuerdo a lo
    * especificado en la schemaType.
    */
-  storeSong() {
+  store() {
     this.database.set('songs', [...this.collection.values()]).write();
   }
 }

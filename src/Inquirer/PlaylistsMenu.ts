@@ -5,6 +5,9 @@ import {PlaylistManager} from '../Managers/PlaylistManager';
 import {SongManager} from '../Managers/SongManager';
 import {promptUser} from './MainMenu';
 
+/**
+ * Despliega el menú de las playlists.
+ */
 export function promptPlaylists(): void {
   const manager: PlaylistManager = PlaylistManager.getPlaylistManager();
   let options: string[] = ['Nueva playlist +'];
@@ -31,8 +34,11 @@ export function promptPlaylists(): void {
     }
   });
 }
-
-function promptPlaylist(playlist: Playlist, order: Order = 0): void {
+/**
+ * Despliega el menú de una playlist en concreto.
+ * @param playlist Playlist del cuál se despliega el menú.
+ */
+export function promptPlaylist(playlist: Playlist, order: Order = 0): void {
   console.clear();
   playlist.showInfo(order);
   inquirer.prompt({
@@ -59,6 +65,10 @@ function promptPlaylist(playlist: Playlist, order: Order = 0): void {
   );
 }
 
+/**
+ * Despliega el menú para seleccionar el orden en que se muestran las canciones de una playlist
+ * @param playlist Playlist de la que se quieren mostrar las canciones.
+ */
 export function promptSelectOrder(playlist: Playlist) {
   console.clear();
   inquirer.prompt({
@@ -124,8 +134,11 @@ export function promptSelectOrder(playlist: Playlist) {
   },
   );
 }
-
-function promptRemovePlaylist(playlist: Playlist) {
+/**
+ * Muestra una pregunta de confirmación para eliminar una playlist.
+ * @param playlist Playlist a eliminar.
+ */
+export function promptRemovePlaylist(playlist: Playlist) {
   const manager: PlaylistManager = PlaylistManager.getPlaylistManager();
   console.clear();
   if (!playlist.getSystemPlaylist()) {
@@ -138,7 +151,7 @@ function promptRemovePlaylist(playlist: Playlist) {
           },
         ])
         .then((answer) => {
-          if (answer.eliminar) manager.removePlaylist(playlist);
+          if (answer.eliminar) manager.remove(playlist);
           promptPlaylists();
         });
   } else {
@@ -154,7 +167,10 @@ function promptRemovePlaylist(playlist: Playlist) {
   }
 }
 
-function promptAddPlaylist(): void {
+/**
+ * Despliega el menú para crear una nueva playlist.
+ */
+export function promptAddPlaylist(): void {
   console.clear();
   inquirer.prompt({
     type: 'list',
@@ -177,8 +193,10 @@ function promptAddPlaylist(): void {
   );
 }
 
-
-function promptSelectPreexistingPlaylist(): void {
+/**
+ * Despliega un menú para elegir una playlist pre-existente.
+ */
+export function promptSelectPreexistingPlaylist(): void {
   const manager: PlaylistManager = PlaylistManager.getPlaylistManager();
   let options: string[] = manager.getList();
   options.push('Volver');
@@ -200,8 +218,11 @@ function promptSelectPreexistingPlaylist(): void {
     }
   });
 }
-
-function promptAddPlaylistFromPreexisting(playlist: Playlist) {
+/**
+ * Despliega un menú para crear una playlist a partir de otra pre-existente.
+ * @param playlist Playlist pre-existente.
+ */
+export function promptAddPlaylistFromPreexisting(playlist: Playlist) {
   const manager: PlaylistManager = PlaylistManager.getPlaylistManager();
   const songs: string[] = SongManager.getSongManager().getList();
   console.clear();
@@ -235,16 +256,18 @@ function promptAddPlaylistFromPreexisting(playlist: Playlist) {
   inquirer.prompt(questions).then((answers) => {
     let songs: Song[] = [];
     answers.songs.forEach((element: string) => {
-      songs.push(SongManager.getSongManager().getSongByName(element) as Song);
+      songs.push(SongManager.getSongManager().searchByName(element));
     });
-    manager.addPlaylist(new Playlist(answers.name, songs));
-    manager.storePlaylists();
+    manager.add(new Playlist(answers.name, songs));
+    manager.store();
     promptPlaylists();
   });
 }
 
-
-function promptAddNewPlaylist(): void {
+/**
+ * Despliega un menú para crear una nueva playlist desde 0.
+ */
+export function promptAddNewPlaylist(): void {
   const manager: PlaylistManager = PlaylistManager.getPlaylistManager();
   const songs: string[] = SongManager.getSongManager().getList();
   console.clear();
@@ -277,53 +300,69 @@ function promptAddNewPlaylist(): void {
   inquirer.prompt(questions).then((answers) => {
     let songs: Song[] = [];
     answers.songs.forEach((element: string) => {
-      songs.push(SongManager.getSongManager().getSongByName(element) as Song);
+      songs.push(SongManager.getSongManager().searchByName(element) as Song);
     });
-    manager.addPlaylist(new Playlist(answers.name, songs));
+    manager.add(new Playlist(answers.name, songs));
     promptPlaylists();
   });
 }
 
+/**
+ * Despliega un menú para editar una playlist.
+ * @param playlist Playlist a editar.
+ */
 function promptEditPlaylist(playlist: Playlist): void {
   const manager: PlaylistManager = PlaylistManager.getPlaylistManager();
   const songs: string[] = SongManager.getSongManager().getList();
   console.clear();
-  const questions = [
-    {
-      type: 'input',
-      name: 'name',
-      message: 'Nombre de la playlist:',
-      default: playlist.getName(),
-      validate(value: string) {
-        let val: boolean | string = true;
-        if (manager.anotherOneWithThatName(value, playlist)) {
-          val = 'Error: ya existe un género con ese nombre.';
-        }
-        return val;
-      },
+  if (playlist.getSystemPlaylist()) {
+    inquirer.prompt({
+      type: 'list',
+      name: 'command',
+      message: 'Error: no se pueden editar playlists creadas por el sistema',
+      choices: ['Volver'],
+    }).then((answers) => {
+      promptPlaylist(playlist);
     },
-    {
-      type: 'checkbox',
-      message: 'Elige canciones:',
-      name: 'songs',
-      choices: songs,
-      default: playlist.getSongsNames(),
-      validate(answer: string[]) {
-        if (answer.length < 1) {
-          return 'Debes elegir al menos una canción.';
-        }
-        return true;
+    );
+  } else {
+    const questions = [
+      {
+        type: 'input',
+        name: 'name',
+        message: 'Nombre de la playlist:',
+        default: playlist.getName(),
+        validate(value: string) {
+          let val: boolean | string = true;
+          if (manager.anotherOneWithThatName(value, playlist)) {
+            val = 'Error: ya existe un género con ese nombre.';
+          }
+          return val;
+        },
       },
-    },
-  ];
-  inquirer.prompt(questions).then((answers) => {
-    playlist.setName(answers.name);
-    let songs: Song[] = [];
-    answers.songs.forEach((element: string) => {
-      songs.push(SongManager.getSongManager().getSongByName(element) as Song);
+      {
+        type: 'checkbox',
+        message: 'Elige canciones:',
+        name: 'songs',
+        choices: songs,
+        default: playlist.getSongsNames(),
+        validate(answer: string[]) {
+          if (answer.length < 1) {
+            return 'Debes elegir al menos una canción.';
+          }
+          return true;
+        },
+      },
+    ];
+    inquirer.prompt(questions).then((answers) => {
+      playlist.setName(answers.name);
+      let songs: Song[] = [];
+      answers.songs.forEach((element: string) => {
+        songs.push(SongManager.getSongManager().searchByName(element));
+      });
+      playlist.setSongs(songs);
+      manager.store();
+      promptPlaylists();
     });
-    playlist.setSongs(songs);
-    manager.storePlaylists();
-    promptPlaylists();
-  });
+  }
 }

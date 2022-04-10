@@ -1,24 +1,17 @@
 import {Song} from './Song';
-import {BasicData} from '../Interfaces/BasicData';
+import {BasicData} from './BasicData';
 import {AlbumInterface} from '../Interfaces/AlbumInterface';
 import {SongManager} from '../Managers/SongManager';
 import {Genre} from './Genre';
 
-export class Album implements BasicData {
-  constructor(private name: string, readonly whoPublishes: string,
+export class Album extends BasicData {
+  constructor(name: string, readonly whoPublishes: string,
     readonly publicationYear: number, readonly genres: string[],
     readonly songs: Song[]) {
+    super(name);
   }
 
-  getName(): string {
-    return this.name;
-  }
-
-  setName(newName: string): void {
-    this.name = newName;
-  }
-
-  public print(): string {
+  public showInfo(): string {
     return (`ALBUM ${this.name}
     Artista o grupo que lo publico: ${this.whoPublishes}
     Año de publicacion: ${this.publicationYear}
@@ -41,7 +34,7 @@ export class Album implements BasicData {
   public static deserialize(album: AlbumInterface): Album {
     let songs: Song[] = [];
     album.songs.forEach((s) =>
-      songs.push(SongManager.getSongManager().getSongByName(s.name) as Song),
+      songs.push(SongManager.getSongManager().searchByName(s.name) as Song),
     );
     return new Album(album.name, album.whoPublishes, album.publicationYear, album.genres, songs);
   }

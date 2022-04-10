@@ -1,4 +1,4 @@
-import {BasicData} from '../Interfaces/BasicData';
+import {BasicData} from './BasicData';
 import {GroupInterface} from '../Interfaces/GroupInterface';
 import {AlbumManager} from '../Managers/AlbumManager';
 import {ArtistManager} from '../Managers/ArtistManager';
@@ -6,17 +6,11 @@ import {Album} from './Album';
 import {Artist} from './Artist';
 import {Genre} from './Genre';
 
-export class Group implements BasicData {
-  constructor(private name: string, private artists: Artist[],
+export class Group extends BasicData {
+  constructor(name: string, private artists: Artist[],
       readonly fundationYear: number, private genres: string[],
       private albums: Album[]) {
-  }
-
-  getName(): string {
-    return this.name;
-  }
-  setName(newName: string): void {
-    this.name = newName;
+    super(name);
   }
   public getArtists(): Artist[] {
     return this.artists;
@@ -57,10 +51,10 @@ export class Group implements BasicData {
     let artists: Artist[] = [];
     let albums: Album[] = [];
     group.artists.forEach((a) =>
-      artists.push(ArtistManager.getArtistManager().getArtistByName(a.name) as Artist),
+      artists.push(ArtistManager.getArtistManager().searchByName(a.name)),
     );
     group.albums.forEach((a) =>
-      albums.push(AlbumManager.getAlbumManager().getAlbumByName(a.name) as Album),
+      albums.push(AlbumManager.getAlbumManager().searchByName(a.name)),
     );
     return new Group(group.name, artists, group.fundationYear, group.genres, albums);
   }

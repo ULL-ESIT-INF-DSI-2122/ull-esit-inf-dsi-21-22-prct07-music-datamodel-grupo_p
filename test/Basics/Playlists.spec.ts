@@ -17,12 +17,12 @@ describe('Pruebas de la clase Playlist', () => {
   let songManager: SongManager = SongManager.getSongManager();
   let genreManager: GenreManager = GenreManager.getGenreManager();
   before(function() {
-    satisfaction = songManager.getSongByName('Satisfaction') as Song;
-    lost = songManager.getSongByName('Lost Stars') as Song;
-    payphone = songManager.getSongByName('Payphone') as Song;
-    god = songManager.getSongByName('God gave me everything') as Song;
-    paradise = songManager.getSongByName('Visions of paradise') as Song;
-    pop = genreManager.getGenreByName('Pop') as Genre;
+    satisfaction = songManager.searchByName('Satisfaction');
+    lost = songManager.searchByName('Lost Stars');
+    payphone = songManager.searchByName('Payphone');
+    god = songManager.searchByName('God gave me everything');
+    paradise = songManager.searchByName('Visions of paradise');
+    pop = genreManager.searchByName('Pop') as Genre;
     lista = new Playlist('MyPlaylist', [satisfaction]);
   });
   it(`new Playlist('MyPlaylist', [satisfaction]); is not equal null`, () => {

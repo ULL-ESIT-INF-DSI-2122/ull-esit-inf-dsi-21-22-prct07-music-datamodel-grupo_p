@@ -1,4 +1,4 @@
-import {BasicData} from '../Interfaces/BasicData';
+import {BasicData} from './BasicData';
 import {GenreInterface} from '../Interfaces/GenreInterface';
 import {SongManager} from '../Managers/SongManager';
 import {Album} from './Album';
@@ -10,50 +10,37 @@ import {ArtistManager} from '../Managers/ArtistManager';
 import {GroupManager} from '../Managers/GroupManager';
 
 /**
- * Class to represent a music genre.
+ * Clase para representar un género musical.
  */
-export class Genre implements BasicData {
+export class Genre extends BasicData {
   /**
-   * Constructor for the `Genre` class.
-   * @param name Name.
-   * @param musicians Groups/Artists.
-   * @param albums Albums.
-   * @param songs Songs.
+   * Constructor de la clase `Genre`.
+   * @param name Nombre.
+   * @param musicians Gropos/Artistas.
+   * @param albums Álbumes.
+   * @param songs Canciones.
    */
-  constructor(private name: string, private musicians: (Group|Artist)[],
+  constructor(name: string, private musicians: (Group|Artist)[],
       private albums: Album[], private songs: Song[]) {
+    super(name);
   }
   /**
-   * Getter for the property `name`.
-   * @returns Returns the value of `name`.
-   */
-  getName(): string {
-    return this.name;
-  }
-  /**
-   * Setter for the property `name`.
-   * @param newName New value of `name`.
-   */
-  setName(newName: string): void {
-    this.name = newName;
-  }
-  /**
-   * Getter for the property `musicians`.
-   * @returns Returns the value of `musicians`.
+   * Getter para la propiedad `musicians`.
+   * @returns Devuelve el valor de`musicians`.
    */
   getMusicians(): (Group|Artist)[] {
     return this.musicians;
   }
   /**
-   * Setter for the property `musicians`.
-   * @param musicians New value of `musicians`.
+   * Setter para la propiedad `musicians`.
+   * @param musicians Nuevo valor de `musicians`.
    */
   setMusicians(musicians: (Group|Artist)[]): void {
     this.musicians = musicians;
   }
   /**
-   * Adds a musician to the genre.
-   * @param newMusician Musician to add.
+   * Agrega un grupo/artista al género.
+   * @param newMusician Grupo/artista a agregar.
    */
   addMusician(newMusician: Group|Artist): void {
     if (this.musicians.find((m) => m === newMusician) === undefined) {
@@ -61,30 +48,30 @@ export class Genre implements BasicData {
     }
   }
   /**
-   * Deletes a group/artist from the genre.
-   * @param musician Group/artist to delete.
+   * Elimina un grupo/artista del género.
+   * @param musician Grupo/artista a eliminar.
    */
   deleteMusician(musician: Group|Artist): void {
     const index = this.musicians.indexOf(musician);
     this.musicians.splice(index, 1);
   }
   /**
-   * Getter for the property `albums`.
-   * @returns Returns the value of `albums`.
+   * Getter para la propiedad `albums`.
+   * @returns Devuelve el valor de`albums`.
    */
   getAlbums(): Album[] {
     return this.albums;
   }
   /**
-   * Setter for the property `albums`.
-   * @param albums New value of `albums`.
+   * Setter para la propiedad `albums`.
+   * @param albums Nuevo valor de `albums`.
    */
   setAlbums(albums: Album[]): void {
     this.albums = albums;
   }
   /**
-   * Adds an album to the genre.
-   * @param newAlbum Album to add.
+   * Agrega un álbum al género.
+   * @param newAlbum Álbum a agregar.
    */
   addAlbum(newAlbum: Album): void {
     if (this.albums.find((m) => m === newAlbum) === undefined) {
@@ -92,30 +79,30 @@ export class Genre implements BasicData {
     }
   }
   /**
-   * Deletes an album from the genre.
-   * @param album Album to delete.
+   * Elimina un álbum del género.
+   * @param album Álbum a eliminar.
    */
   deleteAlbum(album: Album): void {
     const index = this.albums.indexOf(album);
     this.albums.splice(index, 1);
   }
   /**
-   * Getter for the property `songs`.
-   * @returns Returns the value of `songs`.
+   * Getter para la propiedad `songs`.
+   * @returns Devuelve el valor de`songs`.
    */
   getSongs(): Song[] {
     return this.songs;
   }
   /**
-   * Setter for the property `songs`.
-   * @param songs New value of `songs`.
+   * Setter para la propiedad `songs`.
+   * @param songs Nuevo valor de `songs`.
    */
   setSongs(songs: Song[]): void {
     this.songs = songs;
   }
   /**
-   * Adds a song to the genre.
-   * @param newSong Song to add.
+   * Agrega una canción a al género.
+   * @param newSong Canción a agregar.
    */
   addSong(newSong: Song): void {
     if (this.songs.find((m) => m === newSong) === undefined) {
@@ -123,16 +110,16 @@ export class Genre implements BasicData {
     }
   }
   /**
-   * Deletes a song from the genre.
-   * @param song Song to delete.
+   * Elimina una canción del género.
+   * @param song Canción a eliminar.
    */
   deleteSong(song: Song): void {
     const index = this.songs.indexOf(song);
     this.songs.splice(index, 1);
   }
   /**
-   * Shows the genre's information.
-   * @returns Returns a string with the genre's information.
+   * Muestra la información de la playlist.
+   * @returns Devuelve una cadena con la información de la playlist.
    */
   showInfo(): string {
     const info: string = `${this.name}\n  -Grupos/Artistas:\n    ${this.getMusiciansNames().join('\n    ')}\n`+
@@ -141,8 +128,8 @@ export class Genre implements BasicData {
     return info;
   }
   /**
-   * Returns the `musicians` names.
-   * @returns Returns an array with the `musicians` names.
+   * Devuelve los nombres de los grupos/artistas del género.
+   * @returns Devuelve un array con los nombres de los grupos/artistas del género.
    */
   getMusiciansNames(): string[] {
     let musiciansNames: string[] = [];
@@ -152,8 +139,8 @@ export class Genre implements BasicData {
     return musiciansNames;
   }
   /**
-   * Returns the `albums` names.
-   * @returns Returns an array with the `albums` names.
+   * Devuelve los nombres de los álbumes del género.
+   * @returns Devuelve un array con los nombres de los álbumes del género.
    */
   getAlbumsNames(): string[] {
     let albumsNames: string[] = [];
@@ -163,8 +150,8 @@ export class Genre implements BasicData {
     return albumsNames;
   }
   /**
-   * Returns the `songs` names.
-   * @returns Returns an array with the `songs` names.
+   * Devuelve los nombres de las canciones del género.
+   * @returns Devuelve un array con los nombres de las canciones del género.
    */
   getSongsNames(): string[] {
     let songsNames: string[] = [];
@@ -175,25 +162,25 @@ export class Genre implements BasicData {
   }
 
   /**
-   * Deserializes a `GenreInterface` object.
-   * @param genre `GenreInterface` object
-   * @returns Returns a new `Genre` object .
+   * Deserializa un objeto `GenreInterface`.
+   * @param genre Objeto `GenreInterface`.
+   * @returns Devuelve un nuevo objeto `Genre`.
    */
   public static deserialize(genre: GenreInterface): Genre {
     let musicians: (Group|Artist)[] = [];
     let albums: Album[] = [];
     let songs: Song[] = [];
     genre.songs.forEach((s) =>
-      songs.push(SongManager.getSongManager().getSongByName(s.name) as Song),
+      songs.push(SongManager.getSongManager().searchByName(s.name)),
     );
     genre.albums.forEach((a) =>
-      albums.push(AlbumManager.getAlbumManager().getAlbumByName(a.name) as Album),
+      albums.push(AlbumManager.getAlbumManager().searchByName(a.name)),
     );
     genre.musicians.forEach((m) => {
       if ('groups' in m) {
-        musicians.push(ArtistManager.getArtistManager().getArtistByName(m.name) as Artist);
+        musicians.push(ArtistManager.getArtistManager().searchByName(m.name));
       } else {
-        musicians.push(GroupManager.getGroupManager().getGroupByName(m.name) as Group);
+        musicians.push(GroupManager.getGroupManager().searchByName(m.name));
       }
     });
     return new Genre(genre.name, musicians, albums, songs);

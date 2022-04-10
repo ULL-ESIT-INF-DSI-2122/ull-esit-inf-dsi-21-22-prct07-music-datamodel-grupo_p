@@ -27,15 +27,11 @@ export class ArtistManager extends Manager<Artist> {
     return ArtistManager.artistManager;
   }
 
-  getArtistByName(name:string): Artist|undefined {
-    return ([...this.collection.values()].find((album) => album.getName() === name));
-  }
-
   removeGenre(genre: Genre) {
     this.collection.forEach((artist) => {
       artist.removeGenre(genre);
     });
-    this.storeArtists();
+    this.store();
   }
 
   updateGenre(genre: Genre, artists: string[]) {
@@ -46,10 +42,10 @@ export class ArtistManager extends Manager<Artist> {
         artist.removeGenre(genre);
       }
     });
-    this.storeArtists();
+    this.store();
   }
 
-  storeArtists() {
+  store() {
     this.database.set('artists', [...this.collection.values()]).write();
   }
 }

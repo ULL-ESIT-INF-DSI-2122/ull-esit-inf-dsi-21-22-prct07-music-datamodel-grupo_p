@@ -1,22 +1,15 @@
 import {Album} from './Album';
 import {Song} from './Song';
-import {BasicData} from '../Interfaces/BasicData';
+import {BasicData} from './BasicData';
 import {ArtistInterface} from '../Interfaces/ArtistInterface';
 import {SongManager} from '../Managers/SongManager';
 import {AlbumManager} from '../Managers/AlbumManager';
 import {Genre} from './Genre';
 
-export class Artist implements BasicData {
-  constructor(private name: string, private groups: string[],
+export class Artist extends BasicData {
+  constructor(name: string, private groups: string[],
       private genres: string[], private albums: Album[], private songs: Song[]) {
-  }
-
-  public getName(): string {
-    return this.name;
-  }
-
-  public setName(newName: string): void {
-    this.name = newName;
+    super(name);
   }
 
   public getGroups(): string[] {
@@ -68,10 +61,10 @@ export class Artist implements BasicData {
     let albums: Album[] = [];
     let songs: Song[] = [];
     artist.songs.forEach((s) =>
-      songs.push(SongManager.getSongManager().getSongByName(s.name) as Song),
+      songs.push(SongManager.getSongManager().searchByName(s.name)),
     );
     artist.albums.forEach((a) =>
-      albums.push(AlbumManager.getAlbumManager().getAlbumByName(a.name) as Album),
+      albums.push(AlbumManager.getAlbumManager().searchByName(a.name)),
     );
     return new Artist(artist.name, artist.groups, artist.genres, albums, songs);
   }

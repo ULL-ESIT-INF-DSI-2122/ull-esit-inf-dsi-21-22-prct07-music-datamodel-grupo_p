@@ -1,4 +1,4 @@
-import {BasicData} from '../Interfaces/BasicData';
+import {BasicData} from './BasicData';
 import {Genre} from './Genre';
 /**
  * Clase que representa una cancion
@@ -7,12 +7,14 @@ import {Genre} from './Genre';
  */
 
 export type Duration = [number, number];
-export class Song implements BasicData {
-  constructor(private name: string, private author: string,
+export class Song extends BasicData {
+  constructor(name: string, private author: string,
       private duration: Duration, private genres: string[],
       private publicationDate: Date, private isSingle: boolean,
       private reproductions: number) {
+    super(name);
   }
+
 
   public getDuration(): Duration {
     return this.duration;
@@ -24,23 +26,6 @@ export class Song implements BasicData {
   public getIsSingle() {
     return this.isSingle;
   }
-
-
-  /**
-   * Devuelve el nombre de la cancion.
-   * @returns nombre como  string.
-   */
-  public getName(): string {
-    return this.name;
-  }
-  /**
-   * Método setter para nombre de la canción.
-   * @param newName será el nuevo nombre.
-   */
-  public setName(newName: string): void {
-    this.name = newName;
-  }
-
   /**
    * Devuelve el nombre del autor de la canción
    * @returns author como string
