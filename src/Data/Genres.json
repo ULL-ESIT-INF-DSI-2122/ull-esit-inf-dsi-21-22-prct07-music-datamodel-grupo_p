@@ -581,6 +581,34 @@
                   "publicationDate": "1965-06-06",
                   "isSingle": false,
                   "reproductions": 10700000
+                },
+                {
+                  "name": "The Last Time",
+                  "author": "The Rolling Stones",
+                  "duration": [
+                    3,
+                    41
+                  ],
+                  "genres": [
+                    "Rock"
+                  ],
+                  "publicationDate": "1965-03-06",
+                  "isSingle": true,
+                  "reproductions": 6520000
+                },
+                {
+                  "name": "Good Times",
+                  "author": "The Rolling Stones",
+                  "duration": [
+                    1,
+                    58
+                  ],
+                  "genres": [
+                    "Rock"
+                  ],
+                  "publicationDate": "1964-06-26",
+                  "isSingle": true,
+                  "reproductions": 3790000
                 }
               ]
             }
@@ -609,6 +637,34 @@
               "publicationDate": "1965-06-06",
               "isSingle": false,
               "reproductions": 10700000
+            },
+            {
+              "name": "The Last Time",
+              "author": "The Rolling Stones",
+              "duration": [
+                3,
+                41
+              ],
+              "genres": [
+                "Rock"
+              ],
+              "publicationDate": "1965-03-06",
+              "isSingle": true,
+              "reproductions": 6520000
+            },
+            {
+              "name": "Good Times",
+              "author": "The Rolling Stones",
+              "duration": [
+                1,
+                58
+              ],
+              "genres": [
+                "Rock"
+              ],
+              "publicationDate": "1964-06-26",
+              "isSingle": true,
+              "reproductions": 3790000
             }
           ]
         },
@@ -665,6 +721,34 @@
           "publicationDate": "1965-06-06",
           "isSingle": false,
           "reproductions": 10700000
+        },
+        {
+          "name": "The Last Time",
+          "author": "The Rolling Stones",
+          "duration": [
+            3,
+            41
+          ],
+          "genres": [
+            "Rock"
+          ],
+          "publicationDate": "1965-03-06",
+          "isSingle": true,
+          "reproductions": 6520000
+        },
+        {
+          "name": "Good Times",
+          "author": "The Rolling Stones",
+          "duration": [
+            1,
+            58
+          ],
+          "genres": [
+            "Rock"
+          ],
+          "publicationDate": "1964-06-26",
+          "isSingle": true,
+          "reproductions": 3790000
         },
         {
           "name": "God gave me everything",
