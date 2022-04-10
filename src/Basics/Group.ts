@@ -142,9 +142,13 @@ export class Group extends BasicData {
   public showInfo(): void {
     let info: string = `GRUPO ${this.getName()}
     Nombre: ${this.getName()}
-    Artistas: ${this.getArtists()}
+    Artistas: ${this.getArtists().map((artist) => {
+    return artist.getName();
+  })}
     Genero/s: ${this.getGenres()}
-    Albums: ${this.getAlbums()}
+    Albums: ${this.getAlbums().map((album) => {
+    return album.getName();
+  })}
     Año creacion: ${this.getFundationYear()})}`;
     console.log(info);
   }

@@ -68,7 +68,7 @@ export class GroupManager extends Manager<Group> {
     this.store();
   }
 
-  public removeGroup(group: Group): void {
+  public deleteGroup(group: Group): void {
     // Delete group from albums
     const objAlbumManager:AlbumManager = AlbumManager.getAlbumManager();
     const groupAlbums: Album[] = group.getAlbums();
@@ -105,7 +105,7 @@ export class GroupManager extends Manager<Group> {
   public editGroup(group: Group, newName: string, newArtists: Artist[], newYear: number,
       newGenres: string[], newAlbums: Album[] ): void {
     // ARTISTA Y ALBUM???
-    this.removeGroup(group);
+    this.deleteGroup(group);
     this.addGroup(new Group(newName, newArtists, newYear, newGenres, newAlbums));
     this.store();
   }

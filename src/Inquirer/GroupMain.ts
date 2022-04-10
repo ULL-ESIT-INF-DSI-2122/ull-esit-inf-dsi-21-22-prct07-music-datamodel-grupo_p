@@ -5,7 +5,9 @@ import {ArtistManager} from '../Managers/ArtistManager';
 import {AlbumManager} from '../Managers/AlbumManager';
 import {GenreManager} from '../Managers/GenreManager';
 import {GroupManager} from '../Managers/GroupManager';
-
+import {Artist} from '../Basics/Artist';
+import {Album} from '../Basics/Album';
+const promptSync = require('prompt-sync')();
 
 enum options {
   Show = 'Show Data Base',
@@ -19,7 +21,7 @@ const manager = GroupManager.getGroupManager();
 const albums: string[] = AlbumManager.getAlbumManager().getList();
 const genres: string[] = GenreManager.getGenreManager().getList();
 const artists: string[] = ArtistManager.getArtistManager().getList();
-
+/*
 export function promptGroups(): void {
   console.clear();
 
@@ -51,7 +53,60 @@ export function promptGroups(): void {
     }
   });
 }
+*/
 
+export function promptGroups(): void {
+  let options: string[] = ['Nuevo group +'];
+  options = options.concat(manager.getList());
+  options.push('Volver');
+  console.clear();
+  inquirer.prompt({
+    type: 'list',
+    name: 'command',
+    message: 'Grupos',
+    choices: options,
+  }).then((answers) => {
+    switch (answers['command']) {
+      case 'Nuevo artista +':
+        promptAddGroup();
+        break;
+      case 'Volver':
+        promptUser();
+        break;
+      default:
+        const group: Group = manager.searchByName(answers['command']);
+        promptGroup(group);
+        break;
+    }
+  });
+}
+
+export function promptGroup(group: Group): void {
+  console.clear();
+  group.showInfo();
+  inquirer.prompt({
+    type: 'list',
+    name: 'command',
+    message: 'Opciones',
+    choices: ['Mostrar información', 'Editar', 'Eliminar', 'Volver'],
+  }).then((answers) => {
+    switch (answers['command']) {
+      case 'Mostrar información':
+        promptShowData(group);
+        break;
+      case 'Editar':
+        promptEditGroup(group);
+        break;
+      case 'Eliminar':
+        promptRemoveGroup(group);
+        break;
+      default:
+        promptGroups();
+        break;
+    }
+  },
+  );
+}
 
 function promptAddGroup(): void {
   console.clear();
@@ -118,6 +173,14 @@ function promptAddGroup(): void {
     },
   ];
   inquirer.prompt(questions).then((answers) => {
+    let albums: Album[] = [];
+    answers.album.forEach((albumName: string) => {
+      albums.push(AlbumManager.getAlbumManager().searchByName(albumName));
+    });
+    let artist: Artist[] = [];
+    answers.artist.forEach((artistName: string) => {
+      artist.push(ArtistManager.getArtistManager().searchByName(artistName));
+    });
     const newGroup: Group = new Group(answers.name, answers.genre, answers.groups,
         answers.albums, answers.songs);
     manager.addGroup(newGroup);
@@ -125,6 +188,24 @@ function promptAddGroup(): void {
   });
 }
 
+export function promptRemoveGroup(group: Group) {
+  console.clear();
+  inquirer
+      .prompt([
+        {
+          name: 'eliminar',
+          type: 'confirm',
+          message: '¿Seguro que quieres eliminar este grupo?',
+        },
+      ])
+      .then((answer) => {
+        if (answer.eliminar) {
+          manager.deleteGroup(group);
+        }
+        promptGroups();
+      });
+}
+/*
 function promptRemoveGroup(): void {
   console.clear();
   // ELEGIR GRUPO A ELIMINAR
@@ -149,75 +230,72 @@ function promptRemoveGroup(): void {
     });
   });
 }
+*/
 
-
-function promptEditGroup(): void {
+function promptEditGroup(group: Group): void {
   console.clear();
-
-  inquirer.prompt({
-    type: 'list',
-    name: 'groupEdit',
-    message: 'Escoja el grupo que quiere editar:',
-    choices: manager.getList(),
-  }).then((answers) => {
-    let group: Group = manager.searchByName(answers.groupEdit);
-    const questions = [
-      {
-        type: 'input',
-        name: 'name',
-        message: 'Group name:',
-        default: group.getName(),
-        validate(value: string) {
-          let val: boolean | string = true;
-          manager.getCollection().forEach((element) => {
-            if (value === element.getName() && group !== element) {
-              val = 'Error: ya existe un grupo con ese nombre.';
-            }
-          });
-          return val;
-        },
-      },
-      {
-        type: 'checkbox',
-        message: 'Elige artistas:',
-        name: 'artist',
-        choices: artists,
-        default: group.getArtists(),
-      },
-      {
-        type: 'input',
-        message: 'Introduzca el año de creacion:',
-        name: 'year',
-        validate(value: number) {
-          if (value < 1 || value > 9999) {
-            return 'Introduce un año válido.';
+  const albumsNames: string[] = [];
+  group.getAlbums().forEach((album) => {
+    albumsNames.push(album.getName());
+  });
+  const artistNames: string[] = [];
+  group.getArtists().forEach((artist) => artistNames.push(artist.getName()));
+  const questions = [
+    {
+      type: 'input',
+      name: 'name',
+      message: 'Group name:',
+      default: group.getName(),
+      validate(value: string) {
+        let val: boolean | string = true;
+        manager.getCollection().forEach((element) => {
+          if (value === element.getName() && group !== element) {
+            val = 'Error: ya existe un grupo con ese nombre.';
           }
-          return true;
-        },
+        });
+        return val;
       },
-      {
-        type: 'checkbox',
-        message: 'Elige generos:',
-        name: 'genre',
-        choices: genres,
-        default: group.getGenres(),
+    },
+    {
+      type: 'checkbox',
+      message: 'Elige artistas:',
+      name: 'artist',
+      choices: artists,
+      default: artistNames,
+    },
+    {
+      type: 'input',
+      message: 'Introduzca el año de creacion:',
+      name: 'year',
+      validate(value: number) {
+        if (value < 1 || value > 9999) {
+          return 'Introduce un año válido.';
+        }
+        return true;
       },
-      {
-        type: 'checkbox',
-        message: 'Elige álbums:',
-        name: 'albums',
-        choices: albums,
-        default: group.getAlbums(),
-      },
-    ];
-    inquirer.prompt(questions).then((answers) => {
-      group.setName(answers.name);
-      group.setArtists(answers.musicians);
-      group.setYearCreation(answers.year);
-      group.setGenres(answers.genre);
-      group.setAlbums(answers.albums);
-      promptGroups();
-    });
+    },
+    {
+      type: 'checkbox',
+      message: 'Elige generos:',
+      name: 'genre',
+      choices: genres,
+      default: group.getGenres(),
+    },
+    {
+      type: 'checkbox',
+      message: 'Elige álbums:',
+      name: 'albums',
+      choices: albums,
+      default: albumsNames,
+    },
+  ];
+  inquirer.prompt(questions).then((answers) => {
+    group.setName(answers.name);
+    group.setArtists(answers.musicians);
+    group.setYearCreation(answers.year);
+    group.setGenres(answers.genre);
+    group.setAlbums(answers.albums);
+    promptGroups();
   });
 }
 
@@ -229,37 +307,28 @@ enum visualizationMode {
   back = 'Volver'
 }
 
-function promptShowData() {
+function promptShowData(group: Group) {
   console.clear();
-
   inquirer.prompt({
     type: 'list',
-    name: 'group',
-    message: 'Escoja el grupo que quiere ver:',
-    choices: manager.getList(),
+    name: 'visualization',
+    message: 'Que quiere ver',
+    choices: Object.values(visualizationMode),
   }).then((answers) => {
-    let group: Group = manager.searchByName(answers.group);
-    inquirer.prompt({
-      type: 'list',
-      name: 'visualization',
-      message: 'Que quiere ver',
-      choices: Object.values(visualizationMode),
-    }).then((answers) => {
-      switch (answers['visualization']) {
-        case visualizationMode.byTitle:
-          promptShowSongs(group);
-          break;
-        case visualizationMode.byName:
-          promptShowAlbums(group);
-          break;
-        case visualizationMode.byPlaylist:
-          promptShowPleyList(group);
-          break;
-        default:
-          promptGroups();
-          break;
-      }
-    });
+    switch (answers['visualization']) {
+      case visualizationMode.byTitle:
+        promptShowSongs(group);
+        break;
+      case visualizationMode.byName:
+        promptShowAlbums(group);
+        break;
+      case visualizationMode.byPlaylist:
+        promptShowPleyList(group);
+        break;
+      default:
+        promptGroup(group);
+        break;
+    }
   });
 }
 
@@ -294,6 +363,9 @@ function promptShowSongs(group: Group) {
             case 'Descendente':
               group.showSongsOrder(false);
               break;
+            default:
+              promptShowSongs(group);
+              break;
           }
         });
         break;
@@ -311,11 +383,25 @@ function promptShowSongs(group: Group) {
             case 'Descendente':
               group.showByReproductions(false);
               break;
+            default:
+              promptShowSongs(group);
+              break;
           }
         });
         break;
       case modeShowSong.single:
         group.showSingles();
+        inquirer.prompt({
+          type: 'list',
+          name: 'order',
+          message: 'Opciones:',
+          choices: ['Volver'],
+        }).then((answers) => {
+          promptShowSongs(group);
+        });
+        break;
+      default:
+        promptShowData(group);
         break;
     }
   });
@@ -351,6 +437,9 @@ function promptShowAlbums(group: Group) {
             case 'Descendente':
               group.showAlbumOrder(false);
               break;
+            default:
+              promptShowAlbums(group);
+              break;
           }
         });
         break;
@@ -369,7 +458,7 @@ function promptShowAlbums(group: Group) {
               group.showAlbumYearOrder(false);
               break;
             default:
-              promptShowData(group);
+              promptShowAlbums(group);
               break;
           }
         });
@@ -379,8 +468,7 @@ function promptShowAlbums(group: Group) {
 }
 
 enum modeShowPleyList {
-  name = 'Mostrar playlist por nombre',
-  back = 'Volver'
+  name = 'Mostrar playlist asociadas',
 }
 
 function promptShowPleyList(group: Group) {
@@ -403,14 +491,18 @@ function promptShowPleyList(group: Group) {
           switch (answers['order']) {
             case 'Ascendente':
               group.showPlayListAsociate();
+              promptSync('Press key to continue');
               break;
             case 'Descendente':
+              group.showPlayListAsociate();
               break;
-            case modeShowPleyList.back:
+            default:
               promptShowPleyList(group);
               break;
           }
         });
+      default:
+        promptShowData(group);
         break;
     }
   });
