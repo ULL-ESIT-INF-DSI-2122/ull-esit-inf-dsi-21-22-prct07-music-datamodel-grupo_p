@@ -613,7 +613,7 @@
                     "Reggae"
                   ],
                   "publicationDate": "1976-04-11",
-                  "isSingle": true,
+                  "isSingle": false,
                   "reproductions": 1020000
                 }
               ]
@@ -645,7 +645,7 @@
                 "Reggae"
               ],
               "publicationDate": "1976-04-11",
-              "isSingle": true,
+              "isSingle": false,
               "reproductions": 1020000
             }
           ]
