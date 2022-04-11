@@ -113,9 +113,13 @@ export class Genre extends BasicData {
    * Elimina una canción del género.
    * @param song Canción a eliminar.
    */
+
   deleteSong(song: Song): void {
     const index = this.songs.indexOf(song);
     this.songs.splice(index, 1);
+  }
+  public removeSong(songDelete: Song) {
+    this.songs = this.songs.filter((elemento) => elemento !== songDelete);
   }
   /**
    * Muestra la información de la playlist.

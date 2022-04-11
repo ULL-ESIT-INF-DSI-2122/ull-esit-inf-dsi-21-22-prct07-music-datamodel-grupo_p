@@ -45,7 +45,6 @@ export class Group extends BasicData {
       this.genres.push(genre.getName());
     }
   }
-
   public getAlbums(): Album[] {
     return this.albums;
   }

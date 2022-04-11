@@ -14,51 +14,6 @@ export class Artist extends BasicData {
     super(name);
   }
 
-  public getGroups(): string[] {
-    return this.groups;
-  }
-  public addGroup(newGroup: string) {
-    this.groups.push(newGroup);
-  }
-  public removeGroup(groupDelete: string) {
-    this.groups = this.groups.filter((elemento) => elemento !== groupDelete);
-  }
-
-  public getGenres(): string[] {
-    return this.genres;
-  }
-  public removeGenre(genre: Genre): void {
-    const index = this.genres.indexOf(genre.getName());
-    if (index !== -1) {
-      this.genres.splice(index, 1);
-    }
-  }
-  public addGenre(genre: Genre): void {
-    if (this.genres.find((x) => x === genre.getName()) === undefined) {
-      this.genres.push(genre.getName());
-    }
-  }
-
-  public getAlbums(): Album[] {
-    return this.albums;
-  }
-  public addAlbum(newAlbum: Album) {
-    this.albums.push(newAlbum);
-  }
-  public removeAlbum(albumDelete: Album) {
-    this.albums = this.albums.filter((elemento) => elemento !== albumDelete);
-  }
-
-  public getSongs(): Song[] {
-    return this.songs;
-  }
-  public addSong(newSong: Song) {
-    this.songs.push(newSong);
-  }
-  public removeSong(songDelete: Song) {
-    this.songs = this.songs.filter((elemento) => elemento !== songDelete);
-  }
-
   public static deserialize(artist: ArtistInterface): Artist {
     let albums: Album[] = [];
     let songs: Song[] = [];
@@ -69,6 +24,67 @@ export class Artist extends BasicData {
       albums.push(AlbumManager.getAlbumManager().searchByName(a.name)),
     );
     return new Artist(artist.name, artist.groups, artist.genres, albums, songs);
+  }
+
+  // GETTERS
+  public getGroups(): string[] {
+    return this.groups;
+  }
+  public getGenres(): string[] {
+    return this.genres;
+  }
+  public getAlbums(): Album[] {
+    return this.albums;
+  }
+  public getSongs(): Song[] {
+    return this.songs;
+  }
+  // SETTERS
+  public setName(newName: string): void {
+    this.name = newName;
+  }
+  public setGroups(newGroups: string[]): void {
+    this.groups = newGroups;
+  }
+  public setGenres(newGenres: string[]): void {
+    this.genres = newGenres;
+  }
+  public setAlbums(newAlbums: Album[]): void {
+    this.albums = newAlbums;
+  }
+  public setSongs(newSongs: Song[]): void {
+    this.songs = newSongs;
+  }
+  // ADDS
+  public addGroup(newGroup: string) {
+    this.groups.push(newGroup);
+  }
+  public addGenre(genre: Genre): void {
+    if (this.genres.find((x) => x === genre.getName()) === undefined) {
+      this.genres.push(genre.getName());
+    }
+  }
+  public addSong(newSong: Song) {
+    this.songs.push(newSong);
+  }
+  public addAlbum(newAlbum: Album) {
+    this.albums.push(newAlbum);
+  }
+  // REMOVES
+  public removeGroup(groupDelete: string) {
+    this.groups = this.groups.filter((elemento) => elemento !== groupDelete);
+  }
+  public removeGenre(genre: Genre): void {
+    const index = this.genres.indexOf(genre.getName());
+    if (index !== -1) {
+      this.genres.splice(index, 1);
+    }
+  }
+  public removeAlbum(albumDelete: Album) {
+    this.albums = this.albums.filter((elemento) => elemento !== albumDelete);
+  }
+  public removeSong(songDelete: Song) {
+    this.songs = this.songs.filter((elemento) => elemento !== songDelete);
   }
 
   // ---------- //

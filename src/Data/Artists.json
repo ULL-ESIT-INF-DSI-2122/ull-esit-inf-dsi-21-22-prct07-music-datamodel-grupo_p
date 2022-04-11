@@ -32,7 +32,7 @@
               "reproductions": 4500000
             },
             {
-              "name": "Visions of paradise",
+              "name": "Visions of paradise 2",
               "author": "Mick Jagger",
               "duration": [
                 4,
@@ -111,7 +111,7 @@
               "reproductions": 3200000
             },
             {
-              "name": "Lost Stars",
+              "name": "Lost Stars 2",
               "author": "Adam Levine",
               "duration": [
                 3,
@@ -128,20 +128,6 @@
         }
       ],
       "songs": [
-        {
-          "name": "Lost Stars",
-          "author": "Adam Levine",
-          "duration": [
-            3,
-            16
-          ],
-          "genres": [
-            "Pop"
-          ],
-          "publicationDate": "2014-06-30",
-          "isSingle": true,
-          "reproductions": 3200000
-        },
         {
           "name": "Lost Stars",
           "author": "Adam Levine",

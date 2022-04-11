@@ -1,14 +1,19 @@
-import {Song} from '../Basics/Song';
+import {Song, Duration} from '../Basics/Song';
 import {Manager} from './Manager';
 import lowdb = require('lowdb');
 import FileSync = require('lowdb/adapters/FileSync');
 import {Genre} from '../Basics/Genre';
 import {SongInterface} from '../Interfaces/SongInterface';
+import {ArtistManager} from './ArtistManager';
+import {GenreManager} from './GenreManager';
+import {AlbumManager} from './AlbumManager';
+import {PlaylistManager} from './PlaylistManager';
 
 
 type schemaType = {
     songs: SongInterface[]
 };
+
 
 export class SongManager extends Manager<Song> {
   private static SongManager: SongManager;
@@ -52,6 +57,82 @@ export class SongManager extends Manager<Song> {
     this.store();
   }
 
+  /**
+   * Función que añade un canción a la base
+   * @param song que será agregado a la base
+   */
+  addSong(song: Song): void {
+    // add in artist
+    let author = song.getAuthorName();
+    let authorObj = ArtistManager.getArtistManager().searchByName(author);
+    if (authorObj != undefined) {
+      authorObj.addSong(song);
+      ArtistManager.getArtistManager().store();
+    }
+    // add in genre
+    let genres = song.getGenres().map((genreName) => GenreManager.getGenreManager().searchByName(genreName));
+    genres.forEach((genre) => {
+      genre.addSong(song);
+      GenreManager.getGenreManager().store();
+    });
+
+    this.collection.add(song);
+    this.store();
+  }
+
+  /**
+   * Elimina la canción de la colección
+   * @param song de tipo Song
+   */
+  removeSong(song: Song): void {
+    // delete in artist
+    let author = song.getAuthorName();
+    let authorObj = ArtistManager.getArtistManager().searchByName(author);
+    if (authorObj != undefined) {
+      authorObj.removeSong(song);
+      ArtistManager.getArtistManager().store();
+    }
+
+    // delete in genre
+    const objGenreManager:GenreManager = GenreManager.getGenreManager();
+    const genreNames: string[] = song.getGenres();
+    genreNames.forEach((genreName) => {
+      let genre = objGenreManager.searchByName(genreName);
+      genre.removeSong(song); // If artist is not in list it won't do anything
+      GenreManager.getGenreManager().store();
+    });
+    // delete from album
+    let albumsAsociate = AlbumManager.getAlbumManager().getCollection();
+    let albumsObj = Array.from(albumsAsociate);
+    let albumsThisSong = albumsObj.filter((album) => album.getSongs().includes(song));
+    albumsThisSong.forEach((album) => album.removeSong(song));
+    AlbumManager.getAlbumManager().store();
+    // delete from playlist
+    let playlist = PlaylistManager.getPlaylistManager().getCollection();
+    let playlistObj = Array.from(playlist);
+    let playlistAsociate = playlistObj.filter((playlist) => playlist.getSongs().includes(song));
+    playlistAsociate.forEach((playlist) => playlist.deleteSong(song));
+    PlaylistManager.getPlaylistManager().store();
+
+    this.collection.delete(song);
+    this.store();
+  }
+
+  editSong(newName: string, newAuthor: string, newDuration: Duration, newGenre: string[],
+      newDAtePublication: Date, changeSingle: boolean, changeReproductions: number): void {
+    this.collection.forEach((element) => {
+      if (element.getName() === newName) {
+        element.setName(newName);
+        element.setAuthorName(newAuthor);
+        element.setDuration(newDuration);
+        element.setGenres(newGenre);
+        element.setDatePublication(newDAtePublication);
+        element.setIsSingle(changeSingle);
+        element.setReproductions(changeReproductions);
+      }
+    });
+    this.store();
+  }
 
   /**
    * Alamacena la información de la canción de acuerdo a lo

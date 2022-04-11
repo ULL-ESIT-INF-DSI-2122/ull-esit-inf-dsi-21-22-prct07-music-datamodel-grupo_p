@@ -61,10 +61,12 @@ export class GroupManager extends Manager<Group> {
     console.log(genres);
     genres.forEach((genre) => {
       genre.addMusician(group);
+      GenreManager.getGenreManager().store();
     });
     let artists = group.getArtists();
     artists.forEach((artist) => {
       artist.addGroup(group.getName());
+      ArtistManager.getArtistManager().store();
     });
     this.collection.add(group);
     this.store();
@@ -76,6 +78,7 @@ export class GroupManager extends Manager<Group> {
     const groupAlbums: Album[] = group.getAlbums();
     groupAlbums.forEach((album) => {
       objAlbumManager.remove(album);
+      AlbumManager.getAlbumManager().store();
     });
 
     // Delet group from genres
@@ -86,6 +89,7 @@ export class GroupManager extends Manager<Group> {
       genre.deleteMusician(group); // If group is not in list it won't do anything
       if (genre.getMusicians().length == 0) {
         objGenreManager.remove(genre);
+        GenreManager.getGenreManager().store();
       }
     });
 
@@ -94,6 +98,7 @@ export class GroupManager extends Manager<Group> {
     const groupArtists: Artist[] = group.getArtists();
     groupArtists.forEach((artist) => {
       objArtistManager.deleteArtist(artist);
+      ArtistManager.getArtistManager().store();
     });
 
     this.collection.forEach((element) => {
@@ -144,6 +149,9 @@ export class GroupManager extends Manager<Group> {
       albumsToDelete.forEach((album) => AlbumManager.getAlbumManager().remove(album));
     }
     group.setGenres(newGenres);
+    ArtistManager.getArtistManager().store();
+    GenreManager.getGenreManager().store();
+    AlbumManager.getAlbumManager().store();
     this.store();
   }
 }

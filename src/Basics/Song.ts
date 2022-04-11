@@ -27,6 +27,20 @@ export class Song extends BasicData {
     return this.isSingle;
   }
   /**
+   * Método setter de si es single o no la canción.
+   * @param newValor tipo boleano.
+   */
+  public setIsSingle(newValor: boolean): void {
+    this.isSingle = newValor;
+  }
+  /**
+   * Método setter para la nueva duración de la canción.
+   * @param newDuraction de tipo Duration
+   */
+  public setDuration(newDuraction: Duration): void {
+    this.duration = newDuraction;
+  }
+  /**
    * Devuelve el nombre del autor de la canción
    * @returns author como string
    */
@@ -43,10 +57,30 @@ export class Song extends BasicData {
   public getReproductions(): number {
     return this.reproductions;
   }
+  /**
+   * Método setter
+   * @param reproduction de tipo Reproduccion
+   */
+  public setReproductions(reproduction: number): void {
+    this.reproductions = reproduction;
+  }
 
   public getGenres():string[] {
     return this.genres;
   }
+  /**
+   * Método setter para los nuevos generos
+   * que pertenece la canción.
+   * @param newGenres de tipo Genre
+   */
+  public setGenres(newGenres: string[]): void {
+    this.genres = newGenres;
+  }
+
+  public setDatePublication(duration: Date): void {
+    this.publicationDate = duration;
+  }
+
   public removeGenre(genre: Genre): void {
     const index = this.genres.indexOf(genre.getName());
     if (index !== -1) {

@@ -4,6 +4,7 @@ import FileSync = require('lowdb/adapters/FileSync');
 import {Album} from '../Basics/Album';
 import {Genre} from '../Basics/Genre';
 import {AlbumInterface} from '../Interfaces/AlbumInterface';
+import {Song} from '../Basics/Song';
 
 type schemaType = {
     albums: AlbumInterface[]
@@ -41,6 +42,13 @@ export class AlbumManager extends Manager<Album> {
       } else {
         album.removeGenre(genre);
       }
+    });
+    this.store();
+  }
+
+  removeSong(song: Song) {
+    this.collection.forEach((al) => {
+      al.removeSong(song);
     });
     this.store();
   }

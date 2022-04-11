@@ -3,6 +3,7 @@ import {Manager} from './Manager';
 import lowdb = require('lowdb');
 import FileSync = require('lowdb/adapters/FileSync');
 import {GenreInterface} from '../Interfaces/GenreInterface';
+import {Song} from '../Basics/Song';
 
 /**
  * Tipo para almacenar géneros mediante Lowdb.
@@ -41,6 +42,15 @@ export class GenreManager extends Manager<Genre> {
       GenreManager.genresManager = new GenreManager();
     }
     return GenreManager.genresManager;
+  }
+  /**
+   *
+   */
+  removeSong(song: Song) {
+    this.collection.forEach((element) => {
+      element.deleteSong(song);
+    });
+    this.store();
   }
 
   /**
