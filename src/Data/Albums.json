@@ -1,60 +1,8 @@
 {
   "albums": [
     {
-      "name": "Out Of Our Heads",
-      "whoPublishes": "The Rolling Stones",
-      "publicationYear": 1965,
-      "genres": [
-        "Rock"
-      ],
-      "songs": [
-        {
-          "name": "Satisfaction",
-          "author": "The Rolling Stones",
-          "duration": [
-            3,
-            51
-          ],
-          "genres": [
-            "Rock"
-          ],
-          "publicationDate": "1965-06-06",
-          "isSingle": false,
-          "reproductions": 10700000
-        },
-        {
-          "name": "The Last Time",
-          "author": "The Rolling Stones",
-          "duration": [
-            3,
-            41
-          ],
-          "genres": [
-            "Rock"
-          ],
-          "publicationDate": "1965-03-06",
-          "isSingle": true,
-          "reproductions": 6520000
-        },
-        {
-          "name": "Good Times",
-          "author": "The Rolling Stones",
-          "duration": [
-            1,
-            58
-          ],
-          "genres": [
-            "Rock"
-          ],
-          "publicationDate": "1964-06-26",
-          "isSingle": true,
-          "reproductions": 3790000
-        }
-      ]
-    },
-    {
       "name": "Overexposed",
-      "whoPublishes": "Maroon 5",
+      "publisher": "Maroon 5",
       "publicationYear": 2012,
       "genres": [
         "Pop"
@@ -105,46 +53,8 @@
       ]
     },
     {
-      "name": "Goddess in the Doorway",
-      "whoPublishes": "Mick Jagger",
-      "publicationYear": 2001,
-      "genres": [
-        "Rock"
-      ],
-      "songs": [
-        {
-          "name": "God gave me everything",
-          "author": "Mick Jagger",
-          "duration": [
-            3,
-            34
-          ],
-          "genres": [
-            "Rock"
-          ],
-          "publicationDate": "2001-11-19",
-          "isSingle": true,
-          "reproductions": 4500000
-        },
-        {
-          "name": "Visions of paradise",
-          "author": "Mick Jagger",
-          "duration": [
-            4,
-            2
-          ],
-          "genres": [
-            "Rock"
-          ],
-          "publicationDate": "2001-11-19",
-          "isSingle": false,
-          "reproductions": 2750000
-        }
-      ]
-    },
-    {
       "name": "Begin Again",
-      "whoPublishes": "Adam Levine",
+      "publisher": "Adam Levine",
       "publicationYear": 2014,
       "genres": [
         "Pop"
@@ -182,7 +92,7 @@
     },
     {
       "name": "Líderes",
-      "whoPublishes": "Wisin y Yandel",
+      "publisher": "Wisin y Yandel",
       "publicationYear": 2012,
       "genres": [
         "Reggeaton"
@@ -234,7 +144,7 @@
     },
     {
       "name": "Quien contra mi",
-      "whoPublishes": "Yandel",
+      "publisher": "Yandel",
       "publicationYear": 2003,
       "genres": [
         "Reggeaton"
@@ -272,7 +182,7 @@
     },
     {
       "name": "The Marshall Matters LP",
-      "whoPublishes": "Eminem",
+      "publisher": "Eminem",
       "publicationYear": 2000,
       "genres": [
         "Rap"
@@ -352,7 +262,7 @@
     },
     {
       "name": "Entren los que quieran",
-      "whoPublishes": "Calle 13",
+      "publisher": "Calle 13",
       "publicationYear": 2010,
       "genres": [
         "Urbano Latino"
@@ -404,7 +314,7 @@
     },
     {
       "name": "Residente",
-      "whoPublishes": "Residente",
+      "publisher": "Residente",
       "publicationYear": 2017,
       "genres": [
         "Urbano Latino"
@@ -442,7 +352,7 @@
     },
     {
       "name": "American Recordings",
-      "whoPublishes": "Johnny Cash",
+      "publisher": "Johnny Cash",
       "publicationYear": 1962,
       "genres": [
         "Country"
@@ -522,7 +432,7 @@
     },
     {
       "name": "What A Wonderful World",
-      "whoPublishes": "Louis Armstrong",
+      "publisher": "Louis Armstrong",
       "publicationYear": 1967,
       "genres": [
         "Jazz"
@@ -602,7 +512,7 @@
     },
     {
       "name": "Catch a Fire",
-      "whoPublishes": "The Wailers",
+      "publisher": "The Wailers",
       "publicationYear": 1973,
       "genres": [
         "Reggae"
@@ -654,7 +564,7 @@
     },
     {
       "name": "Rastaman Vibration",
-      "whoPublishes": "Bob Marley",
+      "publisher": "Bob Marley",
       "publicationYear": 1976,
       "genres": [
         "Reggae"
@@ -692,7 +602,7 @@
     },
     {
       "name": "DAMN.",
-      "whoPublishes": "Kendrik Lamar",
+      "publisher": "Kendrik Lamar",
       "publicationYear": 2017,
       "genres": [
         "Trap"
@@ -772,7 +682,7 @@
     },
     {
       "name": "True",
-      "whoPublishes": "Avicii",
+      "publisher": "Avicii",
       "publicationYear": 2013,
       "genres": [
         "Musica Electronica"
