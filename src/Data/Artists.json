@@ -478,6 +478,169 @@
           "reproductions": 1600000
         }
       ]
+    },
+    {
+      "name": "Johnny Cash",
+      "groups": [
+        "-"
+      ],
+      "genres": [
+        "Country"
+      ],
+      "albums": [
+        {
+          "name": "American Recordings",
+          "whoPublishes": "Johnny Cash",
+          "publicationYear": 1962,
+          "genres": [
+            "Country"
+          ],
+          "songs": [
+            {
+              "name": "Delia's Gone",
+              "author": "Johnny Cash",
+              "duration": [
+                2,
+                17
+              ],
+              "genres": [
+                "Country"
+              ],
+              "publicationDate": "1962-03-31",
+              "isSingle": false,
+              "reproductions": 1200000
+            },
+            {
+              "name": "The Beast In Me",
+              "author": "Johnny Cash",
+              "duration": [
+                2,
+                45
+              ],
+              "genres": [
+                "Country"
+              ],
+              "publicationDate": "1962-03-31",
+              "isSingle": false,
+              "reproductions": 850000
+            },
+            {
+              "name": "Drive On",
+              "author": "Johnny Cash",
+              "duration": [
+                2,
+                23
+              ],
+              "genres": [
+                "Country"
+              ],
+              "publicationDate": "1962-03-31",
+              "isSingle": false,
+              "reproductions": 700000
+            },
+            {
+              "name": "Why Me Lord",
+              "author": "Johnny Cash",
+              "duration": [
+                2,
+                19
+              ],
+              "genres": [
+                "Country"
+              ],
+              "publicationDate": "1962-03-31",
+              "isSingle": false,
+              "reproductions": 1300000
+            },
+            {
+              "name": "Thirteen",
+              "author": "Johnny Cash",
+              "duration": [
+                2,
+                29
+              ],
+              "genres": [
+                "Country"
+              ],
+              "publicationDate": "1962-03-31",
+              "isSingle": false,
+              "reproductions": 420000
+            }
+          ]
+        }
+      ],
+      "songs": [
+        {
+          "name": "Delia's Gone",
+          "author": "Johnny Cash",
+          "duration": [
+            2,
+            17
+          ],
+          "genres": [
+            "Country"
+          ],
+          "publicationDate": "1962-03-31",
+          "isSingle": false,
+          "reproductions": 1200000
+        },
+        {
+          "name": "The Beast In Me",
+          "author": "Johnny Cash",
+          "duration": [
+            2,
+            45
+          ],
+          "genres": [
+            "Country"
+          ],
+          "publicationDate": "1962-03-31",
+          "isSingle": false,
+          "reproductions": 850000
+        },
+        {
+          "name": "Drive On",
+          "author": "Johnny Cash",
+          "duration": [
+            2,
+            23
+          ],
+          "genres": [
+            "Country"
+          ],
+          "publicationDate": "1962-03-31",
+          "isSingle": false,
+          "reproductions": 700000
+        },
+        {
+          "name": "Why Me Lord",
+          "author": "Johnny Cash",
+          "duration": [
+            2,
+            19
+          ],
+          "genres": [
+            "Country"
+          ],
+          "publicationDate": "1962-03-31",
+          "isSingle": false,
+          "reproductions": 1300000
+        },
+        {
+          "name": "Thirteen",
+          "author": "Johnny Cash",
+          "duration": [
+            2,
+            29
+          ],
+          "genres": [
+            "Country"
+          ],
+          "publicationDate": "1962-03-31",
+          "isSingle": false,
+          "reproductions": 420000
+        }
+      ]
     }
   ]
 }
