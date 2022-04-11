@@ -225,7 +225,7 @@ function promptEditSong(song: Song): void {
     },
   ];
   inquirer.prompt(questions).then((answers) => {
-    manager.editSong(song, answers.name, answers.author, answers.duracion, answers.genres,
+    manager.editSong(song, answers.name, answers.author, answers.duration, answers.genres,
         answers.publication, answers.single, answers.reproductions);
     promptSongPrincipal();
   });

@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import * as inquirer from 'inquirer';
 import {Group} from '../Basics//Group';
 import {promptUser} from './MainMenu';
@@ -7,7 +8,6 @@ import {GenreManager} from '../Managers/GenreManager';
 import {GroupManager} from '../Managers/GroupManager';
 import {Artist} from '../Basics/Artist';
 import {Album} from '../Basics/Album';
-const promptSync = require('prompt-sync')();
 
 enum options {
   Show = 'Show Data Base',
@@ -301,7 +301,6 @@ function promptEditGroup(group: Group): void {
       artist.push(ArtistManager.getArtistManager().searchByName(artistName));
     });
     manager.editGroup(group, answers.name, artist, answers.year, answers.genre, albums);
-    promptSync('prueba');
     promptGroups();
   });
 }
@@ -499,7 +498,6 @@ function promptShowPleyList(group: Group) {
           switch (answers['order']) {
             case 'Ascendente':
               group.showPlayListAsociate();
-              promptSync('Press key to continue');
               break;
             case 'Descendente':
               group.showPlayListAsociate();
