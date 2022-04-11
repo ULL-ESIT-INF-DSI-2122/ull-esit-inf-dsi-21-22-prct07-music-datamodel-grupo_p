@@ -8,7 +8,7 @@ import {PlaylistManager} from '../Managers/PlaylistManager';
 import {SongManager} from '../Managers/SongManager';
 import {promptArtists} from './ArtistMenu';
 import {promptGenres} from './GenresMenu';
-import {promptGroups} from './GroupMain';
+import {promptGroups} from './GroupsMenu';
 import {promptPlaylists} from './PlaylistsMenu';
 import {promptSongPrincipal} from './SongMenu';
 

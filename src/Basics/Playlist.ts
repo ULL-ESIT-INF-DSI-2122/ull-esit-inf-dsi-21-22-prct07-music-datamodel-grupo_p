@@ -278,8 +278,12 @@ export class Playlist extends BasicData {
    * @returns Devuelve una cadena con la información de la playlist.
    */
   showInfo(order: Order = 0): string {
-    const info: string = `${this.name}\n  -Géneros: ${this.getGenresNames()}\n  -Playlist original: ${(this.systemPlaylist ? 'Sí' : 'No')}\n`+
-       `  -Duración: ${this.duration[0]}h ${this.duration[1]}min\n  -Canciones:\n    ${this.getSongsNames(order).join('\n    ')}\n`;
+    const info: string = `PLAYLIST ${this.name}
+    -Géneros: ${this.getGenresNames()}
+    -Playlist original: ${(this.systemPlaylist ? 'Sí' : 'No')}
+    -Duración: ${this.duration[0]}h ${this.duration[1]}min
+    -Canciones:
+      ${this.getSongsNames(order).join('\n      ')}`;
     console.log(info);
     return info;
   }

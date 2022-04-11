@@ -126,8 +126,13 @@ export class Genre extends BasicData {
    * @returns Devuelve una cadena con la información de la playlist.
    */
   showInfo(): string {
-    const info: string = `${this.name}\n  -Grupos/Artistas:\n    ${this.getMusiciansNames().join('\n    ')}\n`+
-    `  -Álbums:\n    ${this.getAlbumsNames().join('\n    ')}\n  -Canciones:\n    ${this.getSongsNames().join('\n    ')}\n`;
+    const info: string = `GÉNERO ${this.name}
+    -Grupos/Artistas:
+      ${this.getMusiciansNames().join('\n      ')}
+    -Álbums:
+      ${this.getAlbumsNames().join('\n      ')}
+    -Canciones:
+      ${this.getSongsNames().join('\n      ')}`;
     console.log(info);
     return info;
   }

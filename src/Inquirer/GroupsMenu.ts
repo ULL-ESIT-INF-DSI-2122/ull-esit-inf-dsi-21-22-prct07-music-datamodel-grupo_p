@@ -1,6 +1,6 @@
 /* eslint-disable no-unused-vars */
 import * as inquirer from 'inquirer';
-import {Group} from '../Basics//Group';
+import {Group} from '../Basics/Group';
 import {promptUser} from './MainMenu';
 import {ArtistManager} from '../Managers/ArtistManager';
 import {AlbumManager} from '../Managers/AlbumManager';

@@ -43,7 +43,7 @@ function promptSong(song: Song): void {
   console.clear();
   song.showInfo();
   inquirer.prompt({
-    type: 'rawlist',
+    type: 'list',
     name: 'command',
     message: 'Opciones',
     choices: ['Editar', 'Eliminar', 'Volver'],

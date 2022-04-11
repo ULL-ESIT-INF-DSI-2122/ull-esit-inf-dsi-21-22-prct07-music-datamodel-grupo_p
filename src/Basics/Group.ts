@@ -140,15 +140,16 @@ export class Group extends BasicData {
 
   public showInfo(): void {
     let info: string = `GRUPO ${this.getName()}
-    Nombre: ${this.getName()}
-    Artistas: ${this.getArtists().map((artist) => {
+    -Nombre: ${this.getName()}
+    -Artistas: ${this.getArtists().map((artist) => {
     return artist.getName();
   })}
-    Genero/s: ${this.getGenres()}
-    Albums: ${this.getAlbums().map((album) => {
+    -Año creacion: ${this.getFundationYear()}
+    -Genero/s: ${this.getGenres()}
+    -Albums:
+      ${this.getAlbums().map((album) => {
     return album.getName();
-  })}
-    Año creacion: ${this.getFundationYear()})}`;
+  }).join('\n      ')}`;
     console.log(info);
   }
 }

@@ -87,32 +87,19 @@ export class Artist extends BasicData {
     this.songs = this.songs.filter((elemento) => elemento !== songDelete);
   }
 
-  // ---------- //
-  /*
-  public getNumberListenersMonthly(): number {
-    let listenersGroups: number = 0;
-    let listenerSongs: number = 0;
-    this.getGroups().forEach((group) => {
-      listenersGroups += group.getNumberListenersMonthly();
-    });
-    this.getSongs().forEach((song) => {
-      listenerSongs += song.monthlyReproductions();
-    });
-
-    return listenerSongs + listenersGroups;
-  }*/
-
   public showInfo(): void {
     let info: string = `ARTISTA ${this.getName()}
-    Nombre: ${this.getName()}
-    Grupos: ${this.getGroups()}
-    Genero/s: ${this.getGenres()}
-    Albums: ${this.getAlbums().map((album) => {
+    -Nombre: ${this.getName()}
+    -Grupos: ${this.getGroups()}
+    -Genero/s: ${this.getGenres()}
+    -Albums:
+      ${this.getAlbums().map((album) => {
     return album.getName();
-  })}
-    Canciones: ${this.getSongs().map((song) => {
+  }).join('\n      ')}
+    -Canciones:
+      ${this.getSongs().map((song) => {
     return song.getName();
-  })}`;
+  }).join('\n      ')}`;
     console.log(info);
   }
 
