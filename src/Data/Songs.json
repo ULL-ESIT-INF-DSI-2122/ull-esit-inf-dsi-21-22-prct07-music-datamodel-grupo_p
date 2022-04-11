@@ -419,6 +419,76 @@
       "publicationDate": "1962-03-31",
       "isSingle": false,
       "reproductions": 420000
+    },
+    {
+      "name": "Cabaret",
+      "author": "Louis Armstrong",
+      "duration": [
+        2,
+        44
+      ],
+      "genres": [
+        "Jazz"
+      ],
+      "publicationDate": "1967-04-01",
+      "isSingle": false,
+      "reproductions": 6420000
+    },
+    {
+      "name": "The Home Fire",
+      "author": "Louis Armstrong",
+      "duration": [
+        3,
+        14
+      ],
+      "genres": [
+        "Jazz"
+      ],
+      "publicationDate": "1967-04-01",
+      "isSingle": false,
+      "reproductions": 820000
+    },
+    {
+      "name": "There Must Be A Way",
+      "author": "Louis Armstrong",
+      "duration": [
+        3,
+        5
+      ],
+      "genres": [
+        "Jazz"
+      ],
+      "publicationDate": "1967-04-01",
+      "isSingle": false,
+      "reproductions": 5420000
+    },
+    {
+      "name": "Give Me Your Kisses",
+      "author": "Louis Armstrong",
+      "duration": [
+        1,
+        58
+      ],
+      "genres": [
+        "Jazz"
+      ],
+      "publicationDate": "1967-04-01",
+      "isSingle": false,
+      "reproductions": 2120000
+    },
+    {
+      "name": "The Sunshine Of Love",
+      "author": "Louis Armstrong",
+      "duration": [
+        2,
+        52
+      ],
+      "genres": [
+        "Jazz"
+      ],
+      "publicationDate": "1967-04-01",
+      "isSingle": false,
+      "reproductions": 620000
     }
   ]
 }
