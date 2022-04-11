@@ -1,17 +1,23 @@
 import * as inquirer from 'inquirer';
-import {Genre} from '../Basics/Genre';
-import {Song} from '../Basics/Song';
 import {GenreManager} from '../Managers/GenreManager';
 import {AlbumManager} from '../Managers/AlbumManager';
 import {Album} from '../Basics/Album';
 import {promptUser} from './MainMenu';
 import {SongManager} from '../Managers/SongManager';
-import {Playlist} from '../Basics/Playlist';
-import {promptSelectOrder} from './PlaylistsMenu';
+import {ArtistManager} from '../Managers/ArtistManager';
+import {GroupManager} from '../Managers/GroupManager';
+import {Song} from '../Basics/Song';
+
+
+const manager: AlbumManager = AlbumManager.getAlbumManager();
+const songs: string[] = SongManager.getSongManager().getList();
+const genres: string[] = GenreManager.getGenreManager().getList();
+const artists: string[] = ArtistManager.getArtistManager().getList();
+const groups: string[] = GroupManager.getGroupManager().getList();
+
 
 export function promptAlbumPrincipal(): void {
-  const manager: AlbumManager = AlbumManager.getAlbumManager();
-  let options: string[] = ['Nuevo Album'];
+  let options: string[] = ['Nuevo Album +'];
   options = options.concat(manager.getList());
   options.push('Volver');
   console.clear();
@@ -22,7 +28,7 @@ export function promptAlbumPrincipal(): void {
     choices: options,
   }).then((answers) => {
     switch (answers['command']) {
-      case 'Nuevo Album':
+      case 'Nuevo Album +':
         promptAddAlbum();
         break;
       case 'Volver':
@@ -30,6 +36,7 @@ export function promptAlbumPrincipal(): void {
         break;
       default:
         const album: Album = manager.searchByName(answers['command']);
+        album.showInfo();
         promptAlbum(album);
         break;
     }
@@ -37,11 +44,10 @@ export function promptAlbumPrincipal(): void {
 }
 
 function promptAlbum(album: Album): void {
-  let p: Playlist;
   console.clear();
-  album.print();
+  album.showInfo();
   inquirer.prompt({
-    type: 'rawlist',
+    type: 'list',
     name: 'command',
     message: 'Opciones',
     choices: ['Editar', 'Eliminar', 'Volver'],
@@ -51,14 +57,7 @@ function promptAlbum(album: Album): void {
         promptEditAlbum(album);
         break;
       case 'Eliminar':
-        promptRemoveSong(album);
-        /*
-        ArtistsManager.getArtistsManager().removeGenre(genre);
-        GroupsManager.getGroupsManager().removeGenre(genre);
-        AlbumsManager.getAlbumsManager().removeGenre(genre);
-        SongsManager.getSongsManager().removeGenre(genre);
-        PlaylistsManager.getPlaylistsManager().updateGenre();
-        */
+        promptRemoveAlbum(album);
         break;
       default:
         promptAlbumPrincipal();
@@ -68,36 +67,23 @@ function promptAlbum(album: Album): void {
   );
 }
 
-function promptRemoveSong(album: Album) {
-  const manager: AlbumManager = AlbumManager.getAlbumManager();
+function promptRemoveAlbum(album: Album) {
   console.clear();
-  inquirer
-      .prompt([
-        {
-          name: 'eliminar',
-          type: 'confirm',
-          message: '¿Seguro que quieres eliminar este album?',
-        },
-      ])
-      .then((answer) => {
-        if (answer.eliminar) manager.removeAlbum(album);
-        promptAlbumPrincipal();
-      });
+  inquirer.prompt([
+    {
+      name: 'eliminar',
+      type: 'confirm',
+      message: '¿Seguro que quieres eliminar este album?',
+    },
+  ]).then((answer) => {
+    if (answer.eliminar) manager.removeAlbum(album);
+    promptAlbumPrincipal();
+  });
 }
 
 function promptAddAlbum(): void {
-  let d: Date = new Date;
-  const manager: AlbumManager = AlbumManager.getAlbumManager();
-  const musicians: string[] = ['Rolling Stones', 'Michael Jackson'];
-  const song: SongManager = SongManager.getSongManager();
-  const genres: GenreManager = GenreManager.getGenreManager();
-  // const genre: string[] = GenresManager.getGenresManager().getList();
-  /*
-  let musicians: string[] = ArtistsManager.getArtistsManager().getList();
-  musicians = musicians.concat(GroupsManager.getGroupsManager().getList());
-  const albums: string[] = AlbumsManager.getAlbumsManager().getList();
-  const songs: string[] = SongsManager.getSongsManager().getList();
-  */
+  let musicians: string[] = artists;
+  musicians = musicians.concat(groups);
   console.clear();
   const questions = [
     {
@@ -105,30 +91,18 @@ function promptAddAlbum(): void {
       name: 'name',
       message: 'Nombre del album:',
       validate(answer: string) {
-        if (answer.length === null) {
-          return 'Debes elegir al menos un género.';
+        let val: boolean | string = true;
+        if (manager.anotherOneWithThatName(answer)) {
+          val = 'Ya existe una canción con ese nombre.';
         }
-        return true;
+        return val;
       },
-      // validate(value: string) {
-      //   let val: boolean | string = true;
-      //   if (manager.exists(value)) {
-      //     val = 'Error: ya existe un género con ese nombre.';
-      //   }
-      //   return val;
-      // },
     },
     {
       type: 'list',
-      message: '¿Nombre del artista o grupo?:',
+      message: '¿Nombre del artista o grupo que lo publica?:',
       name: 'musicians',
       choices: musicians,
-      validate(answer: string) {
-        if (answer.length < 1) {
-          return 'Debes introducir el nombre del artisto o grupo.';
-        }
-        return true;
-      },
     },
     {
       type: 'number',
@@ -143,9 +117,9 @@ function promptAddAlbum(): void {
     },
     {
       type: 'checkbox',
-      message: 'Elige un/unos de los géneros:',
+      message: 'Elige los géneros:',
       name: 'genre',
-      choices: genres.getList(),
+      choices: genres,
       validate(answer: string[]) {
         if (answer.length < 1) {
           return 'Debes elegir al menos un género.';
@@ -155,37 +129,25 @@ function promptAddAlbum(): void {
     },
     {
       type: 'checkbox',
-      message: '¿Selecciona las canciones?',
+      message: 'Selecciona las canciones',
       name: 'songs',
-      choices: song.getList(),
+      choices: songs,
     },
   ];
   inquirer.prompt(questions).then((answers) => {
-    const newAlbum: Album = new Album(answers.name, answers.musicians, answers.publication, answers.genre, answers.songs);
+    let songs: Song[] = [];
+    answers.songs.forEach((song: string) => {
+      songs.push(SongManager.getSongManager().searchByName(song));
+    });
+    const newAlbum: Album = new Album(answers.name, answers.musicians, answers.publication, answers.genre, songs);
     manager.addAlbum(newAlbum);
-    /*
-    ArtistsManager.getArtistsManager().updateGenre(newGenre, answers.musicians);
-    GroupsManager.getGroupsManager().updateGenre(newGenre, answers.musicians);
-    AlbumsManager.getAlbumsManager().updateGenre(newGenre, answers.albums);
-    SongsManager.getSongsManager().updateGenre(newGenre, answers.songs);
-    PlaylistsManager.getPlaylistsManager().updateGenre();
-    */
     promptAlbumPrincipal();
   });
 }
 
 function promptEditAlbum(album: Album): void {
-  const manager: AlbumManager = AlbumManager.getAlbumManager();
-  const musicians: string[] = ['Rolling Stones', 'Michael Jackson'];
-  // const songs: string[] = ['Imagine', 'Despacito'];
-  let genreList: string[] = GenreManager.getGenreManager().getList();
-  let songs: string[] = SongManager.getSongManager().getList();
-  /*
-  let musicians: string[] = ArtistsManager.getArtistsManager().getList();
-  musicians = musicians.concat(GroupsManager.getGroupsManager().getList());
-  const albums: string[] = AlbumsManager.getAlbumsManager().getList();
-  const songs: string[] = SongsManager.getSongsManager().getList();
-  */
+  let musicians: string[] = artists;
+  musicians = musicians.concat(groups);
   console.clear();
   const questions = [
     {
@@ -193,16 +155,9 @@ function promptEditAlbum(album: Album): void {
       name: 'name',
       message: 'Nuevo nombre del álbum:',
       default: album.getName(),
-      validate(value: string) {
-        let val: boolean | string = true;
-        if (manager.anotherOneWithThatName(value)) {
-          val = 'Error: ya existe un álbum con ese nombre.';
-        }
-        return val;
-      },
     },
     {
-      type: 'checkbox',
+      type: 'list',
       message: 'Elige artistas/grupos:',
       name: 'musicians',
       choices: musicians,
@@ -218,7 +173,7 @@ function promptEditAlbum(album: Album): void {
       type: 'checkbox',
       message: 'Elige el o los nuevos géneros:',
       name: 'genre',
-      choices: genreList,
+      choices: genres,
       default: album.getGenres(),
     },
     {
@@ -230,11 +185,6 @@ function promptEditAlbum(album: Album): void {
     },
   ];
   inquirer.prompt(questions).then((answers) => {
-    album.setName(answers.name);
-    album.setPublisher(answers.musicians);
-    album.setYear(answers.publication);
-    album.setGenres(answers.genre);
-    manager.store();
     promptAlbumPrincipal();
   });
 }

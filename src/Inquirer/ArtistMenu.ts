@@ -9,7 +9,7 @@ import {AlbumManager} from '../Managers/AlbumManager';
 import {GenreManager} from '../Managers/GenreManager';
 import {promptUser} from './MainMenu';
 import {GroupManager} from '../Managers/GroupManager';
-
+const promptStop = require('prompt-sync')();
 
 enum options {
   Show = 'Show Data Base',

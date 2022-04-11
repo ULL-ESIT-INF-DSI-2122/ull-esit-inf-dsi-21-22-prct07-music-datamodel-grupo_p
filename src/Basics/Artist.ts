@@ -7,6 +7,7 @@ import {AlbumManager} from '../Managers/AlbumManager';
 import {Genre} from './Genre';
 import {PlaylistManager} from '../Managers/PlaylistManager';
 import {Playlist} from './Playlist';
+// const promptStop = require('prompt-sync')();
 
 export class Artist extends BasicData {
   constructor(name: string, private groups: string[],
@@ -17,12 +18,15 @@ export class Artist extends BasicData {
   public static deserialize(artist: ArtistInterface): Artist {
     let albums: Album[] = [];
     let songs: Song[] = [];
-    artist.songs.forEach((s) =>
-      songs.push(SongManager.getSongManager().searchByName(s.name)),
+    artist.songs.forEach((song) =>
+      songs.push(SongManager.getSongManager().searchByName(song.name)),
     );
-    artist.albums.forEach((a) =>
-      albums.push(AlbumManager.getAlbumManager().searchByName(a.name)),
+    artist.albums.forEach((album) =>
+      albums.push(AlbumManager.getAlbumManager().searchByName(album.name)),
     );
+    // console.log(artist.albums);
+    // console.log(albums);
+    // promptStop('pulsa');
     return new Artist(artist.name, artist.groups, artist.genres, albums, songs);
   }
 

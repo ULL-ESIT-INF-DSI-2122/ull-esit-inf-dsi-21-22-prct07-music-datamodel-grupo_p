@@ -13,7 +13,6 @@ const artists: string[] = ArtistManager.getArtistManager().getList();
 const groups: string[] = GroupManager.getGroupManager().getList();
 
 export function promptSongPrincipal(): void {
-  const manager: SongManager = SongManager.getSongManager();
   let options: string[] = ['Nueva canción +'];
   options = options.concat(manager.getList());
   options.push('Volver');

@@ -9,6 +9,7 @@ import {AlbumManager} from '../Managers/AlbumManager';
 import {ArtistManager} from '../Managers/ArtistManager';
 import {GroupManager} from '../Managers/GroupManager';
 
+
 /**
  * Clase para representar un género musical.
  */
@@ -125,7 +126,7 @@ export class Genre extends BasicData {
    * Muestra la información de la playlist.
    * @returns Devuelve una cadena con la información de la playlist.
    */
-  showInfo(): string {
+  showInfo():void {
     const info: string = `GÉNERO ${this.name}
     -Grupos/Artistas:
       ${this.getMusiciansNames().join('\n      ')}
@@ -134,7 +135,6 @@ export class Genre extends BasicData {
     -Canciones:
       ${this.getSongsNames().join('\n      ')}`;
     console.log(info);
-    return info;
   }
   /**
    * Devuelve los nombres de los grupos/artistas del género.

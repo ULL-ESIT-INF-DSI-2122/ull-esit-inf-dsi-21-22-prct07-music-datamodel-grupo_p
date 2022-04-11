@@ -58,21 +58,21 @@ export class Album extends BasicData {
     this.songs = this.songs.filter((elemento) => elemento !== songDelete);
   }
   public static deserialize(album: AlbumInterface): Album {
-    let songs: Song[] = [];
-    album.songs.forEach((s) =>
-      songs.push(SongManager.getSongManager().searchByName(s.name) as Song),
-    );
+    let managerSong = SongManager.getSongManager();
+    let songs: Song[] = album.songs.map((songName) => {
+      return managerSong.searchByName(songName.name);
+    });
     return new Album(album.name, album.whoPublishes, album.publicationYear, album.genres, songs);
   }
 
-  public print(): string {
+  public showInfo(): void {
     //   return (`ALBUM ${this.name}
     //   Año de publicacion: ${this.publicationYear}
     //   Generos que contiene este album: ${this.genres}
     //  `);
+    const songsNames = this.songs.map((song) => song.getName());
     const info: string = `${this.name}\n  -Grupos/Artistas: ${this.publisher}\n`+
-      `  -Año de publicacion: ${this.publicationYear}\n  -Genero: ${this.genres}\n  -Canciones: ${this.songs}\n `;
+      `  -Año de publicacion: ${this.publicationYear}\n  -Genero: ${this.genres}\n  -Canciones: ${songsNames}\n `;
     console.log(info);
-    return info;
   }
 }

@@ -11,6 +11,7 @@ import {promptGenres} from './GenresMenu';
 import {promptGroups} from './GroupsMenu';
 import {promptPlaylists} from './PlaylistsMenu';
 import {promptSongPrincipal} from './SongMenu';
+import {promptAlbumPrincipal} from './AlbumMenu';
 
 /**
  * Enumeración de las opciones del menú principal.
@@ -18,6 +19,7 @@ import {promptSongPrincipal} from './SongMenu';
 export enum Commands {
     Genres = 'Géneros',
     Artists = 'Artistas',
+    Albums = 'Albumnes',
     Songs = 'Canciones',
     Groups = 'Grupos',
     Playlists = 'Playlists',
@@ -50,6 +52,8 @@ export function promptUser(): void {
       case Commands.Playlists:
         promptPlaylists();
         break;
+      case Commands.Albums:
+        promptAlbumPrincipal();
     }
   });
 }
