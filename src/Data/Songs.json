@@ -279,6 +279,76 @@
       "publicationDate": "2000-09-15",
       "isSingle": false,
       "reproductions": 7600000
+    },
+    {
+      "name": "La vuelta al mundo",
+      "author": "Calle 13",
+      "duration": [
+        3,
+        53
+      ],
+      "genres": [
+        "Urbano Latino"
+      ],
+      "publicationDate": "2012-05-21",
+      "isSingle": true,
+      "reproductions": 4600000
+    },
+    {
+      "name": "Digo lo que pienso",
+      "author": "Calle 13",
+      "duration": [
+        4,
+        52
+      ],
+      "genres": [
+        "Urbano Latino"
+      ],
+      "publicationDate": "2010-11-22",
+      "isSingle": true,
+      "reproductions": 3600000
+    },
+    {
+      "name": "Calma pueblo",
+      "author": "Calle 13",
+      "duration": [
+        4,
+        9
+      ],
+      "genres": [
+        "Urbano Latino"
+      ],
+      "publicationDate": "2010-06-15",
+      "isSingle": false,
+      "reproductions": 2380000
+    },
+    {
+      "name": "Desencuentro",
+      "author": "Residente",
+      "duration": [
+        4,
+        44
+      ],
+      "genres": [
+        "Urbano Latino"
+      ],
+      "publicationDate": "2017-03-29",
+      "isSingle": true,
+      "reproductions": 2750000
+    },
+    {
+      "name": "Apocalíptico",
+      "author": "Residente",
+      "duration": [
+        6,
+        12
+      ],
+      "genres": [
+        "Urbano Latino"
+      ],
+      "publicationDate": "2017-03-31",
+      "isSingle": true,
+      "reproductions": 3600000
     }
   ]
 }

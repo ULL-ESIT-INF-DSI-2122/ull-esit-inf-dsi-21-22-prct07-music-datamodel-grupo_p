@@ -399,6 +399,85 @@
           "reproductions": 7600000
         }
       ]
+    },
+    {
+      "name": "Residente",
+      "groups": [
+        "Calle 13"
+      ],
+      "genres": [
+        "Urbano Latino"
+      ],
+      "albums": [
+        {
+          "name": "Residente",
+          "whoPublishes": "Residente",
+          "publicationYear": 2017,
+          "genres": [
+            "Urbano Latino"
+          ],
+          "songs": [
+            {
+              "name": "Desencuentro",
+              "author": "Residente",
+              "duration": [
+                4,
+                44
+              ],
+              "genres": [
+                "Urbano Latino"
+              ],
+              "publicationDate": "2017-03-29",
+              "isSingle": true,
+              "reproductions": 2750000
+            },
+            {
+              "name": "Apocalíptico",
+              "author": "Residente",
+              "duration": [
+                6,
+                12
+              ],
+              "genres": [
+                "Urbano Latino"
+              ],
+              "publicationDate": "2017-03-31",
+              "isSingle": true,
+              "reproductions": 3600000
+            }
+          ]
+        }
+      ],
+      "songs": [
+        {
+          "name": "Te suelto el pelo",
+          "author": "Yandel",
+          "duration": [
+            4,
+            2
+          ],
+          "genres": [
+            "Reggeaton"
+          ],
+          "publicationDate": "2003-09-15",
+          "isSingle": false,
+          "reproductions": 2550000
+        },
+        {
+          "name": "Ya me cansé",
+          "author": "Yandel",
+          "duration": [
+            2,
+            35
+          ],
+          "genres": [
+            "Reggeaton"
+          ],
+          "publicationDate": "2003-09-15",
+          "isSingle": false,
+          "reproductions": 1600000
+        }
+      ]
     }
   ]
 }

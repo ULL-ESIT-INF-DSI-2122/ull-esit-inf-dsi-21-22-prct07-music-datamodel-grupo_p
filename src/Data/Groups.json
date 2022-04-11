@@ -425,6 +425,148 @@
           ]
         }
       ]
+    },
+    {
+      "name": "Calle 13",
+      "artists": [
+        {
+          "name": "Residente",
+          "groups": [
+            "Calle 13"
+          ],
+          "genres": [
+            "Urbano Latino"
+          ],
+          "albums": [
+            {
+              "name": "Residente",
+              "whoPublishes": "Residente",
+              "publicationYear": 2017,
+              "genres": [
+                "Urbano Latino"
+              ],
+              "songs": [
+                {
+                  "name": "Desencuentro",
+                  "author": "Residente",
+                  "duration": [
+                    4,
+                    44
+                  ],
+                  "genres": [
+                    "Urbano Latino"
+                  ],
+                  "publicationDate": "2017-03-29",
+                  "isSingle": true,
+                  "reproductions": 2750000
+                },
+                {
+                  "name": "Apocalíptico",
+                  "author": "Residente",
+                  "duration": [
+                    6,
+                    12
+                  ],
+                  "genres": [
+                    "Urbano Latino"
+                  ],
+                  "publicationDate": "2017-03-31",
+                  "isSingle": true,
+                  "reproductions": 3600000
+                }
+              ]
+            }
+          ],
+          "songs": [
+            {
+              "name": "Te suelto el pelo",
+              "author": "Yandel",
+              "duration": [
+                4,
+                2
+              ],
+              "genres": [
+                "Reggeaton"
+              ],
+              "publicationDate": "2003-09-15",
+              "isSingle": false,
+              "reproductions": 2550000
+            },
+            {
+              "name": "Ya me cansé",
+              "author": "Yandel",
+              "duration": [
+                2,
+                35
+              ],
+              "genres": [
+                "Reggeaton"
+              ],
+              "publicationDate": "2003-09-15",
+              "isSingle": false,
+              "reproductions": 1600000
+            }
+          ]
+        }
+      ],
+      "fundationYear": 2004,
+      "genres": [
+        "Urbano Latino"
+      ],
+      "albums": [
+        {
+          "name": "Entren los que quieran",
+          "whoPublishes": "Calle 13",
+          "publicationYear": 2010,
+          "genres": [
+            "Urbano Latino"
+          ],
+          "songs": [
+            {
+              "name": "La vuelta al mundo",
+              "author": "Calle 13",
+              "duration": [
+                3,
+                53
+              ],
+              "genres": [
+                "Urbano Latino"
+              ],
+              "publicationDate": "2012-05-21",
+              "isSingle": true,
+              "reproductions": 4600000
+            },
+            {
+              "name": "Digo lo que pienso",
+              "author": "Calle 13",
+              "duration": [
+                4,
+                52
+              ],
+              "genres": [
+                "Urbano Latino"
+              ],
+              "publicationDate": "2010-11-22",
+              "isSingle": true,
+              "reproductions": 3600000
+            },
+            {
+              "name": "Calma pueblo",
+              "author": "Calle 13",
+              "duration": [
+                4,
+                9
+              ],
+              "genres": [
+                "Urbano Latino"
+              ],
+              "publicationDate": "2010-06-15",
+              "isSingle": false,
+              "reproductions": 2380000
+            }
+          ]
+        }
+      ]
     }
   ]
 }
