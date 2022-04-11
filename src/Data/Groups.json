@@ -35,18 +35,18 @@
                   "reproductions": 3200000
                 },
                 {
-                  "name": "A Higher Place",
+                  "name": "Lost Stars",
                   "author": "Adam Levine",
                   "duration": [
                     3,
-                    11
+                    16
                   ],
                   "genres": [
                     "Pop"
                   ],
-                  "publicationDate": "2014-07-07",
-                  "isSingle": false,
-                  "reproductions": 1860000
+                  "publicationDate": "2014-06-30",
+                  "isSingle": true,
+                  "reproductions": 3200000
                 }
               ]
             }
@@ -67,18 +67,18 @@
               "reproductions": 3200000
             },
             {
-              "name": "A Higher Place",
+              "name": "Lost Stars",
               "author": "Adam Levine",
               "duration": [
                 3,
-                11
+                16
               ],
               "genres": [
                 "Pop"
               ],
-              "publicationDate": "2014-07-07",
-              "isSingle": false,
-              "reproductions": 1860000
+              "publicationDate": "2014-06-30",
+              "isSingle": true,
+              "reproductions": 3200000
             }
           ]
         }
@@ -225,7 +225,7 @@
           ]
         }
       ],
-      "fundationYear": 1999,
+      "fundationYear": 1962,
       "genres": [
         "Rock"
       ],
@@ -248,6 +248,7 @@
               "genres": [
                 "Rock"
               ],
+              "publicationDate": "1965-06-06",
               "isSingle": false,
               "reproductions": 10700000
             },
@@ -278,6 +279,148 @@
               "publicationDate": "1964-06-26",
               "isSingle": true,
               "reproductions": 3790000
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Wisin y Yandel",
+      "artists": [
+        {
+          "name": "Yandel",
+          "groups": [
+            "Wisin y Yandel"
+          ],
+          "genres": [
+            "Reggeaton"
+          ],
+          "albums": [
+            {
+              "name": "Quien contra mi",
+              "whoPublishes": "Yandel",
+              "publicationYear": 2003,
+              "genres": [
+                "Reggeaton"
+              ],
+              "songs": [
+                {
+                  "name": "Te suelto el pelo",
+                  "author": "Yandel",
+                  "duration": [
+                    4,
+                    2
+                  ],
+                  "genres": [
+                    "Reggeaton"
+                  ],
+                  "publicationDate": "2003-09-15",
+                  "isSingle": false,
+                  "reproductions": 2550000
+                },
+                {
+                  "name": "Ya me cansé",
+                  "author": "Yandel",
+                  "duration": [
+                    2,
+                    35
+                  ],
+                  "genres": [
+                    "Reggeaton"
+                  ],
+                  "publicationDate": "2003-09-15",
+                  "isSingle": false,
+                  "reproductions": 1600000
+                }
+              ]
+            }
+          ],
+          "songs": [
+            {
+              "name": "Te suelto el pelo",
+              "author": "Yandel",
+              "duration": [
+                4,
+                2
+              ],
+              "genres": [
+                "Reggeaton"
+              ],
+              "publicationDate": "2003-09-15",
+              "isSingle": false,
+              "reproductions": 2550000
+            },
+            {
+              "name": "Ya me cansé",
+              "author": "Yandel",
+              "duration": [
+                2,
+                35
+              ],
+              "genres": [
+                "Reggeaton"
+              ],
+              "publicationDate": "2003-09-15",
+              "isSingle": false,
+              "reproductions": 1600000
+            }
+          ]
+        }
+      ],
+      "fundationYear": 1998,
+      "genres": [
+        "Reggeaton"
+      ],
+      "albums": [
+        {
+          "name": "Líderes",
+          "whoPublishes": "Wisin y Yandel",
+          "publicationYear": 2012,
+          "genres": [
+            "Reggeaton"
+          ],
+          "songs": [
+            {
+              "name": "Tu nombre",
+              "author": "Wisin y Yandel",
+              "duration": [
+                4,
+                32
+              ],
+              "genres": [
+                "Reggeaton"
+              ],
+              "publicationDate": "2012-07-03",
+              "isSingle": false,
+              "reproductions": 2750000
+            },
+            {
+              "name": "Peligro",
+              "author": "Wisin y Yandel",
+              "duration": [
+                3,
+                30
+              ],
+              "genres": [
+                "Reggeaton"
+              ],
+              "publicationDate": "2012-07-03",
+              "isSingle": false,
+              "reproductions": 600000
+            },
+            {
+              "name": "No te detengas",
+              "author": "Wisin y Yandel",
+              "duration": [
+                3,
+                47
+              ],
+              "genres": [
+                "Reggeaton"
+              ],
+              "publicationDate": "2012-09-03",
+              "isSingle": false,
+              "reproductions": 750000
             }
           ]
         }

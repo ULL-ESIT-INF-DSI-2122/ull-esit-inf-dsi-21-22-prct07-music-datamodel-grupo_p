@@ -157,6 +157,248 @@
           "reproductions": 3200000
         }
       ]
+    },
+    {
+      "name": "Yandel",
+      "groups": [
+        "Wisin y Yandel"
+      ],
+      "genres": [
+        "Reggeaton"
+      ],
+      "albums": [
+        {
+          "name": "Quien contra mi",
+          "whoPublishes": "Yandel",
+          "publicationYear": 2003,
+          "genres": [
+            "Reggeaton"
+          ],
+          "songs": [
+            {
+              "name": "Te suelto el pelo",
+              "author": "Yandel",
+              "duration": [
+                4,
+                2
+              ],
+              "genres": [
+                "Reggeaton"
+              ],
+              "publicationDate": "2003-09-15",
+              "isSingle": false,
+              "reproductions": 2550000
+            },
+            {
+              "name": "Ya me cansé",
+              "author": "Yandel",
+              "duration": [
+                2,
+                35
+              ],
+              "genres": [
+                "Reggeaton"
+              ],
+              "publicationDate": "2003-09-15",
+              "isSingle": false,
+              "reproductions": 1600000
+            }
+          ]
+        }
+      ],
+      "songs": [
+        {
+          "name": "Te suelto el pelo",
+          "author": "Yandel",
+          "duration": [
+            4,
+            2
+          ],
+          "genres": [
+            "Reggeaton"
+          ],
+          "publicationDate": "2003-09-15",
+          "isSingle": false,
+          "reproductions": 2550000
+        },
+        {
+          "name": "Ya me cansé",
+          "author": "Yandel",
+          "duration": [
+            2,
+            35
+          ],
+          "genres": [
+            "Reggeaton"
+          ],
+          "publicationDate": "2003-09-15",
+          "isSingle": false,
+          "reproductions": 1600000
+        }
+      ]
+    },
+    {
+      "name": "Eminem",
+      "groups": [
+        "-"
+      ],
+      "genres": [
+        "Rap"
+      ],
+      "albums": [
+        {
+          "name": "The Marshall Matters LP",
+          "whoPublishes": "Eminem",
+          "publicationYear": 2000,
+          "genres": [
+            "Rap"
+          ],
+          "songs": [
+            {
+              "name": "Marshall Matters",
+              "author": "Eminem",
+              "duration": [
+                5,
+                20
+              ],
+              "genres": [
+                "Rap"
+              ],
+              "publicationDate": "2000-09-15",
+              "isSingle": false,
+              "reproductions": 3420000
+            },
+            {
+              "name": "Stan",
+              "author": "Eminem",
+              "duration": [
+                5,
+                33
+              ],
+              "genres": [
+                "Rap"
+              ],
+              "publicationDate": "2000-09-15",
+              "isSingle": false,
+              "reproductions": 8430000
+            },
+            {
+              "name": "Kill you",
+              "author": "Eminem",
+              "duration": [
+                4,
+                24
+              ],
+              "genres": [
+                "Rap"
+              ],
+              "publicationDate": "2000-09-15",
+              "isSingle": false,
+              "reproductions": 3600000
+            },
+            {
+              "name": "Who knew",
+              "author": "Eminem",
+              "duration": [
+                3,
+                47
+              ],
+              "genres": [
+                "Rap"
+              ],
+              "publicationDate": "2000-09-15",
+              "isSingle": false,
+              "reproductions": 1600000
+            },
+            {
+              "name": "I'm back",
+              "author": "Eminem",
+              "duration": [
+                5,
+                11
+              ],
+              "genres": [
+                "Rap"
+              ],
+              "publicationDate": "2000-09-15",
+              "isSingle": false,
+              "reproductions": 7600000
+            }
+          ]
+        }
+      ],
+      "songs": [
+        {
+          "name": "Marshall Matters",
+          "author": "Eminem",
+          "duration": [
+            5,
+            20
+          ],
+          "genres": [
+            "Rap"
+          ],
+          "publicationDate": "2000-09-15",
+          "isSingle": false,
+          "reproductions": 3420000
+        },
+        {
+          "name": "Stan",
+          "author": "Eminem",
+          "duration": [
+            5,
+            33
+          ],
+          "genres": [
+            "Rap"
+          ],
+          "publicationDate": "2000-09-15",
+          "isSingle": false,
+          "reproductions": 8430000
+        },
+        {
+          "name": "Kill you",
+          "author": "Eminem",
+          "duration": [
+            4,
+            24
+          ],
+          "genres": [
+            "Rap"
+          ],
+          "publicationDate": "2000-09-15",
+          "isSingle": false,
+          "reproductions": 3600000
+        },
+        {
+          "name": "Who knew",
+          "author": "Eminem",
+          "duration": [
+            3,
+            47
+          ],
+          "genres": [
+            "Rap"
+          ],
+          "publicationDate": "2000-09-15",
+          "isSingle": false,
+          "reproductions": 1600000
+        },
+        {
+          "name": "I'm back",
+          "author": "Eminem",
+          "duration": [
+            5,
+            11
+          ],
+          "genres": [
+            "Rap"
+          ],
+          "publicationDate": "2000-09-15",
+          "isSingle": false,
+          "reproductions": 7600000
+        }
+      ]
     }
   ]
 }

@@ -555,7 +555,7 @@
               ]
             }
           ],
-          "fundationYear": 1999,
+          "fundationYear": 1962,
           "genres": [
             "Rock"
           ],
@@ -777,6 +777,718 @@
           "publicationDate": "2001-11-19",
           "isSingle": false,
           "reproductions": 2750000
+        }
+      ]
+    },
+    {
+      "name": "Reggeaton",
+      "musicians": [
+        {
+          "name": "Yandel",
+          "groups": [
+            "Wisin y Yandel"
+          ],
+          "genres": [
+            "Reggeaton"
+          ],
+          "albums": [
+            {
+              "name": "Quien contra mi",
+              "whoPublishes": "Yandel",
+              "publicationYear": 2003,
+              "genres": [
+                "Reggeaton"
+              ],
+              "songs": [
+                {
+                  "name": "Te suelto el pelo",
+                  "author": "Yandel",
+                  "duration": [
+                    4,
+                    2
+                  ],
+                  "genres": [
+                    "Reggeaton"
+                  ],
+                  "publicationDate": "2003-09-15",
+                  "isSingle": false,
+                  "reproductions": 2550000
+                },
+                {
+                  "name": "Ya me cansé",
+                  "author": "Yandel",
+                  "duration": [
+                    2,
+                    35
+                  ],
+                  "genres": [
+                    "Reggeaton"
+                  ],
+                  "publicationDate": "2003-09-15",
+                  "isSingle": false,
+                  "reproductions": 1600000
+                }
+              ]
+            }
+          ],
+          "songs": [
+            {
+              "name": "Te suelto el pelo",
+              "author": "Yandel",
+              "duration": [
+                4,
+                2
+              ],
+              "genres": [
+                "Reggeaton"
+              ],
+              "publicationDate": "2003-09-15",
+              "isSingle": false,
+              "reproductions": 2550000
+            },
+            {
+              "name": "Ya me cansé",
+              "author": "Yandel",
+              "duration": [
+                2,
+                35
+              ],
+              "genres": [
+                "Reggeaton"
+              ],
+              "publicationDate": "2003-09-15",
+              "isSingle": false,
+              "reproductions": 1600000
+            }
+          ]
+        },
+        {
+          "name": "Wisin y Yandel",
+          "artists": [
+            {
+              "name": "Yandel",
+              "groups": [
+                "Wisin y Yandel"
+              ],
+              "genres": [
+                "Reggeaton"
+              ],
+              "albums": [
+                {
+                  "name": "Quien contra mi",
+                  "whoPublishes": "Yandel",
+                  "publicationYear": 2003,
+                  "genres": [
+                    "Reggeaton"
+                  ],
+                  "songs": [
+                    {
+                      "name": "Te suelto el pelo",
+                      "author": "Yandel",
+                      "duration": [
+                        4,
+                        2
+                      ],
+                      "genres": [
+                        "Reggeaton"
+                      ],
+                      "publicationDate": "2003-09-15",
+                      "isSingle": false,
+                      "reproductions": 2550000
+                    },
+                    {
+                      "name": "Ya me cansé",
+                      "author": "Yandel",
+                      "duration": [
+                        2,
+                        35
+                      ],
+                      "genres": [
+                        "Reggeaton"
+                      ],
+                      "publicationDate": "2003-09-15",
+                      "isSingle": false,
+                      "reproductions": 1600000
+                    }
+                  ]
+                }
+              ],
+              "songs": [
+                {
+                  "name": "Te suelto el pelo",
+                  "author": "Yandel",
+                  "duration": [
+                    4,
+                    2
+                  ],
+                  "genres": [
+                    "Reggeaton"
+                  ],
+                  "publicationDate": "2003-09-15",
+                  "isSingle": false,
+                  "reproductions": 2550000
+                },
+                {
+                  "name": "Ya me cansé",
+                  "author": "Yandel",
+                  "duration": [
+                    2,
+                    35
+                  ],
+                  "genres": [
+                    "Reggeaton"
+                  ],
+                  "publicationDate": "2003-09-15",
+                  "isSingle": false,
+                  "reproductions": 1600000
+                }
+              ]
+            }
+          ],
+          "fundationYear": 1998,
+          "genres": [
+            "Reggeaton"
+          ],
+          "albums": [
+            {
+              "name": "Líderes",
+              "whoPublishes": "Wisin y Yandel",
+              "publicationYear": 2012,
+              "genres": [
+                "Reggeaton"
+              ],
+              "songs": [
+                {
+                  "name": "Tu nombre",
+                  "author": "Wisin y Yandel",
+                  "duration": [
+                    4,
+                    32
+                  ],
+                  "genres": [
+                    "Reggeaton"
+                  ],
+                  "publicationDate": "2012-07-03",
+                  "isSingle": false,
+                  "reproductions": 2750000
+                },
+                {
+                  "name": "Peligro",
+                  "author": "Wisin y Yandel",
+                  "duration": [
+                    3,
+                    30
+                  ],
+                  "genres": [
+                    "Reggeaton"
+                  ],
+                  "publicationDate": "2012-07-03",
+                  "isSingle": false,
+                  "reproductions": 600000
+                },
+                {
+                  "name": "No te detengas",
+                  "author": "Wisin y Yandel",
+                  "duration": [
+                    3,
+                    47
+                  ],
+                  "genres": [
+                    "Reggeaton"
+                  ],
+                  "publicationDate": "2012-09-03",
+                  "isSingle": false,
+                  "reproductions": 750000
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "albums": [
+        {
+          "name": "Líderes",
+          "whoPublishes": "Wisin y Yandel",
+          "publicationYear": 2012,
+          "genres": [
+            "Reggeaton"
+          ],
+          "songs": [
+            {
+              "name": "Tu nombre",
+              "author": "Wisin y Yandel",
+              "duration": [
+                4,
+                32
+              ],
+              "genres": [
+                "Reggeaton"
+              ],
+              "publicationDate": "2012-07-03",
+              "isSingle": false,
+              "reproductions": 2750000
+            },
+            {
+              "name": "Peligro",
+              "author": "Wisin y Yandel",
+              "duration": [
+                3,
+                30
+              ],
+              "genres": [
+                "Reggeaton"
+              ],
+              "publicationDate": "2012-07-03",
+              "isSingle": false,
+              "reproductions": 600000
+            },
+            {
+              "name": "No te detengas",
+              "author": "Wisin y Yandel",
+              "duration": [
+                3,
+                47
+              ],
+              "genres": [
+                "Reggeaton"
+              ],
+              "publicationDate": "2012-09-03",
+              "isSingle": false,
+              "reproductions": 750000
+            }
+          ]
+        },
+        {
+          "name": "Quien contra mi",
+          "whoPublishes": "Yandel",
+          "publicationYear": 2003,
+          "genres": [
+            "Reggeaton"
+          ],
+          "songs": [
+            {
+              "name": "Te suelto el pelo",
+              "author": "Yandel",
+              "duration": [
+                4,
+                2
+              ],
+              "genres": [
+                "Reggeaton"
+              ],
+              "publicationDate": "2003-09-15",
+              "isSingle": false,
+              "reproductions": 2550000
+            },
+            {
+              "name": "Ya me cansé",
+              "author": "Yandel",
+              "duration": [
+                2,
+                35
+              ],
+              "genres": [
+                "Reggeaton"
+              ],
+              "publicationDate": "2003-09-15",
+              "isSingle": false,
+              "reproductions": 1600000
+            }
+          ]
+        }
+      ],
+      "songs": [
+        {
+          "name": "Tu nombre",
+          "author": "Wisin y Yandel",
+          "duration": [
+            4,
+            32
+          ],
+          "genres": [
+            "Reggeaton"
+          ],
+          "publicationDate": "2012-07-03",
+          "isSingle": false,
+          "reproductions": 2750000
+        },
+        {
+          "name": "Peligro",
+          "author": "Wisin y Yandel",
+          "duration": [
+            3,
+            30
+          ],
+          "genres": [
+            "Reggeaton"
+          ],
+          "publicationDate": "2012-07-03",
+          "isSingle": false,
+          "reproductions": 600000
+        },
+        {
+          "name": "No te detengas",
+          "author": "Wisin y Yandel",
+          "duration": [
+            3,
+            47
+          ],
+          "genres": [
+            "Reggeaton"
+          ],
+          "publicationDate": "2012-09-03",
+          "isSingle": false,
+          "reproductions": 750000
+        },
+        {
+          "name": "Te suelto el pelo",
+          "author": "Yandel",
+          "duration": [
+            4,
+            2
+          ],
+          "genres": [
+            "Reggeaton"
+          ],
+          "publicationDate": "2003-09-15",
+          "isSingle": false,
+          "reproductions": 2550000
+        },
+        {
+          "name": "Ya me cansé",
+          "author": "Yandel",
+          "duration": [
+            2,
+            35
+          ],
+          "genres": [
+            "Reggeaton"
+          ],
+          "publicationDate": "2003-09-15",
+          "isSingle": false,
+          "reproductions": 1600000
+        }
+      ]
+    },
+    {
+      "name": "Rap",
+      "musicians": [
+        {
+          "name": "Eminem",
+          "groups": [
+            "-"
+          ],
+          "genres": [
+            "Rap"
+          ],
+          "albums": [
+            {
+              "name": "The Marshall Matters LP",
+              "whoPublishes": "Eminem",
+              "publicationYear": 2000,
+              "genres": [
+                "Rap"
+              ],
+              "songs": [
+                {
+                  "name": "Marshall Matters",
+                  "author": "Eminem",
+                  "duration": [
+                    5,
+                    20
+                  ],
+                  "genres": [
+                    "Rap"
+                  ],
+                  "publicationDate": "2000-09-15",
+                  "isSingle": false,
+                  "reproductions": 3420000
+                },
+                {
+                  "name": "Stan",
+                  "author": "Eminem",
+                  "duration": [
+                    5,
+                    33
+                  ],
+                  "genres": [
+                    "Rap"
+                  ],
+                  "publicationDate": "2000-09-15",
+                  "isSingle": false,
+                  "reproductions": 8430000
+                },
+                {
+                  "name": "Kill you",
+                  "author": "Eminem",
+                  "duration": [
+                    4,
+                    24
+                  ],
+                  "genres": [
+                    "Rap"
+                  ],
+                  "publicationDate": "2000-09-15",
+                  "isSingle": false,
+                  "reproductions": 3600000
+                },
+                {
+                  "name": "Who knew",
+                  "author": "Eminem",
+                  "duration": [
+                    3,
+                    47
+                  ],
+                  "genres": [
+                    "Rap"
+                  ],
+                  "publicationDate": "2000-09-15",
+                  "isSingle": false,
+                  "reproductions": 1600000
+                },
+                {
+                  "name": "I'm back",
+                  "author": "Eminem",
+                  "duration": [
+                    5,
+                    11
+                  ],
+                  "genres": [
+                    "Rap"
+                  ],
+                  "publicationDate": "2000-09-15",
+                  "isSingle": false,
+                  "reproductions": 7600000
+                }
+              ]
+            }
+          ],
+          "songs": [
+            {
+              "name": "Marshall Matters",
+              "author": "Eminem",
+              "duration": [
+                5,
+                20
+              ],
+              "genres": [
+                "Rap"
+              ],
+              "publicationDate": "2000-09-15",
+              "isSingle": false,
+              "reproductions": 3420000
+            },
+            {
+              "name": "Stan",
+              "author": "Eminem",
+              "duration": [
+                5,
+                33
+              ],
+              "genres": [
+                "Rap"
+              ],
+              "publicationDate": "2000-09-15",
+              "isSingle": false,
+              "reproductions": 8430000
+            },
+            {
+              "name": "Kill you",
+              "author": "Eminem",
+              "duration": [
+                4,
+                24
+              ],
+              "genres": [
+                "Rap"
+              ],
+              "publicationDate": "2000-09-15",
+              "isSingle": false,
+              "reproductions": 3600000
+            },
+            {
+              "name": "Who knew",
+              "author": "Eminem",
+              "duration": [
+                3,
+                47
+              ],
+              "genres": [
+                "Rap"
+              ],
+              "publicationDate": "2000-09-15",
+              "isSingle": false,
+              "reproductions": 1600000
+            },
+            {
+              "name": "I'm back",
+              "author": "Eminem",
+              "duration": [
+                5,
+                11
+              ],
+              "genres": [
+                "Rap"
+              ],
+              "publicationDate": "2000-09-15",
+              "isSingle": false,
+              "reproductions": 7600000
+            }
+          ]
+        }
+      ],
+      "albums": [
+        {
+          "name": "The Marshall Matters LP",
+          "whoPublishes": "Eminem",
+          "publicationYear": 2000,
+          "genres": [
+            "Rap"
+          ],
+          "songs": [
+            {
+              "name": "Marshall Matters",
+              "author": "Eminem",
+              "duration": [
+                5,
+                20
+              ],
+              "genres": [
+                "Rap"
+              ],
+              "publicationDate": "2000-09-15",
+              "isSingle": false,
+              "reproductions": 3420000
+            },
+            {
+              "name": "Stan",
+              "author": "Eminem",
+              "duration": [
+                5,
+                33
+              ],
+              "genres": [
+                "Rap"
+              ],
+              "publicationDate": "2000-09-15",
+              "isSingle": false,
+              "reproductions": 8430000
+            },
+            {
+              "name": "Kill you",
+              "author": "Eminem",
+              "duration": [
+                4,
+                24
+              ],
+              "genres": [
+                "Rap"
+              ],
+              "publicationDate": "2000-09-15",
+              "isSingle": false,
+              "reproductions": 3600000
+            },
+            {
+              "name": "Who knew",
+              "author": "Eminem",
+              "duration": [
+                3,
+                47
+              ],
+              "genres": [
+                "Rap"
+              ],
+              "publicationDate": "2000-09-15",
+              "isSingle": false,
+              "reproductions": 1600000
+            },
+            {
+              "name": "I'm back",
+              "author": "Eminem",
+              "duration": [
+                5,
+                11
+              ],
+              "genres": [
+                "Rap"
+              ],
+              "publicationDate": "2000-09-15",
+              "isSingle": false,
+              "reproductions": 7600000
+            }
+          ]
+        }
+      ],
+      "songs": [
+        {
+          "name": "Marshall Matters",
+          "author": "Eminem",
+          "duration": [
+            5,
+            20
+          ],
+          "genres": [
+            "Rap"
+          ],
+          "publicationDate": "2000-09-15",
+          "isSingle": false,
+          "reproductions": 3420000
+        },
+        {
+          "name": "Stan",
+          "author": "Eminem",
+          "duration": [
+            5,
+            33
+          ],
+          "genres": [
+            "Rap"
+          ],
+          "publicationDate": "2000-09-15",
+          "isSingle": false,
+          "reproductions": 8430000
+        },
+        {
+          "name": "Kill you",
+          "author": "Eminem",
+          "duration": [
+            4,
+            24
+          ],
+          "genres": [
+            "Rap"
+          ],
+          "publicationDate": "2000-09-15",
+          "isSingle": false,
+          "reproductions": 3600000
+        },
+        {
+          "name": "Who knew",
+          "author": "Eminem",
+          "duration": [
+            3,
+            47
+          ],
+          "genres": [
+            "Rap"
+          ],
+          "publicationDate": "2000-09-15",
+          "isSingle": false,
+          "reproductions": 1600000
+        },
+        {
+          "name": "I'm back",
+          "author": "Eminem",
+          "duration": [
+            5,
+            11
+          ],
+          "genres": [
+            "Rap"
+          ],
+          "publicationDate": "2000-09-15",
+          "isSingle": false,
+          "reproductions": 7600000
         }
       ]
     }
