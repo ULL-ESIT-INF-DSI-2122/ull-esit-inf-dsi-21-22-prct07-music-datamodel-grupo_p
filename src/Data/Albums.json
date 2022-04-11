@@ -599,6 +599,96 @@
           "reproductions": 620000
         }
       ]
+    },
+    {
+      "name": "Catch a Fire",
+      "whoPublishes": "The Wailers",
+      "publicationYear": 1973,
+      "genres": [
+        "Reggae"
+      ],
+      "songs": [
+        {
+          "name": "Concrete Jungle",
+          "author": "The Wailers",
+          "duration": [
+            4,
+            13
+          ],
+          "genres": [
+            "Reggae"
+          ],
+          "publicationDate": "1973-04-13",
+          "isSingle": false,
+          "reproductions": 1620000
+        },
+        {
+          "name": "400 Years",
+          "author": "The Wailers",
+          "duration": [
+            3,
+            0
+          ],
+          "genres": [
+            "Reggae"
+          ],
+          "publicationDate": "1973-04-13",
+          "isSingle": false,
+          "reproductions": 820000
+        },
+        {
+          "name": "Stir It Up",
+          "author": "The Wailers",
+          "duration": [
+            5,
+            32
+          ],
+          "genres": [
+            "Reggae"
+          ],
+          "publicationDate": "1973-04-13",
+          "isSingle": false,
+          "reproductions": 713000
+        }
+      ]
+    },
+    {
+      "name": "Rastaman Vibration",
+      "whoPublishes": "Bob Marley",
+      "publicationYear": 1976,
+      "genres": [
+        "Reggae"
+      ],
+      "songs": [
+        {
+          "name": "Positive Vibration",
+          "author": "Bob Marley",
+          "duration": [
+            3,
+            33
+          ],
+          "genres": [
+            "Reggae"
+          ],
+          "publicationDate": "1976-04-11",
+          "isSingle": false,
+          "reproductions": 820000
+        },
+        {
+          "name": "Want More",
+          "author": "Bob Marley",
+          "duration": [
+            4,
+            14
+          ],
+          "genres": [
+            "Reggae"
+          ],
+          "publicationDate": "1976-04-11",
+          "isSingle": true,
+          "reproductions": 1020000
+        }
+      ]
     }
   ]
 }

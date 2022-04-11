@@ -804,6 +804,85 @@
           "reproductions": 620000
         }
       ]
+    },
+    {
+      "name": "Bob Marley",
+      "groups": [
+        "The Wailers"
+      ],
+      "genres": [
+        "Reggae"
+      ],
+      "albums": [
+        {
+          "name": "Rastaman Vibration",
+          "whoPublishes": "Bob Marley",
+          "publicationYear": 1976,
+          "genres": [
+            "Reggae"
+          ],
+          "songs": [
+            {
+              "name": "Positive Vibration",
+              "author": "Bob Marley",
+              "duration": [
+                3,
+                33
+              ],
+              "genres": [
+                "Reggae"
+              ],
+              "publicationDate": "1976-04-11",
+              "isSingle": false,
+              "reproductions": 820000
+            },
+            {
+              "name": "Want More",
+              "author": "Bob Marley",
+              "duration": [
+                4,
+                14
+              ],
+              "genres": [
+                "Reggae"
+              ],
+              "publicationDate": "1976-04-11",
+              "isSingle": true,
+              "reproductions": 1020000
+            }
+          ]
+        }
+      ],
+      "songs": [
+        {
+          "name": "Positive Vibration",
+          "author": "Bob Marley",
+          "duration": [
+            3,
+            33
+          ],
+          "genres": [
+            "Reggae"
+          ],
+          "publicationDate": "1976-04-11",
+          "isSingle": false,
+          "reproductions": 820000
+        },
+        {
+          "name": "Want More",
+          "author": "Bob Marley",
+          "duration": [
+            4,
+            14
+          ],
+          "genres": [
+            "Reggae"
+          ],
+          "publicationDate": "1976-04-11",
+          "isSingle": true,
+          "reproductions": 1020000
+        }
+      ]
     }
   ]
 }
