@@ -107,7 +107,7 @@ export class Playlist extends BasicData {
   /**
    * Recalcula la duración total de la playlist.
    */
-  private recalculateDuration(): void {
+  recalculateDuration(): void {
     let minuts: number = 0;
     let seconds: number = 0;
     this.songs.forEach((song) => {

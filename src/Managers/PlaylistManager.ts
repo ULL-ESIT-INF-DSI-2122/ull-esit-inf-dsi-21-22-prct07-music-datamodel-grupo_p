@@ -47,9 +47,13 @@ export class PlaylistManager extends Manager<Playlist> {
   /**
    * Actualiza los géneros de todas las playlists.
    */
-  updateGenre(): void {
+  update(): void {
     this.collection.forEach((playlist) => {
       playlist.updateGenres();
+      playlist.recalculateDuration();
+      if (playlist.getSongs().length === 0) {
+        this.remove(playlist);
+      }
     });
   }
   /**

@@ -2,7 +2,6 @@ import {Manager} from './Manager';
 import lowdb = require('lowdb');
 import FileSync = require('lowdb/adapters/FileSync');
 import {Group} from '../Basics/Group';
-import {Genre} from '../Basics/Genre';
 import {GroupInterface} from '../Interfaces/GroupInterface';
 import {AlbumManager} from './AlbumManager';
 import {GenreManager} from './GenreManager';
@@ -32,25 +31,6 @@ export class GroupManager extends Manager<Group> {
     }
     return GroupManager.groupManager;
   }
-
-  removeGenre(genre: Genre) {
-    this.collection.forEach((group) => {
-      group.removeGenre(genre);
-    });
-    this.store();
-  }
-
-  updateGenre(genre: Genre, groups: string[]) {
-    this.collection.forEach((group) => {
-      if (groups.find((x) => x === group.getName()) !== undefined) {
-        group.addGenre(genre);
-      } else {
-        group.removeGenre(genre);
-      }
-    });
-    this.store();
-  }
-
 
   store() {
     this.database.set('groups', [...this.collection.values()]).write();

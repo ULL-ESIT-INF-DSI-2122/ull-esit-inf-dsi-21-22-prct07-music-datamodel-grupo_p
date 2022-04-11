@@ -2,7 +2,6 @@ import {Song, Duration} from '../Basics/Song';
 import {Manager} from './Manager';
 import lowdb = require('lowdb');
 import FileSync = require('lowdb/adapters/FileSync');
-import {Genre} from '../Basics/Genre';
 import {SongInterface} from '../Interfaces/SongInterface';
 import {ArtistManager} from './ArtistManager';
 import {GenreManager} from './GenreManager';
@@ -39,23 +38,6 @@ export class SongManager extends Manager<Song> {
     return SongManager.SongManager;
   }
 
-  removeGenre(genre: Genre) {
-    this.collection.forEach((song) => {
-      song.removeGenre(genre);
-    });
-    this.store();
-  }
-
-  updateGenre(genre: Genre, songs: string[]) {
-    this.collection.forEach((song) => {
-      if (songs.find((x) => x === song.getName()) !== undefined) {
-        song.addGenre(genre);
-      } else {
-        song.removeGenre(genre);
-      }
-    });
-    this.store();
-  }
 
   /**
    * Función que añade un canción a la base

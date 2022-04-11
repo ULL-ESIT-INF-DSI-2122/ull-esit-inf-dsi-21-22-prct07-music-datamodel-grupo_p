@@ -3,7 +3,6 @@ import lowdb = require('lowdb');
 import FileSync = require('lowdb/adapters/FileSync');
 import {Artist} from '../Basics/Artist';
 import {ArtistInterface} from '../Interfaces/ArtistInterface';
-import {Genre} from '../Basics/Genre';
 import {GroupManager} from './GroupManager';
 import {GenreManager} from './GenreManager';
 import {AlbumManager} from './AlbumManager';
@@ -33,24 +32,6 @@ export class ArtistManager extends Manager<Artist> {
     return ArtistManager.artistManager;
   }
 
-  removeGenre(genre: Genre) {
-    this.collection.forEach((artist) => {
-      artist.removeGenre(genre);
-    });
-    this.store();
-  }
-
-  updateGenre(genre: Genre, artists: string[]) {
-    this.collection.forEach((artist) => {
-      if (artists.find((x) => x === artist.getName()) !== undefined) {
-        artist.addGenre(genre);
-      } else {
-        artist.removeGenre(genre);
-      }
-    });
-    this.store();
-  }
-
   store() {
     this.database.set('artists', [...this.collection.values()]).write();
   }
@@ -77,7 +58,7 @@ export class ArtistManager extends Manager<Artist> {
     const artistAlbumsNames: string[] = artistAlbums.map((album) => album.getName());
     artistAlbumsNames.forEach((albumName) => {
       let album: Album = objAlbumManager.searchByName(albumName);
-      objAlbumManager.remove(album);
+      objAlbumManager.remove(album); // deleteAlbum cuando este AlbumManager
     });
 
     // Delete artists songs
@@ -87,7 +68,7 @@ export class ArtistManager extends Manager<Artist> {
       const artistSongsNames: string[] = artistSongs.map((song) => song.getName());
       artistSongsNames.forEach((songName) => {
         let song: Song = objSongManager.searchByName(songName);
-        objSongManager.remove(song);
+        objSongManager.removeSong(song);
       });
     }
 
@@ -98,7 +79,7 @@ export class ArtistManager extends Manager<Artist> {
       let group = objGroupManager.searchByName(groupName);
       group.removeArtist(artist); // If artist is not in list it won't do anything
       if (group.getArtists().length == 0) {
-        objGroupManager.remove(group);
+        objGroupManager.deleteGroup(group);
       }
     });
 
@@ -109,14 +90,14 @@ export class ArtistManager extends Manager<Artist> {
       let genre = objGenreManager.searchByName(genreName);
       genre.deleteMusician(artist); // If artist is not in list it won't do anything
       if (genre.getMusicians().length == 0) {
-        objGenreManager.remove(genre);
+        objGenreManager.deleteGenre(genre);
       }
     });
 
     // Delete from artist collection
     this.collection.forEach((element) => {
       if (element.getName() === artist.getName()) {
-        this.collection.delete(artist);
+        this.remove(artist);
       }
     });
     this.store();

@@ -1,396 +1,6 @@
 {
   "genres": [
     {
-      "name": "Pop",
-      "musicians": [
-        {
-          "name": "Adam Levine",
-          "groups": [
-            "Maroon 5"
-          ],
-          "genres": [
-            "Pop"
-          ],
-          "albums": [
-            {
-              "name": "Begin Again",
-              "whoPublishes": "Adam Levine",
-              "publicationYear": 2014,
-              "genres": [
-                "Pop"
-              ],
-              "songs": [
-                {
-                  "name": "Lost Stars",
-                  "author": "Adam Levine",
-                  "duration": [
-                    3,
-                    16
-                  ],
-                  "genres": [
-                    "Pop"
-                  ],
-                  "publicationDate": "2014-06-30",
-                  "isSingle": true,
-                  "reproductions": 3200000
-                },
-                {
-                  "name": "Lost Stars",
-                  "author": "Adam Levine",
-                  "duration": [
-                    3,
-                    16
-                  ],
-                  "genres": [
-                    "Pop"
-                  ],
-                  "publicationDate": "2014-06-30",
-                  "isSingle": true,
-                  "reproductions": 3200000
-                }
-              ]
-            }
-          ],
-          "songs": [
-            {
-              "name": "Lost Stars",
-              "author": "Adam Levine",
-              "duration": [
-                3,
-                16
-              ],
-              "genres": [
-                "Pop"
-              ],
-              "publicationDate": "2014-06-30",
-              "isSingle": true,
-              "reproductions": 3200000
-            },
-            {
-              "name": "Lost Stars",
-              "author": "Adam Levine",
-              "duration": [
-                3,
-                16
-              ],
-              "genres": [
-                "Pop"
-              ],
-              "publicationDate": "2014-06-30",
-              "isSingle": true,
-              "reproductions": 3200000
-            }
-          ]
-        },
-        {
-          "name": "Maroon 5",
-          "artists": [
-            {
-              "name": "Adam Levine",
-              "groups": [
-                "Maroon 5"
-              ],
-              "genres": [
-                "Pop"
-              ],
-              "albums": [
-                {
-                  "name": "Begin Again",
-                  "whoPublishes": "Adam Levine",
-                  "publicationYear": 2014,
-                  "genres": [
-                    "Pop"
-                  ],
-                  "songs": [
-                    {
-                      "name": "Lost Stars",
-                      "author": "Adam Levine",
-                      "duration": [
-                        3,
-                        16
-                      ],
-                      "genres": [
-                        "Pop"
-                      ],
-                      "publicationDate": "2014-06-30",
-                      "isSingle": true,
-                      "reproductions": 3200000
-                    },
-                    {
-                      "name": "Lost Stars",
-                      "author": "Adam Levine",
-                      "duration": [
-                        3,
-                        16
-                      ],
-                      "genres": [
-                        "Pop"
-                      ],
-                      "publicationDate": "2014-06-30",
-                      "isSingle": true,
-                      "reproductions": 3200000
-                    }
-                  ]
-                }
-              ],
-              "songs": [
-                {
-                  "name": "Lost Stars",
-                  "author": "Adam Levine",
-                  "duration": [
-                    3,
-                    16
-                  ],
-                  "genres": [
-                    "Pop"
-                  ],
-                  "publicationDate": "2014-06-30",
-                  "isSingle": true,
-                  "reproductions": 3200000
-                },
-                {
-                  "name": "Lost Stars",
-                  "author": "Adam Levine",
-                  "duration": [
-                    3,
-                    16
-                  ],
-                  "genres": [
-                    "Pop"
-                  ],
-                  "publicationDate": "2014-06-30",
-                  "isSingle": true,
-                  "reproductions": 3200000
-                }
-              ]
-            }
-          ],
-          "fundationYear": 1999,
-          "genres": [
-            "Pop"
-          ],
-          "albums": [
-            {
-              "name": "Overexposed",
-              "whoPublishes": "Maroon 5",
-              "publicationYear": 2012,
-              "genres": [
-                "Pop"
-              ],
-              "songs": [
-                {
-                  "name": "Payphone",
-                  "author": "Maroon 5",
-                  "duration": [
-                    3,
-                    51
-                  ],
-                  "genres": [
-                    "Pop"
-                  ],
-                  "publicationDate": "2012-04-16",
-                  "isSingle": false,
-                  "reproductions": 4500000
-                },
-                {
-                  "name": "One More Night",
-                  "author": "Maroon 5",
-                  "duration": [
-                    3,
-                    39
-                  ],
-                  "genres": [
-                    "Pop"
-                  ],
-                  "publicationDate": "2012-06-19",
-                  "isSingle": false,
-                  "reproductions": 1530000
-                },
-                {
-                  "name": "Daylight",
-                  "author": "Maroon 5",
-                  "duration": [
-                    3,
-                    45
-                  ],
-                  "genres": [
-                    "Pop"
-                  ],
-                  "publicationDate": "2012-11-27",
-                  "isSingle": true,
-                  "reproductions": 2000000
-                }
-              ]
-            }
-          ]
-        }
-      ],
-      "albums": [
-        {
-          "name": "Overexposed",
-          "whoPublishes": "Maroon 5",
-          "publicationYear": 2012,
-          "genres": [
-            "Pop"
-          ],
-          "songs": [
-            {
-              "name": "Payphone",
-              "author": "Maroon 5",
-              "duration": [
-                3,
-                51
-              ],
-              "genres": [
-                "Pop"
-              ],
-              "publicationDate": "2012-04-16",
-              "isSingle": false,
-              "reproductions": 4500000
-            },
-            {
-              "name": "One More Night",
-              "author": "Maroon 5",
-              "duration": [
-                3,
-                39
-              ],
-              "genres": [
-                "Pop"
-              ],
-              "publicationDate": "2012-06-19",
-              "isSingle": false,
-              "reproductions": 1530000
-            },
-            {
-              "name": "Daylight",
-              "author": "Maroon 5",
-              "duration": [
-                3,
-                45
-              ],
-              "genres": [
-                "Pop"
-              ],
-              "publicationDate": "2012-11-27",
-              "isSingle": true,
-              "reproductions": 2000000
-            }
-          ]
-        },
-        {
-          "name": "Begin Again",
-          "whoPublishes": "Adam Levine",
-          "publicationYear": 2014,
-          "genres": [
-            "Pop"
-          ],
-          "songs": [
-            {
-              "name": "Lost Stars",
-              "author": "Adam Levine",
-              "duration": [
-                3,
-                16
-              ],
-              "genres": [
-                "Pop"
-              ],
-              "publicationDate": "2014-06-30",
-              "isSingle": true,
-              "reproductions": 3200000
-            },
-            {
-              "name": "Lost Stars",
-              "author": "Adam Levine",
-              "duration": [
-                3,
-                16
-              ],
-              "genres": [
-                "Pop"
-              ],
-              "publicationDate": "2014-06-30",
-              "isSingle": true,
-              "reproductions": 3200000
-            }
-          ]
-        }
-      ],
-      "songs": [
-        {
-          "name": "Payphone",
-          "author": "Maroon 5",
-          "duration": [
-            3,
-            51
-          ],
-          "genres": [
-            "Pop"
-          ],
-          "publicationDate": "2012-04-16",
-          "isSingle": false,
-          "reproductions": 4500000
-        },
-        {
-          "name": "One More Night",
-          "author": "Maroon 5",
-          "duration": [
-            3,
-            39
-          ],
-          "genres": [
-            "Pop"
-          ],
-          "publicationDate": "2012-06-19",
-          "isSingle": false,
-          "reproductions": 1530000
-        },
-        {
-          "name": "Daylight",
-          "author": "Maroon 5",
-          "duration": [
-            3,
-            45
-          ],
-          "genres": [
-            "Pop"
-          ],
-          "publicationDate": "2012-11-27",
-          "isSingle": true,
-          "reproductions": 2000000
-        },
-        {
-          "name": "Lost Stars",
-          "author": "Adam Levine",
-          "duration": [
-            3,
-            16
-          ],
-          "genres": [
-            "Pop"
-          ],
-          "publicationDate": "2014-06-30",
-          "isSingle": true,
-          "reproductions": 3200000
-        },
-        {
-          "name": "A Higher Place",
-          "author": "Adam Levine",
-          "duration": [
-            3,
-            11
-          ],
-          "genres": [
-            "Pop"
-          ],
-          "publicationDate": "2014-07-07",
-          "isSingle": false,
-          "reproductions": 1860000
-        }
-      ]
-    },
-    {
       "name": "Reggeaton",
       "musicians": [
         {
@@ -404,7 +14,6 @@
           "albums": [
             {
               "name": "Quien contra mi",
-              "whoPublishes": "Yandel",
               "publicationYear": 2003,
               "genres": [
                 "Reggeaton"
@@ -486,7 +95,6 @@
               "albums": [
                 {
                   "name": "Quien contra mi",
-                  "whoPublishes": "Yandel",
                   "publicationYear": 2003,
                   "genres": [
                     "Reggeaton"
@@ -562,7 +170,6 @@
           "albums": [
             {
               "name": "Líderes",
-              "whoPublishes": "Wisin y Yandel",
               "publicationYear": 2012,
               "genres": [
                 "Reggeaton"
@@ -618,7 +225,6 @@
       "albums": [
         {
           "name": "Líderes",
-          "whoPublishes": "Wisin y Yandel",
           "publicationYear": 2012,
           "genres": [
             "Reggeaton"
@@ -670,7 +276,6 @@
         },
         {
           "name": "Quien contra mi",
-          "whoPublishes": "Yandel",
           "publicationYear": 2003,
           "genres": [
             "Reggeaton"
@@ -794,7 +399,6 @@
           "albums": [
             {
               "name": "The Marshall Matters LP",
-              "whoPublishes": "Eminem",
               "publicationYear": 2000,
               "genres": [
                 "Rap"
@@ -950,7 +554,6 @@
       "albums": [
         {
           "name": "The Marshall Matters LP",
-          "whoPublishes": "Eminem",
           "publicationYear": 2000,
           "genres": [
             "Rap"
@@ -1116,7 +719,6 @@
           "albums": [
             {
               "name": "Residente",
-              "whoPublishes": "Residente",
               "publicationYear": 2017,
               "genres": [
                 "Urbano Latino"
@@ -1198,7 +800,6 @@
               "albums": [
                 {
                   "name": "Residente",
-                  "whoPublishes": "Residente",
                   "publicationYear": 2017,
                   "genres": [
                     "Urbano Latino"
@@ -1274,7 +875,6 @@
           "albums": [
             {
               "name": "Entren los que quieran",
-              "whoPublishes": "Calle 13",
               "publicationYear": 2010,
               "genres": [
                 "Urbano Latino"
@@ -1330,7 +930,6 @@
       "albums": [
         {
           "name": "Entren los que quieran",
-          "whoPublishes": "Calle 13",
           "publicationYear": 2010,
           "genres": [
             "Urbano Latino"
@@ -1382,7 +981,6 @@
         },
         {
           "name": "Residente",
-          "whoPublishes": "Residente",
           "publicationYear": 2017,
           "genres": [
             "Urbano Latino"
@@ -1506,7 +1104,6 @@
           "albums": [
             {
               "name": "American Recordings",
-              "whoPublishes": "Johnny Cash",
               "publicationYear": 1962,
               "genres": [
                 "Country"
@@ -1662,7 +1259,6 @@
       "albums": [
         {
           "name": "American Recordings",
-          "whoPublishes": "Johnny Cash",
           "publicationYear": 1962,
           "genres": [
             "Country"
@@ -1828,7 +1424,6 @@
           "albums": [
             {
               "name": "What A Wonderful World",
-              "whoPublishes": "Louis Armstrong",
               "publicationYear": 1967,
               "genres": [
                 "Jazz"
@@ -1984,7 +1579,6 @@
       "albums": [
         {
           "name": "What A Wonderful World",
-          "whoPublishes": "Louis Armstrong",
           "publicationYear": 1967,
           "genres": [
             "Jazz"
@@ -2150,7 +1744,6 @@
           "albums": [
             {
               "name": "Rastaman Vibration",
-              "whoPublishes": "Bob Marley",
               "publicationYear": 1976,
               "genres": [
                 "Reggae"
@@ -2232,7 +1825,6 @@
               "albums": [
                 {
                   "name": "Rastaman Vibration",
-                  "whoPublishes": "Bob Marley",
                   "publicationYear": 1976,
                   "genres": [
                     "Reggae"
@@ -2308,7 +1900,6 @@
           "albums": [
             {
               "name": "Catch a Fire",
-              "whoPublishes": "The Wailers",
               "publicationYear": 1973,
               "genres": [
                 "Reggae"
@@ -2364,7 +1955,6 @@
       "albums": [
         {
           "name": "Catch a Fire",
-          "whoPublishes": "The Wailers",
           "publicationYear": 1973,
           "genres": [
             "Reggae"
@@ -2416,7 +2006,6 @@
         },
         {
           "name": "Rastaman Vibration",
-          "whoPublishes": "Bob Marley",
           "publicationYear": 1976,
           "genres": [
             "Reggae"
@@ -2540,7 +2129,6 @@
           "albums": [
             {
               "name": "DAMN.",
-              "whoPublishes": "Kendrik Lamar",
               "publicationYear": 2017,
               "genres": [
                 "Trap"
@@ -2696,7 +2284,6 @@
       "albums": [
         {
           "name": "DAMN.",
-          "whoPublishes": "Kendrik Lamar",
           "publicationYear": 2017,
           "genres": [
             "Trap"
@@ -2862,7 +2449,6 @@
           "albums": [
             {
               "name": "True",
-              "whoPublishes": "Avicii",
               "publicationYear": 2013,
               "genres": [
                 "Musica Electronica"
@@ -3018,7 +2604,6 @@
       "albums": [
         {
           "name": "True",
-          "whoPublishes": "Avicii",
           "publicationYear": 2013,
           "genres": [
             "Musica Electronica"
@@ -3167,396 +2752,6 @@
           "publicationDate": "2013-01-01",
           "isSingle": false,
           "reproductions": 2200000
-        }
-      ]
-    },
-    {
-      "name": "Rock",
-      "musicians": [
-        {
-          "name": "Mick Jagger",
-          "groups": [
-            "The Rolling Stones"
-          ],
-          "genres": [
-            "Rock"
-          ],
-          "albums": [
-            {
-              "name": "Goddess in the Doorway",
-              "whoPublishes": "Mick Jagger",
-              "publicationYear": 2001,
-              "genres": [
-                "Rock"
-              ],
-              "songs": [
-                {
-                  "name": "God gave me everything",
-                  "author": "Mick Jagger",
-                  "duration": [
-                    3,
-                    34
-                  ],
-                  "genres": [
-                    "Rock"
-                  ],
-                  "publicationDate": "2001-11-19",
-                  "isSingle": true,
-                  "reproductions": 4500000
-                },
-                {
-                  "name": "Visions of paradise",
-                  "author": "Mick Jagger",
-                  "duration": [
-                    4,
-                    2
-                  ],
-                  "genres": [
-                    "Rock"
-                  ],
-                  "publicationDate": "2001-11-19",
-                  "isSingle": false,
-                  "reproductions": 2750000
-                }
-              ]
-            }
-          ],
-          "songs": [
-            {
-              "name": "God gave me everything",
-              "author": "Mick Jagger",
-              "duration": [
-                3,
-                34
-              ],
-              "genres": [
-                "Rock"
-              ],
-              "publicationDate": "2001-11-19",
-              "isSingle": true,
-              "reproductions": 4500000
-            },
-            {
-              "name": "Visions of paradise",
-              "author": "Mick Jagger",
-              "duration": [
-                4,
-                2
-              ],
-              "genres": [
-                "Rock"
-              ],
-              "publicationDate": "2001-11-19",
-              "isSingle": false,
-              "reproductions": 2750000
-            }
-          ]
-        },
-        {
-          "name": "The Rolling Stones",
-          "artists": [
-            {
-              "name": "Mick Jagger",
-              "groups": [
-                "The Rolling Stones"
-              ],
-              "genres": [
-                "Rock"
-              ],
-              "albums": [
-                {
-                  "name": "Goddess in the Doorway",
-                  "whoPublishes": "Mick Jagger",
-                  "publicationYear": 2001,
-                  "genres": [
-                    "Rock"
-                  ],
-                  "songs": [
-                    {
-                      "name": "God gave me everything",
-                      "author": "Mick Jagger",
-                      "duration": [
-                        3,
-                        34
-                      ],
-                      "genres": [
-                        "Rock"
-                      ],
-                      "publicationDate": "2001-11-19",
-                      "isSingle": true,
-                      "reproductions": 4500000
-                    },
-                    {
-                      "name": "Visions of paradise",
-                      "author": "Mick Jagger",
-                      "duration": [
-                        4,
-                        2
-                      ],
-                      "genres": [
-                        "Rock"
-                      ],
-                      "publicationDate": "2001-11-19",
-                      "isSingle": false,
-                      "reproductions": 2750000
-                    }
-                  ]
-                }
-              ],
-              "songs": [
-                {
-                  "name": "God gave me everything",
-                  "author": "Mick Jagger",
-                  "duration": [
-                    3,
-                    34
-                  ],
-                  "genres": [
-                    "Rock"
-                  ],
-                  "publicationDate": "2001-11-19",
-                  "isSingle": true,
-                  "reproductions": 4500000
-                },
-                {
-                  "name": "Visions of paradise",
-                  "author": "Mick Jagger",
-                  "duration": [
-                    4,
-                    2
-                  ],
-                  "genres": [
-                    "Rock"
-                  ],
-                  "publicationDate": "2001-11-19",
-                  "isSingle": false,
-                  "reproductions": 2750000
-                }
-              ]
-            }
-          ],
-          "fundationYear": 1962,
-          "genres": [
-            "Rock"
-          ],
-          "albums": [
-            {
-              "name": "Out Of Our Heads",
-              "whoPublishes": "The Rolling Stones",
-              "publicationYear": 1965,
-              "genres": [
-                "Rock"
-              ],
-              "songs": [
-                {
-                  "name": "Satisfaction",
-                  "author": "The Rolling Stones",
-                  "duration": [
-                    3,
-                    51
-                  ],
-                  "genres": [
-                    "Rock"
-                  ],
-                  "publicationDate": "1965-06-06",
-                  "isSingle": false,
-                  "reproductions": 10700000
-                },
-                {
-                  "name": "The Last Time",
-                  "author": "The Rolling Stones",
-                  "duration": [
-                    3,
-                    41
-                  ],
-                  "genres": [
-                    "Rock"
-                  ],
-                  "publicationDate": "1965-03-06",
-                  "isSingle": true,
-                  "reproductions": 6520000
-                },
-                {
-                  "name": "Good Times",
-                  "author": "The Rolling Stones",
-                  "duration": [
-                    1,
-                    58
-                  ],
-                  "genres": [
-                    "Rock"
-                  ],
-                  "publicationDate": "1964-06-26",
-                  "isSingle": true,
-                  "reproductions": 3790000
-                }
-              ]
-            }
-          ]
-        }
-      ],
-      "albums": [
-        {
-          "name": "Out Of Our Heads",
-          "whoPublishes": "The Rolling Stones",
-          "publicationYear": 1965,
-          "genres": [
-            "Rock"
-          ],
-          "songs": [
-            {
-              "name": "Satisfaction",
-              "author": "The Rolling Stones",
-              "duration": [
-                3,
-                51
-              ],
-              "genres": [
-                "Rock"
-              ],
-              "publicationDate": "1965-06-06",
-              "isSingle": false,
-              "reproductions": 10700000
-            },
-            {
-              "name": "The Last Time",
-              "author": "The Rolling Stones",
-              "duration": [
-                3,
-                41
-              ],
-              "genres": [
-                "Rock"
-              ],
-              "publicationDate": "1965-03-06",
-              "isSingle": true,
-              "reproductions": 6520000
-            },
-            {
-              "name": "Good Times",
-              "author": "The Rolling Stones",
-              "duration": [
-                1,
-                58
-              ],
-              "genres": [
-                "Rock"
-              ],
-              "publicationDate": "1964-06-26",
-              "isSingle": true,
-              "reproductions": 3790000
-            }
-          ]
-        },
-        {
-          "name": "Goddess in the Doorway",
-          "whoPublishes": "Mick Jagger",
-          "publicationYear": 2001,
-          "genres": [
-            "Rock"
-          ],
-          "songs": [
-            {
-              "name": "God gave me everything",
-              "author": "Mick Jagger",
-              "duration": [
-                3,
-                34
-              ],
-              "genres": [
-                "Rock"
-              ],
-              "publicationDate": "2001-11-19",
-              "isSingle": true,
-              "reproductions": 4500000
-            },
-            {
-              "name": "Visions of paradise",
-              "author": "Mick Jagger",
-              "duration": [
-                4,
-                2
-              ],
-              "genres": [
-                "Rock"
-              ],
-              "publicationDate": "2001-11-19",
-              "isSingle": false,
-              "reproductions": 2750000
-            }
-          ]
-        }
-      ],
-      "songs": [
-        {
-          "name": "Satisfaction",
-          "author": "The Rolling Stones",
-          "duration": [
-            3,
-            51
-          ],
-          "genres": [
-            "Rock"
-          ],
-          "publicationDate": "1965-06-06",
-          "isSingle": false,
-          "reproductions": 10700000
-        },
-        {
-          "name": "The Last Time",
-          "author": "The Rolling Stones",
-          "duration": [
-            3,
-            41
-          ],
-          "genres": [
-            "Rock"
-          ],
-          "publicationDate": "1965-03-06",
-          "isSingle": true,
-          "reproductions": 6520000
-        },
-        {
-          "name": "Good Times",
-          "author": "The Rolling Stones",
-          "duration": [
-            1,
-            58
-          ],
-          "genres": [
-            "Rock"
-          ],
-          "publicationDate": "1964-06-26",
-          "isSingle": true,
-          "reproductions": 3790000
-        },
-        {
-          "name": "God gave me everything",
-          "author": "Mick Jagger",
-          "duration": [
-            3,
-            34
-          ],
-          "genres": [
-            "Rock"
-          ],
-          "publicationDate": "2001-11-19",
-          "isSingle": true,
-          "reproductions": 4500000
-        },
-        {
-          "name": "Visions of paradise",
-          "author": "Mick Jagger",
-          "duration": [
-            4,
-            2
-          ],
-          "genres": [
-            "Rock"
-          ],
-          "publicationDate": "2001-11-19",
-          "isSingle": false,
-          "reproductions": 2750000
         }
       ]
     }

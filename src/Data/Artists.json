@@ -1,164 +1,6 @@
 {
   "artists": [
     {
-      "name": "Mick Jagger",
-      "groups": [
-        "The Rolling Stones"
-      ],
-      "genres": [
-        "Rock"
-      ],
-      "albums": [
-        {
-          "name": "Goddess in the Doorway",
-          "whoPublishes": "Mick Jagger",
-          "publicationYear": 2001,
-          "genres": [
-            "Rock"
-          ],
-          "songs": [
-            {
-              "name": "God gave me everything",
-              "author": "Mick Jagger",
-              "duration": [
-                3,
-                34
-              ],
-              "genres": [
-                "Rock"
-              ],
-              "publicationDate": "2001-11-19",
-              "isSingle": true,
-              "reproductions": 4500000
-            },
-            {
-              "name": "Visions of paradise",
-              "author": "Mick Jagger",
-              "duration": [
-                4,
-                2
-              ],
-              "genres": [
-                "Rock"
-              ],
-              "publicationDate": "2001-11-19",
-              "isSingle": false,
-              "reproductions": 2750000
-            }
-          ]
-        }
-      ],
-      "songs": [
-        {
-          "name": "God gave me everything",
-          "author": "Mick Jagger",
-          "duration": [
-            3,
-            34
-          ],
-          "genres": [
-            "Rock"
-          ],
-          "publicationDate": "2001-11-19",
-          "isSingle": true,
-          "reproductions": 4500000
-        },
-        {
-          "name": "Visions of paradise",
-          "author": "Mick Jagger",
-          "duration": [
-            4,
-            2
-          ],
-          "genres": [
-            "Rock"
-          ],
-          "publicationDate": "2001-11-19",
-          "isSingle": false,
-          "reproductions": 2750000
-        }
-      ]
-    },
-    {
-      "name": "Adam Levine",
-      "groups": [
-        "Maroon 5"
-      ],
-      "genres": [
-        "Pop"
-      ],
-      "albums": [
-        {
-          "name": "Begin Again",
-          "whoPublishes": "Adam Levine",
-          "publicationYear": 2014,
-          "genres": [
-            "Pop"
-          ],
-          "songs": [
-            {
-              "name": "Lost Stars",
-              "author": "Adam Levine",
-              "duration": [
-                3,
-                16
-              ],
-              "genres": [
-                "Pop"
-              ],
-              "publicationDate": "2014-06-30",
-              "isSingle": true,
-              "reproductions": 3200000
-            },
-            {
-              "name": "Lost Stars",
-              "author": "Adam Levine",
-              "duration": [
-                3,
-                16
-              ],
-              "genres": [
-                "Pop"
-              ],
-              "publicationDate": "2014-06-30",
-              "isSingle": true,
-              "reproductions": 3200000
-            }
-          ]
-        }
-      ],
-      "songs": [
-        {
-          "name": "Lost Stars",
-          "author": "Adam Levine",
-          "duration": [
-            3,
-            16
-          ],
-          "genres": [
-            "Pop"
-          ],
-          "publicationDate": "2014-06-30",
-          "isSingle": true,
-          "reproductions": 3200000
-        },
-        {
-          "name": "Lost Stars",
-          "author": "Adam Levine",
-          "duration": [
-            3,
-            16
-          ],
-          "genres": [
-            "Pop"
-          ],
-          "publicationDate": "2014-06-30",
-          "isSingle": true,
-          "reproductions": 3200000
-        }
-      ]
-    },
-    {
       "name": "Yandel",
       "groups": [
         "Wisin y Yandel"
@@ -169,7 +11,6 @@
       "albums": [
         {
           "name": "Quien contra mi",
-          "whoPublishes": "Yandel",
           "publicationYear": 2003,
           "genres": [
             "Reggeaton"
@@ -248,7 +89,6 @@
       "albums": [
         {
           "name": "The Marshall Matters LP",
-          "whoPublishes": "Eminem",
           "publicationYear": 2000,
           "genres": [
             "Rap"
@@ -411,7 +251,6 @@
       "albums": [
         {
           "name": "Residente",
-          "whoPublishes": "Residente",
           "publicationYear": 2017,
           "genres": [
             "Urbano Latino"
@@ -490,7 +329,6 @@
       "albums": [
         {
           "name": "American Recordings",
-          "whoPublishes": "Johnny Cash",
           "publicationYear": 1962,
           "genres": [
             "Country"
@@ -653,7 +491,6 @@
       "albums": [
         {
           "name": "What A Wonderful World",
-          "whoPublishes": "Louis Armstrong",
           "publicationYear": 1967,
           "genres": [
             "Jazz"
@@ -816,7 +653,6 @@
       "albums": [
         {
           "name": "Rastaman Vibration",
-          "whoPublishes": "Bob Marley",
           "publicationYear": 1976,
           "genres": [
             "Reggae"
@@ -895,7 +731,6 @@
       "albums": [
         {
           "name": "DAMN.",
-          "whoPublishes": "Kendrik Lamar",
           "publicationYear": 2017,
           "genres": [
             "Trap"
@@ -1058,7 +893,6 @@
       "albums": [
         {
           "name": "True",
-          "whoPublishes": "Avicii",
           "publicationYear": 2013,
           "genres": [
             "Musica Electronica"

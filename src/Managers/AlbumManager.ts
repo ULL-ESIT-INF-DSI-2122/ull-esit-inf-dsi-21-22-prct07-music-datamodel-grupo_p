@@ -2,7 +2,6 @@ import {Manager} from './Manager';
 import lowdb = require('lowdb');
 import FileSync = require('lowdb/adapters/FileSync');
 import {Album} from '../Basics/Album';
-import {Genre} from '../Basics/Genre';
 import {AlbumInterface} from '../Interfaces/AlbumInterface';
 import {Song} from '../Basics/Song';
 
@@ -26,24 +25,6 @@ export class AlbumManager extends Manager<Album> {
       AlbumManager.albumManager = new AlbumManager();
     }
     return AlbumManager.albumManager;
-  }
-
-  removeGenre(genre: Genre) {
-    this.collection.forEach((album) => {
-      album.removeGenre(genre);
-    });
-    this.store();
-  }
-
-  updateGenre(genre: Genre, albums: string[]) {
-    this.collection.forEach((album) => {
-      if (albums.find((x) => x === album.getName()) !== undefined) {
-        album.addGenre(genre);
-      } else {
-        album.removeGenre(genre);
-      }
-    });
-    this.store();
   }
 
   removeSong(song: Song) {

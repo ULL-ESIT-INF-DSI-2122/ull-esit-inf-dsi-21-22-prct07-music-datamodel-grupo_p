@@ -8,7 +8,6 @@ import {AlbumManager} from '../Managers/AlbumManager';
 import {ArtistManager} from '../Managers/ArtistManager';
 import {GenreManager} from '../Managers/GenreManager';
 import {GroupManager} from '../Managers/GroupManager';
-import {PlaylistManager} from '../Managers/PlaylistManager';
 import {SongManager} from '../Managers/SongManager';
 import {promptUser} from './MainMenu';
 
@@ -87,12 +86,7 @@ export function promptRemoveGenre(genre: Genre) {
       ])
       .then((answer) => {
         if (answer.eliminar) {
-          manager.remove(genre);
-          SongManager.getSongManager().removeGenre(genre);
-          AlbumManager.getAlbumManager().removeGenre(genre);
-          ArtistManager.getArtistManager().removeGenre(genre);
-          GroupManager.getGroupManager().removeGenre(genre);
-          PlaylistManager.getPlaylistManager().updateGenre();
+          manager.deleteGenre(genre);
         }
         promptGenres();
       });
@@ -178,11 +172,8 @@ export function promptAddGenre(): void {
     });
     const newGenre: Genre = new Genre(answers.name, musicians, albums, songs);
     manager.add(newGenre);
-    SongManager.getSongManager().updateGenre(newGenre, answers.songs);
-    AlbumManager.getAlbumManager().updateGenre(newGenre, answers.albums);
-    ArtistManager.getArtistManager().updateGenre(newGenre, answers.musicians);
-    GroupManager.getGroupManager().updateGenre(newGenre, answers.musicians);
-    PlaylistManager.getPlaylistManager().updateGenre();
+    manager.store();
+    manager.updateGenre(newGenre, answers.songs, answers.albums, answers.musicians, answers.musicians);
     promptGenres();
   });
 }
@@ -276,11 +267,7 @@ export function promptEditGenre(genre: Genre): void {
     genre.setSongs(songs);
     manager.store();
 
-    SongManager.getSongManager().updateGenre(genre, answers.songs);
-    AlbumManager.getAlbumManager().updateGenre(genre, answers.albums);
-    ArtistManager.getArtistManager().updateGenre(genre, answers.musicians);
-    GroupManager.getGroupManager().updateGenre(genre, answers.musicians);
-    PlaylistManager.getPlaylistManager().updateGenre();
+    manager.updateGenre(genre, answers.songs, answers.albums, answers.musicians, answers.musicians);
     promptGenres();
   });
 }
