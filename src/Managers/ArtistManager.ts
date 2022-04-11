@@ -9,6 +9,7 @@ import {AlbumManager} from './AlbumManager';
 import {Album} from '../Basics/Album';
 import {SongManager} from './SongManager';
 import {Song} from '../Basics/Song';
+import {PlaylistManager} from './PlaylistManager';
 
 type schemaType = {
     artists: ArtistInterface[]
@@ -76,12 +77,15 @@ export class ArtistManager extends Manager<Artist> {
     const objGroupManager:GroupManager = GroupManager.getGroupManager();
     const groupNames: string[] = artist.getGroups();
     groupNames.forEach((groupName) => {
-      let group = objGroupManager.searchByName(groupName);
-      group.removeArtist(artist); // If artist is not in list it won't do anything
-      if (group.getArtists().length == 0) {
-        objGroupManager.deleteGroup(group);
+      if ((objGroupManager.searchByName(groupName)) !== undefined) {
+        let group = objGroupManager.searchByName(groupName);
+        group.removeArtist(artist); // If artist is not in list it won't do anything
+        if (group.getArtists().length == 0) {
+          objGroupManager.deleteGroup(group);
+        }
       }
     });
+
 
     // Delet artist from genres
     const objGenreManager:GenreManager = GenreManager.getGenreManager();
@@ -94,12 +98,11 @@ export class ArtistManager extends Manager<Artist> {
       }
     });
 
+    // Playlist
+    PlaylistManager.getPlaylistManager().update();
+    PlaylistManager.getPlaylistManager().store();
     // Delete from artist collection
-    this.collection.forEach((element) => {
-      if (element.getName() === artist.getName()) {
-        this.remove(artist);
-      }
-    });
+    this.remove(artist);
     this.store();
   }
 
