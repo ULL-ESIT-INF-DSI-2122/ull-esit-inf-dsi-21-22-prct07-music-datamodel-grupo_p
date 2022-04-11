@@ -85,6 +85,12 @@ export class SongManager extends Manager<Song> {
    * @param song de tipo Song
    */
   removeSong(song: Song): void {
+    // delete from album
+    let albumsAsociate = AlbumManager.getAlbumManager().getCollection();
+    let albumsObj = Array.from(albumsAsociate);
+    let albumsThisSong = albumsObj.filter((album) => album.getSongs().includes(song));
+    albumsThisSong.forEach((album) => album.removeSong(song));
+    AlbumManager.getAlbumManager().store();
     // delete in artist
     let author = song.getAuthorName();
     let authorObj = ArtistManager.getArtistManager().searchByName(author);
@@ -92,7 +98,6 @@ export class SongManager extends Manager<Song> {
       authorObj.removeSong(song);
       ArtistManager.getArtistManager().store();
     }
-
     // delete in genre
     const objGenreManager:GenreManager = GenreManager.getGenreManager();
     const genreNames: string[] = song.getGenres();
@@ -101,12 +106,6 @@ export class SongManager extends Manager<Song> {
       genre.removeSong(song); // If artist is not in list it won't do anything
       GenreManager.getGenreManager().store();
     });
-    // delete from album
-    let albumsAsociate = AlbumManager.getAlbumManager().getCollection();
-    let albumsObj = Array.from(albumsAsociate);
-    let albumsThisSong = albumsObj.filter((album) => album.getSongs().includes(song));
-    albumsThisSong.forEach((album) => album.removeSong(song));
-    AlbumManager.getAlbumManager().store();
     // delete from playlist
     let playlist = PlaylistManager.getPlaylistManager().getCollection();
     let playlistObj = Array.from(playlist);
@@ -118,19 +117,20 @@ export class SongManager extends Manager<Song> {
     this.store();
   }
 
-  editSong(newName: string, newAuthor: string, newDuration: Duration, newGenre: string[],
+  editSong(song: Song, newName: string, newAuthor: string, newDuration: Duration, newGenre: string[],
       newDAtePublication: Date, changeSingle: boolean, changeReproductions: number): void {
-    this.collection.forEach((element) => {
-      if (element.getName() === newName) {
-        element.setName(newName);
-        element.setAuthorName(newAuthor);
-        element.setDuration(newDuration);
-        element.setGenres(newGenre);
-        element.setDatePublication(newDAtePublication);
-        element.setIsSingle(changeSingle);
-        element.setReproductions(changeReproductions);
-      }
-    });
+    song.setName(newName);
+    song.setAuthorName(newAuthor);
+    song.setDuration(newDuration);
+    song.setGenres(newGenre);
+    song.setDatePublication(newDAtePublication);
+    song.setIsSingle(changeSingle);
+    song.setReproductions(changeReproductions);
+
+    AlbumManager.getAlbumManager().store();
+    ArtistManager.getArtistManager().store();
+    GenreManager.getGenreManager().store();
+    PlaylistManager.getPlaylistManager().store();
     this.store();
   }
 

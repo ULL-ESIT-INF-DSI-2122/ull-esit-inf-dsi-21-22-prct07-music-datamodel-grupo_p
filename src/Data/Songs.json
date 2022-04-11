@@ -1,20 +1,6 @@
 {
   "songs": [
     {
-      "name": "Payphone",
-      "author": "Maroon 5",
-      "duration": [
-        3,
-        51
-      ],
-      "genres": [
-        "Pop"
-      ],
-      "publicationDate": "2012-04-16",
-      "isSingle": false,
-      "reproductions": 4500000
-    },
-    {
       "name": "One More Night",
       "author": "Maroon 5",
       "duration": [
@@ -43,16 +29,11 @@
       "reproductions": 2000000
     },
     {
-      "name": "Lost Stars",
-      "author": "Adam Levine",
-      "duration": [
-        3,
-        16
-      ],
+      "name": "prueba",
+      "author": "The Rolling Stones",
       "genres": [
         "Pop"
       ],
-      "publicationDate": "2014-06-30",
       "isSingle": true,
       "reproductions": 3200000
     },

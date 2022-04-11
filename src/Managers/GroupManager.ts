@@ -9,6 +9,7 @@ import {GenreManager} from './GenreManager';
 import {Album} from '../Basics/Album';
 import {ArtistManager} from './ArtistManager';
 import {Artist} from '../Basics/Artist';
+import {SongManager} from './SongManager';
 
 type schemaType = {
     groups: GroupInterface[]
@@ -73,7 +74,14 @@ export class GroupManager extends Manager<Group> {
   }
 
   public deleteGroup(group: Group): void {
-    // Delete group from albums
+    // elimina los integrantes del grupo
+    const objArtistManager:ArtistManager = ArtistManager.getArtistManager();
+    const groupArtists: Artist[] = group.getArtists();
+    groupArtists.forEach((artist) => {
+      objArtistManager.deleteArtist(artist, false);
+      ArtistManager.getArtistManager().store();
+    });
+    // elimina los albunes del grupo
     const objAlbumManager:AlbumManager = AlbumManager.getAlbumManager();
     const groupAlbums: Album[] = group.getAlbums();
     groupAlbums.forEach((album) => {
@@ -81,7 +89,7 @@ export class GroupManager extends Manager<Group> {
       AlbumManager.getAlbumManager().store();
     });
 
-    // Delet group from genres
+    // elimina los grupo en los generos
     const objGenreManager:GenreManager = GenreManager.getGenreManager();
     const genreNames: string[] = group.getGenres();
     genreNames.forEach((genreName) => {
@@ -89,17 +97,9 @@ export class GroupManager extends Manager<Group> {
       genre.deleteMusician(group); // If group is not in list it won't do anything
       if (genre.getMusicians().length == 0) {
         objGenreManager.remove(genre);
-        GenreManager.getGenreManager().store();
       }
     });
-
-    // Delete artist from group
-    const objArtistManager:ArtistManager = ArtistManager.getArtistManager();
-    const groupArtists: Artist[] = group.getArtists();
-    groupArtists.forEach((artist) => {
-      objArtistManager.deleteArtist(artist);
-      ArtistManager.getArtistManager().store();
-    });
+    GenreManager.getGenreManager().store();
 
     this.collection.forEach((element) => {
       if (element.getName() === group.getName()) {
@@ -107,6 +107,7 @@ export class GroupManager extends Manager<Group> {
       }
     });
     this.store();
+    SongManager.getSongManager().store();
   }
 
   public editGroup(group: Group, newName: string, newArtists: Artist[], newYear: number,
@@ -150,8 +151,9 @@ export class GroupManager extends Manager<Group> {
     }
     group.setGenres(newGenres);
     ArtistManager.getArtistManager().store();
-    GenreManager.getGenreManager().store();
     AlbumManager.getAlbumManager().store();
+    SongManager.getSongManager().store();
+    GenreManager.getGenreManager().store();
     this.store();
   }
 }

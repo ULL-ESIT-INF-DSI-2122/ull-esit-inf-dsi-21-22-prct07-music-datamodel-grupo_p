@@ -102,12 +102,6 @@ function promptAddSong(): void {
       name: 'author',
       message: '¿Nombre del artista o grupo?:',
       choices: musicians,
-      validate(answer: string) {
-        if (answer.length < 1) {
-          return 'Debes introducir el nombre del artisto o grupo.';
-        }
-        return true;
-      },
     },
     {
       type: 'input',
@@ -187,6 +181,8 @@ function promptAddSong(): void {
  * @param song de tipo Song
  */
 function promptEditSong(song: Song): void {
+  let musicians: string[] = artists;
+  musicians = musicians.concat(groups);
   console.clear();
   const questions = [
     {
@@ -196,9 +192,10 @@ function promptEditSong(song: Song): void {
       default: song.getName(),
     },
     {
-      type: 'input',
+      type: 'list',
       name: 'author',
       message: 'Nombre del author:',
+      choices: musicians,
       default: song.getAuthorName(),
     },
     {
@@ -228,15 +225,8 @@ function promptEditSong(song: Song): void {
     },
   ];
   inquirer.prompt(questions).then((answers) => {
-    song.setName(answers.name);
-    song.setName(answers.author);
-    song.setDuration(answers.duration);
-    song.setGenres(answers.genres);
-    song.setDatePublication(answers.publication);
-    song.setIsSingle(answers.single);
-    song.setReproductions(answers.reproductions);
-    manager.store();
-
+    manager.editSong(song, answers.name, answers.author, answers.duracion, answers.genres,
+        answers.publication, answers.single, answers.reproductions);
     promptSongPrincipal();
   });
 }
