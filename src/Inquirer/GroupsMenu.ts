@@ -9,51 +9,11 @@ import {GroupManager} from '../Managers/GroupManager';
 import {Artist} from '../Basics/Artist';
 import {Album} from '../Basics/Album';
 
-enum options {
-  Show = 'Show Data Base',
-  Add = 'Add new group+',
-  Revove = 'Delete group',
-  Edit = 'Edit group',
-  Back = 'Back'
-}
 
 const manager = GroupManager.getGroupManager();
 const albums: string[] = AlbumManager.getAlbumManager().getList();
 const genres: string[] = GenreManager.getGenreManager().getList();
 const artists: string[] = ArtistManager.getArtistManager().getList();
-/*
-export function promptGroups(): void {
-  console.clear();
-
-  inquirer.prompt({
-    type: 'list',
-    name: 'command',
-    message: 'Escoja que quiere hacer:',
-    choices: Object.values(options),
-  }).then((answers) => {
-    switch (answers['command']) {
-      case options.Add:
-        promptAddGroup();
-        break;
-      case options.Edit:
-        promptEditGroup();
-        break;
-      case options.Revove:
-        promptRemoveGroup();
-        break;
-      case options.Show:
-        promptShowData();
-        break;
-      case options.Back:
-        promptUser();
-        break;
-      default:
-        promptGroups();
-        break;
-    }
-  });
-}
-*/
 
 export function promptGroups(): void {
   let options: string[] = ['Nuevo group +'];
@@ -75,12 +35,17 @@ export function promptGroups(): void {
         break;
       default:
         const group: Group = manager.searchByName(answers['command']);
-        // console.log(answers['command']);
-        // promptSync('prueba');
         promptGroup(group);
         break;
     }
   });
+}
+
+enum optionsMod {
+  Show = 'Mostrar información.',
+  Revove = 'Eliminar grupo.',
+  Edit = 'Editar grupo.',
+  Back = 'Volver.'
 }
 
 export function promptGroup(group: Group): void {
@@ -90,16 +55,16 @@ export function promptGroup(group: Group): void {
     type: 'list',
     name: 'command',
     message: 'Opciones',
-    choices: ['Mostrar información', 'Editar', 'Eliminar', 'Volver'],
+    choices: Object.values(optionsMod),
   }).then((answers) => {
     switch (answers['command']) {
-      case 'Mostrar información':
+      case optionsMod.Show:
         promptShowData(group);
         break;
-      case 'Editar':
+      case optionsMod.Edit:
         promptEditGroup(group);
         break;
-      case 'Eliminar':
+      case optionsMod.Revove:
         promptRemoveGroup(group);
         break;
       default:
@@ -112,7 +77,6 @@ export function promptGroup(group: Group): void {
 
 function promptAddGroup(): void {
   console.clear();
-
   const questions = [
     {
       type: 'input',
@@ -175,15 +139,9 @@ function promptAddGroup(): void {
     },
   ];
   inquirer.prompt(questions).then((answers) => {
-    let albums: Album[] = [];
-    answers.albums.forEach((albumName: string) => {
-      albums.push(AlbumManager.getAlbumManager().searchByName(albumName));
-    });
-    let artist: Artist[] = [];
-    answers.artist.forEach((artistName: string) => {
-      artist.push(ArtistManager.getArtistManager().searchByName(artistName));
-    });
-    const newGroup: Group = new Group(answers.name, artist, answers.year, answers.genre, albums);
+    const albumsObj: Album[] = answers.albums.map((albumName: string) => AlbumManager.getAlbumManager().searchByName(albumName));
+    const artistObj: Artist[] = answers.artist.map((artistName: string) => ArtistManager.getArtistManager().searchByName(artistName));
+    const newGroup: Group = new Group(answers.name, artistObj, answers.year, answers.genre, albumsObj);
     manager.addGroup(newGroup);
     promptGroups();
   });
@@ -191,56 +149,25 @@ function promptAddGroup(): void {
 
 export function promptRemoveGroup(group: Group) {
   console.clear();
-  inquirer
-      .prompt([
-        {
-          name: 'eliminar',
-          type: 'confirm',
-          message: '¿Seguro que quieres eliminar este grupo?',
-        },
-      ])
-      .then((answer) => {
-        if (answer.eliminar) {
-          manager.deleteGroup(group);
-        }
-        promptGroups();
-      });
-}
-/*
-function promptRemoveGroup(): void {
-  console.clear();
-  // ELEGIR GRUPO A ELIMINAR
-  inquirer.prompt({
-    type: 'list',
-    name: 'groupRemove',
-    message: 'Escoja el grupo que quiere eliminar:',
-    choices: manager.getList(),
-  }).then((answers) => {
-    inquirer.prompt([
-      {
-        name: 'remove',
-        type: 'confirm',
-        message: '¿Eliminar este grupo?',
-      },
-    ]).then((answer) => {
-      if (answer.eliminar) {
-        let group: Group = manager.searchByName(answers.groupRemove);
-        manager.removeGroup(group);
-      }
-      promptGroups();
-    });
+  inquirer.prompt([
+    {
+      name: 'eliminar',
+      type: 'confirm',
+      message: '¿Seguro que quieres eliminar este grupo?',
+    },
+  ]).then((answer) => {
+    if (answer.eliminar) {
+      manager.deleteGroup(group);
+    }
+    promptGroups();
   });
 }
-*/
+
 
 function promptEditGroup(group: Group): void {
   console.clear();
-  const albumsNames: string[] = [];
-  group.getAlbums().forEach((album) => {
-    albumsNames.push(album.getName());
-  });
-  const artistNames: string[] = [];
-  group.getArtists().forEach((artist) => artistNames.push(artist.getName()));
+  const albumsNames: string[] = group.getAlbums().map((album) => album.getName());
+  const artistNames: string[] = group.getArtists().map((artist) => artist.getName());
   const questions = [
     {
       type: 'input',
@@ -292,15 +219,11 @@ function promptEditGroup(group: Group): void {
     },
   ];
   inquirer.prompt(questions).then((answers) => {
-    let albums: Album[] = [];
-    answers.albums.forEach((albumName: string) => {
-      albums.push(AlbumManager.getAlbumManager().searchByName(albumName));
-    });
-    let artist: Artist[] = [];
-    answers.artist.forEach((artistName: string) => {
-      artist.push(ArtistManager.getArtistManager().searchByName(artistName));
-    });
-    manager.editGroup(group, answers.name, artist, answers.year, answers.genre, albums);
+    const albumsObj: Album[] = answers.albums.map((albumName: string) => AlbumManager.getAlbumManager().searchByName(albumName));
+    const artistObj: Artist[] = answers.artist.map((artistName: string) => ArtistManager.getArtistManager().searchByName(artistName));
+    const newGroup: Group = new Group(answers.name, artistObj, answers.year, answers.genre, albumsObj);
+    manager.editGroup(group, newGroup);
+    // manager.editGroup(group, answers.name, artistObj, answers.year, answers.genre, albumsObj);
     promptGroups();
   });
 }
@@ -345,9 +268,14 @@ enum modeShowSong {
   back = 'Volver'
 }
 
+enum orden {
+  asc = 'Ascendente',
+  des = 'Descendente',
+  back = 'Volver'
+}
+
 function promptShowSongs(group: Group) {
   console.clear();
-
   inquirer.prompt({
     type: 'list',
     name: 'mode',
@@ -360,14 +288,30 @@ function promptShowSongs(group: Group) {
           type: 'list',
           name: 'order',
           message: 'Orden?',
-          choices: ['Ascendente', 'Descendente'],
+          choices: Object.values(orden),
         }).then((answers) => {
           switch (answers['order']) {
-            case 'Ascendente':
+            case orden.asc:
               group.showSongsOrder();
+              inquirer.prompt({
+                type: 'list',
+                name: 'order',
+                message: 'Opciones:',
+                choices: ['Volver'],
+              }).then((answers) => {
+                promptShowSongs(group);
+              });
               break;
-            case 'Descendente':
+            case orden.des:
               group.showSongsOrder(false);
+              inquirer.prompt({
+                type: 'list',
+                name: 'order',
+                message: 'Opciones:',
+                choices: ['Volver'],
+              }).then((answers) => {
+                promptShowSongs(group);
+              });
               break;
             default:
               promptShowSongs(group);
@@ -380,14 +324,30 @@ function promptShowSongs(group: Group) {
           type: 'list',
           name: 'order',
           message: 'Orden?',
-          choices: ['Ascendente', 'Descendente'],
+          choices: Object.values(orden),
         }).then((answers) => {
           switch (answers['order']) {
-            case 'Ascendente':
+            case orden.asc:
               group.showByReproductions();
+              inquirer.prompt({
+                type: 'list',
+                name: 'order',
+                message: 'Opciones:',
+                choices: ['Volver'],
+              }).then((answers) => {
+                promptShowSongs(group);
+              });
               break;
-            case 'Descendente':
+            case orden.des:
               group.showByReproductions(false);
+              inquirer.prompt({
+                type: 'list',
+                name: 'order',
+                message: 'Opciones:',
+                choices: ['Volver'],
+              }).then((answers) => {
+                promptShowSongs(group);
+              });
               break;
             default:
               promptShowSongs(group);
@@ -414,8 +374,8 @@ function promptShowSongs(group: Group) {
 }
 
 enum modeShowAlbum {
-  name = 'Mostrar albunes por nombre',
-  year = 'Mostrar por año de lanzamiento',
+  name = 'Por nombre',
+  year = 'Por año de lanzamiento',
   back = 'Volver'
 }
 
@@ -434,14 +394,30 @@ function promptShowAlbums(group: Group) {
           type: 'list',
           name: 'order',
           message: 'Orden?',
-          choices: ['Ascendente', 'Descendente'],
+          choices: Object.values(orden),
         }).then((answers) => {
           switch (answers['order']) {
-            case 'Ascendente':
+            case orden.asc:
               group.showAlbumOrder();
+              inquirer.prompt({
+                type: 'list',
+                name: 'order',
+                message: 'Opciones:',
+                choices: ['Volver'],
+              }).then((answers) => {
+                promptShowAlbums(group);
+              });
               break;
-            case 'Descendente':
+            case orden.des:
               group.showAlbumOrder(false);
+              inquirer.prompt({
+                type: 'list',
+                name: 'order',
+                message: 'Opciones:',
+                choices: ['Volver'],
+              }).then((answers) => {
+                promptShowAlbums(group);
+              });
               break;
             default:
               promptShowAlbums(group);
@@ -454,61 +430,76 @@ function promptShowAlbums(group: Group) {
           type: 'list',
           name: 'order',
           message: 'Orden?',
-          choices: ['Ascendente', 'Descendente'],
+          choices: Object.values(orden),
         }).then((answers) => {
           switch (answers['order']) {
-            case 'Ascendente':
+            case orden.asc:
               group.showAlbumYearOrder();
+              inquirer.prompt({
+                type: 'list',
+                name: 'order',
+                message: 'Opciones:',
+                choices: ['Volver'],
+              }).then((answers) => {
+                promptShowAlbums(group);
+              });
               break;
-            case 'Descendente':
+            case orden.des:
               group.showAlbumYearOrder(false);
+              inquirer.prompt({
+                type: 'list',
+                name: 'order',
+                message: 'Opciones:',
+                choices: ['Volver'],
+              }).then((answers) => {
+                promptShowAlbums(group);
+              });
               break;
             default:
               promptShowAlbums(group);
               break;
           }
         });
+      default:
+        promptShowData(group);
         break;
     }
   });
 }
 
-enum modeShowPlayList {
-  name = 'Mostrar playlist asociadas',
-  back = 'Volver'
-}
-
 function promptShowPleyList(group: Group) {
   console.clear();
-
   inquirer.prompt({
     type: 'list',
-    name: 'mode',
-    message: 'Como quiere ver los datos?',
-    choices: Object.values(modeShowPlayList),
+    name: 'order',
+    message: 'Orden?',
+    choices: Object.values(orden),
   }).then((answers) => {
-    switch (answers['mode']) {
-      case modeShowPlayList.name:
+    switch (answers['order']) {
+      case orden.asc:
+        group.showPlayListAsociate();
         inquirer.prompt({
           type: 'list',
           name: 'order',
-          message: 'Orden?',
-          choices: ['Ascendente', 'Descendente'],
+          message: 'Opciones:',
+          choices: ['Volver'],
         }).then((answers) => {
-          switch (answers['order']) {
-            case 'Ascendente':
-              group.showPlayListAsociate();
-              break;
-            case 'Descendente':
-              group.showPlayListAsociate();
-              break;
-            default:
-              promptShowPleyList(group);
-              break;
-          }
+          promptShowData(group);
         });
+        break;
+      case orden.des:
+        group.showPlayListAsociate();
+        inquirer.prompt({
+          type: 'list',
+          name: 'order',
+          message: 'Opciones:',
+          choices: ['Volver'],
+        }).then((answers) => {
+          promptShowData(group);
+        });
+        break;
       default:
-        promptShowData(group);
+        promptShowPleyList(group);
         break;
     }
   });

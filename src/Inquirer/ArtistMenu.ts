@@ -11,14 +11,6 @@ import {promptUser} from './MainMenu';
 import {GroupManager} from '../Managers/GroupManager';
 const promptStop = require('prompt-sync')();
 
-enum options {
-  Show = 'Show Data Base',
-  Add = 'Add new artist+',
-  Revove = 'Delete artist',
-  Edit = 'Edit artista',
-  Back = 'Back'
-}
-
 const manager = ArtistManager.getArtistManager();
 const songs: string[] = SongManager.getSongManager().getList();
 const albums: string[] = AlbumManager.getAlbumManager().getList();
@@ -52,6 +44,13 @@ export function promptArtists(): void {
   });
 }
 
+enum options {
+  Show = 'Mostrar información',
+  Revove = 'Eliminar',
+  Edit = 'Editar',
+  Back = 'Volver'
+}
+
 export function promptArtist(artist: Artist): void {
   console.clear();
   artist.showInfo();
@@ -59,16 +58,16 @@ export function promptArtist(artist: Artist): void {
     type: 'list',
     name: 'command',
     message: 'Opciones',
-    choices: ['Mostrar información', 'Editar', 'Eliminar', 'Volver'],
+    choices: Object.values(options),
   }).then((answers) => {
     switch (answers['command']) {
-      case 'Mostrar información':
+      case options.Show:
         promptShowData(artist);
         break;
-      case 'Editar':
+      case options.Edit:
         promptEditArtist(artist);
         break;
-      case 'Eliminar':
+      case options.Revove:
         promptRemoveArtist(artist);
         break;
       default:
@@ -144,17 +143,9 @@ function promptAddArtist(): void {
     },
   ];
   inquirer.prompt(questions).then((answers) => {
-    let albums: Album[] = [];
-    answers.albums.forEach((a: string) => {
-      albums.push(AlbumManager.getAlbumManager().searchByName(a));
-    });
-    let songs: Song[] = [];
-    answers.song.forEach((s: string) => {
-      songs.push(SongManager.getSongManager().searchByName(s));
-    });
-    const newArtist: Artist = new Artist(answers.name, answers.groups, answers.genre,
-        albums, songs);
-    // manager.updateArtist(newArtist, answers.newName, answers.song, answers.albums, answers.groups, answers.genre);
+    const albumsObj: Album[] = answers.albums.map((albumName: string) => AlbumManager.getAlbumManager().searchByName(albumName));
+    const songsObj: Song[] = answers.song.map((songName: string) => SongManager.getSongManager().searchByName(songName));
+    const newArtist: Artist = new Artist(answers.name, answers.groups, answers.genre, albumsObj, songsObj);
     manager.addArtist(newArtist);
     promptArtists();
   });
@@ -178,14 +169,9 @@ export function promptRemoveArtist(artist: Artist) {
 
 function promptEditArtist(artist: Artist): void {
   console.clear();
-  const albumsNames: string[] = [];
-  artist.getAlbums().forEach((album) => {
-    albumsNames.push(album.getName());
-  });
-  const songsNames: string[] = [];
-  artist.getSongs().forEach((song) => {
-    songsNames.push(song.getName());
-  });
+  const albumsNames: string[] = artist.getAlbums().map((album) => album.getName());
+  const songsNames: string[] = artist.getSongs().map((song) => song.getName());
+
   const questions = [
     {
       type: 'input',
@@ -232,17 +218,10 @@ function promptEditArtist(artist: Artist): void {
     },
   ];
   inquirer.prompt(questions).then((answers) => {
-    let albums: Album[] = [];
-    answers.albums.forEach((album: string) => {
-      albums.push(AlbumManager.getAlbumManager().searchByName(album));
-    });
-    let songs: Song[] = [];
-    answers.song.forEach((song: string) => {
-      songs.push(SongManager.getSongManager().searchByName(song));
-    });
-    // manager.updateArtist(artist, answers.newName, answers.groups, answers.genre, answers.albums, answers.song);
-    // manager.editArtist(artist, answers.newName, answers.groups, answers.genre, albums, songs);
-    let newArtist: Artist = new Artist(answers.newName, answers.groups, answers.genre, albums, songs);
+    const albumsObj: Album[] = answers.albums.map((albumName: string) => AlbumManager.getAlbumManager().searchByName(albumName));
+    const songsObj: Song[] = answers.song.map((songName: string) => SongManager.getSongManager().searchByName(songName));
+
+    let newArtist: Artist = new Artist(answers.newName, answers.groups, answers.genre, albumsObj, songsObj);
     manager.editArtist(artist, newArtist);
     promptArtists();
   });
@@ -287,6 +266,12 @@ enum modeShowSong {
   back = 'volver'
 }
 
+enum orden {
+  asc = 'Ascendente',
+  des = 'Descendente',
+  back = 'Volver'
+}
+
 function promptShowSongs(artist: Artist) {
   console.clear();
   inquirer.prompt({
@@ -301,14 +286,30 @@ function promptShowSongs(artist: Artist) {
           type: 'list',
           name: 'order',
           message: 'Orden?',
-          choices: ['Ascendente', 'Descendente', 'Volver'],
+          choices: Object.values(orden),
         }).then((answers) => {
           switch (answers['order']) {
-            case 'Ascendente':
+            case orden.asc:
               artist.showSongsOrder();
+              inquirer.prompt({
+                type: 'list',
+                name: 'order',
+                message: 'Opciones:',
+                choices: ['Volver'],
+              }).then((answers) => {
+                promptShowSongs(artist);
+              });
               break;
-            case 'Descendente':
+            case orden.des:
               artist.showSongsOrder(false);
+              inquirer.prompt({
+                type: 'list',
+                name: 'order',
+                message: 'Opciones:',
+                choices: ['Volver'],
+              }).then((answers) => {
+                promptShowSongs(artist);
+              });
               break;
             default:
               promptShowSongs(artist);
@@ -321,14 +322,30 @@ function promptShowSongs(artist: Artist) {
           type: 'list',
           name: 'order',
           message: 'Orden?',
-          choices: ['Ascendente', 'Descendente', 'Volver'],
+          choices: Object.values(orden),
         }).then((answers) => {
           switch (answers['order']) {
-            case 'Ascendente':
+            case orden.asc:
               artist.showByReproductions();
+              inquirer.prompt({
+                type: 'list',
+                name: 'order',
+                message: 'Opciones:',
+                choices: ['Volver'],
+              }).then((answers) => {
+                promptShowSongs(artist);
+              });
               break;
-            case 'Descendente':
+            case orden.des:
               artist.showByReproductions(false);
+              inquirer.prompt({
+                type: 'list',
+                name: 'order',
+                message: 'Opciones:',
+                choices: ['Volver'],
+              }).then((answers) => {
+                promptShowSongs(artist);
+              });
               break;
             default:
               promptShowSongs(artist);
@@ -374,14 +391,30 @@ function promptShowAlbums(artist: Artist) {
           type: 'list',
           name: 'order',
           message: 'Orden?',
-          choices: ['Ascendente', 'Descendente', 'Volver'],
+          choices: Object.values(orden),
         }).then((answers) => {
           switch (answers['order']) {
-            case 'Ascendente':
+            case orden.asc:
               artist.showAlbumOrder();
+              inquirer.prompt({
+                type: 'list',
+                name: 'order',
+                message: 'Opciones:',
+                choices: ['Volver'],
+              }).then((answers) => {
+                promptShowAlbums(artist);
+              });
               break;
-            case 'Descendente':
+            case orden.des:
               artist.showAlbumOrder(false);
+              inquirer.prompt({
+                type: 'list',
+                name: 'order',
+                message: 'Opciones:',
+                choices: ['Volver'],
+              }).then((answers) => {
+                promptShowAlbums(artist);
+              });
               break;
             default:
               promptShowAlbums(artist);
@@ -394,14 +427,30 @@ function promptShowAlbums(artist: Artist) {
           type: 'list',
           name: 'order',
           message: 'Orden?',
-          choices: ['Ascendente', 'Descendente', 'Volver'],
+          choices: Object.values(orden),
         }).then((answers) => {
           switch (answers['order']) {
-            case 'Ascendente':
+            case orden.asc:
               artist.showAlbumYearOrder();
+              inquirer.prompt({
+                type: 'list',
+                name: 'order',
+                message: 'Opciones:',
+                choices: ['Volver'],
+              }).then((answers) => {
+                promptShowAlbums(artist);
+              });
               break;
-            case 'Descendente':
+            case orden.des:
               artist.showAlbumYearOrder(false);
+              inquirer.prompt({
+                type: 'list',
+                name: 'order',
+                message: 'Opciones:',
+                choices: ['Volver'],
+              }).then((answers) => {
+                promptShowAlbums(artist);
+              });
               break;
             default:
               promptShowAlbums(artist);
@@ -409,18 +458,14 @@ function promptShowAlbums(artist: Artist) {
           }
         });
         break;
-      case modeShowAlbum.back:
+      default:
         promptShowData(artist);
         break;
     }
   });
 }
 
-enum ordenPlaylist {
-  asc = 'Ascendente',
-  des = 'Descendente',
-  back = 'Volver',
-}
+
 function promptShowPlayList(artist: Artist) {
   promptStop('Pulse para continuar');
   console.clear();
@@ -429,16 +474,30 @@ function promptShowPlayList(artist: Artist) {
     type: 'list',
     name: 'order',
     message: 'Orden?',
-    choices: Object.values(ordenPlaylist),
+    choices: Object.values(orden),
   }).then((answers) => {
     switch (answers['order']) {
-      case 'Ascendente':
+      case orden.asc:
         artist.showPlayListAsociate();
-        promptShowPlayList(artist);
+        inquirer.prompt({
+          type: 'list',
+          name: 'order',
+          message: 'Opciones:',
+          choices: ['Volver'],
+        }).then((answers) => {
+          promptShowPlayList(artist);
+        });
         break;
-      case 'Descendente':
+      case orden.des:
         artist.showPlayListAsociate();
-        promptShowPlayList(artist);
+        inquirer.prompt({
+          type: 'list',
+          name: 'order',
+          message: 'Opciones:',
+          choices: ['Volver'],
+        }).then((answers) => {
+          promptShowPlayList(artist);
+        });
         break;
       default:
         promptShowData(artist);

@@ -89,7 +89,7 @@ export class GroupManager extends Manager<Group> {
     this.store();
     SongManager.getSongManager().store();
   }
-
+  /*
   public editGroup(group: Group, newName: string, newArtists: Artist[], newYear: number,
       newGenres: string[], newAlbums: Album[] ): void {
     if (group.getArtists() != newArtists) {
@@ -135,5 +135,9 @@ export class GroupManager extends Manager<Group> {
     SongManager.getSongManager().store();
     GenreManager.getGenreManager().store();
     this.store();
+  }*/
+  public editGroup(oldGroup: Group, newGroup: Group) {
+    this.addGroup(newGroup);
+    this.deleteGroup(oldGroup);
   }
 }
