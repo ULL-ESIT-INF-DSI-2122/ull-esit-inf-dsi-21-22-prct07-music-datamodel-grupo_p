@@ -3,8 +3,7 @@
     {
       "name": "Mick Jagger",
       "groups": [
-        "The Rolling Stones",
-        "prueba"
+        "The Rolling Stones"
       ],
       "genres": [
         "Rock"
@@ -12,7 +11,7 @@
       "albums": [
         {
           "name": "Goddess in the Doorway",
-          "publisher": "Mick Jagger",
+          "whoPublishes": "Mick Jagger",
           "publicationYear": 2001,
           "genres": [
             "Rock"
@@ -83,7 +82,7 @@
     {
       "name": "Adam Levine",
       "groups": [
-        "prueba"
+        "Maroon 5"
       ],
       "genres": [
         "Pop"
@@ -91,7 +90,7 @@
       "albums": [
         {
           "name": "Begin Again",
-          "publisher": "Adam Levine",
+          "whoPublishes": "Adam Levine",
           "publicationYear": 2014,
           "genres": [
             "Pop"
@@ -170,7 +169,7 @@
       "albums": [
         {
           "name": "Quien contra mi",
-          "publisher": "Yandel",
+          "whoPublishes": "Yandel",
           "publicationYear": 2003,
           "genres": [
             "Reggeaton"
@@ -249,7 +248,7 @@
       "albums": [
         {
           "name": "The Marshall Matters LP",
-          "publisher": "Eminem",
+          "whoPublishes": "Eminem",
           "publicationYear": 2000,
           "genres": [
             "Rap"
@@ -412,7 +411,7 @@
       "albums": [
         {
           "name": "Residente",
-          "publisher": "Residente",
+          "whoPublishes": "Residente",
           "publicationYear": 2017,
           "genres": [
             "Urbano Latino"
@@ -491,7 +490,7 @@
       "albums": [
         {
           "name": "American Recordings",
-          "publisher": "Johnny Cash",
+          "whoPublishes": "Johnny Cash",
           "publicationYear": 1962,
           "genres": [
             "Country"
@@ -654,7 +653,7 @@
       "albums": [
         {
           "name": "What A Wonderful World",
-          "publisher": "Louis Armstrong",
+          "whoPublishes": "Louis Armstrong",
           "publicationYear": 1967,
           "genres": [
             "Jazz"
@@ -817,7 +816,7 @@
       "albums": [
         {
           "name": "Rastaman Vibration",
-          "publisher": "Bob Marley",
+          "whoPublishes": "Bob Marley",
           "publicationYear": 1976,
           "genres": [
             "Reggae"
@@ -896,7 +895,7 @@
       "albums": [
         {
           "name": "DAMN.",
-          "publisher": "Kendrik Lamar",
+          "whoPublishes": "Kendrik Lamar",
           "publicationYear": 2017,
           "genres": [
             "Trap"
@@ -1059,7 +1058,7 @@
       "albums": [
         {
           "name": "True",
-          "publisher": "Avicii",
+          "whoPublishes": "Avicii",
           "publicationYear": 2013,
           "genres": [
             "Musica Electronica"
