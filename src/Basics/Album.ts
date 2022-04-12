@@ -65,13 +65,15 @@ export class Album extends BasicData {
     return new Album(album.name, album.whoPublishes, album.publicationYear, album.genres, songs);
   }
 
-  public print(): string {
-    //   return (`ALBUM ${this.name}
-    //   Año de publicacion: ${this.publicationYear}
-    //   Generos que contiene este album: ${this.genres}
-    //  `);
-    const info: string = `${this.name}\n  -Grupos/Artistas: ${this.publisher}\n`+
-      `  -Año de publicacion: ${this.publicationYear}\n  -Genero: ${this.genres}\n  -Canciones: ${this.songs}\n `;
+  public showInfo(): string {
+    const info: string = `ÁLBUM ${this.name}
+    -Publicado por: ${this.publisher}
+    -Año de publicacion: ${this.publicationYear}
+    -Genero: ${this.genres}
+    -Canciones: 
+      ${this.songs.map((song) => {
+    return song.getName();
+  }).join('\n      ')}`;
     console.log(info);
     return info;
   }

@@ -6,6 +6,7 @@ import {GenreManager} from '../Managers/GenreManager';
 import {GroupManager} from '../Managers/GroupManager';
 import {PlaylistManager} from '../Managers/PlaylistManager';
 import {SongManager} from '../Managers/SongManager';
+import {promptAlbumPrincipal} from './AlbumMenu';
 import {promptArtists} from './ArtistMenu';
 import {promptGenres} from './GenresMenu';
 import {promptGroups} from './GroupsMenu';
@@ -17,9 +18,10 @@ import {promptSongPrincipal} from './SongMenu';
  */
 export enum Commands {
     Genres = 'Géneros',
-    Artists = 'Artistas',
-    Songs = 'Canciones',
     Groups = 'Grupos',
+    Artists = 'Artistas',
+    Albums = 'Álbumes',
+    Songs = 'Canciones',
     Playlists = 'Playlists',
     Quit = 'Salir'
 }
@@ -49,6 +51,9 @@ export function promptUser(): void {
         break;
       case Commands.Playlists:
         promptPlaylists();
+        break;
+      case Commands.Albums:
+        promptAlbumPrincipal();
         break;
     }
   });

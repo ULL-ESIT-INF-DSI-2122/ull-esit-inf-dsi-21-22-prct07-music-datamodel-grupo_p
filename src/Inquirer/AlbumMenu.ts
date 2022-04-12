@@ -7,7 +7,7 @@ import {SongManager} from '../Managers/SongManager';
 
 export function promptAlbumPrincipal(): void {
   const manager: AlbumManager = AlbumManager.getAlbumManager();
-  let options: string[] = ['Nuevo Album'];
+  let options: string[] = ['Nuevo Album +'];
   options = options.concat(manager.getList());
   options.push('Volver');
   console.clear();
@@ -18,7 +18,7 @@ export function promptAlbumPrincipal(): void {
     choices: options,
   }).then((answers) => {
     switch (answers['command']) {
-      case 'Nuevo Album':
+      case 'Nuevo Album +':
         promptAddAlbum();
         break;
       case 'Volver':
@@ -34,7 +34,7 @@ export function promptAlbumPrincipal(): void {
 
 function promptAlbum(album: Album): void {
   console.clear();
-  album.print();
+  album.showInfo();
   inquirer.prompt({
     type: 'list',
     name: 'command',
