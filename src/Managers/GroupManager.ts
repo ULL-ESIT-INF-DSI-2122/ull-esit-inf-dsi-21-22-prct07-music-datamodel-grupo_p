@@ -61,7 +61,7 @@ export class GroupManager extends Manager<Group> {
       objArtistManager.deleteArtist(artist, false);
       ArtistManager.getArtistManager().store();
     });
-    // elimina los albunes del grupo
+    // elimina los albumes del grupo
     const objAlbumManager:AlbumManager = AlbumManager.getAlbumManager();
     const groupAlbums: Album[] = group.getAlbums();
     groupAlbums.forEach((album) => {
@@ -69,14 +69,16 @@ export class GroupManager extends Manager<Group> {
       AlbumManager.getAlbumManager().store();
     });
 
-    // elimina los grupo en los generos
+    // elimina el grupo en los generos
     const objGenreManager:GenreManager = GenreManager.getGenreManager();
     const genreNames: string[] = group.getGenres();
     genreNames.forEach((genreName) => {
-      let genre = objGenreManager.searchByName(genreName);
-      genre.deleteMusician(group); // If group is not in list it won't do anything
-      if (genre.getMusicians().length == 0) {
-        objGenreManager.remove(genre);
+      if (objGenreManager.searchByName(genreName) !== undefined) {
+        let genre = objGenreManager.searchByName(genreName);
+        genre.deleteMusician(group); // If group is not in list it won't do anything
+        if (genre.getMusicians().length == 0) {
+          objGenreManager.remove(genre);
+        }
       }
     });
     GenreManager.getGenreManager().store();

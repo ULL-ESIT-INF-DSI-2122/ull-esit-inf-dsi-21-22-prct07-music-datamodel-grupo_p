@@ -44,21 +44,36 @@ export class AlbumManager extends Manager<Album> {
     let artistObj = ArtistManager.getArtistManager().getCollection();
     let artistArray = Array.from(artistObj);
     let artistsThisAlbum = artistArray.filter((artist) => artist.getAlbums().includes(album));
-    artistsThisAlbum.forEach((artist) => artist.removeAlbum(album));
+    artistsThisAlbum.forEach((artist) => {
+      artist.removeAlbum(album);
+      if (artist.getAlbums().length === 0) {
+        ArtistManager.getArtistManager().deleteArtist(artist);
+      }
+    });
     ArtistManager.getArtistManager().store();
     // eliminar de los grupos
     let groupAsociate = GroupManager.getGroupManager().getCollection();
     let groupObj = Array.from(groupAsociate);
     let groupThisAlbum = groupObj.filter((group) => group.getAlbums().includes(album));
-    groupThisAlbum.forEach((group) => group.removeAlbum(album));
+    groupThisAlbum.forEach((group) => {
+      group.removeAlbum(album);
+      if (group.getAlbums().length === 0) {
+        GroupManager.getGroupManager().deleteGroup(group);
+      }
+    });
     GroupManager.getGroupManager().store();
     // eliminar de generos
     const objGenreManager:GenreManager = GenreManager.getGenreManager();
     const genreNames: string[] = album.getGenres();
     genreNames.forEach((genreName) => {
-      let genre = objGenreManager.searchByName(genreName);
-      genre.deleteAlbum(album); // If artist is not in list it won't do anything
-      GenreManager.getGenreManager().store();
+      if (objGenreManager.searchByName(genreName) !== undefined) {
+        let genre = objGenreManager.searchByName(genreName);
+        genre.deleteAlbum(album); // If artist is not in list it won't do anything
+        if (genre.getAlbums().length === 0) {
+          GenreManager.getGenreManager().deleteGenre(genre);
+        }
+        GenreManager.getGenreManager().store();
+      }
     });
 
     // eliminar album
@@ -91,6 +106,7 @@ export class AlbumManager extends Manager<Album> {
       }
     });
     genreManager.store();
+    this.add(album);
     this.store();
   }
 

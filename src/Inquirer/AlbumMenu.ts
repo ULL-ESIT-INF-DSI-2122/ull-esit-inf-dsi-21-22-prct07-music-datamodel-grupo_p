@@ -4,6 +4,9 @@ import {AlbumManager} from '../Managers/AlbumManager';
 import {Album} from '../Basics/Album';
 import {promptUser} from './MainMenu';
 import {SongManager} from '../Managers/SongManager';
+import {ArtistManager} from '../Managers/ArtistManager';
+import {GroupManager} from '../Managers/GroupManager';
+import {Song} from '../Basics/Song';
 
 export function promptAlbumPrincipal(): void {
   const manager: AlbumManager = AlbumManager.getAlbumManager();
@@ -75,7 +78,9 @@ function promptRemoveAlbum(album: Album) {
 
 function promptAddAlbum(): void {
   const manager: AlbumManager = AlbumManager.getAlbumManager();
-  const musicians: string[] = ['Rolling Stones', 'Michael Jackson'];
+  const artists: string[] = ArtistManager.getArtistManager().getList();
+  const groups: string[] = GroupManager.getGroupManager().getList();
+  const musicians = artists.concat(groups);
   const song: SongManager = SongManager.getSongManager();
   const genres: GenreManager = GenreManager.getGenreManager();
   console.clear();
@@ -134,7 +139,12 @@ function promptAddAlbum(): void {
     },
   ];
   inquirer.prompt(questions).then((answers) => {
-    const newAlbum: Album = new Album(answers.name, answers.musicians, answers.publication, answers.genre, answers.songs);
+    const songManager: SongManager = SongManager.getSongManager();
+    let songs: Song[] = [];
+    answers.songs.forEach((song: string) => {
+      songs.push(songManager.searchByName(song));
+    });
+    const newAlbum: Album = new Album(answers.name, answers.musicians, answers.publication, answers.genre, songs);
     manager.addAlbum(newAlbum);
     promptAlbumPrincipal();
   });

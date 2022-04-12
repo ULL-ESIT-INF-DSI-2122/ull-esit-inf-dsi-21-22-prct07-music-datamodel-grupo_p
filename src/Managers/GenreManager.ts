@@ -71,7 +71,6 @@ export class GenreManager extends Manager<Genre> {
     });
     songManager.store();
     // Album
-    /*
     const albumManager: AlbumManager = AlbumManager.getAlbumManager();
     albumManager.getCollection().forEach((album) => {
       if (genre.getAlbums().find((x) => x === album) !== undefined) {
@@ -81,7 +80,7 @@ export class GenreManager extends Manager<Genre> {
         }
       }
     });
-    albumManager.store();*/
+    albumManager.store();
     // Artist
     const artistManager: ArtistManager = ArtistManager.getArtistManager();
     artistManager.getCollection().forEach((artist) => {
@@ -107,6 +106,7 @@ export class GenreManager extends Manager<Genre> {
     // Playlist
     PlaylistManager.getPlaylistManager().update();
     PlaylistManager.getPlaylistManager().store();
+    // Genre
     this.remove(genre);
     this.store();
   }
@@ -115,7 +115,7 @@ export class GenreManager extends Manager<Genre> {
     // Song
     const songManager: SongManager = SongManager.getSongManager();
     songManager.getCollection().forEach((song) => {
-      if (song.getGenres().find((g) => g === genre.getName()) !== undefined) {
+      if (genre.getSongs().find((s) => s === song) !== undefined) {
         song.addGenre(genre);
       }
     });
@@ -124,7 +124,7 @@ export class GenreManager extends Manager<Genre> {
     // Album
     const albumManager: AlbumManager = AlbumManager.getAlbumManager();
     albumManager.getCollection().forEach((album) => {
-      if (album.getGenres().find((g) => g === genre.getName()) !== undefined) {
+      if (genre.getAlbums().find((a) => a === album) !== undefined) {
         album.addGenre(genre);
       }
     });
@@ -133,7 +133,7 @@ export class GenreManager extends Manager<Genre> {
     // Artist
     const artistManager: ArtistManager = ArtistManager.getArtistManager();
     artistManager.getCollection().forEach((artist) => {
-      if (artist.getGenres().find((g) => g === genre.getName()) !== undefined) {
+      if (genre.getMusicians().find((a) => a === artist) !== undefined) {
         artist.addGenre(genre);
       }
     });
@@ -142,7 +142,7 @@ export class GenreManager extends Manager<Genre> {
     // Group
     const groupManager: GroupManager = GroupManager.getGroupManager();
     groupManager.getCollection().forEach((group) => {
-      if (group.getGenres().find((g) => g === genre.getName()) !== undefined) {
+      if (genre.getMusicians().find((g) => g === group) !== undefined) {
         group.addGenre(genre);
       }
     });

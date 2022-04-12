@@ -119,7 +119,7 @@ export class Song extends BasicData {
   public showInfo(): string {
     const info: string = `CANCIÓN ${this.getName()}
     -Autor: ${this.author}
-    -Duración: ${this.duration[0]}min ${this.duration[0]}s
+    -Duración: ${this.duration[0]}min ${this.duration[1]}s
     -Género/s: ${this.genres}
     -Single: ${(this.isSingle ? 'Si' : 'No')}
     -Numero de reproducciones: ${this.reproductions}`;

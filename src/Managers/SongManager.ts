@@ -46,19 +46,23 @@ export class SongManager extends Manager<Song> {
   addSong(song: Song): void {
     // add in artist
     let author = song.getAuthorName();
-    let authorObj = ArtistManager.getArtistManager().searchByName(author);
-    if (authorObj != undefined) {
-      authorObj.addSong(song);
-      ArtistManager.getArtistManager().store();
-    }
-    // add in genre
-    let genres = song.getGenres().map((genreName) => GenreManager.getGenreManager().searchByName(genreName));
-    genres.forEach((genre) => {
-      genre.addSong(song);
-      GenreManager.getGenreManager().store();
+    let artistManager = ArtistManager.getArtistManager();
+    artistManager.getCollection().forEach((artist) => {
+      if (artist.getName() === author) {
+        artist.addSong(song);
+      }
     });
+    artistManager.store();
+    // add in genre
+    let genreManager = GenreManager.getGenreManager();
+    genreManager.getCollection().forEach((genre) => {
+      if (song.getGenres().find((g) => g === genre.getName())) {
+        genre.addSong(song);
+      }
+    });
+    genreManager.store();
 
-    this.collection.add(song);
+    this.add(song);
     this.store();
   }
 
@@ -68,34 +72,52 @@ export class SongManager extends Manager<Song> {
    */
   removeSong(song: Song): void {
     // delete from album
-    let albumsAsociate = AlbumManager.getAlbumManager().getCollection();
-    let albumsObj = Array.from(albumsAsociate);
-    let albumsThisSong = albumsObj.filter((album) => album.getSongs().includes(song));
-    albumsThisSong.forEach((album) => album.removeSong(song));
-    AlbumManager.getAlbumManager().store();
-    // delete in artist
-    let author = song.getAuthorName();
-    let authorObj = ArtistManager.getArtistManager().searchByName(author);
-    if (authorObj != undefined) {
-      authorObj.removeSong(song);
-      ArtistManager.getArtistManager().store();
-    }
-    // delete in genre
-    const objGenreManager:GenreManager = GenreManager.getGenreManager();
-    const genreNames: string[] = song.getGenres();
-    genreNames.forEach((genreName) => {
-      let genre = objGenreManager.searchByName(genreName);
-      genre.removeSong(song); // If artist is not in list it won't do anything
-      GenreManager.getGenreManager().store();
+    const albumManager: AlbumManager = AlbumManager.getAlbumManager();
+    albumManager.getCollection().forEach((album) => {
+      if (album.getSongs().find((s) => s === song) !== undefined) {
+        album.removeSong(song);
+        if (album.getSongs().length === 0) {
+          albumManager.removeAlbum(album);
+        }
+      }
     });
+    albumManager.store();
+    // delete in artist
+    const artistManager: ArtistManager = ArtistManager.getArtistManager();
+    artistManager.getCollection().forEach((artist) => {
+      if (artist.getSongs().find((s) => s === song) !== undefined) {
+        artist.removeSong(song);
+        if (artist.getSongs().length === 0) {
+          artistManager.deleteArtist(artist);
+        }
+      }
+    });
+    artistManager.store();
+    // delete in genre
+    const genreManager: GenreManager = GenreManager.getGenreManager();
+    genreManager.getCollection().forEach((genre) => {
+      if (genre.getSongs().find((s) => s === song) !== undefined) {
+        genre.removeSong(song);
+        if (genre.getSongs().length === 0) {
+          genreManager.deleteGenre(genre);
+        }
+      }
+    });
+    genreManager.store();
     // delete from playlist
-    let playlist = PlaylistManager.getPlaylistManager().getCollection();
-    let playlistObj = Array.from(playlist);
-    let playlistAsociate = playlistObj.filter((playlist) => playlist.getSongs().includes(song));
-    playlistAsociate.forEach((playlist) => playlist.deleteSong(song));
-    PlaylistManager.getPlaylistManager().store();
+    const playlistManager: PlaylistManager = PlaylistManager.getPlaylistManager();
+    playlistManager.getCollection().forEach((playlist) => {
+      if (playlist.getSongs().find((s) => s === song) !== undefined) {
+        playlist.deleteSong(song);
+        if (playlist.getSongs().length === 0) {
+          playlistManager.remove(playlist);
+        }
+      }
+    });
+    playlistManager.update();
+    playlistManager.store();
 
-    this.collection.delete(song);
+    this.remove(song);
     this.store();
   }
 

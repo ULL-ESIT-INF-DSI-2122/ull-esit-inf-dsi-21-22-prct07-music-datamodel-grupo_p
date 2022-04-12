@@ -154,7 +154,7 @@ function promptAddArtist(): void {
     });
     const newArtist: Artist = new Artist(answers.name, answers.groups, answers.genre,
         albums, songs);
-    manager.updateArtist(newArtist, answers.newName, answers.song, answers.albums, answers.groups, answers.genre);
+    manager.addArtist(newArtist);
     promptArtists();
   });
 }
@@ -241,7 +241,7 @@ function promptEditArtist(artist: Artist): void {
     answers.song.forEach((s: string) => {
       songs.push(SongManager.getSongManager().searchByName(s));
     });
-    manager.updateArtist(artist, answers.newName, answers.song, answers.albums, answers.groups, answers.genre);
+    // manager.updateArtist(artist, answers.newName, answers.song, answers.albums, answers.groups, answers.genre);
     promptArtists();
   });
 }

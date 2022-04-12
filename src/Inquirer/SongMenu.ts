@@ -147,7 +147,7 @@ function promptAddSong(): void {
     },
     {
       type: 'number',
-      message: 'Reproduccioines de la canción',
+      message: 'Reproducciones de la canción',
       name: 'reproduction',
       default: '1000',
       validate(answer: string) {
