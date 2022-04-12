@@ -11,7 +11,7 @@
       "albums": [
         {
           "name": "Goddess in the Doorway",
-          "publisher": "Mick Jagger",
+          "whoPublishes": "Mick Jagger",
           "publicationYear": 2001,
           "genres": [
             "Rock"
@@ -48,7 +48,36 @@
           ]
         }
       ],
-      "songs": []
+      "songs": [
+        {
+          "name": "God gave me everything",
+          "author": "Mick Jagger",
+          "duration": [
+            3,
+            34
+          ],
+          "genres": [
+            "Rock"
+          ],
+          "publicationDate": "2001-11-19",
+          "isSingle": true,
+          "reproductions": 4500000
+        },
+        {
+          "name": "Visions of paradise",
+          "author": "Mick Jagger",
+          "duration": [
+            4,
+            2
+          ],
+          "genres": [
+            "Rock"
+          ],
+          "publicationDate": "2001-11-19",
+          "isSingle": false,
+          "reproductions": 2750000
+        }
+      ]
     },
     {
       "name": "Adam Levine",
@@ -61,7 +90,7 @@
       "albums": [
         {
           "name": "Begin Again",
-          "publisher": "Adam Levine",
+          "whoPublishes": "Adam Levine",
           "publicationYear": 2014,
           "genres": [
             "Pop"
@@ -140,7 +169,7 @@
       "albums": [
         {
           "name": "Quien contra mi",
-          "publisher": "Yandel",
+          "whoPublishes": "Yandel",
           "publicationYear": 2003,
           "genres": [
             "Reggeaton"
@@ -219,7 +248,7 @@
       "albums": [
         {
           "name": "The Marshall Matters LP",
-          "publisher": "Eminem",
+          "whoPublishes": "Eminem",
           "publicationYear": 2000,
           "genres": [
             "Rap"
@@ -382,7 +411,7 @@
       "albums": [
         {
           "name": "Residente",
-          "publisher": "Residente",
+          "whoPublishes": "Residente",
           "publicationYear": 2017,
           "genres": [
             "Urbano Latino"
@@ -461,7 +490,7 @@
       "albums": [
         {
           "name": "American Recordings",
-          "publisher": "Johnny Cash",
+          "whoPublishes": "Johnny Cash",
           "publicationYear": 1962,
           "genres": [
             "Country"
@@ -624,7 +653,7 @@
       "albums": [
         {
           "name": "What A Wonderful World",
-          "publisher": "Louis Armstrong",
+          "whoPublishes": "Louis Armstrong",
           "publicationYear": 1967,
           "genres": [
             "Jazz"
@@ -787,7 +816,7 @@
       "albums": [
         {
           "name": "Rastaman Vibration",
-          "publisher": "Bob Marley",
+          "whoPublishes": "Bob Marley",
           "publicationYear": 1976,
           "genres": [
             "Reggae"
@@ -866,7 +895,7 @@
       "albums": [
         {
           "name": "DAMN.",
-          "publisher": "Kendrik Lamar",
+          "whoPublishes": "Kendrik Lamar",
           "publicationYear": 2017,
           "genres": [
             "Trap"
@@ -1029,7 +1058,7 @@
       "albums": [
         {
           "name": "True",
-          "publisher": "Avicii",
+          "whoPublishes": "Avicii",
           "publicationYear": 2013,
           "genres": [
             "Musica Electronica"

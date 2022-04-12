@@ -71,6 +71,76 @@
       "reproductions": 1860000
     },
     {
+      "name": "Satisfaction",
+      "author": "The Rolling Stones",
+      "duration": [
+        3,
+        51
+      ],
+      "genres": [
+        "Rock"
+      ],
+      "publicationDate": "1965-06-06",
+      "isSingle": false,
+      "reproductions": 10700000
+    },
+    {
+      "name": "The Last Time",
+      "author": "The Rolling Stones",
+      "duration": [
+        3,
+        41
+      ],
+      "genres": [
+        "Rock"
+      ],
+      "publicationDate": "1965-03-06",
+      "isSingle": true,
+      "reproductions": 6520000
+    },
+    {
+      "name": "Good Times",
+      "author": "The Rolling Stones",
+      "duration": [
+        1,
+        58
+      ],
+      "genres": [
+        "Rock"
+      ],
+      "publicationDate": "1964-06-26",
+      "isSingle": true,
+      "reproductions": 3790000
+    },
+    {
+      "name": "God gave me everything",
+      "author": "Mick Jagger",
+      "duration": [
+        3,
+        34
+      ],
+      "genres": [
+        "Rock"
+      ],
+      "publicationDate": "2001-11-19",
+      "isSingle": true,
+      "reproductions": 4500000
+    },
+    {
+      "name": "Visions of paradise",
+      "author": "Mick Jagger",
+      "duration": [
+        4,
+        2
+      ],
+      "genres": [
+        "Rock"
+      ],
+      "publicationDate": "2001-11-19",
+      "isSingle": false,
+      "reproductions": 2750000
+    },
+    {
       "name": "Tu nombre",
       "author": "Wisin y Yandel",
       "duration": [

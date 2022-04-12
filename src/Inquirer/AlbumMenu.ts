@@ -1,13 +1,9 @@
 import * as inquirer from 'inquirer';
-import {Genre} from '../Basics/Genre';
-import {Song} from '../Basics/Song';
 import {GenreManager} from '../Managers/GenreManager';
 import {AlbumManager} from '../Managers/AlbumManager';
 import {Album} from '../Basics/Album';
 import {promptUser} from './MainMenu';
 import {SongManager} from '../Managers/SongManager';
-import {Playlist} from '../Basics/Playlist';
-import {promptSelectOrder} from './PlaylistsMenu';
 
 export function promptAlbumPrincipal(): void {
   const manager: AlbumManager = AlbumManager.getAlbumManager();
@@ -37,11 +33,10 @@ export function promptAlbumPrincipal(): void {
 }
 
 function promptAlbum(album: Album): void {
-  let p: Playlist;
   console.clear();
   album.print();
   inquirer.prompt({
-    type: 'rawlist',
+    type: 'list',
     name: 'command',
     message: 'Opciones',
     choices: ['Editar', 'Eliminar', 'Volver'],
@@ -51,14 +46,7 @@ function promptAlbum(album: Album): void {
         promptEditAlbum(album);
         break;
       case 'Eliminar':
-        promptRemoveSong(album);
-        /*
-        ArtistsManager.getArtistsManager().removeGenre(genre);
-        GroupsManager.getGroupsManager().removeGenre(genre);
-        AlbumsManager.getAlbumsManager().removeGenre(genre);
-        SongsManager.getSongsManager().removeGenre(genre);
-        PlaylistsManager.getPlaylistsManager().updateGenre();
-        */
+        promptRemoveAlbum(album);
         break;
       default:
         promptAlbumPrincipal();
@@ -68,7 +56,7 @@ function promptAlbum(album: Album): void {
   );
 }
 
-function promptRemoveSong(album: Album) {
+function promptRemoveAlbum(album: Album) {
   const manager: AlbumManager = AlbumManager.getAlbumManager();
   console.clear();
   inquirer
@@ -86,18 +74,10 @@ function promptRemoveSong(album: Album) {
 }
 
 function promptAddAlbum(): void {
-  let d: Date = new Date;
   const manager: AlbumManager = AlbumManager.getAlbumManager();
   const musicians: string[] = ['Rolling Stones', 'Michael Jackson'];
   const song: SongManager = SongManager.getSongManager();
   const genres: GenreManager = GenreManager.getGenreManager();
-  // const genre: string[] = GenresManager.getGenresManager().getList();
-  /*
-  let musicians: string[] = ArtistsManager.getArtistsManager().getList();
-  musicians = musicians.concat(GroupsManager.getGroupsManager().getList());
-  const albums: string[] = AlbumsManager.getAlbumsManager().getList();
-  const songs: string[] = SongsManager.getSongsManager().getList();
-  */
   console.clear();
   const questions = [
     {
@@ -110,13 +90,6 @@ function promptAddAlbum(): void {
         }
         return true;
       },
-      // validate(value: string) {
-      //   let val: boolean | string = true;
-      //   if (manager.exists(value)) {
-      //     val = 'Error: ya existe un género con ese nombre.';
-      //   }
-      //   return val;
-      // },
     },
     {
       type: 'list',
@@ -163,13 +136,6 @@ function promptAddAlbum(): void {
   inquirer.prompt(questions).then((answers) => {
     const newAlbum: Album = new Album(answers.name, answers.musicians, answers.publication, answers.genre, answers.songs);
     manager.addAlbum(newAlbum);
-    /*
-    ArtistsManager.getArtistsManager().updateGenre(newGenre, answers.musicians);
-    GroupsManager.getGroupsManager().updateGenre(newGenre, answers.musicians);
-    AlbumsManager.getAlbumsManager().updateGenre(newGenre, answers.albums);
-    SongsManager.getSongsManager().updateGenre(newGenre, answers.songs);
-    PlaylistsManager.getPlaylistsManager().updateGenre();
-    */
     promptAlbumPrincipal();
   });
 }
@@ -180,12 +146,6 @@ function promptEditAlbum(album: Album): void {
   // const songs: string[] = ['Imagine', 'Despacito'];
   let genreList: string[] = GenreManager.getGenreManager().getList();
   let songs: string[] = SongManager.getSongManager().getList();
-  /*
-  let musicians: string[] = ArtistsManager.getArtistsManager().getList();
-  musicians = musicians.concat(GroupsManager.getGroupsManager().getList());
-  const albums: string[] = AlbumsManager.getAlbumsManager().getList();
-  const songs: string[] = SongsManager.getSongsManager().getList();
-  */
   console.clear();
   const questions = [
     {
