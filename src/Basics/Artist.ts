@@ -163,7 +163,10 @@ export class Artist extends BasicData {
 
   showPlayListAsociate(): void {
     const playLists: Playlist[] = Array.from(PlaylistManager.getPlaylistManager().getCollection());
-    const playListsWithAuthor = playLists.filter((playList) => playList.getMusicians().includes(this.getName()));
-    console.log('  '+playListsWithAuthor.join('\n  '));
+    const playListsWithAuthor: Playlist[] = playLists.filter((playList) => playList.getMusicians().includes(this.getName()));
+    const asociatePlaylists: string[] = playListsWithAuthor.map((playlist) => {
+      return playlist.getName();
+    });
+    console.log('  '+asociatePlaylists.join('\n  '));
   }
 }

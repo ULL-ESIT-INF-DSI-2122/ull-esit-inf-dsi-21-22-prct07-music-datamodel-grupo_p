@@ -53,39 +53,11 @@
                       "publicationDate": "2014-06-30",
                       "isSingle": true,
                       "reproductions": 3200000
-                    },
-                    {
-                      "name": "Lost Stars",
-                      "author": "Adam Levine",
-                      "duration": [
-                        3,
-                        16
-                      ],
-                      "genres": [
-                        "Pop"
-                      ],
-                      "publicationDate": "2014-06-30",
-                      "isSingle": true,
-                      "reproductions": 3200000
                     }
                   ]
                 }
               ],
               "songs": [
-                {
-                  "name": "Lost Stars",
-                  "author": "Adam Levine",
-                  "duration": [
-                    3,
-                    16
-                  ],
-                  "genres": [
-                    "Pop"
-                  ],
-                  "publicationDate": "2014-06-30",
-                  "isSingle": true,
-                  "reproductions": 3200000
-                },
                 {
                   "name": "Lost Stars",
                   "author": "Adam Levine",
@@ -135,39 +107,11 @@
                           "publicationDate": "2014-06-30",
                           "isSingle": true,
                           "reproductions": 3200000
-                        },
-                        {
-                          "name": "Lost Stars",
-                          "author": "Adam Levine",
-                          "duration": [
-                            3,
-                            16
-                          ],
-                          "genres": [
-                            "Pop"
-                          ],
-                          "publicationDate": "2014-06-30",
-                          "isSingle": true,
-                          "reproductions": 3200000
                         }
                       ]
                     }
                   ],
                   "songs": [
-                    {
-                      "name": "Lost Stars",
-                      "author": "Adam Levine",
-                      "duration": [
-                        3,
-                        16
-                      ],
-                      "genres": [
-                        "Pop"
-                      ],
-                      "publicationDate": "2014-06-30",
-                      "isSingle": true,
-                      "reproductions": 3200000
-                    },
                     {
                       "name": "Lost Stars",
                       "author": "Adam Levine",
@@ -306,20 +250,6 @@
                 "Pop"
               ],
               "songs": [
-                {
-                  "name": "Lost Stars",
-                  "author": "Adam Levine",
-                  "duration": [
-                    3,
-                    16
-                  ],
-                  "genres": [
-                    "Pop"
-                  ],
-                  "publicationDate": "2014-06-30",
-                  "isSingle": true,
-                  "reproductions": 3200000
-                },
                 {
                   "name": "Lost Stars",
                   "author": "Adam Levine",

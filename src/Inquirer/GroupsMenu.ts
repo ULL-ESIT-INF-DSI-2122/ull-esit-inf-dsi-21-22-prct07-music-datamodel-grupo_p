@@ -307,9 +307,9 @@ function promptEditGroup(group: Group): void {
 
 
 enum visualizationMode {
-  byTitle = 'Ver por titulo de cancion',
-  byName = 'Ver por nombre de album',
-  byPlaylist = 'Ver por pleylists asociadas',
+  byTitle = 'Canciones',
+  byName = 'Álbumes',
+  byPlaylist = 'Playlists asociadas',
   back = 'Volver'
 }
 
@@ -329,7 +329,7 @@ function promptShowData(group: Group) {
         promptShowAlbums(group);
         break;
       case visualizationMode.byPlaylist:
-        promptShowPleyList(group);
+        promptShowPlayList(group);
         break;
       default:
         promptGroup(group);
@@ -339,8 +339,8 @@ function promptShowData(group: Group) {
 }
 
 enum modeShowSong {
-  title = 'Mostrar canciones por titulo',
-  repro = 'Mostrar por numero de reproducciones',
+  title = 'Por titulo',
+  repro = 'Por número de reproducciones',
   single = 'Mostrar solo los singles',
   back = 'Volver'
 }
@@ -360,14 +360,30 @@ function promptShowSongs(group: Group) {
           type: 'list',
           name: 'order',
           message: 'Orden?',
-          choices: ['Ascendente', 'Descendente'],
+          choices: ['Ascendente', 'Descendente', 'Volver'],
         }).then((answers) => {
           switch (answers['order']) {
             case 'Ascendente':
               group.showSongsOrder();
+              inquirer.prompt({
+                type: 'list',
+                name: 'order',
+                message: 'Opciones:',
+                choices: ['Volver'],
+              }).then((answers) => {
+                promptShowSongs(group);
+              });
               break;
             case 'Descendente':
               group.showSongsOrder(false);
+              inquirer.prompt({
+                type: 'list',
+                name: 'order',
+                message: 'Opciones:',
+                choices: ['Volver'],
+              }).then((answers) => {
+                promptShowSongs(group);
+              });
               break;
             default:
               promptShowSongs(group);
@@ -380,14 +396,30 @@ function promptShowSongs(group: Group) {
           type: 'list',
           name: 'order',
           message: 'Orden?',
-          choices: ['Ascendente', 'Descendente'],
+          choices: ['Ascendente', 'Descendente', 'Volver'],
         }).then((answers) => {
           switch (answers['order']) {
             case 'Ascendente':
               group.showByReproductions();
+              inquirer.prompt({
+                type: 'list',
+                name: 'order',
+                message: 'Opciones:',
+                choices: ['Volver'],
+              }).then((answers) => {
+                promptShowSongs(group);
+              });
               break;
             case 'Descendente':
               group.showByReproductions(false);
+              inquirer.prompt({
+                type: 'list',
+                name: 'order',
+                message: 'Opciones:',
+                choices: ['Volver'],
+              }).then((answers) => {
+                promptShowSongs(group);
+              });
               break;
             default:
               promptShowSongs(group);
@@ -414,14 +446,13 @@ function promptShowSongs(group: Group) {
 }
 
 enum modeShowAlbum {
-  name = 'Mostrar albunes por nombre',
-  year = 'Mostrar por año de lanzamiento',
+  name = 'Por nombre',
+  year = 'Por año de lanzamiento',
   back = 'Volver'
 }
 
 function promptShowAlbums(group: Group) {
   console.clear();
-
   inquirer.prompt({
     type: 'list',
     name: 'mode',
@@ -434,14 +465,30 @@ function promptShowAlbums(group: Group) {
           type: 'list',
           name: 'order',
           message: 'Orden?',
-          choices: ['Ascendente', 'Descendente'],
+          choices: ['Ascendente', 'Descendente', 'Volver'],
         }).then((answers) => {
           switch (answers['order']) {
             case 'Ascendente':
               group.showAlbumOrder();
+              inquirer.prompt({
+                type: 'list',
+                name: 'order',
+                message: 'Opciones:',
+                choices: ['Volver'],
+              }).then((answers) => {
+                promptShowAlbums(group);
+              });
               break;
             case 'Descendente':
               group.showAlbumOrder(false);
+              inquirer.prompt({
+                type: 'list',
+                name: 'order',
+                message: 'Opciones:',
+                choices: ['Volver'],
+              }).then((answers) => {
+                promptShowAlbums(group);
+              });
               break;
             default:
               promptShowAlbums(group);
@@ -454,20 +501,39 @@ function promptShowAlbums(group: Group) {
           type: 'list',
           name: 'order',
           message: 'Orden?',
-          choices: ['Ascendente', 'Descendente'],
+          choices: ['Ascendente', 'Descendente', 'Volver'],
         }).then((answers) => {
           switch (answers['order']) {
             case 'Ascendente':
               group.showAlbumYearOrder();
+              inquirer.prompt({
+                type: 'list',
+                name: 'order',
+                message: 'Opciones:',
+                choices: ['Volver'],
+              }).then((answers) => {
+                promptShowAlbums(group);
+              });
               break;
             case 'Descendente':
               group.showAlbumYearOrder(false);
+              inquirer.prompt({
+                type: 'list',
+                name: 'order',
+                message: 'Opciones:',
+                choices: ['Volver'],
+              }).then((answers) => {
+                promptShowAlbums(group);
+              });
               break;
             default:
               promptShowAlbums(group);
               break;
           }
         });
+        break;
+      default:
+        promptShowData(group);
         break;
     }
   });
@@ -478,9 +544,8 @@ enum modeShowPlayList {
   back = 'Volver'
 }
 
-function promptShowPleyList(group: Group) {
+function promptShowPlayList(group: Group) {
   console.clear();
-
   inquirer.prompt({
     type: 'list',
     name: 'mode',
@@ -493,20 +558,37 @@ function promptShowPleyList(group: Group) {
           type: 'list',
           name: 'order',
           message: 'Orden?',
-          choices: ['Ascendente', 'Descendente'],
+          choices: ['Ascendente', 'Descendente', 'Volver'],
         }).then((answers) => {
           switch (answers['order']) {
             case 'Ascendente':
               group.showPlayListAsociate();
+              inquirer.prompt({
+                type: 'list',
+                name: 'order',
+                message: 'Opciones:',
+                choices: ['Volver'],
+              }).then((answers) => {
+                promptShowPlayList(group);
+              });
               break;
             case 'Descendente':
               group.showPlayListAsociate();
+              inquirer.prompt({
+                type: 'list',
+                name: 'order',
+                message: 'Opciones:',
+                choices: ['Volver'],
+              }).then((answers) => {
+                promptShowPlayList(group);
+              });
               break;
             default:
-              promptShowPleyList(group);
+              promptShowPlayList(group);
               break;
           }
         });
+        break;
       default:
         promptShowData(group);
         break;

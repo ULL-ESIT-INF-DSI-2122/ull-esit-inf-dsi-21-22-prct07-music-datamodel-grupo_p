@@ -95,9 +95,12 @@ export class Group extends BasicData {
   }
 
   public showPlayListAsociate(): void {
-    const playLists: Playlist[] = Array.from(PlaylistManager.getPlaylistManager().getCollection());
-    const playListsWithAuthor = playLists.filter((playList) => playList.getMusicians().includes(this.getName()));
-    console.log(playListsWithAuthor);
+    const playLists: Playlist[] = [...PlaylistManager.getPlaylistManager().getCollection().values()];
+    const playListsWithAuthor: Playlist[] = Array.from(playLists).filter((playList) => playList.getMusicians().includes(this.getName()));
+    const asociatePlaylists: string[] = playListsWithAuthor.map((playlist) => {
+      return playlist.getName();
+    });
+    console.log('  '+asociatePlaylists.join('\n  '));
   }
 
   showSongsOrder(ascending: boolean = true): void {

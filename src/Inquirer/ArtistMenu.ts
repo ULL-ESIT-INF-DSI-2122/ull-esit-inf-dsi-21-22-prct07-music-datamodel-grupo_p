@@ -282,7 +282,7 @@ enum modeShowSong {
   title = 'Por titulo',
   repro = 'Por numero de reproducciones',
   single = 'Mostrar solo los singles',
-  back = 'volver'
+  back = 'Volver'
 }
 
 function promptShowSongs(artist: Artist) {
@@ -485,7 +485,6 @@ enum modeShowPlayList {
 
 function promptShowPlayList(artist: Artist) {
   console.clear();
-
   inquirer.prompt({
     type: 'list',
     name: 'mode',
@@ -528,6 +527,7 @@ function promptShowPlayList(artist: Artist) {
               break;
           }
         });
+        break;
       default:
         promptShowData(artist);
         break;
