@@ -51,7 +51,7 @@ export class ArtistManager extends Manager<Artist> {
       GenreManager.getGenreManager().store();
     });
 
-    this.collection.add(artist);
+    this.add(artist);
     this.store();
   }
 
@@ -63,9 +63,8 @@ export class ArtistManager extends Manager<Artist> {
     artistAlbumsNames.forEach((albumName) => {
       let album: Album = objAlbumManager.searchByName(albumName);
       objAlbumManager.deleteAlbum(album); // deleteAlbum cuando este AlbumManager
-      AlbumManager.getAlbumManager().store();
     });
-
+    objAlbumManager.store();
     // Delete artists songs
     if (deleteSongs) {
       const objSongManager:SongManager = SongManager.getSongManager();
@@ -74,10 +73,9 @@ export class ArtistManager extends Manager<Artist> {
       artistSongsNames.forEach((songName) => {
         let song: Song = objSongManager.searchByName(songName);
         objSongManager.removeSong(song);
-        SongManager.getSongManager().store();
       });
+      objSongManager.store();
     }
-
     // Grupos
     const objGroupManager:GroupManager = GroupManager.getGroupManager();
     const groupNames: string[] = artist.getGroups();
@@ -89,7 +87,7 @@ export class ArtistManager extends Manager<Artist> {
           objGroupManager.deleteGroup(group);
         }
       }
-      GroupManager.getGroupManager().store();
+      objGroupManager.store();
     });
 
     // Delet artist from genres
@@ -101,17 +99,16 @@ export class ArtistManager extends Manager<Artist> {
       if (genre.getMusicians().length == 0) {
         objGenreManager.deleteGenre(genre);
       }
-      GenreManager.getGenreManager().store();
     });
-
+    objGenreManager.store();
     // Playlist
     PlaylistManager.getPlaylistManager().update();
     PlaylistManager.getPlaylistManager().store();
-
     // Delete from artist collection
     this.remove(artist);
     this.store();
   }
+
   public editArtist(oldArtist: Artist, newArtist: Artist) {
     let songAsociate: Set<Song> = SongManager.getSongManager().getCollection();
     let songObj: Song[] = Array.from(songAsociate);

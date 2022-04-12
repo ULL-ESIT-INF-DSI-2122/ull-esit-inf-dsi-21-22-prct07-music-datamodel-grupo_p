@@ -7,6 +7,7 @@ import {ArtistManager} from './ArtistManager';
 import {GenreManager} from './GenreManager';
 import {AlbumManager} from './AlbumManager';
 import {PlaylistManager} from './PlaylistManager';
+import {Genre} from '../Basics/Genre';
 
 
 type schemaType = {
@@ -38,27 +39,28 @@ export class SongManager extends Manager<Song> {
     return SongManager.SongManager;
   }
 
-
   /**
    * Función que añade un canción a la base
    * @param song que será agregado a la base
    */
-  addSong(song: Song): void {
+  public addSong(song: Song): void {
     // add in artist
     let author = song.getAuthor();
-    let authorObj = ArtistManager.getArtistManager().searchByName(author);
-    if (authorObj != undefined) {
-      authorObj.addSong(song);
-      ArtistManager.getArtistManager().store();
-    }
+    let artistManager = ArtistManager.getArtistManager();
+    artistManager.getCollection().forEach((artist) => {
+      if (artist.getName() === author) {
+        artist.addSong(song);
+      }
+    });
+    artistManager.store();
     // add in genre
-    let genres = song.getGenres().map((genreName) => GenreManager.getGenreManager().searchByName(genreName));
+    let genres: Genre[] = song.getGenres().map((genreName) => GenreManager.getGenreManager().searchByName(genreName));
     genres.forEach((genre) => {
       genre.addSong(song);
-      GenreManager.getGenreManager().store();
     });
+    GenreManager.getGenreManager().store();
 
-    this.collection.add(song);
+    this.add(song);
     this.store();
   }
 
@@ -66,40 +68,57 @@ export class SongManager extends Manager<Song> {
    * Elimina la canción de la colección
    * @param song de tipo Song
    */
-  removeSong(song: Song): void {
+  public removeSong(song: Song): void {
     // delete from album
     let albumsAsociate = AlbumManager.getAlbumManager().getCollection();
     let albumsObj = Array.from(albumsAsociate);
     let albumsThisSong = albumsObj.filter((album) => album.getSongs().includes(song));
-    albumsThisSong.forEach((album) => album.removeSong(song));
+    albumsThisSong.forEach((album) => {
+      album.removeSong(song);
+      if (album.getSongs().length === 0) {
+        AlbumManager.getAlbumManager().deleteAlbum(album);
+      }
+    });
     AlbumManager.getAlbumManager().store();
     // delete in artist
     let author = song.getAuthor();
     let authorObj = ArtistManager.getArtistManager().searchByName(author);
     if (authorObj != undefined) {
       authorObj.removeSong(song);
-      ArtistManager.getArtistManager().store();
+      if (authorObj.getSongs().length === 0) {
+        ArtistManager.getArtistManager().deleteArtist(authorObj);
+      }
     }
+    ArtistManager.getArtistManager().store();
     // delete in genre
     const objGenreManager:GenreManager = GenreManager.getGenreManager();
     const genreNames: string[] = song.getGenres();
     genreNames.forEach((genreName) => {
       let genre = objGenreManager.searchByName(genreName);
       genre.removeSong(song); // If artist is not in list it won't do anything
-      GenreManager.getGenreManager().store();
+      if (genre.getSongs().length === 0) {
+        objGenreManager.deleteGenre(genre);
+      }
+      objGenreManager.store();
     });
     // delete from playlist
-    let playlist = PlaylistManager.getPlaylistManager().getCollection();
-    let playlistObj = Array.from(playlist);
-    let playlistAsociate = playlistObj.filter((playlist) => playlist.getSongs().includes(song));
-    playlistAsociate.forEach((playlist) => playlist.deleteSong(song));
-    PlaylistManager.getPlaylistManager().store();
+    const playlistManager: PlaylistManager = PlaylistManager.getPlaylistManager();
+    playlistManager.getCollection().forEach((playlist) => {
+      if (playlist.getSongs().find((s) => s === song) !== undefined) {
+        playlist.deleteSong(song);
+        if (playlist.getSongs().length === 0) {
+          playlistManager.remove(playlist);
+        }
+      }
+    });
+    playlistManager.update();
+    playlistManager.store();
 
-    this.collection.delete(song);
+    this.remove(song);
     this.store();
   }
 
-  editSong(song: Song, newName: string, newAuthor: string, newDuration: Duration, newGenre: string[],
+  public editSong(song: Song, newName: string, newAuthor: string, newDuration: Duration, newGenre: string[],
       newDAtePublication: Date, changeSingle: boolean, changeReproductions: number): void {
     song.setName(newName);
     song.setAuthor(newAuthor);

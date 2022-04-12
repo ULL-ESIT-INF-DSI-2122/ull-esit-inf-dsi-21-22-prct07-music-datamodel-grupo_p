@@ -4,7 +4,6 @@ import FileSync = require('lowdb/adapters/FileSync');
 import {Album} from '../Basics/Album';
 import {AlbumInterface} from '../Interfaces/AlbumInterface';
 import {Song} from '../Basics/Song';
-
 import {SongManager} from './SongManager';
 import {ArtistManager} from './ArtistManager';
 import {GroupManager} from './GroupManager';
@@ -32,7 +31,7 @@ export class AlbumManager extends Manager<Album> {
     return AlbumManager.albumManager;
   }
 
-  deleteAlbum(album: Album, removeSongs: boolean = true): void {
+  public deleteAlbum(album: Album, removeSongs: boolean = true): void {
     // eliminar canciones del album
     if (removeSongs) {
       const objSongManager:SongManager = SongManager.getSongManager();
@@ -42,7 +41,7 @@ export class AlbumManager extends Manager<Album> {
         let song: Song = objSongManager.searchByName(songName);
         objSongManager.removeSong(song);
       });
-      SongManager.getSongManager().store();
+      objSongManager.store();
     }
     // eliminar de los artistas
     let artistObj = ArtistManager.getArtistManager().getCollection();
@@ -76,10 +75,9 @@ export class AlbumManager extends Manager<Album> {
         if (genre.getAlbums().length === 0) {
           GenreManager.getGenreManager().deleteGenre(genre);
         }
-        GenreManager.getGenreManager().store();
       }
     });
-
+    objGenreManager.store();
     // eliminar album
     this.collection.delete(album);
     this.store();
@@ -111,7 +109,7 @@ export class AlbumManager extends Manager<Album> {
     });
     genreManager.store();
 
-    this.collection.add(album);
+    this.add(album);
     this.store();
   }
 

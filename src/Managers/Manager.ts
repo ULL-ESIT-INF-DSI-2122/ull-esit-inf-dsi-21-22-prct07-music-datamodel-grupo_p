@@ -12,14 +12,14 @@ export abstract class Manager<T extends BasicData> {
    * Getter para la propiedad `collection`.
    * @returns Devuelve el valor de`collection`.
    */
-  getCollection(): Set<T> {
+  public getCollection(): Set<T> {
     return this.collection;
   }
   /**
    * Devuelve los nombres de los objetos de la colección.
    * @returns Devuelve un array con los nombres de los objetos de la colección.
    */
-  getList(): string[] {
+  public getList(): string[] {
     let options: string[] = [];
     this.collection.forEach((element) => {
       options.push(element.getName());
@@ -32,7 +32,7 @@ export abstract class Manager<T extends BasicData> {
    * @param element Elemento del que es el nombre.
    * @returns Devuelve true si existe otro objeto en la colección con el mismo nombre.
    */
-  anotherOneWithThatName(name: string, element?: T): boolean {
+  public anotherOneWithThatName(name: string, element?: T): boolean {
     let exists: boolean = false;
     this.collection.forEach((c) => {
       if (name === c.getName() && c !== element) {
@@ -46,7 +46,7 @@ export abstract class Manager<T extends BasicData> {
    * @param name Nombre del elemento a buscar.
    * @returns Devuelve el elemento al que pertenece el nombre.
    */
-  searchByName(name:string): T {
+  public searchByName(name:string): T {
     return [...this.collection.values()].find((g) =>
       g.getName() === name) as T;
   }
@@ -54,7 +54,7 @@ export abstract class Manager<T extends BasicData> {
    * Agrega un nuevo elemento a la colección.
    * @param element Elemento a agregar.
    */
-  add(element: T): void {
+  public add(element: T): void {
     this.collection.add(element);
     this.store();
   }
@@ -62,7 +62,7 @@ export abstract class Manager<T extends BasicData> {
    * Elimina un elemento de la collección.
    * @param element Elemento a eliminar.
    */
-  remove(element: T): void {
+  public remove(element: T): void {
     if (element) {
       this.collection.forEach((x) => {
         if (x.getName() === element.getName()) {

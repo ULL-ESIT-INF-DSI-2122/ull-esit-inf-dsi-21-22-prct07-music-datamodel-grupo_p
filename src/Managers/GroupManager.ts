@@ -37,18 +37,21 @@ export class GroupManager extends Manager<Group> {
   }
 
   public addGroup(group: Group): void {
+    // añade a generos
     let genres = group.getGenres().map((genreName) => GenreManager.getGenreManager().searchByName(genreName));
     console.log(group.getGenres());
     console.log(genres);
     genres.forEach((genre) => {
       genre.addMusician(group);
-      GenreManager.getGenreManager().store();
     });
+    GenreManager.getGenreManager().store();
+    // añade a artistas
     let artists = group.getArtists();
     artists.forEach((artist) => {
       artist.addGroup(group.getName());
-      ArtistManager.getArtistManager().store();
     });
+    ArtistManager.getArtistManager().store();
+    // añade grupo nuevo
     this.collection.add(group);
     this.store();
   }
@@ -57,18 +60,13 @@ export class GroupManager extends Manager<Group> {
     // elimina los integrantes del grupo
     const objArtistManager:ArtistManager = ArtistManager.getArtistManager();
     const groupArtists: Artist[] = group.getArtists();
-    groupArtists.forEach((artist) => {
-      objArtistManager.deleteArtist(artist, false);
-      ArtistManager.getArtistManager().store();
-    });
+    groupArtists.forEach((artist) => objArtistManager.deleteArtist(artist, false));
+    objArtistManager.store();
     // elimina los albunes del grupo
     const objAlbumManager:AlbumManager = AlbumManager.getAlbumManager();
     const groupAlbums: Album[] = group.getAlbums();
-    groupAlbums.forEach((album) => {
-      objAlbumManager.remove(album);
-      AlbumManager.getAlbumManager().store();
-    });
-
+    groupAlbums.forEach((album) => objAlbumManager.remove(album));
+    objAlbumManager.store();
     // elimina los grupo en los generos
     const objGenreManager:GenreManager = GenreManager.getGenreManager();
     const genreNames: string[] = group.getGenres();
@@ -79,13 +77,9 @@ export class GroupManager extends Manager<Group> {
         objGenreManager.remove(genre);
       }
     });
-    GenreManager.getGenreManager().store();
+    objGenreManager.store();
 
-    this.collection.forEach((element) => {
-      if (element.getName() === group.getName()) {
-        this.collection.delete(group);
-      }
-    });
+    this.remove(group);
     this.store();
     SongManager.getSongManager().store();
   }
