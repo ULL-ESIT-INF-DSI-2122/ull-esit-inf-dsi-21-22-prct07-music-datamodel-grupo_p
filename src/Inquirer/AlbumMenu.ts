@@ -135,10 +135,7 @@ function promptAddAlbum(): void {
     },
   ];
   inquirer.prompt(questions).then((answers) => {
-    let songs: Song[] = [];
-    answers.songs.forEach((song: string) => {
-      songs.push(SongManager.getSongManager().searchByName(song));
-    });
+    let songs: Song[] = answers.songs.map((song: string) => SongManager.getSongManager().searchByName(song));
     const newAlbum: Album = new Album(answers.name, answers.musicians, answers.publication, answers.genre, songs);
     manager.addAlbum(newAlbum);
     promptAlbumPrincipal();
@@ -185,10 +182,7 @@ function promptEditAlbum(album: Album): void {
     },
   ];
   inquirer.prompt(questions).then((answers) => {
-    let songs: Song[] = [];
-    answers.songs.forEach((song: string) => {
-      songs.push(SongManager.getSongManager().searchByName(song));
-    });
+    let songs: Song[] = answers.songs.map((song: string) => SongManager.getSongManager().searchByName(song));
     const newAlbum: Album = new Album(answers.name, answers.musicians, answers.publication, answers.genre, songs);
     manager.editAlbum(album, newAlbum);
     promptAlbumPrincipal();

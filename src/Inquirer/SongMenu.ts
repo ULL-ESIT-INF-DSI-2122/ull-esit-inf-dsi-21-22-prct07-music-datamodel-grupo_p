@@ -116,7 +116,7 @@ function promptAddSong(): void {
     },
     {
       type: 'checkbox',
-      message: 'Elige un/unos de los géneros:',
+      message: 'Elige géneros:',
       name: 'genre',
       choices: genres,
       validate(answer: string[]) {
