@@ -10,7 +10,7 @@ import {Album} from '../Basics/Album';
 import {SongManager} from './SongManager';
 import {Song} from '../Basics/Song';
 import {PlaylistManager} from './PlaylistManager';
-const promptStop = require('prompt-sync')();
+// const promptStop = require('prompt-sync')();
 
 type schemaType = {
     artists: ArtistInterface[]
@@ -62,7 +62,7 @@ export class ArtistManager extends Manager<Artist> {
     const artistAlbumsNames: string[] = artistAlbums.map((album) => album.getName());
     artistAlbumsNames.forEach((albumName) => {
       let album: Album = objAlbumManager.searchByName(albumName);
-      objAlbumManager.removeAlbum(album); // deleteAlbum cuando este AlbumManager
+      objAlbumManager.deleteAlbum(album); // deleteAlbum cuando este AlbumManager
       AlbumManager.getAlbumManager().store();
     });
 
@@ -112,12 +112,26 @@ export class ArtistManager extends Manager<Artist> {
     this.remove(artist);
     this.store();
   }
-/*
+  public editArtist(oldArtist: Artist, newArtist: Artist) {
+    let songAsociate: Set<Song> = SongManager.getSongManager().getCollection();
+    let songObj: Song[] = Array.from(songAsociate);
+    let songAuthor: Song[] = songObj.filter((song) => song.getAuthor() == oldArtist.getName());
+    songAuthor.forEach((song) => song.setAuthor(newArtist.getName()));
+    SongManager.getSongManager().store();
+    // actualiza nombre de publicador album
+    const albumObj: Album[] = oldArtist.getAlbums();
+    let albumPublisher: Album[] = [];
+    albumPublisher = albumObj.filter((album) => album.getPublisher() == oldArtist.getName());
+    albumPublisher.forEach((album) => album.setPublisher(newArtist.getName()));
+    AlbumManager.getAlbumManager().store();
+    // actualiza artista
+    this.addArtist(newArtist);
+    this.deleteArtist(oldArtist);
+  }
+  /*
   public editArtist(artist: Artist, newName: string, newGroups: string[], newGenres: string[],
       newAlbums: Album[], newSongs: Song[] ): void {
-    console.log(newGroups);
-    console.log('grupos artista', artist.getGroups());
-    promptStop('Pulsa para continuar');
+    // promptStop('Pulsa para continuar');
     const originalSongs = artist.getSongs();
     const originalArtistName = artist.getName();
     this.deleteArtist(artist, false);
@@ -129,55 +143,6 @@ export class ArtistManager extends Manager<Artist> {
       newSongs.forEach((song) => song.setAuthorName(newName));
     }
     this.store();
-  }*/
-  
-  updateArtist(artist: Artist, name: string, songs: string[], albums: string[], groups: string[], genres: string[]): void {
-    // Song
-    const songManager: SongManager = SongManager.getSongManager();
-    songManager.getCollection().forEach((song) => {
-      if (songs.find((x) => x === song.getName()) === undefined && song.getAuthorName() === artist.getName()) {
-        songManager.removeSong(song);
-      }
-    });
-    songManager.store();
-    // Album
-    const albumManager: AlbumManager = AlbumManager.getAlbumManager();
-    albumManager.getCollection().forEach((album) => {
-      if (albums.find((x) => x === album.getName()) === undefined && album.getPublisher() === artist.getName()) {
-        albumManager.remove(album); // delete album
-      }
-    });
-    songManager.store();
-    // Group
-    const groupManager: GroupManager = GroupManager.getGroupManager();
-    groupManager.getCollection().forEach((group) => {
-      if (groups.find((x) => x === group.getName()) !== undefined) {
-        group.addArtist(artist);
-      } else {
-        group.removeArtist(artist);
-        if (group.getArtists().length === 0) {
-          groupManager.deleteGroup(group);
-        }
-      }
-    });
-    groupManager.store();
-    // Genre
-    const genreManager: GenreManager = GenreManager.getGenreManager();
-    genreManager.getCollection().forEach((genre) => {
-      if (genres.find((x) => x === genre.getName()) !== undefined) {
-        genre.addMusician(artist);
-      } else {
-        genre.deleteMusician(artist);
-        if (genre.getMusicians().length === 0) {
-          genreManager.deleteGenre(genre);
-        }
-      }
-    });
-    genreManager.store();
-    // Playlist
-    PlaylistManager.getPlaylistManager().update();
-    PlaylistManager.getPlaylistManager().store();
-    artist.setName(name);
-    this.store();
   }
+  */
 }

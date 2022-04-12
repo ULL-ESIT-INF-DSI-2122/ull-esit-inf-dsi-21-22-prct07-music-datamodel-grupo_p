@@ -44,10 +44,10 @@ export class Song extends BasicData {
    * Devuelve el nombre del autor de la canción
    * @returns author como string
    */
-  public getAuthorName(): string {
+  public getAuthor(): string {
     return this.author;
   }
-  public setAuthorName(newAuthor: string): void {
+  public setAuthor(newAuthor: string): void {
     this.author = newAuthor;
   }
   /**

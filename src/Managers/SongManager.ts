@@ -45,7 +45,7 @@ export class SongManager extends Manager<Song> {
    */
   addSong(song: Song): void {
     // add in artist
-    let author = song.getAuthorName();
+    let author = song.getAuthor();
     let authorObj = ArtistManager.getArtistManager().searchByName(author);
     if (authorObj != undefined) {
       authorObj.addSong(song);
@@ -74,7 +74,7 @@ export class SongManager extends Manager<Song> {
     albumsThisSong.forEach((album) => album.removeSong(song));
     AlbumManager.getAlbumManager().store();
     // delete in artist
-    let author = song.getAuthorName();
+    let author = song.getAuthor();
     let authorObj = ArtistManager.getArtistManager().searchByName(author);
     if (authorObj != undefined) {
       authorObj.removeSong(song);
@@ -102,7 +102,7 @@ export class SongManager extends Manager<Song> {
   editSong(song: Song, newName: string, newAuthor: string, newDuration: Duration, newGenre: string[],
       newDAtePublication: Date, changeSingle: boolean, changeReproductions: number): void {
     song.setName(newName);
-    song.setAuthorName(newAuthor);
+    song.setAuthor(newAuthor);
     song.setDuration(newDuration);
     song.setGenres(newGenre);
     song.setDatePublication(newDAtePublication);

@@ -76,7 +76,7 @@ function promptRemoveAlbum(album: Album) {
       message: '¿Seguro que quieres eliminar este album?',
     },
   ]).then((answer) => {
-    if (answer.eliminar) manager.removeAlbum(album);
+    if (answer.eliminar) manager.deleteAlbum(album);
     promptAlbumPrincipal();
   });
 }
@@ -185,6 +185,12 @@ function promptEditAlbum(album: Album): void {
     },
   ];
   inquirer.prompt(questions).then((answers) => {
+    let songs: Song[] = [];
+    answers.songs.forEach((song: string) => {
+      songs.push(SongManager.getSongManager().searchByName(song));
+    });
+    const newAlbum: Album = new Album(answers.name, answers.musicians, answers.publication, answers.genre, songs);
+    manager.editAlbum(album, newAlbum);
     promptAlbumPrincipal();
   });
 }

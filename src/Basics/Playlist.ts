@@ -158,10 +158,10 @@ export class Playlist extends BasicData {
         break;
       case 2:
         this.songs.sort(function(a, b) {
-          if (a.getAuthorName() < b.getAuthorName()) {
+          if (a.getAuthor() < b.getAuthor()) {
             return -1;
           }
-          if (a.getAuthorName() > b.getAuthorName()) {
+          if (a.getAuthor() > b.getAuthor()) {
             return 1;
           }
           return 0;
@@ -169,10 +169,10 @@ export class Playlist extends BasicData {
         break;
       case 3:
         this.songs.sort(function(a, b) {
-          if (a.getAuthorName() > b.getAuthorName()) {
+          if (a.getAuthor() > b.getAuthor()) {
             return -1;
           }
-          if (a.getAuthorName() < b.getAuthorName()) {
+          if (a.getAuthor() < b.getAuthor()) {
             return 1;
           }
           return 0;
@@ -290,7 +290,7 @@ export class Playlist extends BasicData {
 
 
   public getMusicians(): string[] {
-    const artistList: string[] = this.getSongs().map((song) => song.getAuthorName());
+    const artistList: string[] = this.getSongs().map((song) => song.getAuthor());
     // const artistList = artistLists.reduce((acumulated, newList) => acumulated.concat(newList));
     return artistList;
   }

@@ -240,8 +240,10 @@ function promptEditArtist(artist: Artist): void {
     answers.song.forEach((song: string) => {
       songs.push(SongManager.getSongManager().searchByName(song));
     });
-    manager.updateArtist(artist, answers.newName, answers.groups, answers.genre, answers.albums, answers.song);
+    // manager.updateArtist(artist, answers.newName, answers.groups, answers.genre, answers.albums, answers.song);
     // manager.editArtist(artist, answers.newName, answers.groups, answers.genre, albums, songs);
+    let newArtist: Artist = new Artist(answers.newName, answers.groups, answers.genre, albums, songs);
+    manager.editArtist(artist, newArtist);
     promptArtists();
   });
 }

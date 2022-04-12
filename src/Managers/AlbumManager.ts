@@ -32,15 +32,18 @@ export class AlbumManager extends Manager<Album> {
     return AlbumManager.albumManager;
   }
 
-  removeAlbum(album: Album): void {
+  deleteAlbum(album: Album, removeSongs: boolean = true): void {
     // eliminar canciones del album
-    const objSongManager:SongManager = SongManager.getSongManager();
-    const albumSongs: Song[] = album.getSongs();
-    const albumSongsNames: string[] = albumSongs.map((song) => song.getName());
-    albumSongsNames.forEach((songName) => {
-      let song: Song = objSongManager.searchByName(songName);
-      objSongManager.removeSong(song);
-    });
+    if (removeSongs) {
+      const objSongManager:SongManager = SongManager.getSongManager();
+      const albumSongs: Song[] = album.getSongs();
+      const albumSongsNames: string[] = albumSongs.map((song) => song.getName());
+      albumSongsNames.forEach((songName) => {
+        let song: Song = objSongManager.searchByName(songName);
+        objSongManager.removeSong(song);
+      });
+      SongManager.getSongManager().store();
+    }
     // eliminar de los grupos
     let groupAsociate = GroupManager.getGroupManager().getCollection();
     let groupObj = Array.from(groupAsociate);
@@ -97,10 +100,12 @@ export class AlbumManager extends Manager<Album> {
     this.store();
   }
 
-  editAlbum(album: Album, newName: string, newPublisher: string, newYear: number,
-      newGenres: string[], newSongs: Song[]): void {
-    //
+  editAlbum(oldAlbum: Album, newAlbum: Album): void {
+    // actualizar album
+    this.add(newAlbum);
+    this.deleteAlbum(oldAlbum);
   }
+
   store() {
     this.database.set('albums', [...this.collection.values()]).write();
   }

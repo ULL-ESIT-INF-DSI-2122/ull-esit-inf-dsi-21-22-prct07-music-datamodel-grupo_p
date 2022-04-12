@@ -195,7 +195,7 @@ function promptEditSong(song: Song): void {
       name: 'author',
       message: 'Nombre del author:',
       choices: musicians,
-      default: song.getAuthorName(),
+      default: song.getAuthor(),
     },
     {
       type: 'input',
