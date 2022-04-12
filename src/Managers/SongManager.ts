@@ -7,6 +7,7 @@ import {ArtistManager} from './ArtistManager';
 import {GenreManager} from './GenreManager';
 import {AlbumManager} from './AlbumManager';
 import {PlaylistManager} from './PlaylistManager';
+import {GroupManager} from './GroupManager';
 
 
 type schemaType = {
@@ -131,10 +132,40 @@ export class SongManager extends Manager<Song> {
     song.setIsSingle(changeSingle);
     song.setReproductions(changeReproductions);
 
+    // Album
     AlbumManager.getAlbumManager().store();
-    ArtistManager.getArtistManager().store();
-    GenreManager.getGenreManager().store();
-    PlaylistManager.getPlaylistManager().store();
+    // Artist
+    const artistManager: ArtistManager = ArtistManager.getArtistManager();
+    artistManager.getCollection().forEach((artist) => {
+      if (artist.getName() === song.getAuthorName()) {
+        artist.addSong(song);
+      } else {
+        artist.removeSong(song);
+        if (artist.getSongs().length === 0) {
+          artistManager.deleteArtist(artist);
+        }
+      }
+    });
+    artistManager.store();
+    // Group
+    GroupManager.getGroupManager().store();
+    // Genre
+    const genreManager: GenreManager = GenreManager.getGenreManager();
+    genreManager.getCollection().forEach((genre) => {
+      if (song.getGenres().find((g) => g === genre.getName()) !== undefined) {
+        genre.addSong(song);
+      } else {
+        genre.removeSong(song);
+        if (genre.getSongs().length === 0) {
+          genreManager.deleteGenre(genre);
+        }
+      }
+    });
+    genreManager.store();
+    // Playlist
+    const playlistManager: PlaylistManager = PlaylistManager.getPlaylistManager();
+    playlistManager.update();
+    playlistManager.store();
     this.store();
   }
 
