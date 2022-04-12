@@ -179,14 +179,9 @@ export function promptRemoveArtist(artist: Artist) {
 
 function promptEditArtist(artist: Artist): void {
   console.clear();
-  const albumsNames: string[] = [];
-  artist.getAlbums().forEach((album) => {
-    albumsNames.push(album.getName());
-  });
-  const songsNames: string[] = [];
-  artist.getSongs().forEach((song) => {
-    songsNames.push(song.getName());
-  });
+  const albumsNames: string[] = artist.getAlbums().map((album) => album.getName());
+  const songsNames: string[] = artist.getSongs().map((song) => song.getName());
+
   const questions = [
     {
       type: 'input',
@@ -233,15 +228,11 @@ function promptEditArtist(artist: Artist): void {
     },
   ];
   inquirer.prompt(questions).then((answers) => {
-    let albums: Album[] = [];
-    answers.albums.forEach((a: string) => {
-      albums.push(AlbumManager.getAlbumManager().searchByName(a));
-    });
-    let songs: Song[] = [];
-    answers.song.forEach((s: string) => {
-      songs.push(SongManager.getSongManager().searchByName(s));
-    });
-    // manager.updateArtist(artist, answers.newName, answers.song, answers.albums, answers.groups, answers.genre);
+    const albumsObj: Album[] = answers.albums.map((albumName: string) => AlbumManager.getAlbumManager().searchByName(albumName));
+    const songsObj: Song[] = answers.song.map((songName: string) => SongManager.getSongManager().searchByName(songName));
+
+    let newArtist: Artist = new Artist(answers.newName, answers.groups, answers.genre, albumsObj, songsObj);
+    manager.editArtist(artist, newArtist);
     promptArtists();
   });
 }
@@ -478,54 +469,42 @@ function promptShowAlbums(artist: Artist) {
   });
 }
 
-enum modeShowPlayList {
-  name = 'Mostrar playlist asociadas',
+enum orden {
+  asc = 'Ascendente',
+  des = 'Descendente',
   back = 'Volver'
 }
 
 function promptShowPlayList(artist: Artist) {
   console.clear();
+
   inquirer.prompt({
     type: 'list',
-    name: 'mode',
-    message: 'Como quiere ver los datos?',
-    choices: Object.values(modeShowPlayList),
+    name: 'order',
+    message: 'Orden?',
+    choices: Object.values(orden),
   }).then((answers) => {
-    switch (answers['mode']) {
-      case modeShowPlayList.name:
+    switch (answers['order']) {
+      case orden.asc:
+        artist.showPlayListAsociate();
         inquirer.prompt({
           type: 'list',
           name: 'order',
-          message: 'Orden?',
-          choices: ['Ascendente', 'Descendente', 'Volver'],
+          message: 'Opciones:',
+          choices: ['Volver'],
         }).then((answers) => {
-          switch (answers['order']) {
-            case 'Ascendente':
-              artist.showPlayListAsociate();
-              inquirer.prompt({
-                type: 'list',
-                name: 'order',
-                message: 'Opciones:',
-                choices: ['Volver'],
-              }).then((answers) => {
-                promptShowPlayList(artist);
-              });
-              break;
-            case 'Descendente':
-              artist.showPlayListAsociate();
-              inquirer.prompt({
-                type: 'list',
-                name: 'order',
-                message: 'Opciones:',
-                choices: ['Volver'],
-              }).then((answers) => {
-                promptShowPlayList(artist);
-              });
-              break;
-            default:
-              promptShowPlayList(artist);
-              break;
-          }
+          promptShowPlayList(artist);
+        });
+        break;
+      case orden.des:
+        artist.showPlayListAsociate();
+        inquirer.prompt({
+          type: 'list',
+          name: 'order',
+          message: 'Opciones:',
+          choices: ['Volver'],
+        }).then((answers) => {
+          promptShowPlayList(artist);
         });
         break;
       default:
