@@ -92,16 +92,15 @@ export class AlbumManager extends Manager<Album> {
       }
     });
     genreManager.store();
+
+    this.collection.add(album);
     this.store();
   }
 
-  removeSong(song: Song) {
-    this.collection.forEach((al) => {
-      al.removeSong(song);
-    });
-    this.store();
+  editAlbum(album: Album, newName: string, newPublisher: string, newYear: number,
+      newGenres: string[], newSongs: Song[]): void {
+    //
   }
-
   store() {
     this.database.set('albums', [...this.collection.values()]).write();
   }

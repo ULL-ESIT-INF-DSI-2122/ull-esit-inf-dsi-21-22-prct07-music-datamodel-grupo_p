@@ -66,10 +66,6 @@ export class Album extends BasicData {
   }
 
   public showInfo(): void {
-    //   return (`ALBUM ${this.name}
-    //   Año de publicacion: ${this.publicationYear}
-    //   Generos que contiene este album: ${this.genres}
-    //  `);
     const songsNames = this.songs.map((song) => song.getName());
     const info: string = `${this.name}\n  -Grupos/Artistas: ${this.publisher}\n`+
       `  -Año de publicacion: ${this.publicationYear}\n  -Genero: ${this.genres}\n  -Canciones: ${songsNames}\n `;

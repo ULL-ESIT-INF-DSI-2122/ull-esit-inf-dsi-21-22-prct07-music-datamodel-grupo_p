@@ -154,27 +154,26 @@ function promptAddArtist(): void {
     });
     const newArtist: Artist = new Artist(answers.name, answers.groups, answers.genre,
         albums, songs);
-    manager.updateArtist(newArtist, answers.newName, answers.song, answers.albums, answers.groups, answers.genre);
+    // manager.updateArtist(newArtist, answers.newName, answers.song, answers.albums, answers.groups, answers.genre);
+    manager.addArtist(newArtist);
     promptArtists();
   });
 }
 
 export function promptRemoveArtist(artist: Artist) {
   console.clear();
-  inquirer
-      .prompt([
-        {
-          name: 'eliminar',
-          type: 'confirm',
-          message: '¿Seguro que quieres eliminar este artista?',
-        },
-      ])
-      .then((answer) => {
-        if (answer.eliminar) {
-          manager.deleteArtist(artist);
-        }
-        promptArtists();
-      });
+  inquirer.prompt([
+    {
+      name: 'eliminar',
+      type: 'confirm',
+      message: '¿Seguro que quieres eliminar este artista?',
+    },
+  ]).then((answer) => {
+    if (answer.eliminar) {
+      manager.deleteArtist(artist);
+    }
+    promptArtists();
+  });
 }
 
 function promptEditArtist(artist: Artist): void {
@@ -234,14 +233,15 @@ function promptEditArtist(artist: Artist): void {
   ];
   inquirer.prompt(questions).then((answers) => {
     let albums: Album[] = [];
-    answers.albums.forEach((a: string) => {
-      albums.push(AlbumManager.getAlbumManager().searchByName(a));
+    answers.albums.forEach((album: string) => {
+      albums.push(AlbumManager.getAlbumManager().searchByName(album));
     });
     let songs: Song[] = [];
-    answers.song.forEach((s: string) => {
-      songs.push(SongManager.getSongManager().searchByName(s));
+    answers.song.forEach((song: string) => {
+      songs.push(SongManager.getSongManager().searchByName(song));
     });
-    manager.updateArtist(artist, answers.newName, answers.song, answers.albums, answers.groups, answers.genre);
+    manager.updateArtist(artist, answers.newName, answers.groups, answers.genre, answers.albums, answers.song);
+    // manager.editArtist(artist, answers.newName, answers.groups, answers.genre, albums, songs);
     promptArtists();
   });
 }
@@ -414,40 +414,30 @@ function promptShowAlbums(artist: Artist) {
   });
 }
 
-enum modeShowPlayList {
-  name = 'Mostrar playlist asociadas',
-  back = 'Volver'
+enum ordenPlaylist {
+  asc = 'Ascendente',
+  des = 'Descendente',
+  back = 'Volver',
 }
-
 function promptShowPlayList(artist: Artist) {
+  promptStop('Pulse para continuar');
   console.clear();
 
   inquirer.prompt({
     type: 'list',
-    name: 'mode',
-    message: 'Como quiere ver los datos?',
-    choices: Object.values(modeShowPlayList),
+    name: 'order',
+    message: 'Orden?',
+    choices: Object.values(ordenPlaylist),
   }).then((answers) => {
-    switch (answers['mode']) {
-      case modeShowPlayList.name:
-        inquirer.prompt({
-          type: 'list',
-          name: 'order',
-          message: 'Orden?',
-          choices: ['Ascendente', 'Descendente', 'Volver'],
-        }).then((answers) => {
-          switch (answers['order']) {
-            case 'Ascendente':
-              artist.showPlayListAsociate();
-              break;
-            case 'Descendente':
-              artist.showPlayListAsociate();
-              break;
-            default:
-              promptShowPlayList(artist);
-              break;
-          }
-        });
+    switch (answers['order']) {
+      case 'Ascendente':
+        artist.showPlayListAsociate();
+        promptShowPlayList(artist);
+        break;
+      case 'Descendente':
+        artist.showPlayListAsociate();
+        promptShowPlayList(artist);
+        break;
       default:
         promptShowData(artist);
         break;
