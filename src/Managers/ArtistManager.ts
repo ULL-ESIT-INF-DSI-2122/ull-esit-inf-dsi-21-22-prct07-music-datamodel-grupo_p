@@ -93,6 +93,22 @@ export class ArtistManager extends Manager<Artist> {
     this.remove(artist);
     this.store();
   }
+  public editArtist(oldArtist: Artist, newArtist: Artist) {
+    let songAsociate: Set<Song> = SongManager.getSongManager().getCollection();
+    let songObj: Song[] = Array.from(songAsociate);
+    let songAuthor: Song[] = songObj.filter((song) => song.getAuthorName() == oldArtist.getName());
+    songAuthor.forEach((song) => song.setAuthorName(newArtist.getName()));
+    SongManager.getSongManager().store();
+    // actualiza nombre de publicador album
+    const albumObj: Album[] = oldArtist.getAlbums();
+    let albumPublisher: Album[] = [];
+    albumPublisher = albumObj.filter((album) => album.getPublisher() == oldArtist.getName());
+    albumPublisher.forEach((album) => album.setPublisher(newArtist.getName()));
+    AlbumManager.getAlbumManager().store();
+    // actualiza artista
+    this.addArtist(newArtist);
+    this.deleteArtist(oldArtist);
+  }
   /*
   public editArtist(artist: Artist, newName: string, newGroups: string[], newGenres: string[],
       newAlbums: Album[], newSongs: Song[] ): void {

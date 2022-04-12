@@ -109,7 +109,11 @@ export class AlbumManager extends Manager<Album> {
     this.add(album);
     this.store();
   }
-
+  editAlbum(oldAlbum: Album, newAlbum: Album): void {
+    // actualizar album
+    this.addAlbum(newAlbum);
+    this.removeAlbum(oldAlbum);
+  }
   removeSong(song: Song) {
     this.collection.forEach((al) => {
       al.removeSong(song);
