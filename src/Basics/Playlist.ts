@@ -320,4 +320,3 @@ export class Playlist extends BasicData {
     return new Playlist(playlist.name, songs, playlist.systemPlaylist);
   }
 }
-

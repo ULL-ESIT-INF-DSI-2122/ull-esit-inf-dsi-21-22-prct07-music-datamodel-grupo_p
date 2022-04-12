@@ -14,22 +14,18 @@ export class Artist extends BasicData {
       private genres: string[], private albums: Album[], private songs: Song[]) {
     super(name);
   }
-
+  //
   public static deserialize(artist: ArtistInterface): Artist {
-    let albums: Album[] = [];
-    let songs: Song[] = [];
-    artist.songs.forEach((song) =>
-      songs.push(SongManager.getSongManager().searchByName(song.name)),
-    );
-    artist.albums.forEach((album) =>
-      albums.push(AlbumManager.getAlbumManager().searchByName(album.name)),
-    );
-    // console.log(artist.albums);
-    // console.log(albums);
-    // promptStop('pulsa');
+    let managerSong = SongManager.getSongManager();
+    let managerAlbum = AlbumManager.getAlbumManager();
+    let songs: Song[] = artist.songs.map((songName) => {
+      return managerSong.searchByName(songName.name);
+    });
+    let albums: Album[] = artist.albums.map((albumName) => {
+      return managerAlbum.searchByName(albumName.name);
+    });
     return new Artist(artist.name, artist.groups, artist.genres, albums, songs);
   }
-
   // GETTERS
   public getGroups(): string[] {
     return this.groups;
@@ -90,7 +86,7 @@ export class Artist extends BasicData {
   public removeSong(songDelete: Song) {
     this.songs = this.songs.filter((elemento) => elemento !== songDelete);
   }
-
+  // MOSTRAR
   public showInfo(): void {
     let info: string = `ARTISTA ${this.getName()}
     -Nombre: ${this.getName()}
@@ -111,9 +107,9 @@ export class Artist extends BasicData {
     let nameList: string[] = this.getSongs().map((song) => song.getName());
     nameList = nameList.sort();
     if (ascending) {
-      console.log(nameList.join('\n  '));
+      console.log('  '+nameList.join('\n  '));
     } else {
-      console.log(nameList.reverse().join('\n  '));
+      console.log('  '+nameList.reverse().join('\n  '));
     }
   }
 
@@ -123,9 +119,9 @@ export class Artist extends BasicData {
     });
     nameList = nameList.sort();
     if (ascending) {
-      console.log(nameList.join('\n  '));
+      console.log('  '+nameList.join('\n  '));
     } else {
-      console.log(nameList.reverse().join('\n  '));
+      console.log('  '+nameList.reverse().join('\n  '));
     }
   }
 
@@ -137,9 +133,9 @@ export class Artist extends BasicData {
       return album.getName();
     });
     if (ascending) {
-      console.log(albumNames.join('\n  '));
+      console.log('  '+albumNames.join('\n  '));
     } else {
-      console.log(albumNames.reverse().join('\n  '));
+      console.log('  '+albumNames.reverse().join('\n  '));
     }
   }
 
@@ -148,7 +144,7 @@ export class Artist extends BasicData {
     let single: string[] = songs.map((song) => {
       return song.getName();
     });
-    console.log(single.join('\n  '));
+    console.log('  '+single.join('\n  '));
   }
 
   showByReproductions(ascending: boolean = true): void {
@@ -159,15 +155,18 @@ export class Artist extends BasicData {
       return song.getName();
     });
     if (ascending) {
-      console.log(songsNames.join('\n  '));
+      console.log('  '+songsNames.join('\n  '));
     } else {
-      console.log(songsNames.reverse().join('\n  '));
+      console.log('  '+songsNames.reverse().join('\n  '));
     }
   }
 
   showPlayListAsociate(): void {
     const playLists: Playlist[] = Array.from(PlaylistManager.getPlaylistManager().getCollection());
-    const playListsWithAuthor = playLists.filter((playList) => playList.getMusicians().includes(this.getName()));
-    console.log(playListsWithAuthor.join('\n  '));
+    const playListsWithAuthor: Playlist[] = playLists.filter((playList) => playList.getMusicians().includes(this.getName()));
+    const asociatePlaylists: string[] = playListsWithAuthor.map((playlist) => {
+      return playlist.getName();
+    });
+    console.log('  ' + asociatePlaylists.join('\n  '));
   }
 }

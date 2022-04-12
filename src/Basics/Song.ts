@@ -1,86 +1,66 @@
-import {BasicData} from './BasicData';
+
+import {ArtistManager} from '../Managers/ArtistManager';
+import {Artist} from './Artist';
 import {Genre} from './Genre';
-/**
- * Clase que representa una cancion
- * Tiene asociados los siguientes datos: nombre, autor,
- * duracion, genero/s, numero de reproducciones y si es un single
- */
+import {BasicData} from './BasicData';
+
 
 export type Duration = [number, number];
 export class Song extends BasicData {
   constructor(name: string, private author: string,
       private duration: Duration, private genres: string[],
-      private publicationDate: Date, private isSingle: boolean,
+      private publicationDate: Date, private single: boolean,
       private reproductions: number) {
     super(name);
   }
 
-
-  public getDuration(): Duration {
-    return this.duration;
-  }
-
-  public getPublicationDate() {
-    return this.publicationDate;
-  }
-  public getIsSingle() {
-    return this.isSingle;
-  }
-  /**
-   * Método setter de si es single o no la canción.
-   * @param newValor tipo boleano.
-   */
-  public setIsSingle(newValor: boolean): void {
-    this.isSingle = newValor;
-  }
-  /**
-   * Método setter para la nueva duración de la canción.
-   * @param newDuraction de tipo Duration
-   */
-  public setDuration(newDuraction: Duration): void {
-    this.duration = newDuraction;
-  }
-  /**
-   * Devuelve el nombre del autor de la canción
-   * @returns author como string
-   */
+  // GETTER
   public getAuthor(): string {
     return this.author;
   }
-  public setAuthor(newAuthor: string): void {
-    this.author = newAuthor;
+  public getDuration(): Duration {
+    return this.duration;
   }
-  /**
-   * Devuelve el número de reproducciones que tiene la canción
-   * @returns la longitud del array reproductions
-   */
-  public getReproductions(): number {
-    return this.reproductions;
-  }
-  /**
-   * Método setter
-   * @param reproduction de tipo Reproduccion
-   */
-  public setReproductions(reproduction: number): void {
-    this.reproductions = reproduction;
-  }
-
   public getGenres():string[] {
     return this.genres;
   }
-  /**
-   * Método setter para los nuevos generos
-   * que pertenece la canción.
-   * @param newGenres de tipo Genre
-   */
+  public getPublicationDate(): Date {
+    return this.publicationDate;
+  }
+  public getIsSingle(): boolean {
+    return this.single;
+  }
+  public getReproductions(): number {
+    return this.reproductions;
+  }
+  public getArtists(): string[] {
+    const artists: string[] = ArtistManager.getArtistManager().getList();
+    const objArtist: Artist[] = artists.map((name) => ArtistManager.getArtistManager().searchByName(name));
+    let artistAsociate: Artist[] = objArtist.filter((artist) => artist.getSongs().includes(this));
+    return artistAsociate.map((artistObj) => artistObj.getName());
+  }
+  // SETTERS
+  public setAuthor(newAuthor: string): void {
+    this.author = newAuthor;
+  }
+  public setDuration(newDuration: Duration): void {
+    this.duration = newDuration;
+  }
   public setGenres(newGenres: string[]): void {
     this.genres = newGenres;
   }
-
-  public setDatePublication(duration: Date): void {
-    this.publicationDate = duration;
+  public setPublicationDate(newDate: Date): void {
+    this.publicationDate = newDate;
   }
+  public setIsSingle(single: boolean): void {
+    this.single = single;
+  }
+  public setReproductions(repro: number): void {
+    this.reproductions = repro;
+  }
+  // ADDS
 
+  // REMOVES
   public removeGenre(genre: Genre): void {
     const index = this.genres.indexOf(genre.getName());
     if (index !== -1) {
@@ -92,36 +72,13 @@ export class Song extends BasicData {
       this.genres.push(genre.getName());
     }
   }
-
-  /*
-  public playSong(): void {
-    this.reproductions.push(new Reproduccion(new Date(Date.now())));
-  }*/
-
-  /**
-   * Devuelve media de las reproduccines
-   * @returns un número de resproducciones
-   */
-  /*
-  public monthlyReproductions(): number {
-    const actualDate: Date = new Date(Date.now());
-    const difference: number = actualDate.getTime() -
-      this.datePublication.getTime();
-    // pasa de milisegundos a meses
-    const monthDifference: number = difference / (1000 * 3600 * 24 * 30);
-    // media de reproducciones por mes
-    return this.getReproduction() / monthDifference;
-  }*/
-  /**
-   * Devuelve los datos de la canción
-   * @returns datos de la canción como string
-   */
+  // MOSTRAR
   public showInfo(): string {
     const info: string = `CANCIÓN ${this.getName()}
     -Autor: ${this.author}
-    -Duración: ${this.duration[0]}min ${this.duration[0]}s
+    -Duración: ${this.duration[0]}min ${this.duration[1]}s
     -Género/s: ${this.genres}
-    -Single: ${(this.isSingle ? 'Si' : 'No')}
+    -Single: ${(this.single ? 'Si' : 'No')}
     -Numero de reproducciones: ${this.reproductions}`;
     console.log(info);
     return info;

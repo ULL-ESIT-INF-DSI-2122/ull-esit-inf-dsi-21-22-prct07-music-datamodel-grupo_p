@@ -105,7 +105,7 @@ export class SongManager extends Manager<Song> {
     song.setAuthor(newAuthor);
     song.setDuration(newDuration);
     song.setGenres(newGenre);
-    song.setDatePublication(newDAtePublication);
+    song.setPublicationDate(newDAtePublication);
     song.setIsSingle(changeSingle);
     song.setReproductions(changeReproductions);
 

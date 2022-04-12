@@ -57,6 +57,7 @@ export class Album extends BasicData {
   public removeSong(songDelete: Song) {
     this.songs = this.songs.filter((elemento) => elemento !== songDelete);
   }
+  //
   public static deserialize(album: AlbumInterface): Album {
     let managerSong = SongManager.getSongManager();
     let songs: Song[] = album.songs.map((songName) => {
@@ -64,7 +65,7 @@ export class Album extends BasicData {
     });
     return new Album(album.name, album.whoPublishes, album.publicationYear, album.genres, songs);
   }
-
+  // MOSTRAR INFO
   public showInfo(): void {
     const songsNames = this.songs.map((song) => song.getName());
     const info: string = `${this.name}\n  -Grupos/Artistas: ${this.publisher}\n`+
