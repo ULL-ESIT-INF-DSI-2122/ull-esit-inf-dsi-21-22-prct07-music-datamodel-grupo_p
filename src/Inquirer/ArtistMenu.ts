@@ -304,9 +304,25 @@ function promptShowSongs(artist: Artist) {
           switch (answers['order']) {
             case 'Ascendente':
               artist.showSongsOrder();
+              inquirer.prompt({
+                type: 'list',
+                name: 'order',
+                message: 'Opciones:',
+                choices: ['Volver'],
+              }).then((answers) => {
+                promptShowSongs(artist);
+              });
               break;
             case 'Descendente':
               artist.showSongsOrder(false);
+              inquirer.prompt({
+                type: 'list',
+                name: 'order',
+                message: 'Opciones:',
+                choices: ['Volver'],
+              }).then((answers) => {
+                promptShowSongs(artist);
+              });
               break;
             default:
               promptShowSongs(artist);
@@ -324,9 +340,25 @@ function promptShowSongs(artist: Artist) {
           switch (answers['order']) {
             case 'Ascendente':
               artist.showByReproductions();
+              inquirer.prompt({
+                type: 'list',
+                name: 'order',
+                message: 'Opciones:',
+                choices: ['Volver'],
+              }).then((answers) => {
+                promptShowSongs(artist);
+              });
               break;
             case 'Descendente':
               artist.showByReproductions(false);
+              inquirer.prompt({
+                type: 'list',
+                name: 'order',
+                message: 'Opciones:',
+                choices: ['Volver'],
+              }).then((answers) => {
+                promptShowSongs(artist);
+              });
               break;
             default:
               promptShowSongs(artist);
@@ -377,9 +409,25 @@ function promptShowAlbums(artist: Artist) {
           switch (answers['order']) {
             case 'Ascendente':
               artist.showAlbumOrder();
+              inquirer.prompt({
+                type: 'list',
+                name: 'order',
+                message: 'Opciones:',
+                choices: ['Volver'],
+              }).then((answers) => {
+                promptShowAlbums(artist);
+              });
               break;
             case 'Descendente':
               artist.showAlbumOrder(false);
+              inquirer.prompt({
+                type: 'list',
+                name: 'order',
+                message: 'Opciones:',
+                choices: ['Volver'],
+              }).then((answers) => {
+                promptShowAlbums(artist);
+              });
               break;
             default:
               promptShowAlbums(artist);
@@ -397,9 +445,25 @@ function promptShowAlbums(artist: Artist) {
           switch (answers['order']) {
             case 'Ascendente':
               artist.showAlbumYearOrder();
+              inquirer.prompt({
+                type: 'list',
+                name: 'order',
+                message: 'Opciones:',
+                choices: ['Volver'],
+              }).then((answers) => {
+                promptShowAlbums(artist);
+              });
               break;
             case 'Descendente':
               artist.showAlbumYearOrder(false);
+              inquirer.prompt({
+                type: 'list',
+                name: 'order',
+                message: 'Opciones:',
+                choices: ['Volver'],
+              }).then((answers) => {
+                promptShowAlbums(artist);
+              });
               break;
             default:
               promptShowAlbums(artist);
@@ -439,9 +503,25 @@ function promptShowPlayList(artist: Artist) {
           switch (answers['order']) {
             case 'Ascendente':
               artist.showPlayListAsociate();
+              inquirer.prompt({
+                type: 'list',
+                name: 'order',
+                message: 'Opciones:',
+                choices: ['Volver'],
+              }).then((answers) => {
+                promptShowPlayList(artist);
+              });
               break;
             case 'Descendente':
               artist.showPlayListAsociate();
+              inquirer.prompt({
+                type: 'list',
+                name: 'order',
+                message: 'Opciones:',
+                choices: ['Volver'],
+              }).then((answers) => {
+                promptShowPlayList(artist);
+              });
               break;
             default:
               promptShowPlayList(artist);

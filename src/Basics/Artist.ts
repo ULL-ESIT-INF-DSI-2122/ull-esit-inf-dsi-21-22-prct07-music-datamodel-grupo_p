@@ -107,9 +107,9 @@ export class Artist extends BasicData {
     let nameList: string[] = this.getSongs().map((song) => song.getName());
     nameList = nameList.sort();
     if (ascending) {
-      console.log(nameList.join('\n  '));
+      console.log('  '+nameList.join('\n  '));
     } else {
-      console.log(nameList.reverse().join('\n  '));
+      console.log('  '+nameList.reverse().join('\n  '));
     }
   }
 
@@ -119,9 +119,9 @@ export class Artist extends BasicData {
     });
     nameList = nameList.sort();
     if (ascending) {
-      console.log(nameList.join('\n  '));
+      console.log('  '+nameList.join('\n  '));
     } else {
-      console.log(nameList.reverse().join('\n  '));
+      console.log('  '+nameList.reverse().join('\n  '));
     }
   }
 
@@ -133,9 +133,9 @@ export class Artist extends BasicData {
       return album.getName();
     });
     if (ascending) {
-      console.log(albumNames.join('\n  '));
+      console.log('  '+albumNames.join('\n  '));
     } else {
-      console.log(albumNames.reverse().join('\n  '));
+      console.log('  '+albumNames.reverse().join('\n  '));
     }
   }
 
@@ -144,7 +144,7 @@ export class Artist extends BasicData {
     let single: string[] = songs.map((song) => {
       return song.getName();
     });
-    console.log(single.join('\n  '));
+    console.log('  '+single.join('\n  '));
   }
 
   showByReproductions(ascending: boolean = true): void {
@@ -155,15 +155,15 @@ export class Artist extends BasicData {
       return song.getName();
     });
     if (ascending) {
-      console.log(songsNames.join('\n  '));
+      console.log('  '+songsNames.join('\n  '));
     } else {
-      console.log(songsNames.reverse().join('\n  '));
+      console.log('  '+songsNames.reverse().join('\n  '));
     }
   }
 
   showPlayListAsociate(): void {
     const playLists: Playlist[] = Array.from(PlaylistManager.getPlaylistManager().getCollection());
     const playListsWithAuthor = playLists.filter((playList) => playList.getMusicians().includes(this.getName()));
-    console.log(playListsWithAuthor.join('\n  '));
+    console.log('  '+playListsWithAuthor.join('\n  '));
   }
 }
