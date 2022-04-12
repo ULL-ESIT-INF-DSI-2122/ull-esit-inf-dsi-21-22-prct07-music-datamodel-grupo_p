@@ -84,14 +84,14 @@ export class Group extends BasicData {
   public showSingles(): void {
     let songsGroup: Song[] = this.getSongs();
     let singles: Song[] = songsGroup.filter((song) => song.getIsSingle());
-    console.log(singles.map((song) => song.getName()));
+    console.log('  '+singles.map((song) => song.getName()).join('\n  '));
   }
 
   public showByReproductions(ascending: boolean = true): void {
     let songsGroup: Song[] = this.getSongs();
     songsGroup = songsGroup.sort((songA, songB) => songA.getReproductions() - songB.getReproductions());
     songsGroup = ascending ? songsGroup : songsGroup.reverse();
-    console.log(songsGroup.map((song) => `${song.getName()} - ${song.getReproductions()}`));
+    console.log('  '+songsGroup.map((song) => `${song.getName()} - ${song.getReproductions()}`).join('\n  '));
   }
 
   public showPlayListAsociate(): void {
@@ -109,9 +109,9 @@ export class Group extends BasicData {
     });
     nameList = nameList.sort();
     if (ascending) {
-      console.log(nameList);
+      console.log('  '+nameList.join('\n  '));
     } else {
-      console.log(nameList.reverse());
+      console.log('  '+nameList.reverse().join('\n  '));
     }
   }
 
@@ -121,9 +121,9 @@ export class Group extends BasicData {
     });
     nameList = nameList.sort();
     if (ascending) {
-      console.log(nameList);
+      console.log('  '+nameList.join('\n  '));
     } else {
-      console.log(nameList.reverse());
+      console.log('  '+nameList.reverse().join('\n  '));
     }
   }
 
@@ -135,9 +135,9 @@ export class Group extends BasicData {
       return album.getName();
     });
     if (ascending) {
-      console.log(albumNames);
+      console.log('  '+albumNames.join('\n  '));
     } else {
-      console.log(albumNames.reverse());
+      console.log('  '+albumNames.reverse().join('\n  '));
     }
   }
 
