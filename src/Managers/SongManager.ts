@@ -98,7 +98,7 @@ export class SongManager extends Manager<Song> {
     const genreManager: GenreManager = GenreManager.getGenreManager();
     genreManager.getCollection().forEach((genre) => {
       if (genre.getSongs().find((s) => s === song) !== undefined) {
-        genre.removeSong(song);
+        genre.deleteSong(song);
         if (genre.getSongs().length === 0) {
           genreManager.deleteGenre(genre);
         }
@@ -155,7 +155,7 @@ export class SongManager extends Manager<Song> {
       if (song.getGenres().find((g) => g === genre.getName()) !== undefined) {
         genre.addSong(song);
       } else {
-        genre.removeSong(song);
+        genre.deleteSong(song);
         if (genre.getSongs().length === 0) {
           genreManager.deleteGenre(genre);
         }

@@ -53,7 +53,9 @@ export class Genre extends BasicData {
    */
   deleteMusician(musician: Group|Artist): void {
     const index = this.musicians.indexOf(musician);
-    this.musicians.splice(index, 1);
+    if (index !== -1) {
+      this.musicians.splice(index, 1);
+    }
   }
   /**
    * Getter para la propiedad `albums`.
@@ -118,10 +120,9 @@ export class Genre extends BasicData {
 
   deleteSong(song: Song): void {
     const index = this.songs.indexOf(song);
-    this.songs.splice(index, 1);
-  }
-  public removeSong(songDelete: Song) {
-    this.songs = this.songs.filter((elemento) => elemento !== songDelete);
+    if (index !== -1) {
+      this.songs.splice(index, 1);
+    }
   }
   /**
    * Muestra la información de la playlist.
