@@ -124,7 +124,7 @@ export class Playlist extends BasicData {
     this.genres = [];
     this.songs.forEach((s) => {
       s.getGenres().forEach((g) => {
-        if ((this.genres.find((x: Genre) => x.getName() === g)) === undefined) {
+        if (this.genres.length === 0 || ((this.genres.find((x: Genre) => x.getName() === g)) === undefined)) {
           this.genres.push(GenreManager.getGenreManager().searchByName(g));
         }
       });

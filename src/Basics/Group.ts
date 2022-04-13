@@ -22,7 +22,9 @@ export class Group extends BasicData {
     return this.artists;
   }
   public addArtist(newArtist: Artist): void {
-    this.artists.push(newArtist);
+    if (this.artists.find((artist) => artist === newArtist) === undefined) {
+      this.artists.push(newArtist);
+    }
   }
   public removeArtist(artistDelete: Artist): void {
     this.artists = this.artists.filter((elemento) => elemento !== artistDelete);
@@ -34,8 +36,8 @@ export class Group extends BasicData {
   public getGenres(): string[] {
     return this.genres;
   }
-  public removeGenre(genre: Genre): void {
-    const index = this.genres.indexOf(genre.getName());
+  public removeGenre(genre: string): void {
+    const index = this.genres.indexOf(genre);
     if (index !== -1) {
       this.genres.splice(index, 1);
     }
@@ -49,7 +51,9 @@ export class Group extends BasicData {
     return this.albums;
   }
   public addAlbums(newAlbum: Album): void {
-    this.albums.push(newAlbum);
+    if (this.albums.find((album) => album === newAlbum) === undefined) {
+      this.albums.push(newAlbum);
+    }
   }
   public removeAlbum(albumDelete: Album): void {
     this.albums = this.albums.filter((elemento) => elemento !== albumDelete);

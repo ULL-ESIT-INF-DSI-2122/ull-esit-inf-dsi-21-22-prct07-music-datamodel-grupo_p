@@ -89,9 +89,11 @@ function promptAddAlbum(): void {
       type: 'input',
       name: 'name',
       message: 'Nombre del album:',
-      validate(answer: string) {
-        if (answer.length === null) {
-          return 'Debes elegir al menos un género.';
+      validate(value: string) {
+        if (value.length === null) {
+          return 'Debes dar un nombre al álbum.';
+        } else if (manager.anotherOneWithThatName(value)) {
+          return 'Error: ya existe un álbum con ese nombre.';
         }
         return true;
       },
@@ -102,8 +104,8 @@ function promptAddAlbum(): void {
       name: 'musicians',
       choices: musicians,
       validate(answer: string) {
-        if (answer.length < 1) {
-          return 'Debes introducir el nombre del artisto o grupo.';
+        if (answer.length !== 1) {
+          return 'Debes elegir un artista o grupo.';
         }
         return true;
       },
@@ -136,6 +138,12 @@ function promptAddAlbum(): void {
       message: '¿Selecciona las canciones?',
       name: 'songs',
       choices: song.getList(),
+      validate(answer: string[]) {
+        if (answer.length < 1) {
+          return 'Debes elegir al menos una canción.';
+        }
+        return true;
+      },
     },
   ];
   inquirer.prompt(questions).then((answers) => {
@@ -152,8 +160,9 @@ function promptAddAlbum(): void {
 
 function promptEditAlbum(album: Album): void {
   const manager: AlbumManager = AlbumManager.getAlbumManager();
-  const musicians: string[] = ['Rolling Stones', 'Michael Jackson'];
-  // const songs: string[] = ['Imagine', 'Despacito'];
+  const artists: string[] = ArtistManager.getArtistManager().getList();
+  const groups: string[] = GroupManager.getGroupManager().getList();
+  const musicians = artists.concat(groups);
   let genreList: string[] = GenreManager.getGenreManager().getList();
   let songs: string[] = SongManager.getSongManager().getList();
   console.clear();
@@ -164,47 +173,73 @@ function promptEditAlbum(album: Album): void {
       message: 'Nuevo nombre del álbum:',
       default: album.getName(),
       validate(value: string) {
-        let val: boolean | string = true;
-        if (manager.anotherOneWithThatName(value)) {
-          val = 'Error: ya existe un álbum con ese nombre.';
+        if (value.length === null) {
+          return 'Debes dar un nombre al álbum.';
+        } else if (manager.anotherOneWithThatName(value, album)) {
+          return 'Error: ya existe un álbum con ese nombre.';
         }
-        return val;
+        return true;
       },
     },
     {
       type: 'checkbox',
-      message: 'Elige artistas/grupos:',
-      name: 'musicians',
+      message: 'Autor del album:',
+      name: 'publisher',
       choices: musicians,
-      default: 'musicians',
+      default: [album.getPublisher()],
+      validate(answer: string[]) {
+        if (answer.length !== 1) {
+          return 'Debes elegir un autor.';
+        }
+        return true;
+      },
     },
     {
       type: 'input',
-      message: 'Nuevo año de publicación:',
+      message: 'Año de publicación:',
       name: 'publication',
       default: album.getYear(),
+      validate(answer: number) {
+        if (answer === null) {
+          return 'Debes introducir el año de publicación';
+        }
+        return true;
+      },
     },
     {
       type: 'checkbox',
-      message: 'Elige el o los nuevos géneros:',
-      name: 'genre',
+      message: 'Género/s:',
+      name: 'genres',
       choices: genreList,
       default: album.getGenres(),
+      validate(answer: string[]) {
+        if (answer.length < 1) {
+          return 'Debes elegir al menos un género.';
+        }
+        return true;
+      },
     },
     {
       type: 'checkbox',
-      message: 'Elige las canciones que quieres añadir:',
+      message: 'Canciones:',
       name: 'songs',
       choices: songs,
-      default: album.getSongs(),
+      default: album.getSongsNames(),
+      validate(answer: string[]) {
+        if (answer.length < 1) {
+          return 'Debes elegir al menos una canción.';
+        }
+        return true;
+      },
     },
   ];
   inquirer.prompt(questions).then((answers) => {
-    album.setName(answers.name);
-    album.setPublisher(answers.musicians);
-    album.setYear(answers.publication);
-    album.setGenres(answers.genre);
-    manager.store();
+    let songs: Song[] = [];
+    answers.songs.forEach((s: string) => {
+      songs.push(SongManager.getSongManager().searchByName(s));
+    });
+    manager.editAlbum(album, answers.name, answers.publisher, answers.publication,
+        answers.genres, songs);
     promptAlbumPrincipal();
   });
 }

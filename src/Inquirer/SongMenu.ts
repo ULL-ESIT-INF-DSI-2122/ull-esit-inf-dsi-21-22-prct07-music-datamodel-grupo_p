@@ -140,10 +140,10 @@ function promptAddSong(): void {
       },
     },
     {
-      type: 'list',
+      type: 'checkbox',
       message: '¿La canción es single?',
       name: 'single',
-      choices: ['true', 'false'],
+      choices: ['Sí', 'No'],
     },
     {
       type: 'number',
@@ -167,9 +167,15 @@ function promptAddSong(): void {
       return +index;
     });
     let durationSongFinal: Duration = [durationSong[0], durationSong[1]];
+    let isSingle: boolean;
+    if (answers.single = 'Sí') {
+      isSingle = true;
+    } else {
+      isSingle = false;
+    }
     // inicializando canción
     const newSong: Song = new Song(answers.name, answers.author, durationSongFinal,
-        answers.genre, datePublication, answers.single, answers.reproduction);
+        answers.genre, datePublication, isSingle, answers.reproduction);
     manager.addSong(newSong);
     promptSongPrincipal();
   });
@@ -212,10 +218,11 @@ function promptEditSong(song: Song): void {
       default: song.getGenres(),
     },
     {
-      type: 'input',
-      message: '¿Es single?',
+      type: 'checkbox',
+      message: '¿La canción es single?',
       name: 'single',
-      default: song.getIsSingle(),
+      choices: ['Sí', 'No'],
+      default: (song.getIsSingle() ? 'Si' : 'No'),
     },
     {
       type: 'input',
@@ -225,8 +232,14 @@ function promptEditSong(song: Song): void {
     },
   ];
   inquirer.prompt(questions).then((answers) => {
+    let isSingle: boolean;
+    if (answers.single = 'Sí') {
+      isSingle = true;
+    } else {
+      isSingle = false;
+    }
     manager.editSong(song, answers.name, answers.author, answers.duration, answers.genres,
-        answers.publication, answers.single, answers.reproductions);
+        answers.publication, isSingle, answers.reproductions);
     promptSongPrincipal();
   });
 }

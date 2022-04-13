@@ -57,7 +57,9 @@ export class Artist extends BasicData {
   }
   // ADDS
   public addGroup(newGroup: string) {
-    this.groups.push(newGroup);
+    if (this.groups.find((group) => group === newGroup) === undefined) {
+      this.groups.push(newGroup);
+    }
   }
   public addGenre(genre: Genre): void {
     if (this.genres.find((x) => x === genre.getName()) === undefined) {
@@ -65,17 +67,21 @@ export class Artist extends BasicData {
     }
   }
   public addSong(newSong: Song) {
-    this.songs.push(newSong);
+    if (this.songs.find((song) => song === newSong) === undefined) {
+      this.songs.push(newSong);
+    }
   }
   public addAlbum(newAlbum: Album) {
-    this.albums.push(newAlbum);
+    if (this.albums.find((album) => album === newAlbum) === undefined) {
+      this.albums.push(newAlbum);
+    }
   }
   // REMOVES
   public removeGroup(groupDelete: string) {
     this.groups = this.groups.filter((elemento) => elemento !== groupDelete);
   }
-  public removeGenre(genre: Genre): void {
-    const index = this.genres.indexOf(genre.getName());
+  public removeGenre(genre: string): void {
+    const index = this.genres.indexOf(genre);
     if (index !== -1) {
       this.genres.splice(index, 1);
     }

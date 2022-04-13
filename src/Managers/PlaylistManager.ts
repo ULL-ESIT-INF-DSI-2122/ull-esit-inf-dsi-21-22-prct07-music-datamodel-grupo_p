@@ -55,6 +55,7 @@ export class PlaylistManager extends Manager<Playlist> {
         this.remove(playlist);
       }
     });
+    this.store();
   }
   /**
    * Guarda las playlists en la base de datos.

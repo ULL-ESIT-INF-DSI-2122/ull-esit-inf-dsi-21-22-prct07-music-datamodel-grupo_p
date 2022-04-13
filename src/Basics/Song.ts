@@ -81,8 +81,8 @@ export class Song extends BasicData {
     this.publicationDate = duration;
   }
 
-  public removeGenre(genre: Genre): void {
-    const index = this.genres.indexOf(genre.getName());
+  public removeGenre(genre: string): void {
+    const index = this.genres.indexOf(genre);
     if (index !== -1) {
       this.genres.splice(index, 1);
     }

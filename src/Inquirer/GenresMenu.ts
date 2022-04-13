@@ -260,14 +260,7 @@ export function promptEditGenre(genre: Genre): void {
     answers.songs.forEach((s: string) => {
       songs.push(SongManager.getSongManager().searchByName(s));
     });
-    /*
-    genre.setName(answers.name);
-    genre.setMusicians(musicians);
-    genre.setAlbums(albums);
-    genre.setSongs(songs);
-    manager.store();*/
-
-    // manager.updateGenre(genre, answers.songs, answers.albums, answers.musicians, answers.musicians);
+    manager.editGenre(genre, answers.name, musicians, albums, songs);
     promptGenres();
   });
 }

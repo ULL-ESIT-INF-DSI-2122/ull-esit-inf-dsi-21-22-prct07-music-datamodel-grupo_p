@@ -58,14 +58,15 @@ export class GroupManager extends Manager<Group> {
     const objArtistManager:ArtistManager = ArtistManager.getArtistManager();
     const groupArtists: Artist[] = group.getArtists();
     groupArtists.forEach((artist) => {
-      objArtistManager.deleteArtist(artist, false);
-      ArtistManager.getArtistManager().store();
+      // objArtistManager.deleteArtist(artist, false);
+      artist.setGroups(['-']);
+      objArtistManager.store();
     });
     // elimina los albumes del grupo
     const objAlbumManager:AlbumManager = AlbumManager.getAlbumManager();
     const groupAlbums: Album[] = group.getAlbums();
     groupAlbums.forEach((album) => {
-      objAlbumManager.remove(album);
+      objAlbumManager.removeAlbum(album);
       AlbumManager.getAlbumManager().store();
     });
 
@@ -77,7 +78,7 @@ export class GroupManager extends Manager<Group> {
         let genre = objGenreManager.searchByName(genreName);
         genre.deleteMusician(group); // If group is not in list it won't do anything
         if (genre.getMusicians().length == 0) {
-          objGenreManager.remove(genre);
+          objGenreManager.deleteGenre(genre);
         }
       }
     });

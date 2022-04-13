@@ -6,7 +6,7 @@ import {Genre} from './Genre';
 
 
 export class Album extends BasicData {
-  constructor(name: string, private publisher: string,
+  constructor(name: string, private whoPublishes: string,
     private publicationYear: number, private genres: string[],
     private songs: Song[]) {
     super(name);
@@ -14,7 +14,7 @@ export class Album extends BasicData {
 
   // GETTERS
   public getPublisher(): string {
-    return this.publisher;
+    return this.whoPublishes;
   }
   public getYear(): number {
     return this.publicationYear;
@@ -27,7 +27,7 @@ export class Album extends BasicData {
   }
   // SETTERS
   public setPublisher(newPublisher: string): void {
-    this.publisher = newPublisher;
+    this.whoPublishes = newPublisher;
   }
   public setYear(year: number): void {
     this.publicationYear = year;
@@ -45,11 +45,13 @@ export class Album extends BasicData {
     }
   }
   public addSong(newSong: Song) {
-    this.songs.push(newSong);
+    if (this.songs.find((song) => song === newSong) === undefined) {
+      this.songs.push(newSong);
+    }
   }
   // REMOVES
-  public removeGenre(genre: Genre): void {
-    const index = this.genres.indexOf(genre.getName());
+  public removeGenre(genre: string): void {
+    const index = this.genres.indexOf(genre);
     if (index !== -1) {
       this.genres.splice(index, 1);
     }
@@ -67,7 +69,7 @@ export class Album extends BasicData {
 
   public showInfo(): string {
     const info: string = `ÁLBUM ${this.name}
-    -Publicado por: ${this.publisher}
+    -Publicado por: ${this.whoPublishes}
     -Año de publicacion: ${this.publicationYear}
     -Genero: ${this.genres}
     -Canciones: 
@@ -76,5 +78,13 @@ export class Album extends BasicData {
   }).join('\n      ')}`;
     console.log(info);
     return info;
+  }
+
+  getSongsNames(): string[] {
+    let songsNames: string[] = [];
+    this.songs.forEach((song) => {
+      songsNames.push(song.getName());
+    });
+    return songsNames;
   }
 }
