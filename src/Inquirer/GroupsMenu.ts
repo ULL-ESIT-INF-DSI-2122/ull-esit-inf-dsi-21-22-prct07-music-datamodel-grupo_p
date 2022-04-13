@@ -18,39 +18,6 @@ enum options {
 }
 
 const manager = GroupManager.getGroupManager();
-/*
-export function promptGroups(): void {
-  console.clear();
-
-  inquirer.prompt({
-    type: 'list',
-    name: 'command',
-    message: 'Escoja que quiere hacer:',
-    choices: Object.values(options),
-  }).then((answers) => {
-    switch (answers['command']) {
-      case options.Add:
-        promptAddGroup();
-        break;
-      case options.Edit:
-        promptEditGroup();
-        break;
-      case options.Revove:
-        promptRemoveGroup();
-        break;
-      case options.Show:
-        promptShowData();
-        break;
-      case options.Back:
-        promptUser();
-        break;
-      default:
-        promptGroups();
-        break;
-    }
-  });
-}
-*/
 
 export function promptGroups(): void {
   let options: string[] = ['Nuevo group +'];
@@ -205,32 +172,6 @@ export function promptRemoveGroup(group: Group) {
         promptGroups();
       });
 }
-/*
-function promptRemoveGroup(): void {
-  console.clear();
-  // ELEGIR GRUPO A ELIMINAR
-  inquirer.prompt({
-    type: 'list',
-    name: 'groupRemove',
-    message: 'Escoja el grupo que quiere eliminar:',
-    choices: manager.getList(),
-  }).then((answers) => {
-    inquirer.prompt([
-      {
-        name: 'remove',
-        type: 'confirm',
-        message: '¿Eliminar este grupo?',
-      },
-    ]).then((answer) => {
-      if (answer.eliminar) {
-        let group: Group = manager.searchByName(answers.groupRemove);
-        manager.removeGroup(group);
-      }
-      promptGroups();
-    });
-  });
-}
-*/
 
 function promptEditGroup(group: Group): void {
   console.clear();

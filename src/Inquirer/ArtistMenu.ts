@@ -20,10 +20,6 @@ enum options {
 }
 
 const manager = ArtistManager.getArtistManager();
-const songs: string[] = SongManager.getSongManager().getList();
-const albums: string[] = AlbumManager.getAlbumManager().getList();
-const genres: string[] = GenreManager.getGenreManager().getList();
-const groups: string[] = GroupManager.getGroupManager().getList();
 
 
 export function promptArtists(): void {
@@ -81,6 +77,10 @@ export function promptArtist(artist: Artist): void {
 
 function promptAddArtist(): void {
   console.clear();
+  const songs: string[] = SongManager.getSongManager().getList();
+  const albums: string[] = AlbumManager.getAlbumManager().getList();
+  const genres: string[] = GenreManager.getGenreManager().getList();
+  const groups: string[] = GroupManager.getGroupManager().getList();
   const questions = [
     {
       type: 'input',
@@ -179,6 +179,10 @@ export function promptRemoveArtist(artist: Artist) {
 
 function promptEditArtist(artist: Artist): void {
   console.clear();
+  const songs: string[] = SongManager.getSongManager().getList();
+  const albums: string[] = AlbumManager.getAlbumManager().getList();
+  const genres: string[] = GenreManager.getGenreManager().getList();
+  const groups: string[] = GroupManager.getGroupManager().getList();
   const albumsNames: string[] = [];
   artist.getAlbums().forEach((album) => {
     albumsNames.push(album.getName());

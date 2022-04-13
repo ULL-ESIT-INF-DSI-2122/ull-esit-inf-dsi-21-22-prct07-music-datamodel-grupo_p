@@ -8,9 +8,7 @@ import {GroupManager} from '../Managers/GroupManager';
 
 
 const manager: SongManager = SongManager.getSongManager();
-const genres: string[] = GenreManager.getGenreManager().getList();
-const artists: string[] = ArtistManager.getArtistManager().getList();
-const groups: string[] = GroupManager.getGroupManager().getList();
+
 
 export function promptSongPrincipal(): void {
   const manager: SongManager = SongManager.getSongManager();
@@ -81,6 +79,9 @@ function promptRemoveSong(song: Song) {
  * prompt para agregar musica
  */
 function promptAddSong(): void {
+  const genres: string[] = GenreManager.getGenreManager().getList();
+  const artists: string[] = ArtistManager.getArtistManager().getList();
+  const groups: string[] = GroupManager.getGroupManager().getList();
   let musicians: string[] = artists;
   musicians = musicians.concat(groups);
   console.clear();
@@ -187,6 +188,9 @@ function promptAddSong(): void {
  * @param song de tipo Song
  */
 function promptEditSong(song: Song): void {
+  const genres: string[] = GenreManager.getGenreManager().getList();
+  const artists: string[] = ArtistManager.getArtistManager().getList();
+  const groups: string[] = GroupManager.getGroupManager().getList();
   let musicians: string[] = artists;
   musicians = musicians.concat(groups);
   console.clear();
