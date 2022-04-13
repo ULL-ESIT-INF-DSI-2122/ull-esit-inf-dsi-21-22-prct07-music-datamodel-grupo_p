@@ -118,7 +118,7 @@ export class AlbumManager extends Manager<Album> {
     album.setGenres(genres);
     const oldSongs: Song[] = album.getSongs();
     album.setSongs(songs);
-    AlbumManager.getAlbumManager().store();
+    this.store();
     // Song
     const songManager: SongManager = SongManager.getSongManager();
     let hasAlbum: boolean;

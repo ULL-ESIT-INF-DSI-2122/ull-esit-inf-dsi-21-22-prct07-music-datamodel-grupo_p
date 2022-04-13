@@ -206,7 +206,7 @@ function promptEditArtist(artist: Artist): void {
     {
       type: 'checkbox',
       message: 'Elige generos:',
-      name: 'genre',
+      name: 'genres',
       choices: genres,
       default: artist.getGenres(),
     },
@@ -227,7 +227,7 @@ function promptEditArtist(artist: Artist): void {
     {
       type: 'checkbox',
       message: 'Elige canciones:',
-      name: 'song',
+      name: 'songs',
       choices: songs,
       default: songsNames,
     },
@@ -238,10 +238,10 @@ function promptEditArtist(artist: Artist): void {
       albums.push(AlbumManager.getAlbumManager().searchByName(a));
     });
     let songs: Song[] = [];
-    answers.song.forEach((s: string) => {
+    answers.songs.forEach((s: string) => {
       songs.push(SongManager.getSongManager().searchByName(s));
     });
-    // manager.updateArtist(artist, answers.newName, answers.song, answers.albums, answers.groups, answers.genre);
+    manager.editArtist(artist, answers.newName, answers.groups, answers.genres, albums, songs);
     promptArtists();
   });
 }

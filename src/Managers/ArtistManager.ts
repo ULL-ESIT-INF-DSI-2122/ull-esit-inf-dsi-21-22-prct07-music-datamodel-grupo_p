@@ -93,21 +93,60 @@ export class ArtistManager extends Manager<Artist> {
     this.remove(artist);
     this.store();
   }
-  /*
-  public editArtist(artist: Artist, newName: string, newGroups: string[], newGenres: string[],
-      newAlbums: Album[], newSongs: Song[] ): void {
-    const originalSongs = artist.getSongs();
-    const originalArtistName = artist.getName();
-    this.deleteArtist(artist, false);
-    this.addArtist(new Artist(newName, newGroups, newGenres, newAlbums, newSongs));
-    const newSongsNames = newSongs.map((song) => song.getName());
-    const originalSongsToDelete = originalSongs.filter((song) => !newSongsNames.includes(song.getName()));
-    originalSongsToDelete.forEach((song) => SongManager.getSongManager().removeSong(song));
-    if (originalArtistName != newName) {
-      newSongs.forEach((song) => song.setAuthorName(newName));
-    }
+  public editArtist(artist: Artist, name: string, groups: string[],
+      genres: string[], albums: Album[], songs: Song[]): void {
+    artist.setName(name);
+    artist.setGroups(groups);
+    artist.setGenres(genres);
+    artist.setAlbums(albums);
+    artist.setSongs(songs);
     this.store();
-  }*/
+    // Song
+    const songManager: SongManager = SongManager.getSongManager();
+    songManager.getCollection().forEach((song) => {
+      if (artist.getSongs().find((s) => s === song) === undefined && song.getAuthorName() === artist.getName()) {
+        songManager.removeSong(song);
+      }
+    });
+    songManager.store();
+    // Album
+    const albumManager: AlbumManager = AlbumManager.getAlbumManager();
+    albumManager.getCollection().forEach((album) => {
+      if (artist.getAlbums().find((a) => a === album) === undefined && album.getPublisher() === artist.getName()) {
+        albumManager.removeAlbum(album);
+      }
+    });
+    albumManager.store();
+    // Group
+    const groupManager: GroupManager = GroupManager.getGroupManager();
+    groupManager.getCollection().forEach((group) => {
+      if (artist.getGroups().find((g) => g === group.getName()) !== undefined) {
+        group.addArtist(artist);
+      } else {
+        group.removeArtist(artist);
+        if (group.getArtists().length === 0) {
+          groupManager.deleteGroup(group);
+        }
+      }
+    });
+    groupManager.store();
+    // Genre
+    const genreManager: GenreManager = GenreManager.getGenreManager();
+    genreManager.getCollection().forEach((genre) => {
+      if (artist.getGenres().find((g) => g === genre.getName()) !== undefined) {
+        genre.addMusician(artist);
+      } else {
+        genre.deleteMusician(artist);
+        if (genre.getMusicians().length === 0) {
+          genreManager.deleteGenre(genre);
+        }
+      }
+    });
+    genreManager.store();
+    // Playlist
+    PlaylistManager.getPlaylistManager().update();
+    this.store();
+  }
   addArtist(artist: Artist): void {
     // Group
     const groupManager: GroupManager = GroupManager.getGroupManager();
