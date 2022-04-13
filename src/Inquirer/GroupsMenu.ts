@@ -18,9 +18,6 @@ enum options {
 }
 
 const manager = GroupManager.getGroupManager();
-const albums: string[] = AlbumManager.getAlbumManager().getList();
-const genres: string[] = GenreManager.getGenreManager().getList();
-const artists: string[] = ArtistManager.getArtistManager().getList();
 /*
 export function promptGroups(): void {
   console.clear();
@@ -112,7 +109,9 @@ export function promptGroup(group: Group): void {
 
 function promptAddGroup(): void {
   console.clear();
-
+  const albums: string[] = AlbumManager.getAlbumManager().getList();
+  const genres: string[] = GenreManager.getGenreManager().getList();
+  const artists: string[] = ArtistManager.getArtistManager().getList();
   const questions = [
     {
       type: 'input',
@@ -235,6 +234,9 @@ function promptRemoveGroup(): void {
 
 function promptEditGroup(group: Group): void {
   console.clear();
+  const albums: string[] = AlbumManager.getAlbumManager().getList();
+  const genres: string[] = GenreManager.getGenreManager().getList();
+  const artists: string[] = ArtistManager.getArtistManager().getList();
   const albumsNames: string[] = [];
   group.getAlbums().forEach((album) => {
     albumsNames.push(album.getName());
@@ -260,7 +262,7 @@ function promptEditGroup(group: Group): void {
     {
       type: 'checkbox',
       message: 'Elige artistas:',
-      name: 'artist',
+      name: 'artists',
       choices: artists,
       default: artistNames,
     },
@@ -279,7 +281,7 @@ function promptEditGroup(group: Group): void {
     {
       type: 'checkbox',
       message: 'Elige generos:',
-      name: 'genre',
+      name: 'genres',
       choices: genres,
       default: group.getGenres(),
     },
@@ -296,11 +298,11 @@ function promptEditGroup(group: Group): void {
     answers.albums.forEach((albumName: string) => {
       albums.push(AlbumManager.getAlbumManager().searchByName(albumName));
     });
-    let artist: Artist[] = [];
-    answers.artist.forEach((artistName: string) => {
-      artist.push(ArtistManager.getArtistManager().searchByName(artistName));
+    let artists: Artist[] = [];
+    answers.artists.forEach((artistName: string) => {
+      artists.push(ArtistManager.getArtistManager().searchByName(artistName));
     });
-    manager.editGroup(group, answers.name, artist, answers.year, answers.genre, albums);
+    manager.editGroup(group, answers.name, artists, answers.year, answers.genres, albums);
     promptGroups();
   });
 }

@@ -57,7 +57,11 @@ export class Artist extends BasicData {
   }
   // ADDS
   public addGroup(newGroup: string) {
-    if (this.groups.find((group) => group === newGroup) === undefined) {
+    const noGroups: string = '-';
+    if (this.groups.find((group) => group === noGroups) !== undefined) {
+      this.groups.pop();
+      this.groups.push(newGroup);
+    } else if (this.groups.find((group) => group === newGroup) === undefined) {
       this.groups.push(newGroup);
     }
   }
@@ -78,7 +82,10 @@ export class Artist extends BasicData {
   }
   // REMOVES
   public removeGroup(groupDelete: string) {
-    this.groups = this.groups.filter((elemento) => elemento !== groupDelete);
+    const index = this.groups.indexOf(groupDelete);
+    if (index !== -1) {
+      this.groups.splice(index, 1);
+    }
   }
   public removeGenre(genre: string): void {
     const index = this.genres.indexOf(genre);
