@@ -232,14 +232,22 @@ function promptEditSong(song: Song): void {
     },
   ];
   inquirer.prompt(questions).then((answers) => {
+    // conviertiendo date
+    let datePublication: Date = new Date(answers.publication);
+    // Convirtiendo al tipo duracion
+    let durationSongString: string = answers.duration;
+    let durationSong: number[]= (durationSongString.split(':', durationSongString.length)).map((index) => {
+      return +index;
+    });
+    let durationSongFinal: Duration = [durationSong[0], durationSong[1]];
     let isSingle: boolean;
     if (answers.single = 'Sí') {
       isSingle = true;
     } else {
       isSingle = false;
     }
-    manager.editSong(song, answers.name, answers.author, answers.duration, answers.genres,
-        answers.publication, isSingle, answers.reproductions);
+    manager.editSong(song, answers.name, answers.author, durationSongFinal, answers.genres,
+        datePublication, isSingle, answers.reproductions);
     promptSongPrincipal();
   });
 }

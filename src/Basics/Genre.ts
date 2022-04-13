@@ -84,7 +84,9 @@ export class Genre extends BasicData {
    */
   deleteAlbum(album: Album): void {
     const index = this.albums.indexOf(album);
-    this.albums.splice(index, 1);
+    if (index !== -1) {
+      this.albums.splice(index, 1);
+    }
   }
   /**
    * Getter para la propiedad `songs`.

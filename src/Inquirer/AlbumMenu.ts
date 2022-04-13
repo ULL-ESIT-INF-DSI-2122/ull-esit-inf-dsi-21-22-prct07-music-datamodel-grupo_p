@@ -238,7 +238,7 @@ function promptEditAlbum(album: Album): void {
     answers.songs.forEach((s: string) => {
       songs.push(SongManager.getSongManager().searchByName(s));
     });
-    manager.editAlbum(album, answers.name, answers.publisher, answers.publication,
+    manager.editAlbum(album, answers.name, answers.publisher[0], answers.publication,
         answers.genres, songs);
     promptAlbumPrincipal();
   });

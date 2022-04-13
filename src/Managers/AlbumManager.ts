@@ -148,7 +148,6 @@ export class AlbumManager extends Manager<Album> {
     });
     artistManager.store();
     // Group
-    /*
     const groupManager: GroupManager = GroupManager.getGroupManager();
     groupManager.getCollection().forEach((group) => {
       if (group.getName() === album.getPublisher()) {
@@ -173,7 +172,7 @@ export class AlbumManager extends Manager<Album> {
         }
       }
     });
-    genreManager.store();*/
+    genreManager.store();
     // Playlist
     const playlistManager: PlaylistManager = PlaylistManager.getPlaylistManager();
     playlistManager.update();
