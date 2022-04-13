@@ -1,35 +1,40 @@
-import {Group} from './Group';
-import {Genre} from './Genre';
 import {Album} from './Album';
 import {Song} from './Song';
+import {BasicData} from './BasicData';
+import {ArtistInterface} from '../Interfaces/ArtistInterface';
+import {SongManager} from '../Managers/SongManager';
+import {AlbumManager} from '../Managers/AlbumManager';
+import {Genre} from './Genre';
 
-export class Artist {
-  constructor(readonly name: string, private groups: Group[],
-      private genres: Genre[], private albums: Album[], private songs: Song[]) {
+export class Artist extends BasicData {
+  constructor(name: string, private groups: string[],
+      private genres: string[], private albums: Album[], private songs: Song[]) {
+    super(name);
   }
 
-  getName(): string {
-    return this.name;
-  }
-
-  public getGroups(): Group[] {
+  public getGroups(): string[] {
     return this.groups;
   }
-  public addGroup(newGroup: Group) {
+  public addGroup(newGroup: string) {
     this.groups.push(newGroup);
   }
-  public removeGroup(groupDelete: Group) {
+  public removeGroup(groupDelete: string) {
     this.groups = this.groups.filter((elemento) => elemento !== groupDelete);
   }
 
-  public getGenres(): Genre[] {
+  public getGenres(): string[] {
     return this.genres;
   }
-  public addGenre(newGenre: Genre) {
-    this.genres.push(newGenre);
+  public removeGenre(genre: Genre): void {
+    const index = this.genres.indexOf(genre.getName());
+    if (index !== -1) {
+      this.genres.splice(index, 1);
+    }
   }
-  public removeGenre(genreDelete: Genre) {
-    this.genres = this.genres.filter((elemento) => elemento !== genreDelete);
+  public addGenre(genre: Genre): void {
+    if (this.genres.find((x) => x === genre.getName()) === undefined) {
+      this.genres.push(genre.getName());
+    }
   }
 
   public getAlbums(): Album[] {
@@ -51,7 +56,21 @@ export class Artist {
   public removeSong(songDelete: Song) {
     this.songs = this.songs.filter((elemento) => elemento !== songDelete);
   }
+
+  public static deserialize(artist: ArtistInterface): Artist {
+    let albums: Album[] = [];
+    let songs: Song[] = [];
+    artist.songs.forEach((s) =>
+      songs.push(SongManager.getSongManager().searchByName(s.name)),
+    );
+    artist.albums.forEach((a) =>
+      albums.push(AlbumManager.getAlbumManager().searchByName(a.name)),
+    );
+    return new Artist(artist.name, artist.groups, artist.genres, albums, songs);
+  }
+
   // ---------- //
+  /*
   public getNumberListenersMonthly(): number {
     let listenersGroups: number = 0;
     let listenerSongs: number = 0;
@@ -63,5 +82,5 @@ export class Artist {
     });
 
     return listenerSongs + listenersGroups;
-  }
+  }*/
 }

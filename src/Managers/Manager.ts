@@ -1,11 +1,24 @@
-import {Genre} from '../Basics/Genre';
-import {Playlist} from '../Basics/Playlist';
+import {BasicData} from '../Basics/BasicData';
 
-export abstract class Manager<T extends Genre|Playlist> {
+/**
+ * Clase abstracta génerica para las clases mánager.
+ */
+export abstract class Manager<T extends BasicData> {
+  /**
+   * Colección de elementos T.
+   */
   protected collection: Set<T> = new Set<T>();
+  /**
+   * Getter para la propiedad `collection`.
+   * @returns Devuelve el valor de`collection`.
+   */
   getCollection(): Set<T> {
     return this.collection;
   }
+  /**
+   * Devuelve los nombres de los objetos de la colección.
+   * @returns Devuelve un array con los nombres de los objetos de la colección.
+   */
   getList(): string[] {
     let options: string[] = [];
     this.collection.forEach((element) => {
@@ -13,38 +26,52 @@ export abstract class Manager<T extends Genre|Playlist> {
     });
     return options;
   }
-  exists(value: string): boolean {
-    let exists: boolean = false;
-    this.collection.forEach((element) => {
-      if (value === element.getName()) {
-        exists = true;
-      }
-    });
-    return exists;
-  }
-  anotherOneWithThatName(value: string, element?: T): boolean {
+  /**
+   * Comprueba si existe otro objeto en la colección con el mismo nombre.
+   * @param name Nombre del elemento a buscar.
+   * @param element Elemento del que es el nombre.
+   * @returns Devuelve true si existe otro objeto en la colección con el mismo nombre.
+   */
+  anotherOneWithThatName(name: string, element?: T): boolean {
     let exists: boolean = false;
     this.collection.forEach((c) => {
-      if (value === c.getName() && c !== element) {
+      if (name === c.getName() && c !== element) {
         exists = true;
       }
     });
     return exists;
   }
+  /**
+   * Busca un elemento de la colección por su nombre.
+   * @param name Nombre del elemento a buscar.
+   * @returns Devuelve el elemento al que pertenece el nombre.
+   */
   searchByName(name:string): T {
     return [...this.collection.values()].find((g) =>
       g.getName() === name) as T;
   }
+  /**
+   * Agrega un nuevo elemento a la colección.
+   * @param element Elemento a agregar.
+   */
   add(element: T): void {
     this.collection.add(element);
+    this.store();
   }
+  /**
+   * Elimina un elemento de la collección.
+   * @param element Elemento a eliminar.
+   */
   remove(element: T): void {
-    this.collection.delete(element);
-  }
-  showInOrder(): void {
-    const ordenedArray: T[] = Array.from(this.collection).sort((a, b) => a.getName().localeCompare(b.getName()));
-    ordenedArray.forEach((element) => {
-      console.log(element);
+    this.collection.forEach((x) => {
+      if (x.getName() === element.getName()) {
+        this.collection.delete(element);
+      }
     });
+    this.store();
   }
+  /**
+   * Guarda los datos en la base de datos.
+   */
+  abstract store(): void;
 }

@@ -1,0 +1,1214 @@
+{
+  "artists": [
+    {
+      "name": "Mick Jagger",
+      "groups": [
+        "The Rolling Stones"
+      ],
+      "genres": [
+        "Rock"
+      ],
+      "albums": [
+        {
+          "name": "Goddess in the Doorway",
+          "whoPublishes": "Mick Jagger",
+          "publicationYear": 2001,
+          "genres": [
+            "Rock"
+          ],
+          "songs": [
+            {
+              "name": "God gave me everything",
+              "author": "Mick Jagger",
+              "duration": [
+                3,
+                34
+              ],
+              "genres": [
+                "Rock"
+              ],
+              "publicationDate": "2001-11-19",
+              "isSingle": true,
+              "reproductions": 4500000
+            },
+            {
+              "name": "Visions of paradise",
+              "author": "Mick Jagger",
+              "duration": [
+                4,
+                2
+              ],
+              "genres": [
+                "Rock"
+              ],
+              "publicationDate": "2001-11-19",
+              "isSingle": false,
+              "reproductions": 2750000
+            }
+          ]
+        }
+      ],
+      "songs": [
+        {
+          "name": "God gave me everything",
+          "author": "Mick Jagger",
+          "duration": [
+            3,
+            34
+          ],
+          "genres": [
+            "Rock"
+          ],
+          "publicationDate": "2001-11-19",
+          "isSingle": true,
+          "reproductions": 4500000
+        },
+        {
+          "name": "Visions of paradise",
+          "author": "Mick Jagger",
+          "duration": [
+            4,
+            2
+          ],
+          "genres": [
+            "Rock"
+          ],
+          "publicationDate": "2001-11-19",
+          "isSingle": false,
+          "reproductions": 2750000
+        }
+      ]
+    },
+    {
+      "name": "Adam Levine",
+      "groups": [
+        "Maroon 5"
+      ],
+      "genres": [
+        "Pop"
+      ],
+      "albums": [
+        {
+          "name": "Begin Again",
+          "whoPublishes": "Adam Levine",
+          "publicationYear": 2014,
+          "genres": [
+            "Pop"
+          ],
+          "songs": [
+            {
+              "name": "Lost Stars",
+              "author": "Adam Levine",
+              "duration": [
+                3,
+                16
+              ],
+              "genres": [
+                "Pop"
+              ],
+              "publicationDate": "2014-06-30",
+              "isSingle": true,
+              "reproductions": 3200000
+            },
+            {
+              "name": "Lost Stars",
+              "author": "Adam Levine",
+              "duration": [
+                3,
+                16
+              ],
+              "genres": [
+                "Pop"
+              ],
+              "publicationDate": "2014-06-30",
+              "isSingle": true,
+              "reproductions": 3200000
+            }
+          ]
+        }
+      ],
+      "songs": [
+        {
+          "name": "Lost Stars",
+          "author": "Adam Levine",
+          "duration": [
+            3,
+            16
+          ],
+          "genres": [
+            "Pop"
+          ],
+          "publicationDate": "2014-06-30",
+          "isSingle": true,
+          "reproductions": 3200000
+        },
+        {
+          "name": "Lost Stars",
+          "author": "Adam Levine",
+          "duration": [
+            3,
+            16
+          ],
+          "genres": [
+            "Pop"
+          ],
+          "publicationDate": "2014-06-30",
+          "isSingle": true,
+          "reproductions": 3200000
+        }
+      ]
+    },
+    {
+      "name": "Yandel",
+      "groups": [
+        "Wisin y Yandel"
+      ],
+      "genres": [
+        "Reggeaton"
+      ],
+      "albums": [
+        {
+          "name": "Quien contra mi",
+          "whoPublishes": "Yandel",
+          "publicationYear": 2003,
+          "genres": [
+            "Reggeaton"
+          ],
+          "songs": [
+            {
+              "name": "Te suelto el pelo",
+              "author": "Yandel",
+              "duration": [
+                4,
+                2
+              ],
+              "genres": [
+                "Reggeaton"
+              ],
+              "publicationDate": "2003-09-15",
+              "isSingle": false,
+              "reproductions": 2550000
+            },
+            {
+              "name": "Ya me cansé",
+              "author": "Yandel",
+              "duration": [
+                2,
+                35
+              ],
+              "genres": [
+                "Reggeaton"
+              ],
+              "publicationDate": "2003-09-15",
+              "isSingle": false,
+              "reproductions": 1600000
+            }
+          ]
+        }
+      ],
+      "songs": [
+        {
+          "name": "Te suelto el pelo",
+          "author": "Yandel",
+          "duration": [
+            4,
+            2
+          ],
+          "genres": [
+            "Reggeaton"
+          ],
+          "publicationDate": "2003-09-15",
+          "isSingle": false,
+          "reproductions": 2550000
+        },
+        {
+          "name": "Ya me cansé",
+          "author": "Yandel",
+          "duration": [
+            2,
+            35
+          ],
+          "genres": [
+            "Reggeaton"
+          ],
+          "publicationDate": "2003-09-15",
+          "isSingle": false,
+          "reproductions": 1600000
+        }
+      ]
+    },
+    {
+      "name": "Eminem",
+      "groups": [
+        "-"
+      ],
+      "genres": [
+        "Rap"
+      ],
+      "albums": [
+        {
+          "name": "The Marshall Matters LP",
+          "whoPublishes": "Eminem",
+          "publicationYear": 2000,
+          "genres": [
+            "Rap"
+          ],
+          "songs": [
+            {
+              "name": "Marshall Matters",
+              "author": "Eminem",
+              "duration": [
+                5,
+                20
+              ],
+              "genres": [
+                "Rap"
+              ],
+              "publicationDate": "2000-09-15",
+              "isSingle": false,
+              "reproductions": 3420000
+            },
+            {
+              "name": "Stan",
+              "author": "Eminem",
+              "duration": [
+                5,
+                33
+              ],
+              "genres": [
+                "Rap"
+              ],
+              "publicationDate": "2000-09-15",
+              "isSingle": false,
+              "reproductions": 8430000
+            },
+            {
+              "name": "Kill you",
+              "author": "Eminem",
+              "duration": [
+                4,
+                24
+              ],
+              "genres": [
+                "Rap"
+              ],
+              "publicationDate": "2000-09-15",
+              "isSingle": false,
+              "reproductions": 3600000
+            },
+            {
+              "name": "Who knew",
+              "author": "Eminem",
+              "duration": [
+                3,
+                47
+              ],
+              "genres": [
+                "Rap"
+              ],
+              "publicationDate": "2000-09-15",
+              "isSingle": false,
+              "reproductions": 1600000
+            },
+            {
+              "name": "I'm back",
+              "author": "Eminem",
+              "duration": [
+                5,
+                11
+              ],
+              "genres": [
+                "Rap"
+              ],
+              "publicationDate": "2000-09-15",
+              "isSingle": false,
+              "reproductions": 7600000
+            }
+          ]
+        }
+      ],
+      "songs": [
+        {
+          "name": "Marshall Matters",
+          "author": "Eminem",
+          "duration": [
+            5,
+            20
+          ],
+          "genres": [
+            "Rap"
+          ],
+          "publicationDate": "2000-09-15",
+          "isSingle": false,
+          "reproductions": 3420000
+        },
+        {
+          "name": "Stan",
+          "author": "Eminem",
+          "duration": [
+            5,
+            33
+          ],
+          "genres": [
+            "Rap"
+          ],
+          "publicationDate": "2000-09-15",
+          "isSingle": false,
+          "reproductions": 8430000
+        },
+        {
+          "name": "Kill you",
+          "author": "Eminem",
+          "duration": [
+            4,
+            24
+          ],
+          "genres": [
+            "Rap"
+          ],
+          "publicationDate": "2000-09-15",
+          "isSingle": false,
+          "reproductions": 3600000
+        },
+        {
+          "name": "Who knew",
+          "author": "Eminem",
+          "duration": [
+            3,
+            47
+          ],
+          "genres": [
+            "Rap"
+          ],
+          "publicationDate": "2000-09-15",
+          "isSingle": false,
+          "reproductions": 1600000
+        },
+        {
+          "name": "I'm back",
+          "author": "Eminem",
+          "duration": [
+            5,
+            11
+          ],
+          "genres": [
+            "Rap"
+          ],
+          "publicationDate": "2000-09-15",
+          "isSingle": false,
+          "reproductions": 7600000
+        }
+      ]
+    },
+    {
+      "name": "Residente",
+      "groups": [
+        "Calle 13"
+      ],
+      "genres": [
+        "Urbano Latino"
+      ],
+      "albums": [
+        {
+          "name": "Residente",
+          "whoPublishes": "Residente",
+          "publicationYear": 2017,
+          "genres": [
+            "Urbano Latino"
+          ],
+          "songs": [
+            {
+              "name": "Desencuentro",
+              "author": "Residente",
+              "duration": [
+                4,
+                44
+              ],
+              "genres": [
+                "Urbano Latino"
+              ],
+              "publicationDate": "2017-03-29",
+              "isSingle": true,
+              "reproductions": 2750000
+            },
+            {
+              "name": "Apocalíptico",
+              "author": "Residente",
+              "duration": [
+                6,
+                12
+              ],
+              "genres": [
+                "Urbano Latino"
+              ],
+              "publicationDate": "2017-03-31",
+              "isSingle": true,
+              "reproductions": 3600000
+            }
+          ]
+        }
+      ],
+      "songs": [
+        {
+          "name": "Te suelto el pelo",
+          "author": "Yandel",
+          "duration": [
+            4,
+            2
+          ],
+          "genres": [
+            "Reggeaton"
+          ],
+          "publicationDate": "2003-09-15",
+          "isSingle": false,
+          "reproductions": 2550000
+        },
+        {
+          "name": "Ya me cansé",
+          "author": "Yandel",
+          "duration": [
+            2,
+            35
+          ],
+          "genres": [
+            "Reggeaton"
+          ],
+          "publicationDate": "2003-09-15",
+          "isSingle": false,
+          "reproductions": 1600000
+        }
+      ]
+    },
+    {
+      "name": "Johnny Cash",
+      "groups": [
+        "-"
+      ],
+      "genres": [
+        "Country"
+      ],
+      "albums": [
+        {
+          "name": "American Recordings",
+          "whoPublishes": "Johnny Cash",
+          "publicationYear": 1962,
+          "genres": [
+            "Country"
+          ],
+          "songs": [
+            {
+              "name": "Delia's Gone",
+              "author": "Johnny Cash",
+              "duration": [
+                2,
+                17
+              ],
+              "genres": [
+                "Country"
+              ],
+              "publicationDate": "1962-03-31",
+              "isSingle": false,
+              "reproductions": 1200000
+            },
+            {
+              "name": "The Beast In Me",
+              "author": "Johnny Cash",
+              "duration": [
+                2,
+                45
+              ],
+              "genres": [
+                "Country"
+              ],
+              "publicationDate": "1962-03-31",
+              "isSingle": false,
+              "reproductions": 850000
+            },
+            {
+              "name": "Drive On",
+              "author": "Johnny Cash",
+              "duration": [
+                2,
+                23
+              ],
+              "genres": [
+                "Country"
+              ],
+              "publicationDate": "1962-03-31",
+              "isSingle": false,
+              "reproductions": 700000
+            },
+            {
+              "name": "Why Me Lord",
+              "author": "Johnny Cash",
+              "duration": [
+                2,
+                19
+              ],
+              "genres": [
+                "Country"
+              ],
+              "publicationDate": "1962-03-31",
+              "isSingle": false,
+              "reproductions": 1300000
+            },
+            {
+              "name": "Thirteen",
+              "author": "Johnny Cash",
+              "duration": [
+                2,
+                29
+              ],
+              "genres": [
+                "Country"
+              ],
+              "publicationDate": "1962-03-31",
+              "isSingle": false,
+              "reproductions": 420000
+            }
+          ]
+        }
+      ],
+      "songs": [
+        {
+          "name": "Delia's Gone",
+          "author": "Johnny Cash",
+          "duration": [
+            2,
+            17
+          ],
+          "genres": [
+            "Country"
+          ],
+          "publicationDate": "1962-03-31",
+          "isSingle": false,
+          "reproductions": 1200000
+        },
+        {
+          "name": "The Beast In Me",
+          "author": "Johnny Cash",
+          "duration": [
+            2,
+            45
+          ],
+          "genres": [
+            "Country"
+          ],
+          "publicationDate": "1962-03-31",
+          "isSingle": false,
+          "reproductions": 850000
+        },
+        {
+          "name": "Drive On",
+          "author": "Johnny Cash",
+          "duration": [
+            2,
+            23
+          ],
+          "genres": [
+            "Country"
+          ],
+          "publicationDate": "1962-03-31",
+          "isSingle": false,
+          "reproductions": 700000
+        },
+        {
+          "name": "Why Me Lord",
+          "author": "Johnny Cash",
+          "duration": [
+            2,
+            19
+          ],
+          "genres": [
+            "Country"
+          ],
+          "publicationDate": "1962-03-31",
+          "isSingle": false,
+          "reproductions": 1300000
+        },
+        {
+          "name": "Thirteen",
+          "author": "Johnny Cash",
+          "duration": [
+            2,
+            29
+          ],
+          "genres": [
+            "Country"
+          ],
+          "publicationDate": "1962-03-31",
+          "isSingle": false,
+          "reproductions": 420000
+        }
+      ]
+    },
+    {
+      "name": "Louis Armstrong",
+      "groups": [
+        "-"
+      ],
+      "genres": [
+        "Jazz"
+      ],
+      "albums": [
+        {
+          "name": "What A Wonderful World",
+          "whoPublishes": "Louis Armstrong",
+          "publicationYear": 1967,
+          "genres": [
+            "Jazz"
+          ],
+          "songs": [
+            {
+              "name": "Cabaret",
+              "author": "Louis Armstrong",
+              "duration": [
+                2,
+                44
+              ],
+              "genres": [
+                "Jazz"
+              ],
+              "publicationDate": "1967-04-01",
+              "isSingle": false,
+              "reproductions": 6420000
+            },
+            {
+              "name": "The Home Fire",
+              "author": "Louis Armstrong",
+              "duration": [
+                3,
+                14
+              ],
+              "genres": [
+                "Jazz"
+              ],
+              "publicationDate": "1967-04-01",
+              "isSingle": false,
+              "reproductions": 820000
+            },
+            {
+              "name": "There Must Be A Way",
+              "author": "Louis Armstrong",
+              "duration": [
+                3,
+                5
+              ],
+              "genres": [
+                "Jazz"
+              ],
+              "publicationDate": "1967-04-01",
+              "isSingle": false,
+              "reproductions": 5420000
+            },
+            {
+              "name": "Give Me Your Kisses",
+              "author": "Louis Armstrong",
+              "duration": [
+                1,
+                58
+              ],
+              "genres": [
+                "Jazz"
+              ],
+              "publicationDate": "1967-04-01",
+              "isSingle": false,
+              "reproductions": 2120000
+            },
+            {
+              "name": "The Sunshine Of Love",
+              "author": "Louis Armstrong",
+              "duration": [
+                2,
+                52
+              ],
+              "genres": [
+                "Jazz"
+              ],
+              "publicationDate": "1967-04-01",
+              "isSingle": false,
+              "reproductions": 620000
+            }
+          ]
+        }
+      ],
+      "songs": [
+        {
+          "name": "Cabaret",
+          "author": "Louis Armstrong",
+          "duration": [
+            2,
+            44
+          ],
+          "genres": [
+            "Jazz"
+          ],
+          "publicationDate": "1967-04-01",
+          "isSingle": false,
+          "reproductions": 6420000
+        },
+        {
+          "name": "The Home Fire",
+          "author": "Louis Armstrong",
+          "duration": [
+            3,
+            14
+          ],
+          "genres": [
+            "Jazz"
+          ],
+          "publicationDate": "1967-04-01",
+          "isSingle": false,
+          "reproductions": 820000
+        },
+        {
+          "name": "There Must Be A Way",
+          "author": "Louis Armstrong",
+          "duration": [
+            3,
+            5
+          ],
+          "genres": [
+            "Jazz"
+          ],
+          "publicationDate": "1967-04-01",
+          "isSingle": false,
+          "reproductions": 5420000
+        },
+        {
+          "name": "Give Me Your Kisses",
+          "author": "Louis Armstrong",
+          "duration": [
+            1,
+            58
+          ],
+          "genres": [
+            "Jazz"
+          ],
+          "publicationDate": "1967-04-01",
+          "isSingle": false,
+          "reproductions": 2120000
+        },
+        {
+          "name": "The Sunshine Of Love",
+          "author": "Louis Armstrong",
+          "duration": [
+            2,
+            52
+          ],
+          "genres": [
+            "Jazz"
+          ],
+          "publicationDate": "1967-04-01",
+          "isSingle": false,
+          "reproductions": 620000
+        }
+      ]
+    },
+    {
+      "name": "Bob Marley",
+      "groups": [
+        "The Wailers"
+      ],
+      "genres": [
+        "Reggae"
+      ],
+      "albums": [
+        {
+          "name": "Rastaman Vibration",
+          "whoPublishes": "Bob Marley",
+          "publicationYear": 1976,
+          "genres": [
+            "Reggae"
+          ],
+          "songs": [
+            {
+              "name": "Positive Vibration",
+              "author": "Bob Marley",
+              "duration": [
+                3,
+                33
+              ],
+              "genres": [
+                "Reggae"
+              ],
+              "publicationDate": "1976-04-11",
+              "isSingle": false,
+              "reproductions": 820000
+            },
+            {
+              "name": "Want More",
+              "author": "Bob Marley",
+              "duration": [
+                4,
+                14
+              ],
+              "genres": [
+                "Reggae"
+              ],
+              "publicationDate": "1976-04-11",
+              "isSingle": false,
+              "reproductions": 1020000
+            }
+          ]
+        }
+      ],
+      "songs": [
+        {
+          "name": "Positive Vibration",
+          "author": "Bob Marley",
+          "duration": [
+            3,
+            33
+          ],
+          "genres": [
+            "Reggae"
+          ],
+          "publicationDate": "1976-04-11",
+          "isSingle": false,
+          "reproductions": 820000
+        },
+        {
+          "name": "Want More",
+          "author": "Bob Marley",
+          "duration": [
+            4,
+            14
+          ],
+          "genres": [
+            "Reggae"
+          ],
+          "publicationDate": "1976-04-11",
+          "isSingle": false,
+          "reproductions": 1020000
+        }
+      ]
+    },
+    {
+      "name": "Kendrik Lamar",
+      "groups": [
+        "-"
+      ],
+      "genres": [
+        "Trap"
+      ],
+      "albums": [
+        {
+          "name": "DAMN.",
+          "whoPublishes": "Kendrik Lamar",
+          "publicationYear": 2017,
+          "genres": [
+            "Trap"
+          ],
+          "songs": [
+            {
+              "name": "BLOOD.",
+              "author": "Kendrik Lamar",
+              "duration": [
+                1,
+                58
+              ],
+              "genres": [
+                "Trap"
+              ],
+              "publicationDate": "2017-04-14",
+              "isSingle": false,
+              "reproductions": 1620000
+            },
+            {
+              "name": "YAH.",
+              "author": "Kendrik Lamar",
+              "duration": [
+                2,
+                40
+              ],
+              "genres": [
+                "Trap"
+              ],
+              "publicationDate": "2017-04-14",
+              "isSingle": false,
+              "reproductions": 3500000
+            },
+            {
+              "name": "ELEMENT.",
+              "author": "Kendrik Lamar",
+              "duration": [
+                3,
+                28
+              ],
+              "genres": [
+                "Trap"
+              ],
+              "publicationDate": "2017-04-14",
+              "isSingle": false,
+              "reproductions": 820000
+            },
+            {
+              "name": "FEEL.",
+              "author": "Kendrik Lamar",
+              "duration": [
+                3,
+                34
+              ],
+              "genres": [
+                "Trap"
+              ],
+              "publicationDate": "2017-04-14",
+              "isSingle": false,
+              "reproductions": 1130000
+            },
+            {
+              "name": "GOD.",
+              "author": "Kendrik Lamar",
+              "duration": [
+                4,
+                8
+              ],
+              "genres": [
+                "Trap"
+              ],
+              "publicationDate": "2017-04-14",
+              "isSingle": false,
+              "reproductions": 480000
+            }
+          ]
+        }
+      ],
+      "songs": [
+        {
+          "name": "BLOOD.",
+          "author": "Kendrik Lamar",
+          "duration": [
+            1,
+            58
+          ],
+          "genres": [
+            "Trap"
+          ],
+          "publicationDate": "2017-04-14",
+          "isSingle": false,
+          "reproductions": 1620000
+        },
+        {
+          "name": "YAH.",
+          "author": "Kendrik Lamar",
+          "duration": [
+            2,
+            40
+          ],
+          "genres": [
+            "Trap"
+          ],
+          "publicationDate": "2017-04-14",
+          "isSingle": false,
+          "reproductions": 3500000
+        },
+        {
+          "name": "ELEMENT.",
+          "author": "Kendrik Lamar",
+          "duration": [
+            3,
+            28
+          ],
+          "genres": [
+            "Trap"
+          ],
+          "publicationDate": "2017-04-14",
+          "isSingle": false,
+          "reproductions": 820000
+        },
+        {
+          "name": "FEEL.",
+          "author": "Kendrik Lamar",
+          "duration": [
+            3,
+            34
+          ],
+          "genres": [
+            "Trap"
+          ],
+          "publicationDate": "2017-04-14",
+          "isSingle": false,
+          "reproductions": 1130000
+        },
+        {
+          "name": "GOD.",
+          "author": "Kendrik Lamar",
+          "duration": [
+            4,
+            8
+          ],
+          "genres": [
+            "Trap"
+          ],
+          "publicationDate": "2017-04-14",
+          "isSingle": false,
+          "reproductions": 480000
+        }
+      ]
+    },
+    {
+      "name": "Avicii",
+      "groups": [
+        "-"
+      ],
+      "genres": [
+        "Musica Electronica"
+      ],
+      "albums": [
+        {
+          "name": "True",
+          "whoPublishes": "Avicii",
+          "publicationYear": 2013,
+          "genres": [
+            "Musica Electronica"
+          ],
+          "songs": [
+            {
+              "name": "Wake Me Up",
+              "author": "Avicii",
+              "duration": [
+                4,
+                7
+              ],
+              "genres": [
+                "Musica Electronica"
+              ],
+              "publicationDate": "2013-01-01",
+              "isSingle": false,
+              "reproductions": 10480000
+            },
+            {
+              "name": "Hey Brother",
+              "author": "Avicii",
+              "duration": [
+                4,
+                15
+              ],
+              "genres": [
+                "Musica Electronica"
+              ],
+              "publicationDate": "2013-01-01",
+              "isSingle": false,
+              "reproductions": 7520000
+            },
+            {
+              "name": "Addicted To You",
+              "author": "Avicii",
+              "duration": [
+                2,
+                28
+              ],
+              "genres": [
+                "Musica Electronica"
+              ],
+              "publicationDate": "2013-01-01",
+              "isSingle": false,
+              "reproductions": 3200000
+            },
+            {
+              "name": "Shame On Me",
+              "author": "Avicii",
+              "duration": [
+                4,
+                13
+              ],
+              "genres": [
+                "Musica Electronica"
+              ],
+              "publicationDate": "2013-01-01",
+              "isSingle": false,
+              "reproductions": 2700000
+            },
+            {
+              "name": "You Make Me",
+              "author": "Avicii",
+              "duration": [
+                3,
+                53
+              ],
+              "genres": [
+                "Musica Electronica"
+              ],
+              "publicationDate": "2013-01-01",
+              "isSingle": false,
+              "reproductions": 2200000
+            }
+          ]
+        }
+      ],
+      "songs": [
+        {
+          "name": "Wake Me Up",
+          "author": "Avicii",
+          "duration": [
+            4,
+            7
+          ],
+          "genres": [
+            "Musica Electronica"
+          ],
+          "publicationDate": "2013-01-01",
+          "isSingle": false,
+          "reproductions": 10480000
+        },
+        {
+          "name": "Hey Brother",
+          "author": "Avicii",
+          "duration": [
+            4,
+            15
+          ],
+          "genres": [
+            "Musica Electronica"
+          ],
+          "publicationDate": "2013-01-01",
+          "isSingle": false,
+          "reproductions": 7520000
+        },
+        {
+          "name": "Addicted To You",
+          "author": "Avicii",
+          "duration": [
+            2,
+            28
+          ],
+          "genres": [
+            "Musica Electronica"
+          ],
+          "publicationDate": "2013-01-01",
+          "isSingle": false,
+          "reproductions": 3200000
+        },
+        {
+          "name": "Shame On Me",
+          "author": "Avicii",
+          "duration": [
+            4,
+            13
+          ],
+          "genres": [
+            "Musica Electronica"
+          ],
+          "publicationDate": "2013-01-01",
+          "isSingle": false,
+          "reproductions": 2700000
+        },
+        {
+          "name": "You Make Me",
+          "author": "Avicii",
+          "duration": [
+            3,
+            53
+          ],
+          "genres": [
+            "Musica Electronica"
+          ],
+          "publicationDate": "2013-01-01",
+          "isSingle": false,
+          "reproductions": 2200000
+        }
+      ]
+    }
+  ]
+}
