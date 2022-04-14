@@ -17,11 +17,11 @@ describe('Pruebas de la clase GenreManager', () => {
   });
   it(`genreManager.removeGenre(rock) removes rock from the genre collection`, () => {
     genreManager.remove(rock);
-    expect(genreManager.getCollection()).to.be.eql(new Set<Genre>([pop]));
+    expect(genreManager.getList().includes('Rock')).to.be.equal(false);
   });
   it(`genreManager.addGenre(rock) adds rock to the genre collection`, () => {
-    genreManager.add(rock);
-    expect(genreManager.getCollection()).to.be.eql(new Set<Genre>([pop, rock]));
+    genreManager.add(pop);
+    expect(genreManager.searchByName('Pop')).to.be.equal(pop);
   });
   it(`genreManager.getGenreByName('Rock') returns rock`, () => {
     expect(genreManager.searchByName('Rock')).to.be.equal(rock);

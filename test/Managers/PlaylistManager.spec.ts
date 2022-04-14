@@ -24,6 +24,6 @@ describe('Pruebas de la clase PlaylistManager', () => {
   });
   it(`playlistManager.getPlaylistByName('MyPlaylist') returns list`, () => {
     expect(playlistManager.searchByName('MyPlaylist')).to.be.equal(list);
-    playlistManager.updateGenre();
+    playlistManager.update();
   });
 });
