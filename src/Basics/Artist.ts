@@ -100,7 +100,7 @@ export class Artist extends BasicData {
     this.songs = this.songs.filter((elemento) => elemento !== songDelete);
   }
 
-  public showInfo(): void {
+  public showInfo(): string {
     let info: string = `ARTISTA ${this.getName()}
     -Nombre: ${this.getName()}
     -Grupos: ${this.getGroups()}
@@ -114,9 +114,10 @@ export class Artist extends BasicData {
     return song.getName();
   }).join('\n      ')}`;
     console.log(info);
+    return info;
   }
 
-  showSongsOrder(ascending: boolean = true): void {
+  public showSongsOrder(ascending: boolean = true): string {
     let nameList: string[] = this.getSongs().map((song) => song.getName());
     nameList = nameList.sort();
     if (ascending) {
@@ -124,9 +125,10 @@ export class Artist extends BasicData {
     } else {
       console.log('  '+nameList.reverse().join('\n  '));
     }
+    return nameList.join('\n  ');
   }
 
-  showAlbumOrder(ascending: boolean = true): void {
+  showAlbumOrder(ascending: boolean = true): string {
     let nameList: string[] = this.getAlbums().map((album) => {
       return album.getName();
     });
@@ -136,9 +138,10 @@ export class Artist extends BasicData {
     } else {
       console.log('  '+nameList.reverse().join('\n  '));
     }
+    return nameList.join('\n  ');
   }
 
-  showAlbumYearOrder(ascending: boolean = true): void {
+  showAlbumYearOrder(ascending: boolean = true): string {
     let albums = this.getAlbums().sort((albumA, albumB) => {
       return albumA.getYear() - albumB.getYear();
     });
@@ -150,17 +153,19 @@ export class Artist extends BasicData {
     } else {
       console.log('  '+albumNames.reverse().join('\n  '));
     }
+    return albumNames.join('\n  ');
   }
 
-  showSingles(): void {
+  showSingles(): string {
     let songs: Song[] = this.getSongs().filter((song) => song.getIsSingle());
     let single: string[] = songs.map((song) => {
       return song.getName();
     });
     console.log('  '+single.join('\n  '));
+    return single.join('\n  ');
   }
 
-  showByReproductions(ascending: boolean = true): void {
+  showByReproductions(ascending: boolean = true): string {
     let songs = this.getSongs().sort((songA, songB) => {
       return songA.getReproductions() - songB.getReproductions();
     });
@@ -172,14 +177,16 @@ export class Artist extends BasicData {
     } else {
       console.log('  '+songsNames.reverse().join('\n  '));
     }
+    return songsNames.join('\n  ');
   }
 
-  showPlayListAsociate(): void {
+  showPlayListAsociate(): string {
     const playLists: Playlist[] = Array.from(PlaylistManager.getPlaylistManager().getCollection());
     const playListsWithAuthor: Playlist[] = playLists.filter((playList) => playList.getMusicians().includes(this.getName()));
     const asociatePlaylists: string[] = playListsWithAuthor.map((playlist) => {
       return playlist.getName();
     });
     console.log('  '+asociatePlaylists.join('\n  '));
+    return asociatePlaylists.join('\n  ');
   }
 }

@@ -95,4 +95,25 @@ describe('Pruebas de la clase Artist', () => {
     JhonnyCash.removeGroup('Landsberg Barbarians');
     expect(JhonnyCash.getGroups()).to.be.eql([]);
   });
+  it('ShowInfo', () => {
+
+  });
+  it('showSongsOrder', () => {
+
+  });
+  it('showAlbumOrder', () => {
+
+  });
+  it('showAlbumYearOrder', () => {
+
+  });
+  it('showSingles', () => {
+
+  });
+  it('showByReproductions', () => {
+
+  });
+  it('showPlayListAsociate', () => {
+
+  });
 });
