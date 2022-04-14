@@ -32,8 +32,15 @@ export class GroupManager extends Manager<Group> {
     }
     return GroupManager.groupManager;
   }
+  /*
+  recalculateListeners(): void {
+    this.collection.forEach((group) => {
+      group.recalculateListeners();
+    });
+    this.store();
+  }*/
 
-  store() {
+  store(): void {
     this.database.set('groups', [...this.collection.values()]).write();
   }
 

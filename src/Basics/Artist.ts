@@ -9,10 +9,28 @@ import {PlaylistManager} from '../Managers/PlaylistManager';
 import {Playlist} from './Playlist';
 
 export class Artist extends BasicData {
+  // private listeners: number;
   constructor(name: string, private groups: string[],
       private genres: string[], private albums: Album[], private songs: Song[]) {
     super(name);
+    /* this.listeners = 0;
+    songs.forEach((song) => {
+      this.listeners += song.getReproductions();
+    });*/
   }
+  /*
+  public recalculateListeners(): void {
+    this.listeners = 0;
+    this.songs.forEach((song) => {
+      this.listeners += song.getReproductions();
+    });
+    this.groups.forEach((groupName) => {
+      if (GroupManager.getGroupManager().searchByName(groupName) !== undefined) {
+        let group: Group = GroupManager.getGroupManager().searchByName(groupName);
+        this.listeners += group.getListeners();
+      }
+    });
+  }*/
 
   public static deserialize(artist: ArtistInterface): Artist {
     let albums: Album[] = [];
@@ -38,7 +56,10 @@ export class Artist extends BasicData {
   }
   public getSongs(): Song[] {
     return this.songs;
-  }
+  }/*
+  public getListeners(): number {
+    return this.listeners;
+  }*/
   // SETTERS
   public setName(newName: string): void {
     this.name = newName;

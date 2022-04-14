@@ -10,14 +10,25 @@ import {PlaylistManager} from '../Managers/PlaylistManager';
 import {Playlist} from './Playlist';
 
 export class Group extends BasicData {
+  // private listeners: number;
   constructor(name: string, private artists: Artist[],
       private fundationYear: number, private genres: string[],
       private albums: Album[]) {
-    super(name);
+    super(name);/*
+    this.listeners = 0;
+    this.albums.forEach((album) => {
+      album.getSongs().forEach((song) => {
+        this.listeners += song.getReproductions();
+      });
+    });*/
   }
   getFundationYear(): number {
     return this.fundationYear;
   }
+  /*
+  getListeners(): number {
+    return this.listeners;
+  }*/
   public getArtists(): Artist[] {
     return this.artists;
   }
@@ -71,6 +82,16 @@ export class Group extends BasicData {
   public setGenres(newGenres: string[]): void {
     this.genres = newGenres;
   }
+  /*
+  recalculateListeners(): void {
+    this.listeners = 0;
+    this.albums.forEach((album) => {
+      album.getSongs().forEach((song) => {
+        this.listeners += song.getReproductions();
+      });
+    });
+  }*/
+
   public setAlbums(newAlbums: Album[]): void {
     this.albums = newAlbums;
   }
