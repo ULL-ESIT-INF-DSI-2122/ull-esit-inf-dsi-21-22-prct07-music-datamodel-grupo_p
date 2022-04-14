@@ -760,9 +760,646 @@ export class PlaylistManager extends Manager<Playlist> {
 ```
 
 ## __Menús__
-  
 
-  
-    
- 
+Los `MENUS` son la parte iteractiva sobre como hemos realizado la gestión de playlists, canciones, álbumes, artistas y grupos por una línea de comandos haciendo uso del modulo `Inquiere`. A continuación se muestra el prompt principal:
 
+```ts
+/**
+ * Enumeración de las opciones del menú principal.
+ */
+export enum Commands {
+    Genres = 'Géneros',
+    Groups = 'Grupos',
+    Artists = 'Artistas',
+    Albums = 'Álbumes',
+    Songs = 'Canciones',
+    Playlists = 'Playlists',
+    Quit = 'Salir'
+}
+/**
+ * Despliega el menú principal.
+ */
+export function promptUser(): void {
+  console.clear();
+  inquirer.prompt({
+    type: 'list',
+    name: 'command',
+    message: 'Menú principal',
+    choices: Object.values(Commands),
+  }).then((answers) => {
+    switch (answers['command']) {
+      case Commands.Genres:
+        promptGenres();
+        break;
+      case Commands.Artists:
+        promptArtists();
+        break;
+      case Commands.Groups:
+        promptGroups();
+        break;
+      case Commands.Songs:
+        promptSongPrincipal();
+        break;
+      case Commands.Playlists:
+        promptPlaylists();
+        break;
+      case Commands.Albums:
+        promptAlbumPrincipal();
+        break;
+    }
+  });
+}
+/**
+ * Inicia el programa.
+ */
+export function run():void {
+  SongManager.getSongManager();
+  AlbumManager.getAlbumManager();
+  ArtistManager.getArtistManager();
+  GroupManager.getGroupManager();
+  GenreManager.getGenreManager();
+  PlaylistManager.getPlaylistManager();
+  promptUser();
+}
+
+run();
+```
+Como se puede ver, se ha realizado un `prompt` para cada clase gestora, es decir, si se quiere agregar, modificar o eliminar artistas, canciones, grupos, géneros o playlist se llama al prompt principal de la clase gestora. También se puede apreciar la función `run`, esta inicia el programa en ese orden específico.
+
+Una vez el usuario por ejemplo quiera visualizar, editar, o eliminar un `Artista`se le mostrará el siguiente menú:
+```ts
+enum options {
+  Show = 'Show Data Base',
+  Add = 'Add new artist+',
+  Revove = 'Delete artist',
+  Edit = 'Edit artista',
+  Back = 'Back'
+}
+
+const manager = ArtistManager.getArtistManager();
+
+
+export function promptArtists(): void {
+  let options: string[] = ['Nuevo artista +'];
+  options = options.concat(manager.getList());
+  options.push('Volver');
+  console.clear();
+  inquirer.prompt({
+    type: 'list',
+    name: 'command',
+    message: 'Artistas',
+    choices: options,
+  }).then((answers) => {
+    switch (answers['command']) {
+      case 'Nuevo artista +':
+        promptAddArtist();
+        break;
+      case 'Volver':
+        promptUser();
+        break;
+      default:
+        const artist: Artist = manager.searchByName(answers['command']);
+        promptArtist(artist);
+        break;
+    }
+  });
+}
+```
+
+Con el menú  siguiente se listará todos los artistas registrados en la base de datos, desde aquí es que el usuario elige eliminar, agregar o modificar el artista.
+
+```ts
+export function promptArtist(artist: Artist): void {
+  console.clear();
+  artist.showInfo();
+  inquirer.prompt({
+    type: 'list',
+    name: 'command',
+    message: 'Opciones',
+    choices: ['Mostrar información', 'Editar', 'Eliminar', 'Volver'],
+  }).then((answers) => {
+    switch (answers['command']) {
+      case 'Mostrar información':
+        promptShowData(artist);
+        break;
+      case 'Editar':
+        promptEditArtist(artist);
+        break;
+      case 'Eliminar':
+        promptRemoveArtist(artist);
+        break;
+      default:
+        promptArtists();
+        break;
+    }
+  },
+  );
+}
+```
+
+Ahora, en la sección de `agregar un artista`, se le solicita que resgistre el artista, colocando el `nombre` y este nombre no puede ser repetido, ya que está registrado en la base de datos(Se valida la entrada previamente), después se le da lo opción de eligir los géneros(haciendo uso del tipo `list` para que se listen todos los géneros de la base, obligando a que elija al menos un género), después le pide elegir los grupos a los que pertenece el artista, despues las canciones que tiene y los álbunes que ha lanzado. Ya que `Artist` recibe un array de tipo `Album` y `Song` se hace lo siguiente para poder hacer la instancia del artista:
+
+```ts
+let albums: Album[] = [];
+    answers.albums.forEach((a: string) => {
+      albums.push(AlbumManager.getAlbumManager().searchByName(a));
+    });
+```
+Se realiza lo mismo para `Song`, y se agrega el artista de la siguiente manera(Obviamente intanciando `Artist`):
+
+```ts
+const newArtist: Artist = new Artist(answers.name, answers.groups, answers.genre,
+        albums, songs);
+    manager.addArtist(newArtist);
+```
+A continuación se muestra el contenido completo de como se agregaría el artista:
+
+```ts
+function promptAddArtist(): void {
+  console.clear();
+  const songs: string[] = SongManager.getSongManager().getList();
+  const albums: string[] = AlbumManager.getAlbumManager().getList();
+  const genres: string[] = GenreManager.getGenreManager().getList();
+  const groups: string[] = GroupManager.getGroupManager().getList();
+  const questions = [
+    {
+      type: 'input',
+      name: 'name',
+      message: 'Artist name:',
+      validate(value: string) {
+        let val: boolean | string = true;
+        if (manager.anotherOneWithThatName(value)) {
+          val = 'Error: ya existe un artista con ese nombre.';
+        }
+        return val;
+      },
+    },
+    {
+      type: 'checkbox',
+      name: 'genre',
+      message: 'Choice genre:',
+      choices: genres,
+      validate(value: string[]) {
+        if (value.length < 1) {
+          return 'Debes elegir al menos un genero';
+        }
+        return true;
+      },
+    },
+    {
+      type: 'checkbox',
+      message: 'Elige grupos:',
+      name: 'groups',
+      choices: groups,
+      validate(value: string[]) {
+        if (value.length < 1) {
+          return 'Debes elegir al menos un grupo';
+        }
+        return true;
+      },
+    },
+    {
+      type: 'checkbox',
+      message: 'Elige álbums:',
+      name: 'albums',
+      choices: albums,
+      validate(answer: string[]) {
+        if (answer.length < 1) {
+          return 'Debes elegir al menos un álbum.';
+        }
+        return true;
+      },
+    },
+    {
+      type: 'checkbox',
+      message: 'Elige canciones:',
+      name: 'song',
+      choices: songs,
+      validate(answer: string[]) {
+        if (answer.length < 1) {
+          return 'Debes elegir al menos una cancion.';
+        }
+        return true;
+      },
+    },
+  ];
+  inquirer.prompt(questions).then((answers) => {
+    let albums: Album[] = [];
+    answers.albums.forEach((a: string) => {
+      albums.push(AlbumManager.getAlbumManager().searchByName(a));
+    });
+    let songs: Song[] = [];
+    answers.song.forEach((s: string) => {
+      songs.push(SongManager.getSongManager().searchByName(s));
+    });
+    const newArtist: Artist = new Artist(answers.name, answers.groups, answers.genre,
+        albums, songs);
+    manager.addArtist(newArtist);
+    promptArtists();
+  });
+}
+```
+
+Por otra parte, también tenemos el prompt para eliminar el artista, que prácticamente la funcioón `promptRemoveArtist()` recibe el artista que el usuario haya elegido para eliminar. Se usa el tipo `confirm` para confirma la acción de eliminar.
+
+```ts
+export function promptRemoveArtist(artist: Artist) {
+  console.clear();
+  inquirer
+      .prompt([
+        {
+          name: 'eliminar',
+          type: 'confirm',
+          message: '¿Seguro que quieres eliminar este artista?',
+        },
+      ])
+      .then((answer) => {
+        if (answer.eliminar) {
+          manager.deleteArtist(artist);
+        }
+        promptArtists();
+      });
+}
+```
+
+Después tenemos la función `promptEditArtist()` que recibe el artista que el usuario haya elegido. A continuación se despliega la serie de preguntas con los datos que **quiere y puede** el usuario editar.
+
+Si se quiere editar el nombre del artista, se valida que el nombre del artista no exista en la base, si existe, no se podrá editar.
+```ts
+{
+      type: 'input',
+      name: 'newName',
+      message: 'Artist new name:',
+      default: artist.getName(),
+      validate(value: string) {
+        let val: boolean | string = true;
+        manager.getCollection().forEach((element) => {
+          if (value === element.getName() && artist !== element) {
+            val = 'Error: ya existe un artista con ese nombre.';
+          }
+        });
+        return val;
+      },
+    },
+```
+
+Para la elección de los grupos a los que pertenece el artista, se despliega un `checkbox` con todos los grupos en la base para que pueda selecionarlos, más los que tiene ya seleccionados por si quiere deseleccionarlos:
+
+```ts
+    {
+      type: 'checkbox',
+      message: 'Elige grupos:',
+      name: 'groups',
+      choices: groups,
+      default: artist.getGroups(),
+    },
+```
+
+Y lo mismo para la elección de los géneros, canciones y álbumes:
+
+```ts
+{
+      type: 'checkbox',
+      message: 'Elige generos:',
+      name: 'genres',
+      choices: genres,
+      default: artist.getGenres(),
+    },
+    {
+      type: 'checkbox',
+      message: 'Elige álbums:',
+      name: 'albums',
+      choices: albums,
+      default: albumsNames,
+    },
+    {
+      type: 'checkbox',
+      message: 'Elige canciones:',
+      name: 'songs',
+      choices: songs,
+      default: songsNames,
+    },
+```
+Después de la serie de preguntas, se llama al método `editArtist()` donse se le pasa todas las respuestas seleccionadas por el usuario.
+
+```ts
+inquirer.prompt(questions).then((answers) => {
+    let albums: Album[] = [];
+    answers.albums.forEach((a: string) => {
+      albums.push(AlbumManager.getAlbumManager().searchByName(a));
+    });
+    let songs: Song[] = [];
+    answers.songs.forEach((s: string) => {
+      songs.push(SongManager.getSongManager().searchByName(s));
+    });
+    manager.editArtist(artist, answers.newName, answers.groups, answers.genres, albums, songs);
+    promptArtists();
+  });
+```
+
+Para tener un modo de visualización de los artistas por las canciones, o por los álbumes que tiene, o por las playlists que tiene asociada, se tiene una fucnción `promptShowData()`
+
+```ts
+enum visualizationMode {
+  byTitle = 'Canciones',
+  byName = 'Álbumes',
+  byPlaylist = 'Playlists asociadas',
+  back = 'Volver'
+}
+
+function promptShowData(artist: Artist) {
+  console.clear();
+  inquirer.prompt({
+    type: 'list',
+    name: 'visualization',
+    message: 'Que quiere ver',
+    choices: Object.values(visualizationMode),
+  }).then((answers) => {
+    switch (answers['visualization']) {
+      case visualizationMode.byTitle:
+        promptShowSongs(artist);
+        break;
+      case visualizationMode.byName:
+        promptShowAlbums(artist);
+        break;
+      case visualizationMode.byPlaylist:
+        promptShowPlayList(artist);
+        break;
+      default:
+        promptArtist(artist);
+        break;
+    }
+  });
+}
+```
+
+Para la visualización de las canciones de modo `ascendente`, `descendente`, por los `singles` o por el `número de reproducciones`, bajo la serie de preguntas y según el usuario requiera visualizar se llama a la función de la clase básica `Artist` donde tiene implementado el método `showSongsOrder()` y `showByReproductions()`, como se ha mencionado anteriormente en la descripción de las clases básicas.
+Si se elige orden ascendente no se pone el valor a `true`, porque lo tiene por defecto. Así también para la visualización de los álbumes y las playlists que tiene asociado el artista.
+
+### **SHOWSONG**
+
+```ts
+enum modeShowSong {
+  title = 'Por titulo',
+  repro = 'Por numero de reproducciones',
+  single = 'Mostrar solo los singles',
+  back = 'Volver'
+}
+
+function promptShowSongs(artist: Artist) {
+  console.clear();
+  inquirer.prompt({
+    type: 'list',
+    name: 'mode',
+    message: 'Como quiere ver los datos?',
+    choices: Object.values(modeShowSong),
+  }).then((answers) => {
+    switch (answers['mode']) {
+      case modeShowSong.title:
+        inquirer.prompt({
+          type: 'list',
+          name: 'order',
+          message: 'Orden?',
+          choices: ['Ascendente', 'Descendente', 'Volver'],
+        }).then((answers) => {
+          switch (answers['order']) {
+            case 'Ascendente':
+              artist.showSongsOrder();
+              inquirer.prompt({
+                type: 'list',
+                name: 'order',
+                message: 'Opciones:',
+                choices: ['Volver'],
+              }).then((answers) => {
+                promptShowSongs(artist);
+              });
+              break;
+            case 'Descendente':
+              artist.showSongsOrder(false);
+              inquirer.prompt({
+                type: 'list',
+                name: 'order',
+                message: 'Opciones:',
+                choices: ['Volver'],
+              }).then((answers) => {
+                promptShowSongs(artist);
+              });
+              break;
+            default:
+              promptShowSongs(artist);
+              break;
+          }
+        });
+        break;
+      case modeShowSong.repro:
+        inquirer.prompt({
+          type: 'list',
+          name: 'order',
+          message: 'Orden?',
+          choices: ['Ascendente', 'Descendente', 'Volver'],
+        }).then((answers) => {
+          switch (answers['order']) {
+            case 'Ascendente':
+              artist.showByReproductions();
+              inquirer.prompt({
+                type: 'list',
+                name: 'order',
+                message: 'Opciones:',
+                choices: ['Volver'],
+              }).then((answers) => {
+                promptShowSongs(artist);
+              });
+              break;
+            case 'Descendente':
+              artist.showByReproductions(false);
+              inquirer.prompt({
+                type: 'list',
+                name: 'order',
+                message: 'Opciones:',
+                choices: ['Volver'],
+              }).then((answers) => {
+                promptShowSongs(artist);
+              });
+              break;
+            default:
+              promptShowSongs(artist);
+              break;
+          }
+        });
+        break;
+      case modeShowSong.single:
+        artist.showSingles();
+        inquirer.prompt({
+          type: 'list',
+          name: 'order',
+          message: 'Opciones:',
+          choices: ['Volver'],
+        }).then((answers) => {
+          promptShowSongs(artist);
+        });
+        break;
+      default:
+        promptShowData(artist);
+        break;
+    }
+  });
+}
+```
+### **SHOWALBUMS**
+
+```ts
+enum modeShowAlbum {
+  name = 'Por nombre',
+  year = 'Por año de lanzamiento',
+  back = 'Volver'
+}
+
+function promptShowAlbums(artist: Artist) {
+  console.clear();
+  inquirer.prompt({
+    type: 'list',
+    name: 'mode',
+    message: 'Como quiere ver los datos?',
+    choices: Object.values(modeShowAlbum),
+  }).then((answers) => {
+    switch (answers['mode']) {
+      case modeShowAlbum.name:
+        inquirer.prompt({
+          type: 'list',
+          name: 'order',
+          message: 'Orden?',
+          choices: ['Ascendente', 'Descendente', 'Volver'],
+        }).then((answers) => {
+          switch (answers['order']) {
+            case 'Ascendente':
+              artist.showAlbumOrder();
+              inquirer.prompt({
+                type: 'list',
+                name: 'order',
+                message: 'Opciones:',
+                choices: ['Volver'],
+              }).then((answers) => {
+                promptShowAlbums(artist);
+              });
+              break;
+            case 'Descendente':
+              artist.showAlbumOrder(false);
+              inquirer.prompt({
+                type: 'list',
+                name: 'order',
+                message: 'Opciones:',
+                choices: ['Volver'],
+              }).then((answers) => {
+                promptShowAlbums(artist);
+              });
+              break;
+            default:
+              promptShowAlbums(artist);
+              break;
+          }
+        });
+        break;
+      case modeShowAlbum.year:
+        inquirer.prompt({
+          type: 'list',
+          name: 'order',
+          message: 'Orden?',
+          choices: ['Ascendente', 'Descendente', 'Volver'],
+        }).then((answers) => {
+          switch (answers['order']) {
+            case 'Ascendente':
+              artist.showAlbumYearOrder();
+              inquirer.prompt({
+                type: 'list',
+                name: 'order',
+                message: 'Opciones:',
+                choices: ['Volver'],
+              }).then((answers) => {
+                promptShowAlbums(artist);
+              });
+              break;
+            case 'Descendente':
+              artist.showAlbumYearOrder(false);
+              inquirer.prompt({
+                type: 'list',
+                name: 'order',
+                message: 'Opciones:',
+                choices: ['Volver'],
+              }).then((answers) => {
+                promptShowAlbums(artist);
+              });
+              break;
+            default:
+              promptShowAlbums(artist);
+              break;
+          }
+        });
+        break;
+      case modeShowAlbum.back:
+        promptShowData(artist);
+        break;
+    }
+  });
+}
+```
+
+### **SHOWPLAYLIST**
+
+```ts
+enum modeShowPlayList {
+  name = 'Mostrar playlist asociadas',
+  back = 'Volver'
+}
+
+function promptShowPlayList(artist: Artist) {
+  console.clear();
+  inquirer.prompt({
+    type: 'list',
+    name: 'mode',
+    message: 'Como quiere ver los datos?',
+    choices: Object.values(modeShowPlayList),
+  }).then((answers) => {
+    switch (answers['mode']) {
+      case modeShowPlayList.name:
+        inquirer.prompt({
+          type: 'list',
+          name: 'order',
+          message: 'Orden?',
+          choices: ['Ascendente', 'Descendente', 'Volver'],
+        }).then((answers) => {
+          switch (answers['order']) {
+            case 'Ascendente':
+              artist.showPlayListAsociate();
+              inquirer.prompt({
+                type: 'list',
+                name: 'order',
+                message: 'Opciones:',
+                choices: ['Volver'],
+              }).then((answers) => {
+                promptShowPlayList(artist);
+              });
+              break;
+            case 'Descendente':
+              artist.showPlayListAsociate();
+              inquirer.prompt({
+                type: 'list',
+                name: 'order',
+                message: 'Opciones:',
+                choices: ['Volver'],
+              }).then((answers) => {
+                promptShowPlayList(artist);
+              });
+              break;
+            default:
+              promptShowPlayList(artist);
+              break;
+          }
+        });
+        break;
+      default:
+        promptShowData(artist);
+        break;
+    }
+  });
+}
+```
