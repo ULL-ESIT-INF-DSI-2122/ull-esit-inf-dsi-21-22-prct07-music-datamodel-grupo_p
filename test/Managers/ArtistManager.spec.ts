@@ -1,4 +1,4 @@
-import 'mocha';
+/* import 'mocha';
 import {expect} from 'chai';
 import {ArtistManager} from '../../src/Managers/ArtistManager';
 import {AlbumManager} from '../../src/Managers/AlbumManager';
@@ -26,4 +26,4 @@ describe('Pruebas de la clase Artist Manager', () => {
     artistManager.add(LouisArmstrong);
     expect(artistManager.getList().includes('Louis Armstrong')).to.be.eql(true);
   });
-});
+});*/

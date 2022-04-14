@@ -1,4 +1,4 @@
-import 'mocha';
+/* import 'mocha';
 import {expect} from 'chai';
 import {PlaylistManager} from '../../src/Managers/PlaylistManager';
 import {Playlist} from '../../src/Basics/Playlist';
@@ -27,4 +27,4 @@ describe('Pruebas de la clase PlaylistManager', () => {
     expect(playlistManager.searchByName('MyPlaylist')).to.be.equal(list);
     playlistManager.update();
   });
-});
+});*/
