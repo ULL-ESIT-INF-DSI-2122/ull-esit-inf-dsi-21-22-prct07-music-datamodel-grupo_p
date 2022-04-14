@@ -93,25 +93,6 @@ export class Song extends BasicData {
     }
   }
 
-  /*
-  public playSong(): void {
-    this.reproductions.push(new Reproduccion(new Date(Date.now())));
-  }*/
-
-  /**
-   * Devuelve media de las reproduccines
-   * @returns un número de resproducciones
-   */
-  /*
-  public monthlyReproductions(): number {
-    const actualDate: Date = new Date(Date.now());
-    const difference: number = actualDate.getTime() -
-      this.datePublication.getTime();
-    // pasa de milisegundos a meses
-    const monthDifference: number = difference / (1000 * 3600 * 24 * 30);
-    // media de reproducciones por mes
-    return this.getReproduction() / monthDifference;
-  }*/
   /**
    * Devuelve los datos de la canción
    * @returns datos de la canción como string

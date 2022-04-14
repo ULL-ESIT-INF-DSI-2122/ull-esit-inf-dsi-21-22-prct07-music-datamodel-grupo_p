@@ -32,8 +32,14 @@ export class GroupManager extends Manager<Group> {
     }
     return GroupManager.groupManager;
   }
+  recalculateListeners(): void {
+    this.collection.forEach((group) => {
+      group.recalculateListeners();
+    });
+    this.store();
+  }
 
-  store() {
+  store(): void {
     this.database.set('groups', [...this.collection.values()]).write();
   }
 
@@ -51,7 +57,7 @@ export class GroupManager extends Manager<Group> {
       ArtistManager.getArtistManager().store();
     });
     this.collection.add(group);
-    this.store();
+    this.recalculateListeners();
   }
 
   public deleteGroup(group: Group): void {
@@ -90,7 +96,7 @@ export class GroupManager extends Manager<Group> {
         this.collection.delete(group);
       }
     });
-    this.store();
+    this.recalculateListeners();
     SongManager.getSongManager().store();
   }
 
@@ -141,6 +147,6 @@ export class GroupManager extends Manager<Group> {
     genreManager.store();
     // Playlist
     PlaylistManager.getPlaylistManager().update();
-    this.store();
+    this.recalculateListeners();
   }
 }

@@ -288,7 +288,11 @@ export class Playlist extends BasicData {
     return info;
   }
 
-
+  /**
+   * Devuelve los autores de las canciones de la playlist.
+   * @returns Devuelve un array con los nombres de los autores de todas las canciones
+   * de la playlist.
+   */
   public getMusicians(): string[] {
     const artistList: string[] = this.getSongs().map((song) => song.getAuthorName());
     return artistList;

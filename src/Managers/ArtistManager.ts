@@ -33,6 +33,13 @@ export class ArtistManager extends Manager<Artist> {
     return ArtistManager.artistManager;
   }
 
+  recalculateListeners(): void {
+    this.collection.forEach((artist) => {
+      artist.recalculateListeners();
+    });
+    this.store();
+  }
+
   store() {
     this.database.set('artists', [...this.collection.values()]).write();
   }
@@ -83,7 +90,7 @@ export class ArtistManager extends Manager<Artist> {
     PlaylistManager.getPlaylistManager().update();
     // Delete from artist collection
     this.remove(artist);
-    this.store();
+    this.recalculateListeners();
   }
 
   public editArtist(artist: Artist, name: string, groups: string[],
@@ -138,7 +145,7 @@ export class ArtistManager extends Manager<Artist> {
     genreManager.store();
     // Playlist
     PlaylistManager.getPlaylistManager().update();
-    this.store();
+    this.recalculateListeners();
   }
 
   addArtist(artist: Artist): void {
@@ -160,6 +167,6 @@ export class ArtistManager extends Manager<Artist> {
     genreManager.store();
     // Artist
     this.add(artist);
-    this.store();
+    this.recalculateListeners();
   }
 }

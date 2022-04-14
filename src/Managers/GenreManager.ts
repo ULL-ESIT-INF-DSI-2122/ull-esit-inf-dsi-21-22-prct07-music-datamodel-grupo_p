@@ -52,6 +52,10 @@ export class GenreManager extends Manager<Genre> {
     return GenreManager.genresManager;
   }
 
+  /**
+   * Elimina un género de la colección.
+   * @param genre Género a eliminar.
+   */
   deleteGenre(genre: Genre) {
     // Song
     const songManager: SongManager = SongManager.getSongManager();
@@ -104,6 +108,10 @@ export class GenreManager extends Manager<Genre> {
     this.store();
   }
 
+  /**
+   * Agrega un nuevo género a la colección.
+   * @param genre Género a agregar
+   */
   addGenre(genre: Genre): void {
     // Song
     const songManager: SongManager = SongManager.getSongManager();
@@ -113,7 +121,6 @@ export class GenreManager extends Manager<Genre> {
       }
     });
     songManager.store();
-
     // Album
     const albumManager: AlbumManager = AlbumManager.getAlbumManager();
     albumManager.getCollection().forEach((album) => {
@@ -122,7 +129,6 @@ export class GenreManager extends Manager<Genre> {
       }
     });
     albumManager.store();
-
     // Artist
     const artistManager: ArtistManager = ArtistManager.getArtistManager();
     artistManager.getCollection().forEach((artist) => {
@@ -131,7 +137,6 @@ export class GenreManager extends Manager<Genre> {
       }
     });
     artistManager.store();
-
     // Group
     const groupManager: GroupManager = GroupManager.getGroupManager();
     groupManager.getCollection().forEach((group) => {
@@ -140,7 +145,6 @@ export class GenreManager extends Manager<Genre> {
       }
     });
     groupManager.store();
-
     // Playlist
     const playlistsManager: PlaylistManager = PlaylistManager.getPlaylistManager();
     playlistsManager.update();
@@ -149,6 +153,14 @@ export class GenreManager extends Manager<Genre> {
     this.add(genre);
   }
 
+  /**
+   * Edita un género de la colección.
+   * @param genre Género a editar.
+   * @param name Nombre
+   * @param musicians Grupos/Artistas
+   * @param albums Álbumes
+   * @param songs Canciones
+   */
   editGenre(genre: Genre, name: string, musicians: (Group|Artist)[],
       albums: Album[], songs: Song[]): void {
     let oldName: string = genre.getName();
@@ -213,7 +225,6 @@ export class GenreManager extends Manager<Genre> {
     playlistManager.update();
     this.store();
   }
-
 
   /**
    * Guarda los géneros en la base de datos.

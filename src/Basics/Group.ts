@@ -10,13 +10,23 @@ import {PlaylistManager} from '../Managers/PlaylistManager';
 import {Playlist} from './Playlist';
 
 export class Group extends BasicData {
+  private listeners: number;
   constructor(name: string, private artists: Artist[],
       private fundationYear: number, private genres: string[],
       private albums: Album[]) {
     super(name);
+    this.listeners = 0;
+    this.albums.forEach((album) => {
+      album.getSongs().forEach((song) => {
+        this.listeners += song.getReproductions();
+      });
+    });
   }
   getFundationYear(): number {
     return this.fundationYear;
+  }
+  getListeners(): number {
+    return this.listeners;
   }
   public getArtists(): Artist[] {
     return this.artists;
@@ -71,6 +81,16 @@ export class Group extends BasicData {
   public setGenres(newGenres: string[]): void {
     this.genres = newGenres;
   }
+
+  recalculateListeners(): void {
+    this.listeners = 0;
+    this.albums.forEach((album) => {
+      album.getSongs().forEach((song) => {
+        this.listeners += song.getReproductions();
+      });
+    });
+  }
+
   public setAlbums(newAlbums: Album[]): void {
     this.albums = newAlbums;
   }
@@ -153,6 +173,7 @@ export class Group extends BasicData {
   })}
     -Año creacion: ${this.getFundationYear()}
     -Genero/s: ${this.getGenres()}
+    -Oyentes mensuales: ${this.getListeners()}
     -Albums:
       ${this.getAlbums().map((album) => {
     return album.getName();

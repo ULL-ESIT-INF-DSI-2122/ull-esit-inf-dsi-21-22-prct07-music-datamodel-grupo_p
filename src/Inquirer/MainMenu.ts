@@ -62,11 +62,18 @@ export function promptUser(): void {
  * Inicia el programa.
  */
 export function run():void {
+  // Se creean las canciones.
   SongManager.getSongManager();
+  // Se crean los álbumes.
   AlbumManager.getAlbumManager();
+  // Se crean los artistas.
   ArtistManager.getArtistManager();
+  // Se crean los grupos
   GroupManager.getGroupManager();
+  ArtistManager.getArtistManager().recalculateListeners(); // Recalcula los oyentes una vez creados los grupos.
+  // Se crean los géneros
   GenreManager.getGenreManager();
+  // Se crean las playlists.
   PlaylistManager.getPlaylistManager();
   promptUser();
 }
