@@ -77,7 +77,8 @@
           "isSingle": false,
           "reproductions": 2750000
         }
-      ]
+      ],
+      "listeners": 28260000
     },
     {
       "name": "Adam Levine",
@@ -111,18 +112,18 @@
               "reproductions": 3200000
             },
             {
-              "name": "Lost Stars",
+              "name": "A Higher Place",
               "author": "Adam Levine",
               "duration": [
                 3,
-                16
+                11
               ],
               "genres": [
                 "Pop"
               ],
-              "publicationDate": "2014-06-30",
-              "isSingle": true,
-              "reproductions": 3200000
+              "publicationDate": "2014-07-07",
+              "isSingle": false,
+              "reproductions": 1860000
             }
           ]
         }
@@ -156,7 +157,8 @@
           "isSingle": true,
           "reproductions": 3200000
         }
-      ]
+      ],
+      "listeners": 14430000
     },
     {
       "name": "Yandel",
@@ -235,7 +237,8 @@
           "isSingle": false,
           "reproductions": 1600000
         }
-      ]
+      ],
+      "listeners": 8250000
     },
     {
       "name": "Eminem",
@@ -398,7 +401,8 @@
           "isSingle": false,
           "reproductions": 7600000
         }
-      ]
+      ],
+      "listeners": 24650000
     },
     {
       "name": "Residente",
@@ -477,7 +481,8 @@
           "isSingle": false,
           "reproductions": 1600000
         }
-      ]
+      ],
+      "listeners": 14730000
     },
     {
       "name": "Johnny Cash",
@@ -640,7 +645,8 @@
           "isSingle": false,
           "reproductions": 420000
         }
-      ]
+      ],
+      "listeners": 4470000
     },
     {
       "name": "Louis Armstrong",
@@ -803,7 +809,8 @@
           "isSingle": false,
           "reproductions": 620000
         }
-      ]
+      ],
+      "listeners": 15400000
     },
     {
       "name": "Bob Marley",
@@ -882,7 +889,8 @@
           "isSingle": false,
           "reproductions": 1020000
         }
-      ]
+      ],
+      "listeners": 4993000
     },
     {
       "name": "Kendrik Lamar",
@@ -1045,7 +1053,8 @@
           "isSingle": false,
           "reproductions": 480000
         }
-      ]
+      ],
+      "listeners": 7550000
     },
     {
       "name": "Avicii",
@@ -1208,7 +1217,8 @@
           "isSingle": false,
           "reproductions": 2200000
         }
-      ]
+      ],
+      "listeners": 26100000
     }
   ]
 }

@@ -67,20 +67,21 @@
               "reproductions": 3200000
             },
             {
-              "name": "A Higher Place",
+              "name": "Lost Stars",
               "author": "Adam Levine",
               "duration": [
                 3,
-                11
+                16
               ],
               "genres": [
                 "Pop"
               ],
-              "publicationDate": "2014-07-07",
-              "isSingle": false,
-              "reproductions": 1860000
+              "publicationDate": "2014-06-30",
+              "isSingle": true,
+              "reproductions": 3200000
             }
-          ]
+          ],
+          "listeners": 14430000
         }
       ],
       "fundationYear": 1999,
@@ -140,7 +141,8 @@
             }
           ]
         }
-      ]
+      ],
+      "listeners": 8030000
     },
     {
       "name": "The Rolling Stones",
@@ -222,7 +224,8 @@
               "isSingle": false,
               "reproductions": 2750000
             }
-          ]
+          ],
+          "listeners": 28260000
         }
       ],
       "fundationYear": 1962,
@@ -282,7 +285,8 @@
             }
           ]
         }
-      ]
+      ],
+      "listeners": 21010000
     },
     {
       "name": "Wisin y Yandel",
@@ -364,7 +368,8 @@
               "isSingle": false,
               "reproductions": 1600000
             }
-          ]
+          ],
+          "listeners": 8250000
         }
       ],
       "fundationYear": 1998,
@@ -424,7 +429,8 @@
             }
           ]
         }
-      ]
+      ],
+      "listeners": 4100000
     },
     {
       "name": "Calle 13",
@@ -506,7 +512,8 @@
               "isSingle": false,
               "reproductions": 1600000
             }
-          ]
+          ],
+          "listeners": 14730000
         }
       ],
       "fundationYear": 2004,
@@ -566,7 +573,8 @@
             }
           ]
         }
-      ]
+      ],
+      "listeners": 10580000
     },
     {
       "name": "The Wailers",
@@ -648,7 +656,8 @@
               "isSingle": false,
               "reproductions": 1020000
             }
-          ]
+          ],
+          "listeners": 4993000
         }
       ],
       "fundationYear": 1963,
@@ -708,7 +717,8 @@
             }
           ]
         }
-      ]
+      ],
+      "listeners": 3153000
     }
   ]
 }

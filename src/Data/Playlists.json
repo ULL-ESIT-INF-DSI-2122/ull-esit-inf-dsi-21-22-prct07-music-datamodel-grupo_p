@@ -87,20 +87,21 @@
                   "reproductions": 3200000
                 },
                 {
-                  "name": "A Higher Place",
+                  "name": "Lost Stars",
                   "author": "Adam Levine",
                   "duration": [
                     3,
-                    11
+                    16
                   ],
                   "genres": [
                     "Pop"
                   ],
-                  "publicationDate": "2014-07-07",
-                  "isSingle": false,
-                  "reproductions": 1860000
+                  "publicationDate": "2014-06-30",
+                  "isSingle": true,
+                  "reproductions": 3200000
                 }
-              ]
+              ],
+              "listeners": 14430000
             },
             {
               "name": "Maroon 5",
@@ -169,20 +170,21 @@
                       "reproductions": 3200000
                     },
                     {
-                      "name": "A Higher Place",
+                      "name": "Lost Stars",
                       "author": "Adam Levine",
                       "duration": [
                         3,
-                        11
+                        16
                       ],
                       "genres": [
                         "Pop"
                       ],
-                      "publicationDate": "2014-07-07",
-                      "isSingle": false,
-                      "reproductions": 1860000
+                      "publicationDate": "2014-06-30",
+                      "isSingle": true,
+                      "reproductions": 3200000
                     }
-                  ]
+                  ],
+                  "listeners": 14430000
                 }
               ],
               "fundationYear": 1999,
@@ -242,7 +244,8 @@
                     }
                   ]
                 }
-              ]
+              ],
+              "listeners": 8030000
             }
           ],
           "albums": [
@@ -516,7 +519,8 @@
                   "isSingle": false,
                   "reproductions": 2750000
                 }
-              ]
+              ],
+              "listeners": 28260000
             },
             {
               "name": "The Rolling Stones",
@@ -598,7 +602,8 @@
                       "isSingle": false,
                       "reproductions": 2750000
                     }
-                  ]
+                  ],
+                  "listeners": 28260000
                 }
               ],
               "fundationYear": 1962,
@@ -658,7 +663,8 @@
                     }
                   ]
                 }
-              ]
+              ],
+              "listeners": 21010000
             }
           ],
           "albums": [
