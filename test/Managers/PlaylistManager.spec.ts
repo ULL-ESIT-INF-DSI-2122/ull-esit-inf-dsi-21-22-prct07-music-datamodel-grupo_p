@@ -22,8 +22,4 @@ describe('Pruebas de la clase PlaylistManager', () => {
     playlistManager.add(list);
     expect(playlistManager.getCollection()).to.be.eql(new Set<Playlist>([lista, list]));
   });
-  it(`playlistManager.getPlaylistByName('MyPlaylist') returns list`, () => {
-    expect(playlistManager.searchByName('MyPlaylist')).to.be.equal(list);
-    playlistManager.updateGenre();
-  });
 });

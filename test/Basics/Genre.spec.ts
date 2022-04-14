@@ -103,7 +103,7 @@ describe('Pruebas de la clase Genre', () => {
     expect(testGenre.getSongs()).to.be.eql([lost]);
   });
   it('testGenre.showInfo()', () => {
-    expect(testGenre.showInfo()).to.be.equal(`GenreForTest\n  -Grupos/Artistas:\n    Adam Levine\n`+
-    `  -Álbums:\n    Overexposed\n  -Canciones:\n    Lost Stars\n`);
+    expect(testGenre.showInfo()).to.be.equal(`GÉNERO GenreForTest\n    -Grupos/Artistas:\n      Adam Levine\n`+
+    `    -Álbums:\n      Overexposed\n    -Canciones:\n      Lost Stars`);
   });
 });
