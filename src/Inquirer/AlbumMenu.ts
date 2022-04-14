@@ -224,7 +224,7 @@ function promptEditAlbum(album: Album): void {
       message: 'Canciones:',
       name: 'songs',
       choices: songs,
-      default: album.getSongsNames(),
+      default: album.getSongs(),
       validate(answer: string[]) {
         if (answer.length < 1) {
           return 'Debes elegir al menos una canción.';

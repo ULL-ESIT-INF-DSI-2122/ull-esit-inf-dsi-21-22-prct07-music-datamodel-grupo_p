@@ -55,18 +55,18 @@
                       "reproductions": 3200000
                     },
                     {
-                      "name": "A Higher Place",
+                      "name": "Lost Stars",
                       "author": "Adam Levine",
                       "duration": [
                         3,
-                        11
+                        16
                       ],
                       "genres": [
                         "Pop"
                       ],
-                      "publicationDate": "2014-07-07",
-                      "isSingle": false,
-                      "reproductions": 1860000
+                      "publicationDate": "2014-06-30",
+                      "isSingle": true,
+                      "reproductions": 3200000
                     }
                   ]
                 }
@@ -87,18 +87,18 @@
                   "reproductions": 3200000
                 },
                 {
-                  "name": "A Higher Place",
+                  "name": "Lost Stars",
                   "author": "Adam Levine",
                   "duration": [
                     3,
-                    11
+                    16
                   ],
                   "genres": [
                     "Pop"
                   ],
-                  "publicationDate": "2014-07-07",
-                  "isSingle": false,
-                  "reproductions": 1860000
+                  "publicationDate": "2014-06-30",
+                  "isSingle": true,
+                  "reproductions": 3200000
                 }
               ]
             },
@@ -137,18 +137,18 @@
                           "reproductions": 3200000
                         },
                         {
-                          "name": "A Higher Place",
+                          "name": "Lost Stars",
                           "author": "Adam Levine",
                           "duration": [
                             3,
-                            11
+                            16
                           ],
                           "genres": [
                             "Pop"
                           ],
-                          "publicationDate": "2014-07-07",
-                          "isSingle": false,
-                          "reproductions": 1860000
+                          "publicationDate": "2014-06-30",
+                          "isSingle": true,
+                          "reproductions": 3200000
                         }
                       ]
                     }
@@ -169,18 +169,18 @@
                       "reproductions": 3200000
                     },
                     {
-                      "name": "A Higher Place",
+                      "name": "Lost Stars",
                       "author": "Adam Levine",
                       "duration": [
                         3,
-                        11
+                        16
                       ],
                       "genres": [
                         "Pop"
                       ],
-                      "publicationDate": "2014-07-07",
-                      "isSingle": false,
-                      "reproductions": 1860000
+                      "publicationDate": "2014-06-30",
+                      "isSingle": true,
+                      "reproductions": 3200000
                     }
                   ]
                 }
@@ -321,18 +321,18 @@
                   "reproductions": 3200000
                 },
                 {
-                  "name": "A Higher Place",
+                  "name": "Lost Stars",
                   "author": "Adam Levine",
                   "duration": [
                     3,
-                    11
+                    16
                   ],
                   "genres": [
                     "Pop"
                   ],
-                  "publicationDate": "2014-07-07",
-                  "isSingle": false,
-                  "reproductions": 1860000
+                  "publicationDate": "2014-06-30",
+                  "isSingle": true,
+                  "reproductions": 3200000
                 }
               ]
             }
@@ -436,7 +436,396 @@
       ],
       "systemPlaylist": true,
       "genres": [
-        null
+        {
+          "name": "Rock",
+          "musicians": [
+            {
+              "name": "Mick Jagger",
+              "groups": [
+                "The Rolling Stones"
+              ],
+              "genres": [
+                "Rock"
+              ],
+              "albums": [
+                {
+                  "name": "Goddess in the Doorway",
+                  "whoPublishes": "Mick Jagger",
+                  "publicationYear": 2001,
+                  "genres": [
+                    "Rock"
+                  ],
+                  "songs": [
+                    {
+                      "name": "God gave me everything",
+                      "author": "Mick Jagger",
+                      "duration": [
+                        3,
+                        34
+                      ],
+                      "genres": [
+                        "Rock"
+                      ],
+                      "publicationDate": "2001-11-19",
+                      "isSingle": true,
+                      "reproductions": 4500000
+                    },
+                    {
+                      "name": "Visions of paradise",
+                      "author": "Mick Jagger",
+                      "duration": [
+                        4,
+                        2
+                      ],
+                      "genres": [
+                        "Rock"
+                      ],
+                      "publicationDate": "2001-11-19",
+                      "isSingle": false,
+                      "reproductions": 2750000
+                    }
+                  ]
+                }
+              ],
+              "songs": [
+                {
+                  "name": "God gave me everything",
+                  "author": "Mick Jagger",
+                  "duration": [
+                    3,
+                    34
+                  ],
+                  "genres": [
+                    "Rock"
+                  ],
+                  "publicationDate": "2001-11-19",
+                  "isSingle": true,
+                  "reproductions": 4500000
+                },
+                {
+                  "name": "Visions of paradise",
+                  "author": "Mick Jagger",
+                  "duration": [
+                    4,
+                    2
+                  ],
+                  "genres": [
+                    "Rock"
+                  ],
+                  "publicationDate": "2001-11-19",
+                  "isSingle": false,
+                  "reproductions": 2750000
+                }
+              ]
+            },
+            {
+              "name": "The Rolling Stones",
+              "artists": [
+                {
+                  "name": "Mick Jagger",
+                  "groups": [
+                    "The Rolling Stones"
+                  ],
+                  "genres": [
+                    "Rock"
+                  ],
+                  "albums": [
+                    {
+                      "name": "Goddess in the Doorway",
+                      "whoPublishes": "Mick Jagger",
+                      "publicationYear": 2001,
+                      "genres": [
+                        "Rock"
+                      ],
+                      "songs": [
+                        {
+                          "name": "God gave me everything",
+                          "author": "Mick Jagger",
+                          "duration": [
+                            3,
+                            34
+                          ],
+                          "genres": [
+                            "Rock"
+                          ],
+                          "publicationDate": "2001-11-19",
+                          "isSingle": true,
+                          "reproductions": 4500000
+                        },
+                        {
+                          "name": "Visions of paradise",
+                          "author": "Mick Jagger",
+                          "duration": [
+                            4,
+                            2
+                          ],
+                          "genres": [
+                            "Rock"
+                          ],
+                          "publicationDate": "2001-11-19",
+                          "isSingle": false,
+                          "reproductions": 2750000
+                        }
+                      ]
+                    }
+                  ],
+                  "songs": [
+                    {
+                      "name": "God gave me everything",
+                      "author": "Mick Jagger",
+                      "duration": [
+                        3,
+                        34
+                      ],
+                      "genres": [
+                        "Rock"
+                      ],
+                      "publicationDate": "2001-11-19",
+                      "isSingle": true,
+                      "reproductions": 4500000
+                    },
+                    {
+                      "name": "Visions of paradise",
+                      "author": "Mick Jagger",
+                      "duration": [
+                        4,
+                        2
+                      ],
+                      "genres": [
+                        "Rock"
+                      ],
+                      "publicationDate": "2001-11-19",
+                      "isSingle": false,
+                      "reproductions": 2750000
+                    }
+                  ]
+                }
+              ],
+              "fundationYear": 1962,
+              "genres": [
+                "Rock"
+              ],
+              "albums": [
+                {
+                  "name": "Out Of Our Heads",
+                  "whoPublishes": "The Rolling Stones",
+                  "publicationYear": 1965,
+                  "genres": [
+                    "Rock"
+                  ],
+                  "songs": [
+                    {
+                      "name": "Satisfaction",
+                      "author": "The Rolling Stones",
+                      "duration": [
+                        3,
+                        51
+                      ],
+                      "genres": [
+                        "Rock"
+                      ],
+                      "publicationDate": "1965-06-06",
+                      "isSingle": false,
+                      "reproductions": 10700000
+                    },
+                    {
+                      "name": "The Last Time",
+                      "author": "The Rolling Stones",
+                      "duration": [
+                        3,
+                        41
+                      ],
+                      "genres": [
+                        "Rock"
+                      ],
+                      "publicationDate": "1965-03-06",
+                      "isSingle": true,
+                      "reproductions": 6520000
+                    },
+                    {
+                      "name": "Good Times",
+                      "author": "The Rolling Stones",
+                      "duration": [
+                        1,
+                        58
+                      ],
+                      "genres": [
+                        "Rock"
+                      ],
+                      "publicationDate": "1964-06-26",
+                      "isSingle": true,
+                      "reproductions": 3790000
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
+          "albums": [
+            {
+              "name": "Out Of Our Heads",
+              "whoPublishes": "The Rolling Stones",
+              "publicationYear": 1965,
+              "genres": [
+                "Rock"
+              ],
+              "songs": [
+                {
+                  "name": "Satisfaction",
+                  "author": "The Rolling Stones",
+                  "duration": [
+                    3,
+                    51
+                  ],
+                  "genres": [
+                    "Rock"
+                  ],
+                  "publicationDate": "1965-06-06",
+                  "isSingle": false,
+                  "reproductions": 10700000
+                },
+                {
+                  "name": "The Last Time",
+                  "author": "The Rolling Stones",
+                  "duration": [
+                    3,
+                    41
+                  ],
+                  "genres": [
+                    "Rock"
+                  ],
+                  "publicationDate": "1965-03-06",
+                  "isSingle": true,
+                  "reproductions": 6520000
+                },
+                {
+                  "name": "Good Times",
+                  "author": "The Rolling Stones",
+                  "duration": [
+                    1,
+                    58
+                  ],
+                  "genres": [
+                    "Rock"
+                  ],
+                  "publicationDate": "1964-06-26",
+                  "isSingle": true,
+                  "reproductions": 3790000
+                }
+              ]
+            },
+            {
+              "name": "Goddess in the Doorway",
+              "whoPublishes": "Mick Jagger",
+              "publicationYear": 2001,
+              "genres": [
+                "Rock"
+              ],
+              "songs": [
+                {
+                  "name": "God gave me everything",
+                  "author": "Mick Jagger",
+                  "duration": [
+                    3,
+                    34
+                  ],
+                  "genres": [
+                    "Rock"
+                  ],
+                  "publicationDate": "2001-11-19",
+                  "isSingle": true,
+                  "reproductions": 4500000
+                },
+                {
+                  "name": "Visions of paradise",
+                  "author": "Mick Jagger",
+                  "duration": [
+                    4,
+                    2
+                  ],
+                  "genres": [
+                    "Rock"
+                  ],
+                  "publicationDate": "2001-11-19",
+                  "isSingle": false,
+                  "reproductions": 2750000
+                }
+              ]
+            }
+          ],
+          "songs": [
+            {
+              "name": "Satisfaction",
+              "author": "The Rolling Stones",
+              "duration": [
+                3,
+                51
+              ],
+              "genres": [
+                "Rock"
+              ],
+              "publicationDate": "1965-06-06",
+              "isSingle": false,
+              "reproductions": 10700000
+            },
+            {
+              "name": "The Last Time",
+              "author": "The Rolling Stones",
+              "duration": [
+                3,
+                41
+              ],
+              "genres": [
+                "Rock"
+              ],
+              "publicationDate": "1965-03-06",
+              "isSingle": true,
+              "reproductions": 6520000
+            },
+            {
+              "name": "Good Times",
+              "author": "The Rolling Stones",
+              "duration": [
+                1,
+                58
+              ],
+              "genres": [
+                "Rock"
+              ],
+              "publicationDate": "1964-06-26",
+              "isSingle": true,
+              "reproductions": 3790000
+            },
+            {
+              "name": "God gave me everything",
+              "author": "Mick Jagger",
+              "duration": [
+                3,
+                34
+              ],
+              "genres": [
+                "Rock"
+              ],
+              "publicationDate": "2001-11-19",
+              "isSingle": true,
+              "reproductions": 4500000
+            },
+            {
+              "name": "Visions of paradise",
+              "author": "Mick Jagger",
+              "duration": [
+                4,
+                2
+              ],
+              "genres": [
+                "Rock"
+              ],
+              "publicationDate": "2001-11-19",
+              "isSingle": false,
+              "reproductions": 2750000
+            }
+          ]
+        }
       ],
       "duration": [
         0,
