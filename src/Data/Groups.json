@@ -35,18 +35,18 @@
                   "reproductions": 3200000
                 },
                 {
-                  "name": "Lost Stars",
+                  "name": "A Higher Place",
                   "author": "Adam Levine",
                   "duration": [
                     3,
-                    16
+                    11
                   ],
                   "genres": [
                     "Pop"
                   ],
-                  "publicationDate": "2014-06-30",
-                  "isSingle": true,
-                  "reproductions": 3200000
+                  "publicationDate": "2014-07-07",
+                  "isSingle": false,
+                  "reproductions": 1860000
                 }
               ]
             }
@@ -67,18 +67,18 @@
               "reproductions": 3200000
             },
             {
-              "name": "Lost Stars",
+              "name": "A Higher Place",
               "author": "Adam Levine",
               "duration": [
                 3,
-                16
+                11
               ],
               "genres": [
                 "Pop"
               ],
-              "publicationDate": "2014-06-30",
-              "isSingle": true,
-              "reproductions": 3200000
+              "publicationDate": "2014-07-07",
+              "isSingle": false,
+              "reproductions": 1860000
             }
           ]
         }

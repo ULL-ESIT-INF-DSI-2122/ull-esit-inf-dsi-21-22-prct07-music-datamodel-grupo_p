@@ -11,8 +11,8 @@ describe('Pruebas de la clase Playlist', () => {
   let satisfaction: Song;
   let lost: Song;
   let payphone: Song;
-  // let god: Song;
-  // let paradise: Song;
+  let god: Song;
+  let paradise: Song;
   let pop: Genre;
   let songManager: SongManager = SongManager.getSongManager();
   let genreManager: GenreManager = GenreManager.getGenreManager();
@@ -20,8 +20,8 @@ describe('Pruebas de la clase Playlist', () => {
     satisfaction = songManager.searchByName('Satisfaction');
     lost = songManager.searchByName('Lost Stars');
     payphone = songManager.searchByName('Payphone');
-    // god = songManager.searchByName('God gave me everything');
-    // paradise = songManager.searchByName('Visions of paradise');
+    god = songManager.searchByName('God gave me everything');
+    paradise = songManager.searchByName('Visions of paradise');
     pop = genreManager.searchByName('Pop') as Genre;
     lista = new Playlist('MyPlaylist', [satisfaction]);
   });
@@ -66,81 +66,176 @@ describe('Pruebas de la clase Playlist', () => {
     lista.deleteSong(lost);
     expect(lista.getSongs()).to.be.eql([satisfaction]);
   });
-  // it('lista.showInfo()', () => {
-  //   expect(lista.showInfo()).to.be.equal(`MiLista\n  -Géneros: Rock\n`+
-  //   `  -Playlist original: No\n  -Duración: 0h 3min\n  -Canciones:\n    Satisfaction\n`);
-  // });
+  it(`lista.getMusicians() returns ['The Rolling Stones']`, () => {
+    expect(lista.getMusicians()).to.be.eql(['The Rolling Stones']);
+  });
+  it('lista.showInfo()', () => {
+    expect(lista.showInfo()).to.be.equal(`PLAYLIST MiLista
+    -Géneros: Rock
+    -Playlist original: No
+    -Duración: 0h 3min
+    -Canciones:
+      Satisfaction`);
+  });
   it(`lista.setSystemPlaylist(true) sets systemPlaylist to true`, () => {
     lista.setSystemPlaylist(true);
     expect(lista.getSystemPlaylist()).to.be.eql(true);
   });
-  // it('lista.showInfo(0)', () => {
-  //   lista.addSong(payphone);
-  //   lista.addSong(god);
-  //   lista.addSong(lost);
-  //   expect(lista.showInfo(0)).to.be.equal(`PLAYLIST MiLista\n    -Géneros: Rock,Pop\n    -Playlist original: Sí\n`+
-  //   `    -Duración: 0h 14min\n    -Canciones:\n      God gave me everything\n      Lost Stars\n      Payphone\n      Satisfaction`);
-  // });
-  // it('lista.showInfo(1)', () => {
-  //   lista.deleteSong(god);
-  //   lista.addSong(god);
-  //   expect(lista.showInfo(1)).to.be.equal(`PLAYLIST MiLista\n    -Géneros: Pop,Rock\n    -Playlist original: Sí\n`+
-  //   `    -Duración: 0h 14min\n    -Canciones:\n      Satisfaction\n      Payphone\n      Lost Stars\n      God gave me everything`);
-  // });
-  // it('lista.showInfo(2)', () => {
-  //   lista.addSong(paradise);
-  //   expect(lista.showInfo(2)).to.be.equal(`MiLista\n  -Géneros: Rock,Pop\n  -Playlist original: Sí\n`+
-  //   `  -Duración: 0h 18min\n  -Canciones:\n    Lost Stars\n    Payphone\n    God gave me everything\n    Visions of paradise\n    Satisfaction\n`);
-  // });
-  // it('lista.showInfo(3)', () => {
-  //   lista.deleteSong(god);
-  //   lista.addSong(god);
-  //   expect(lista.showInfo(3)).to.be.equal(`MiLista\n  -Géneros: Pop,Rock\n  -Playlist original: Sí\n`+
-  //   `  -Duración: 0h 18min\n  -Canciones:\n    Satisfaction\n    Visions of paradise\n    God gave me everything\n    Payphone\n    Lost Stars\n`);
-  // });
-  // it('lista.showInfo(4)', () => {
-  //   lista.deleteSong(god);
-  //   lista.addSong(god);
-  //   expect(lista.showInfo(4)).to.be.equal(`MiLista\n  -Géneros: Rock,Pop\n  -Playlist original: Sí\n`+
-  //   `  -Duración: 0h 18min\n  -Canciones:\n    Satisfaction\n    Visions of paradise\n    God gave me everything\n    Payphone\n    Lost Stars\n`);
-  // });
-  // it('lista.showInfo(5)', () => {
-  //   lista.deleteSong(god);
-  //   lista.addSong(god);
-  //   expect(lista.showInfo(5)).to.be.equal(`MiLista\n  -Géneros: Rock,Pop\n  -Playlist original: Sí\n`+
-  //   `  -Duración: 0h 18min\n  -Canciones:\n    Lost Stars\n    Payphone\n    Visions of paradise\n    God gave me everything\n    Satisfaction\n`);
-  // });
-  // it('lista.showInfo(6)', () => {
-  //   lista.deleteSong(paradise);
-  //   expect(lista.showInfo(6)).to.be.equal(`MiLista\n  -Géneros: Pop,Rock\n  -Playlist original: Sí\n`+
-  //   `  -Duración: 0h 14min\n  -Canciones:\n    Lost Stars\n    God gave me everything\n    Payphone\n    Satisfaction\n`);
-  // });
-  // it('lista.showInfo(7)', () => {
-  //   lista.deleteSong(god);
-  //   lista.addSong(god);
-  //   expect(lista.showInfo(7)).to.be.equal(`MiLista\n  -Géneros: Pop,Rock\n  -Playlist original: Sí\n`+
-  //   `  -Duración: 0h 14min\n  -Canciones:\n    Payphone\n    Satisfaction\n    God gave me everything\n    Lost Stars\n`);
-  // });
-  // it('lista.showInfo(8)', () => {
-  //   expect(lista.showInfo(8)).to.be.equal(`PLAYLIST MiLista\n    -Géneros: Pop,Rock\n    -Playlist original: Sí\n`+
-  //   `    -Duración: 0h 14min\n    -Canciones:\n      Payphone\n      Lost Stars\n      Satisfaction\n      God gave me everything`);
-  // });
+  it('lista.showInfo(0)', () => {
+    lista.addSong(payphone);
+    lista.addSong(god);
+    lista.addSong(lost);
+    expect(lista.showInfo(0)).to.be.equal(`PLAYLIST MiLista
+    -Géneros: Rock,Pop
+    -Playlist original: Sí
+    -Duración: 0h 14min
+    -Canciones:
+      God gave me everything
+      Lost Stars
+      Payphone
+      Satisfaction`);
+  });
+  it('lista.showInfo(1)', () => {
+    lista.deleteSong(god);
+    lista.addSong(god);
+    expect(lista.showInfo(1)).to.be.equal(`PLAYLIST MiLista
+    -Géneros: Pop,Rock
+    -Playlist original: Sí
+    -Duración: 0h 14min
+    -Canciones:
+      Satisfaction
+      Payphone
+      Lost Stars
+      God gave me everything`);
+  });
+  it('lista.showInfo(2)', () => {
+    lista.addSong(paradise);
+    expect(lista.showInfo(2)).to.be.equal(`PLAYLIST MiLista
+    -Géneros: Rock,Pop
+    -Playlist original: Sí
+    -Duración: 0h 18min
+    -Canciones:
+      Lost Stars
+      Payphone
+      God gave me everything
+      Visions of paradise
+      Satisfaction`);
+  });
+  it('lista.showInfo(3)', () => {
+    lista.deleteSong(god);
+    lista.addSong(god);
+    expect(lista.showInfo(3)).to.be.equal(`PLAYLIST MiLista
+    -Géneros: Pop,Rock
+    -Playlist original: Sí
+    -Duración: 0h 18min
+    -Canciones:
+      Satisfaction
+      Visions of paradise
+      God gave me everything
+      Payphone
+      Lost Stars`);
+  });
+  it('lista.showInfo(4)', () => {
+    lista.deleteSong(god);
+    lista.addSong(god);
+    expect(lista.showInfo(4)).to.be.equal(`PLAYLIST MiLista
+    -Géneros: Rock,Pop
+    -Playlist original: Sí
+    -Duración: 0h 18min
+    -Canciones:
+      Satisfaction
+      Visions of paradise
+      God gave me everything
+      Payphone
+      Lost Stars`);
+  });
+  it('lista.showInfo(5)', () => {
+    lista.deleteSong(god);
+    lista.addSong(god);
+    expect(lista.showInfo(5)).to.be.equal(`PLAYLIST MiLista
+    -Géneros: Rock,Pop
+    -Playlist original: Sí
+    -Duración: 0h 18min
+    -Canciones:
+      Lost Stars
+      Payphone
+      Visions of paradise
+      God gave me everything
+      Satisfaction`);
+  });
+  it('lista.showInfo(6)', () => {
+    lista.deleteSong(paradise);
+    expect(lista.showInfo(6)).to.be.equal(`PLAYLIST MiLista
+    -Géneros: Pop,Rock
+    -Playlist original: Sí
+    -Duración: 0h 14min
+    -Canciones:
+      Lost Stars
+      God gave me everything
+      Payphone
+      Satisfaction`);
+  });
+  it('lista.showInfo(7)', () => {
+    lista.deleteSong(god);
+    lista.addSong(god);
+    expect(lista.showInfo(7)).to.be.equal(`PLAYLIST MiLista
+    -Géneros: Pop,Rock
+    -Playlist original: Sí
+    -Duración: 0h 14min
+    -Canciones:
+      Payphone
+      Satisfaction
+      God gave me everything
+      Lost Stars`);
+  });
+  it('lista.showInfo(8)', () => {
+    expect(lista.showInfo(8)).to.be.equal(`PLAYLIST MiLista
+    -Géneros: Pop,Rock
+    -Playlist original: Sí
+    -Duración: 0h 14min
+    -Canciones:
+      Payphone
+      Lost Stars
+      Satisfaction
+      God gave me everything`);
+  });
   it('lista.showInfo(9)', () => {
     lista.deleteSong(lost);
     lista.addSong(lost);
-    expect(lista.showInfo(9)).to.be.equal(`PLAYLIST MiLista\n    -Géneros: Pop\n    -Playlist original: Sí\n`+
-    `    -Duración: 0h 3min\n    -Canciones:\n      Lost Stars`);
+    expect(lista.showInfo(9)).to.be.equal(`PLAYLIST MiLista
+    -Géneros: Pop,Rock
+    -Playlist original: Sí
+    -Duración: 0h 14min
+    -Canciones:
+      Satisfaction
+      God gave me everything
+      Payphone
+      Lost Stars`);
   });
   it('lista.showInfo(10)', () => {
     lista.deleteSong(payphone);
     lista.addSong(payphone);
-    expect(lista.showInfo(10)).to.be.equal(`PLAYLIST MiLista\n    -Géneros: Pop\n    -Playlist original: Sí\n`+
-    `    -Duración: 0h 3min\n    -Canciones:\n      Payphone`);
+    expect(lista.showInfo(10)).to.be.equal(`PLAYLIST MiLista
+    -Géneros: Rock,Pop
+    -Playlist original: Sí
+    -Duración: 0h 14min
+    -Canciones:
+      Lost Stars
+      God gave me everything
+      Payphone
+      Satisfaction`);
   });
   it('lista.showInfo(11)', () => {
     lista.deleteSong(payphone);
     lista.addSong(payphone);
-    expect(lista.showInfo(11)).to.be.equal(`PLAYLIST MiLista\n    -Géneros: Pop\n    -Playlist original: Sí\n`+
-    `    -Duración: 0h 3min\n    -Canciones:\n      Payphone`);
+    expect(lista.showInfo(11)).to.be.equal(`PLAYLIST MiLista
+    -Géneros: Pop,Rock
+    -Playlist original: Sí
+    -Duración: 0h 14min
+    -Canciones:
+      Satisfaction
+      God gave me everything
+      Payphone
+      Lost Stars`);
   });
 });

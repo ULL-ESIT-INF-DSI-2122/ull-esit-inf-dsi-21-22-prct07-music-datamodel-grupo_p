@@ -51,22 +51,17 @@ export class GenreManager extends Manager<Genre> {
     }
     return GenreManager.genresManager;
   }
-  /**
-   *
-   */
-  removeSong(song: Song) {
-    this.collection.forEach((element) => {
-      element.deleteSong(song);
-    });
-    this.store();
-  }
 
+  /**
+   * Elimina un género de la colección.
+   * @param genre Género a eliminar.
+   */
   deleteGenre(genre: Genre) {
     // Song
     const songManager: SongManager = SongManager.getSongManager();
     songManager.getCollection().forEach((song) => {
       if (genre.getSongs().find((x) => x === song) !== undefined) {
-        song.removeGenre(genre);
+        song.removeGenre(genre.getName());
         if (song.getGenres().length === 0) {
           songManager.removeSong(song);
         }
@@ -77,9 +72,9 @@ export class GenreManager extends Manager<Genre> {
     const albumManager: AlbumManager = AlbumManager.getAlbumManager();
     albumManager.getCollection().forEach((album) => {
       if (genre.getAlbums().find((x) => x === album) !== undefined) {
-        album.removeGenre(genre);
+        album.removeGenre(genre.getName());
         if (album.getGenres().length === 0) {
-          albumManager.removeAlbum(album); // Falta el deleteAlbum
+          albumManager.removeAlbum(album);
         }
       }
     });
@@ -88,7 +83,7 @@ export class GenreManager extends Manager<Genre> {
     const artistManager: ArtistManager = ArtistManager.getArtistManager();
     artistManager.getCollection().forEach((artist) => {
       if (genre.getMusicians().find((x) => x === artist) !== undefined) {
-        artist.removeGenre(genre);
+        artist.removeGenre(genre.getName());
         if (artist.getGenres().length === 0) {
           artistManager.deleteArtist(artist);
         }
@@ -99,7 +94,7 @@ export class GenreManager extends Manager<Genre> {
     const groupManager: GroupManager = GroupManager.getGroupManager();
     groupManager.getCollection().forEach((group) => {
       if (genre.getMusicians().find((x) => x === group) !== undefined) {
-        group.removeGenre(genre);
+        group.removeGenre(genre.getName());
         if (group.getGenres().length === 0) {
           groupManager.remove(group);
         }
@@ -108,12 +103,15 @@ export class GenreManager extends Manager<Genre> {
     groupManager.store();
     // Playlist
     PlaylistManager.getPlaylistManager().update();
-    PlaylistManager.getPlaylistManager().store();
     // Genre
     this.remove(genre);
     this.store();
   }
 
+  /**
+   * Agrega un nuevo género a la colección.
+   * @param genre Género a agregar
+   */
   addGenre(genre: Genre): void {
     // Song
     const songManager: SongManager = SongManager.getSongManager();
@@ -123,7 +121,6 @@ export class GenreManager extends Manager<Genre> {
       }
     });
     songManager.store();
-
     // Album
     const albumManager: AlbumManager = AlbumManager.getAlbumManager();
     albumManager.getCollection().forEach((album) => {
@@ -132,7 +129,6 @@ export class GenreManager extends Manager<Genre> {
       }
     });
     albumManager.store();
-
     // Artist
     const artistManager: ArtistManager = ArtistManager.getArtistManager();
     artistManager.getCollection().forEach((artist) => {
@@ -141,7 +137,6 @@ export class GenreManager extends Manager<Genre> {
       }
     });
     artistManager.store();
-
     // Group
     const groupManager: GroupManager = GroupManager.getGroupManager();
     groupManager.getCollection().forEach((group) => {
@@ -150,7 +145,6 @@ export class GenreManager extends Manager<Genre> {
       }
     });
     groupManager.store();
-
     // Playlist
     const playlistsManager: PlaylistManager = PlaylistManager.getPlaylistManager();
     playlistsManager.update();
@@ -159,8 +153,17 @@ export class GenreManager extends Manager<Genre> {
     this.add(genre);
   }
 
+  /**
+   * Edita un género de la colección.
+   * @param genre Género a editar.
+   * @param name Nombre
+   * @param musicians Grupos/Artistas
+   * @param albums Álbumes
+   * @param songs Canciones
+   */
   editGenre(genre: Genre, name: string, musicians: (Group|Artist)[],
       albums: Album[], songs: Song[]): void {
+    let oldName: string = genre.getName();
     genre.setName(name);
     genre.setMusicians(musicians);
     genre.setAlbums(albums);
@@ -168,10 +171,10 @@ export class GenreManager extends Manager<Genre> {
     // Song
     const songManager: SongManager = SongManager.getSongManager();
     songManager.getCollection().forEach((song) => {
+      song.removeGenre(oldName);
       if (genre.getSongs().find((s) => s === song) !== undefined) {
         song.addGenre(genre);
       } else {
-        song.removeGenre(genre);
         if (song.getGenres().length === 0) {
           songManager.removeSong(song);
         }
@@ -181,10 +184,10 @@ export class GenreManager extends Manager<Genre> {
     // Album
     const albumManager: AlbumManager = AlbumManager.getAlbumManager();
     albumManager.getCollection().forEach((album) => {
+      album.removeGenre(oldName);
       if (genre.getAlbums().find((a) => a === album) !== undefined) {
         album.addGenre(genre);
       } else {
-        album.removeGenre(genre);
         if (album.getGenres().length === 0) {
           albumManager.removeAlbum(album);
         }
@@ -194,10 +197,10 @@ export class GenreManager extends Manager<Genre> {
     // Artist
     const artistManager: ArtistManager = ArtistManager.getArtistManager();
     artistManager.getCollection().forEach((artist) => {
+      artist.removeGenre(oldName);
       if (genre.getMusicians().find((musician) => musician === artist) !== undefined) {
         artist.addGenre(genre);
       } else {
-        artist.removeGenre(genre);
         if (artist.getGenres().length === 0) {
           artistManager.deleteArtist(artist);
         }
@@ -207,10 +210,10 @@ export class GenreManager extends Manager<Genre> {
     // Group
     const groupManager: GroupManager = GroupManager.getGroupManager();
     groupManager.getCollection().forEach((group) => {
+      group.removeGenre(oldName);
       if (genre.getMusicians().find((musician) => musician === group) !== undefined) {
         group.addGenre(genre);
       } else {
-        group.removeGenre(genre);
         if (group.getGenres().length === 0) {
           groupManager.deleteGroup(group);
         }
@@ -220,8 +223,8 @@ export class GenreManager extends Manager<Genre> {
     // Playlist
     const playlistManager: PlaylistManager = PlaylistManager.getPlaylistManager();
     playlistManager.update();
+    this.store();
   }
-
 
   /**
    * Guarda los géneros en la base de datos.
@@ -230,4 +233,5 @@ export class GenreManager extends Manager<Genre> {
     this.database.set('genres', [...this.collection.values()]).write();
   }
 }
+
 

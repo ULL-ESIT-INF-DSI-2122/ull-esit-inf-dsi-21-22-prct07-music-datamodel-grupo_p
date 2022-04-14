@@ -32,6 +32,13 @@ export class ArtistManager extends Manager<Artist> {
     }
     return ArtistManager.artistManager;
   }
+  /*
+  recalculateListeners(): void {
+    this.collection.forEach((artist) => {
+      artist.recalculateListeners();
+    });
+    this.store();
+  }*/
 
   store() {
     this.database.set('artists', [...this.collection.values()]).write();
@@ -41,58 +48,51 @@ export class ArtistManager extends Manager<Artist> {
   public deleteArtist(artist: Artist, deleteSongs: boolean = true): void {
     // Delete artists albums
     const objAlbumManager:AlbumManager = AlbumManager.getAlbumManager();
-    const artistAlbums: Album[] = artist.getAlbums();
-    const artistAlbumsNames: string[] = artistAlbums.map((album) => album.getName());
-    artistAlbumsNames.forEach((albumName) => {
-      let album: Album = objAlbumManager.searchByName(albumName);
-      objAlbumManager.removeAlbum(album); // deleteAlbum cuando este AlbumManager
+    artist.getAlbums().forEach((album) => {
+      if (artist.getName() === album.getPublisher()) {
+        objAlbumManager.removeAlbum(album);
+      }
     });
-
     // Delete artists songs
     if (deleteSongs) {
       const objSongManager:SongManager = SongManager.getSongManager();
-      const artistSongs: Song[] = artist.getSongs();
-      const artistSongsNames: string[] = artistSongs.map((song) => song.getName());
-      artistSongsNames.forEach((songName) => {
-        let song: Song = objSongManager.searchByName(songName);
-        objSongManager.removeSong(song);
+      artist.getSongs().forEach((song) => {
+        if (artist.getName() === song.getAuthorName()) {
+          objSongManager.removeSong(song);
+        }
       });
     }
-
     // Grupos
-    const objGroupManager:GroupManager = GroupManager.getGroupManager();
-    const groupNames: string[] = artist.getGroups();
-    groupNames.forEach((groupName) => {
-      if ((objGroupManager.searchByName(groupName)) !== undefined) {
-        let group = objGroupManager.searchByName(groupName);
-        group.removeArtist(artist); // If artist is not in list it won't do anything
-        if (group.getArtists().length == 0) {
+    const objGroupManager: GroupManager = GroupManager.getGroupManager();
+    objGroupManager.getCollection().forEach((group) => {
+      if (artist.getGroups().find((groupName) => groupName === group.getName()) !== undefined) {
+        group.removeArtist(artist);
+        if (group.getArtists().length === 0) {
           objGroupManager.deleteGroup(group);
         }
       }
     });
+    objGroupManager.store();
 
-
-    // Delet artist from genres
-    const objGenreManager:GenreManager = GenreManager.getGenreManager();
-    const genreNames: string[] = artist.getGenres();
-    genreNames.forEach((genreName) => {
-      if (objGenreManager.searchByName(genreName) !== undefined) {
-        let genre = objGenreManager.searchByName(genreName);
-        genre.deleteMusician(artist); // If artist is not in list it won't do anything
-        if (genre.getMusicians().length == 0) {
-          objGenreManager.deleteGenre(genre);
+    // Genres
+    const objGenresManager: GenreManager = GenreManager.getGenreManager();
+    objGenresManager.getCollection().forEach((genre) => {
+      if (artist.getGenres().find((genreName) => genreName === genre.getName()) !== undefined) {
+        genre.deleteMusician(artist);
+        if (genre.getMusicians().length === 0) {
+          objGenresManager.deleteGenre(genre);
         }
       }
     });
+    objGenresManager.store();
 
     // Playlist
     PlaylistManager.getPlaylistManager().update();
-    PlaylistManager.getPlaylistManager().store();
     // Delete from artist collection
     this.remove(artist);
     this.store();
   }
+
   public editArtist(artist: Artist, name: string, groups: string[],
       genres: string[], albums: Album[], songs: Song[]): void {
     artist.setName(name);
@@ -147,6 +147,7 @@ export class ArtistManager extends Manager<Artist> {
     PlaylistManager.getPlaylistManager().update();
     this.store();
   }
+
   addArtist(artist: Artist): void {
     // Group
     const groupManager: GroupManager = GroupManager.getGroupManager();

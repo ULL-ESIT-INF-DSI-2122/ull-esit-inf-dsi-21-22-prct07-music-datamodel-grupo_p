@@ -7,24 +7,31 @@ import {AlbumManager} from '../Managers/AlbumManager';
 import {Genre} from './Genre';
 import {PlaylistManager} from '../Managers/PlaylistManager';
 import {Playlist} from './Playlist';
-/**
- * Clase que representa a un artista
- * @param name nombre del artista
- * @param groups grupos a los que pertenece el artista
- * @param genres generos que tiene el artista
- * @param albums albumes que tiene el artista
- * @param songs canciones que tiene el artista
- */
+
 export class Artist extends BasicData {
+  // private listeners: number;
   constructor(name: string, private groups: string[],
       private genres: string[], private albums: Album[], private songs: Song[]) {
     super(name);
+    /* this.listeners = 0;
+    songs.forEach((song) => {
+      this.listeners += song.getReproductions();
+    });*/
   }
-  /**
-   * Método que deserealiza un objeto.
-   * @param artist objeto de tipo 'ArtistInterface'
-   * @returns Devuelve un nuevo Artista
-   */
+  /*
+  public recalculateListeners(): void {
+    this.listeners = 0;
+    this.songs.forEach((song) => {
+      this.listeners += song.getReproductions();
+    });
+    this.groups.forEach((groupName) => {
+      if (GroupManager.getGroupManager().searchByName(groupName) !== undefined) {
+        let group: Group = GroupManager.getGroupManager().searchByName(groupName);
+        this.listeners += group.getListeners();
+      }
+    });
+  }*/
+
   public static deserialize(artist: ArtistInterface): Artist {
     let albums: Album[] = [];
     let songs: Song[] = [];
@@ -37,134 +44,84 @@ export class Artist extends BasicData {
     return new Artist(artist.name, artist.groups, artist.genres, albums, songs);
   }
 
-  /**
-   * getter de grupos
-   * @returns un string de grupos
-   */
+  // GETTERS
   public getGroups(): string[] {
     return this.groups;
   }
-  /**
-   * getter de genres
-   * @returns devuelve los generos que tiene el artista
-   */
   public getGenres(): string[] {
     return this.genres;
   }
-  /**
-   * getter de albums
-   * @returns los albumes que tiene el artista
-   */
   public getAlbums(): Album[] {
     return this.albums;
   }
-  /**
-   * getter de songs
-   * @returns las canciones que tiene el artista
-   */
   public getSongs(): Song[] {
     return this.songs;
-  }
-  /**
-   * setter para nombre
-   * @param newName nuevo nombre para el artista
-   */
+  }/*
+  public getListeners(): number {
+    return this.listeners;
+  }*/
+  // SETTERS
   public setName(newName: string): void {
     this.name = newName;
   }
-  /**
-   * Setter para 'groups'
-   * @param newGroups nuevos grupos
-   */
   public setGroups(newGroups: string[]): void {
     this.groups = newGroups;
   }
-  /**
-   * Setter para genrres
-   * @param newGenres nuevos géneros
-   */
   public setGenres(newGenres: string[]): void {
     this.genres = newGenres;
   }
-  /**
-   * Setter para álbum
-   * @param newAlbums nuevos álbumes
-   */
   public setAlbums(newAlbums: Album[]): void {
     this.albums = newAlbums;
   }
-  /**
-  *Setter para songs
-  * @param newSongs nuevas canciones
-  */
   public setSongs(newSongs: Song[]): void {
     this.songs = newSongs;
   }
-  /**
-   * Agrega un grupo al artista
-   * @param newGroup nuevo grupo
-   */
+  // ADDS
   public addGroup(newGroup: string) {
-    this.groups.push(newGroup);
+    const noGroups: string = '-';
+    if (this.groups.find((group) => group === noGroups) !== undefined) {
+      this.groups.pop();
+      this.groups.push(newGroup);
+    } else if (this.groups.find((group) => group === newGroup) === undefined) {
+      this.groups.push(newGroup);
+    }
   }
-  /**
-   * Agrega un género al artista
-   * @param genre nuevo género
-   */
   public addGenre(genre: Genre): void {
     if (this.genres.find((x) => x === genre.getName()) === undefined) {
       this.genres.push(genre.getName());
     }
   }
-  /**
-   * Agrega un canción al artista
-   * @param newSong nueva canción
-   */
   public addSong(newSong: Song) {
-    this.songs.push(newSong);
+    if (this.songs.find((song) => song === newSong) === undefined) {
+      this.songs.push(newSong);
+    }
   }
-  /**
-   * Agrega un álbum al artista
-   * @param newAlbum nuevo álbum
-   */
   public addAlbum(newAlbum: Album) {
-    this.albums.push(newAlbum);
+    if (this.albums.find((album) => album === newAlbum) === undefined) {
+      this.albums.push(newAlbum);
+    }
   }
-  /**
-   * Elimina el grupo del artista
-   * @param groupDelete grupo a eliminar
-   */
+  // REMOVES
   public removeGroup(groupDelete: string) {
-    this.groups = this.groups.filter((elemento) => elemento !== groupDelete);
+    const index = this.groups.indexOf(groupDelete);
+    if (index !== -1) {
+      this.groups.splice(index, 1);
+    }
   }
-  /**
-   * Elimina el género que tiene el artista
-   * @param genre género a eliminar
-   */
-  public removeGenre(genre: Genre): void {
-    const index = this.genres.indexOf(genre.getName());
+  public removeGenre(genre: string): void {
+    const index = this.genres.indexOf(genre);
     if (index !== -1) {
       this.genres.splice(index, 1);
     }
   }
-  /**
-   * Elimina el álbum que tiene el artista
-   * @param albumDelete album que será eliminado
-   */
   public removeAlbum(albumDelete: Album) {
     this.albums = this.albums.filter((elemento) => elemento !== albumDelete);
   }
-  /**
-   * Elimina la canción del artista
-   * @param songDelete canción que será eliminada
-   */
   public removeSong(songDelete: Song) {
     this.songs = this.songs.filter((elemento) => elemento !== songDelete);
   }
-  /**
-   * Muestra la info del artista
-   */
-  public showInfo(): void {
+
+  public showInfo(): string {
     let info: string = `ARTISTA ${this.getName()}
     -Nombre: ${this.getName()}
     -Grupos: ${this.getGroups()}
@@ -178,12 +135,10 @@ export class Artist extends BasicData {
     return song.getName();
   }).join('\n      ')}`;
     console.log(info);
+    return info;
   }
-  /**
-   * Ordena las canciones
-   * @param ascending true para ordenar de forma ascendente
-   */
-  showSongsOrder(ascending: boolean = true): void {
+
+  public showSongsOrder(ascending: boolean = true): string {
     let nameList: string[] = this.getSongs().map((song) => song.getName());
     nameList = nameList.sort();
     if (ascending) {
@@ -191,12 +146,10 @@ export class Artist extends BasicData {
     } else {
       console.log('  '+nameList.reverse().join('\n  '));
     }
+    return nameList.join('\n  ');
   }
-  /**
-   * Ordena los albumes
-   * @param ascending true si es de forma ascendente
-   */
-  showAlbumOrder(ascending: boolean = true): void {
+
+  showAlbumOrder(ascending: boolean = true): string {
     let nameList: string[] = this.getAlbums().map((album) => {
       return album.getName();
     });
@@ -206,12 +159,10 @@ export class Artist extends BasicData {
     } else {
       console.log('  '+nameList.reverse().join('\n  '));
     }
+    return nameList.join('\n  ');
   }
-  /**
-   * Ordena los albumes por año
-   * @param ascending true si es de forma ascedente
-   */
-  showAlbumYearOrder(ascending: boolean = true): void {
+
+  showAlbumYearOrder(ascending: boolean = true): string {
     let albums = this.getAlbums().sort((albumA, albumB) => {
       return albumA.getYear() - albumB.getYear();
     });
@@ -223,22 +174,19 @@ export class Artist extends BasicData {
     } else {
       console.log('  '+albumNames.reverse().join('\n  '));
     }
+    return albumNames.join('\n  ');
   }
-  /**
-   * Muestra la canciones que fueron lanzadas como single
-   */
-  showSingles(): void {
+
+  showSingles(): string {
     let songs: Song[] = this.getSongs().filter((song) => song.getIsSingle());
     let single: string[] = songs.map((song) => {
       return song.getName();
     });
     console.log('  '+single.join('\n  '));
+    return single.join('\n  ');
   }
-  /**
-   * Ordena por número de reproducciones
-   * @param ascending true si es de forma ascendente
-   */
-  showByReproductions(ascending: boolean = true): void {
+
+  showByReproductions(ascending: boolean = true): string {
     let songs = this.getSongs().sort((songA, songB) => {
       return songA.getReproductions() - songB.getReproductions();
     });
@@ -250,16 +198,16 @@ export class Artist extends BasicData {
     } else {
       console.log('  '+songsNames.reverse().join('\n  '));
     }
+    return songsNames.join('\n  ');
   }
-  /**
-   * Muestra las playlist asociadas al artista.
-   */
-  showPlayListAsociate(): void {
+
+  showPlayListAsociate(): string {
     const playLists: Playlist[] = Array.from(PlaylistManager.getPlaylistManager().getCollection());
     const playListsWithAuthor: Playlist[] = playLists.filter((playList) => playList.getMusicians().includes(this.getName()));
     const asociatePlaylists: string[] = playListsWithAuthor.map((playlist) => {
       return playlist.getName();
     });
     console.log('  '+asociatePlaylists.join('\n  '));
+    return asociatePlaylists.join('\n  ');
   }
 }

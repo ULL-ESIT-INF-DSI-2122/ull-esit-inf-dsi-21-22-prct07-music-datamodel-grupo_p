@@ -14,13 +14,14 @@ describe('Pruebas de la clase PlaylistManager', () => {
   it(`PlaylistManager.getPlaylistManager() is not equal null`, () => {
     expect(PlaylistManager.getPlaylistManager()).not.to.be.equal(null);
   });
-  it(`playlistManager.removePlaylist(list) removes list from the genre collection`, () => {
-    playlistManager.remove(list);
-    expect(playlistManager.getCollection()).to.be.eql(new Set<Playlist>([lista]));
-  });
   it(`playlistManager.addPlaylist(list) adds list to the genre collection`, () => {
     playlistManager.add(list);
     expect(playlistManager.getCollection()).to.be.eql(new Set<Playlist>([lista, list]));
+  });
+  it(`playlistManager.update() deletes empty playlists`, () => {
+    playlistManager.add(new Playlist('EmptyPlaylist', []));
+    playlistManager.update();
+    expect(playlistManager.searchByName('EmptyPlaylist')).to.be.equal(undefined);
   });
   it(`playlistManager.getPlaylistByName('MyPlaylist') returns list`, () => {
     expect(playlistManager.searchByName('MyPlaylist')).to.be.equal(list);
