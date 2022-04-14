@@ -64,6 +64,10 @@ describe('Pruebas de la clase Genre', () => {
     testGenre.deleteMusician(rolling);
     expect(testGenre.getMusicians()).to.be.eql([levine]);
   });
+  it(`testGenre.deleteMusician(rolling) doesn't deletes any musician from the musician array`, () => {
+    testGenre.deleteMusician(rolling);
+    expect(testGenre.getMusicians()).to.be.eql([levine]);
+  });
   it('testGenre.getAlbums() returns [overexposed]', () => {
     expect(testGenre.getAlbums()).to.be.eql([overexposed]);
   });
@@ -80,6 +84,10 @@ describe('Pruebas de la clase Genre', () => {
     expect(testGenre.getAlbums()).to.be.eql([heads, overexposed]);
   });
   it('testGenre.deleteAlbum(heads) deletes heads from the album array', () => {
+    testGenre.deleteAlbum(heads);
+    expect(testGenre.getAlbums()).to.be.eql([overexposed]);
+  });
+  it(`testGenre.deleteAlbum(heads) does'nt deletes any album from the album array`, () => {
     testGenre.deleteAlbum(heads);
     expect(testGenre.getAlbums()).to.be.eql([overexposed]);
   });
@@ -102,8 +110,17 @@ describe('Pruebas de la clase Genre', () => {
     testGenre.deleteSong(satisfaction);
     expect(testGenre.getSongs()).to.be.eql([lost]);
   });
+  it(`testGenre.deleteSong(satisfaction) doesn't deletes any song from the song array`, () => {
+    testGenre.deleteSong(satisfaction);
+    expect(testGenre.getSongs()).to.be.eql([lost]);
+  });
   it('testGenre.showInfo()', () => {
-    expect(testGenre.showInfo()).to.be.equal(`GÉNERO GenreForTest\n    -Grupos/Artistas:\n      Adam Levine\n`+
-    `    -Álbums:\n      Overexposed\n    -Canciones:\n      Lost Stars`);
+    expect(testGenre.showInfo()).to.be.equal(`GÉNERO GenreForTest
+    -Grupos/Artistas:
+      Adam Levine
+    -Álbums:
+      Overexposed
+    -Canciones:
+      Lost Stars`);
   });
 });
