@@ -291,7 +291,6 @@ export class Playlist extends BasicData {
 
   public getMusicians(): string[] {
     const artistList: string[] = this.getSongs().map((song) => song.getAuthorName());
-    // const artistList = artistLists.reduce((acumulated, newList) => acumulated.concat(newList));
     return artistList;
   }
 
