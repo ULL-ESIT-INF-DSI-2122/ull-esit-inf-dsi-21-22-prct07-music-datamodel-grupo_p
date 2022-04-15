@@ -7,10 +7,13 @@ import {Album} from '../../src/Basics/Album';
 import {Song} from '../../src/Basics/Song';
 import {GenreManager} from '../../src/Managers/GenreManager';
 import {Genre} from '../../src/Basics/Genre';
+import {ArtistManager} from '../../src/Managers/ArtistManager';
 
 
 describe('Pruebas de la clase Artist', () => {
   let JhonnyCash: Artist;
+  let jagger: Artist;
+  let levine: Artist;
   let grupo: string;
   let grupo2: string;
   let album: Album;
@@ -30,6 +33,8 @@ describe('Pruebas de la clase Artist', () => {
     albumManager = AlbumManager.getAlbumManager();
     songManager = SongManager.getSongManager();
     genreManager = GenreManager.getGenreManager();
+    jagger = ArtistManager.getArtistManager().searchByName('Mick Jagger');
+    levine = ArtistManager.getArtistManager().searchByName('Adam Levine');
     genero2 = genreManager.searchByName('Pop');
     album = albumManager.searchByName('American Recordings');
     album2 = albumManager.searchByName('Overexposed');
@@ -84,6 +89,10 @@ describe('Pruebas de la clase Artist', () => {
     JhonnyCash.addGenre(genero2);
     expect(JhonnyCash.getGenres()).to.be.eql(['Country', 'Pop']);
   });
+  it('Add Genre to belong it artist', () => {
+    JhonnyCash.addGenre(genero2);
+    expect(JhonnyCash.getGenres()).to.be.eql(['Country', 'Pop']);
+  });
   it('Remove Genre to belong it artist', () => {
     JhonnyCash.removeGenre(genero2.getName());
     expect(JhonnyCash.getGenres()).to.be.eql(['Country']);
@@ -95,6 +104,14 @@ describe('Pruebas de la clase Artist', () => {
   it('Add Song to artist', () => {
     JhonnyCash.addSong(cancion2);
     expect(JhonnyCash.getSongs()).to.be.eql([cancion1, cancion2]);
+  });
+  it('Add Song to artist', () => {
+    JhonnyCash.addSong(cancion2);
+    expect(JhonnyCash.getSongs()).to.be.eql([cancion1, cancion2]);
+  });
+  it('Add a new Album to artist', () => {
+    JhonnyCash.addAlbum(album2);
+    expect(JhonnyCash.getAlbums()).to.be.eql([album, album2]);
   });
   it('Add a new Album to artist', () => {
     JhonnyCash.addAlbum(album2);
@@ -108,7 +125,17 @@ describe('Pruebas de la clase Artist', () => {
     JhonnyCash.addGroup('Landsberg Barbarians');
     expect(JhonnyCash.getGroups()).to.be.eql(['Landsberg Barbarians']);
   });
+  it('Adds Landsberg Barbarians to Mick Jagger groups', () => {
+    jagger.addGroup('Landsberg Barbarians');
+    expect(jagger.getGroups()).to.be.eql(['The Rolling Stones', 'Landsberg Barbarians']);
+  });
   it('Delete group to which the artist belongs', () => {
+    jagger.removeGroup('Landsberg Barbarians');
+    JhonnyCash.removeGroup('Landsberg Barbarians');
+    expect(JhonnyCash.getGroups()).to.be.eql(['-']);
+  });
+  it('Delete group to which the artist belongs', () => {
+    jagger.removeGroup('Landsberg Barbarians');
     JhonnyCash.removeGroup('Landsberg Barbarians');
     expect(JhonnyCash.getGroups()).to.be.eql(['-']);
   });
@@ -126,11 +153,21 @@ describe('Pruebas de la clase Artist', () => {
   it('showSongsOrder', () => {
     expect(JhonnyCash.showSongsOrder()).to.be.equal(`Digo lo que pienso\n  Drive On`);
   });
+  it('showSongsOrder', () => {
+    expect(JhonnyCash.showSongsOrder(false)).to.be.equal(`Drive On\n  Digo lo que pienso`);
+  });
   it('showAlbumOrder', () => {
     expect(JhonnyCash.showAlbumOrder()).to.be.equal(`American Recordings`);
   });
+  it('showAlbumOrder', () => {
+    expect(JhonnyCash.showAlbumOrder(false)).to.be.equal(`American Recordings`);
+  });
   it('showAlbumYearOrder', () => {
     expect(JhonnyCash.showAlbumYearOrder()).to.be.equal(`American Recordings`);
+  });
+  it('showAlbumYearOrder', () => {
+    JhonnyCash.addAlbum(album2);
+    expect(JhonnyCash.showAlbumYearOrder(false)).to.be.equal(`Overexposed\n  American Recordings`);
   });
   it('showSingles', () => {
     expect(JhonnyCash.showSingles()).to.be.equal('Digo lo que pienso');
@@ -138,7 +175,13 @@ describe('Pruebas de la clase Artist', () => {
   it('showByReproductions', () => {
     expect(JhonnyCash.showByReproductions()).to.be.equal(`Drive On\n  Digo lo que pienso`);
   });
+  it('showByReproductions', () => {
+    expect(JhonnyCash.showByReproductions(false)).to.be.equal(`Digo lo que pienso\n  Drive On`);
+  });
   it('showPlayListAsociate', () => {
     expect(JhonnyCash.showPlayListAsociate()).to.be.equal(``);
+  });
+  it('showPlayListAsociate', () => {
+    expect(levine.showPlayListAsociate()).to.be.equal(`MiLista`);
   });
 });

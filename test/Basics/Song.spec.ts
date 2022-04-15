@@ -77,8 +77,17 @@ describe('Pruebas de la clase Song', () => {
     LaVieEnRose.addGenre(pop);
     expect(LaVieEnRose.getGenres()).to.be.eql(['Jazz', 'Pop']);
   });
+  it(`Not add genre the song "La Vie En Rose"`, () => {
+    LaVieEnRose.addGenre(pop);
+    expect(LaVieEnRose.getGenres()).to.be.eql(['Jazz', 'Pop']);
+  });
   it(`Show info of the song La vie en rose.`, () => {
     expect(LaVieEnRose.showInfo()).to.be.equal(`CANCIÓN La vie en rose\n    -Autor: Louis Armstrong\n    -Duración: 2min 55s\n`+
     `    -Género/s: Jazz,Pop\n    -Single: Si\n    -Numero de reproducciones: 50000`);
+  });
+  it(`Show info of the song La vie en rose.`, () => {
+    LaVieEnRose.setIsSingle(false);
+    expect(LaVieEnRose.showInfo()).to.be.equal(`CANCIÓN La vie en rose\n    -Autor: Louis Armstrong\n    -Duración: 2min 55s\n`+
+    `    -Género/s: Jazz,Pop\n    -Single: No\n    -Numero de reproducciones: 50000`);
   });
 });
