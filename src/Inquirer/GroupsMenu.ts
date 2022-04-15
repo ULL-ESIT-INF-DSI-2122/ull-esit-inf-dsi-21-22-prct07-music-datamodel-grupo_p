@@ -9,16 +9,14 @@ import {GroupManager} from '../Managers/GroupManager';
 import {Artist} from '../Basics/Artist';
 import {Album} from '../Basics/Album';
 
-enum options {
-  Show = 'Show Data Base',
-  Add = 'Add new group+',
-  Revove = 'Delete group',
-  Edit = 'Edit group',
-  Back = 'Back'
-}
-
+/**
+ * Group Manager.
+ */
 const manager = GroupManager.getGroupManager();
 
+/**
+ * Despliega el menú de los grupos.
+ */
 export function promptGroups(): void {
   let options: string[] = ['Nuevo group +'];
   options = options.concat(manager.getList());
@@ -46,7 +44,10 @@ export function promptGroups(): void {
     }
   });
 }
-
+/**
+ * Despliega el menú de un grupo en concreto.
+ * @param group Grupo del cuál se despliega el menú.
+ */
 export function promptGroup(group: Group): void {
   console.clear();
   group.showInfo();
@@ -73,7 +74,9 @@ export function promptGroup(group: Group): void {
   },
   );
 }
-
+/**
+ * Despliega el menú para crear un nuevo grupo.
+ */
 function promptAddGroup(): void {
   console.clear();
   const albums: string[] = AlbumManager.getAlbumManager().getList();
@@ -154,7 +157,10 @@ function promptAddGroup(): void {
     promptGroups();
   });
 }
-
+/**
+ * Muestra una pregunta de confirmación para eliminar un grupo.
+ * @param group Grupo a eliminar.
+ */
 export function promptRemoveGroup(group: Group) {
   console.clear();
   inquirer
@@ -173,6 +179,10 @@ export function promptRemoveGroup(group: Group) {
       });
 }
 
+/**
+ * Despliega el menú para editar un grupo.
+ * @param group Grupo a editar.
+ */
 function promptEditGroup(group: Group): void {
   console.clear();
   const albums: string[] = AlbumManager.getAlbumManager().getList();
@@ -248,7 +258,9 @@ function promptEditGroup(group: Group): void {
   });
 }
 
-
+/**
+ * Opciones del menú de visualizacion.
+ */
 enum visualizationMode {
   byTitle = 'Canciones',
   byName = 'Álbumes',
@@ -256,6 +268,10 @@ enum visualizationMode {
   back = 'Volver'
 }
 
+/**
+ * Despliega el menú de visualización de un grupo.
+ * @param group Grupo del que se va a visualizar información.
+ */
 function promptShowData(group: Group) {
   console.clear();
   inquirer.prompt({
@@ -281,6 +297,9 @@ function promptShowData(group: Group) {
   });
 }
 
+/**
+ * Opciones del menú de visualización de canciones del grupo.
+ */
 enum modeShowSong {
   title = 'Por titulo',
   repro = 'Por número de reproducciones',
@@ -288,9 +307,12 @@ enum modeShowSong {
   back = 'Volver'
 }
 
+/**
+ * Despliega el menú de visualización de canciones un grupo.
+ * @param group Grupo del que se van a visualizar las canciones.
+ */
 function promptShowSongs(group: Group) {
   console.clear();
-
   inquirer.prompt({
     type: 'list',
     name: 'mode',
@@ -388,12 +410,18 @@ function promptShowSongs(group: Group) {
   });
 }
 
+/**
+ * Opciones del menú de visualización de álbumes del grupo.
+ */
 enum modeShowAlbum {
   name = 'Por nombre',
   year = 'Por año de lanzamiento',
   back = 'Volver'
 }
-
+/**
+ * Despliega el menú de visualización de álbumes un grupo.
+ * @param group Grupo del que se van a visualizar los álbumes.
+ */
 function promptShowAlbums(group: Group) {
   console.clear();
   inquirer.prompt({
@@ -482,11 +510,18 @@ function promptShowAlbums(group: Group) {
   });
 }
 
+/**
+ * Opciones del menú de visualización de playlist asociadas al grupo.
+ */
 enum modeShowPlayList {
   name = 'Mostrar playlist asociadas',
   back = 'Volver'
 }
 
+/**
+ * Despliega el menú de visualización de playlists asociadas a un grupo.
+ * @param group Grupo del que se van a visualizar las playlists asociadas.
+ */
 function promptShowPlayList(group: Group) {
   console.clear();
   inquirer.prompt({

@@ -1,15 +1,20 @@
 import * as inquirer from 'inquirer';
-import {Duration, Song} from '../Basics/Song';
+import {Song} from '../Basics/Song';
 import {SongManager} from '../Managers/SongManager';
 import {promptUser} from './MainMenu';
 import {GenreManager} from '../Managers/GenreManager';
 import {ArtistManager} from '../Managers/ArtistManager';
 import {GroupManager} from '../Managers/GroupManager';
+import {Duration} from '../Basics/Playlist';
 
-
+/**
+ * Song Manager
+ */
 const manager: SongManager = SongManager.getSongManager();
 
-
+/**
+ * Despliega el menú de las canciones.
+ */
 export function promptSongPrincipal(): void {
   const manager: SongManager = SongManager.getSongManager();
   let options: string[] = ['Nueva canción +'];
@@ -37,6 +42,10 @@ export function promptSongPrincipal(): void {
   });
 }
 
+/**
+ * Despliega el menú de una canción en concreto.
+ * @param song Canción del cuál se despliega el menú.
+ */
 function promptSong(song: Song): void {
   console.clear();
   song.showInfo();
@@ -61,6 +70,10 @@ function promptSong(song: Song): void {
   );
 }
 
+/**
+ * Muestra una pregunta de confirmación para eliminar una canción.
+ * @param song Canción a eliminar.
+ */
 function promptRemoveSong(song: Song) {
   console.clear();
   inquirer.prompt([
@@ -76,7 +89,7 @@ function promptRemoveSong(song: Song) {
 }
 
 /**
- * prompt para agregar musica
+ * Despliega el menú para crear una nueva canción.
  */
 function promptAddSong(): void {
   const genres: string[] = GenreManager.getGenreManager().getList();
@@ -184,8 +197,8 @@ function promptAddSong(): void {
 
 
 /**
- * Edita la canción especificada
- * @param song de tipo Song
+ * Despliega el menú para editar una canción.
+ * @param song Canción a editar.
  */
 function promptEditSong(song: Song): void {
   const genres: string[] = GenreManager.getGenreManager().getList();

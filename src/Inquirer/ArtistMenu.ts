@@ -11,17 +11,14 @@ import {promptUser} from './MainMenu';
 import {GroupManager} from '../Managers/GroupManager';
 
 
-enum options {
-  Show = 'Show Data Base',
-  Add = 'Add new artist+',
-  Revove = 'Delete artist',
-  Edit = 'Edit artista',
-  Back = 'Back'
-}
-
+/**
+ * Album manager.
+ */
 const manager = ArtistManager.getArtistManager();
 
-
+/**
+ * Despliega el menú de los artistas.
+ */
 export function promptArtists(): void {
   let options: string[] = ['Nuevo artista +'];
   options = options.concat(manager.getList());
@@ -47,7 +44,10 @@ export function promptArtists(): void {
     }
   });
 }
-
+/**
+ * Despliega el menú de un artista en concreto.
+ * @param artist Artista del cuál se despliega el menú.
+ */
 export function promptArtist(artist: Artist): void {
   console.clear();
   artist.showInfo();
@@ -75,6 +75,9 @@ export function promptArtist(artist: Artist): void {
   );
 }
 
+/**
+ * Despliega el menú para crear un nuevo artista.
+ */
 function promptAddArtist(): void {
   console.clear();
   const songs: string[] = SongManager.getSongManager().getList();
@@ -158,7 +161,10 @@ function promptAddArtist(): void {
     promptArtists();
   });
 }
-
+/**
+ * Muestra una pregunta de confirmación para eliminar un artista.
+ * @param artist Artista a eliminar.
+ */
 export function promptRemoveArtist(artist: Artist) {
   console.clear();
   inquirer
@@ -177,6 +183,10 @@ export function promptRemoveArtist(artist: Artist) {
       });
 }
 
+/**
+ * Despliega el menú para editar un artista.
+ * @param artist Artista a editar.
+ */
 function promptEditArtist(artist: Artist): void {
   console.clear();
   const songs: string[] = SongManager.getSongManager().getList();
@@ -249,14 +259,19 @@ function promptEditArtist(artist: Artist): void {
     promptArtists();
   });
 }
-
+/**
+ * Opciones del menú de visualizacion.
+ */
 enum visualizationMode {
   byTitle = 'Canciones',
   byName = 'Álbumes',
   byPlaylist = 'Playlists asociadas',
   back = 'Volver'
 }
-
+/**
+ * Despliega el menú de visualización de un artista.
+ * @param artist Artista del que se va a visualizar información.
+ */
 function promptShowData(artist: Artist) {
   console.clear();
   inquirer.prompt({
@@ -282,6 +297,9 @@ function promptShowData(artist: Artist) {
   });
 }
 
+/**
+ * Opciones del menú de visualización de canciones del artista.
+ */
 enum modeShowSong {
   title = 'Por titulo',
   repro = 'Por numero de reproducciones',
@@ -289,6 +307,10 @@ enum modeShowSong {
   back = 'Volver'
 }
 
+/**
+ * Despliega el menú de visualización de canciones un artista.
+ * @param artist Artista del que se van a visualizar las canciones.
+ */
 function promptShowSongs(artist: Artist) {
   console.clear();
   inquirer.prompt({
@@ -388,12 +410,19 @@ function promptShowSongs(artist: Artist) {
   });
 }
 
+/**
+ * Opciones del menú de visualización de álbumes del artista.
+ */
 enum modeShowAlbum {
   name = 'Por nombre',
   year = 'Por año de lanzamiento',
   back = 'Volver'
 }
 
+/**
+ * Despliega el menú de visualización de álbumes un artista.
+ * @param artist Artista del que se van a visualizar los álbumes.
+ */
 function promptShowAlbums(artist: Artist) {
   console.clear();
   inquirer.prompt({
@@ -482,11 +511,17 @@ function promptShowAlbums(artist: Artist) {
   });
 }
 
+/**
+ * Opciones del menú de visualización de playlist asociadas al artista.
+ */
 enum modeShowPlayList {
   name = 'Mostrar playlist asociadas',
   back = 'Volver'
 }
-
+/**
+ * Despliega el menú de visualización de playlists asociadas a un artista.
+ * @param artist Artista del que se van a visualizar las playlists asociadas.
+ */
 function promptShowPlayList(artist: Artist) {
   console.clear();
   inquirer.prompt({
