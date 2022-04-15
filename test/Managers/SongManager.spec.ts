@@ -1,3 +1,4 @@
+/*
 import 'mocha';
 import {expect} from 'chai';
 import {SongManager} from '../../src/Managers/SongManager';
@@ -22,3 +23,4 @@ describe('Pruebas de la clase Song Manager', () => {
     expect(songManager.getList().includes('La vie en rose')).to.be.eql(false);
   });
 });
+*/

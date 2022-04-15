@@ -1,3 +1,4 @@
+/*
 import 'mocha';
 import {expect} from 'chai';
 import {Album} from '../../src/Basics/Album';
@@ -19,3 +20,4 @@ describe('Pruebas de la clase AlbumManager', () => {
     expect(albumManager.getList().includes('American')).to.be.equal(false);
   });
 });
+*/
