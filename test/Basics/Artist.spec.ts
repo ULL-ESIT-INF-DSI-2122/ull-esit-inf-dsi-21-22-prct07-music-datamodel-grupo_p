@@ -10,31 +10,6 @@ import {Genre} from '../../src/Basics/Genre';
 
 
 describe('Pruebas de la clase Artist', () => {
-  /*
-  let album2: AlbumManager;
-  let album3: AlbumManager;
-  let genre: GenreManager;
-  let song1: SongManager;
-  let song2: SongManager;
-  let song3: SongManager;
-  // let album1 = AlbumManager.getAlbumManager();
-  album2 = AlbumManager.getAlbumManager();
-  album3 = AlbumManager.getAlbumManager();
-  genre = GenreManager.getGenreManager();
-  song1 = SongManager.getSongManager();
-  song2 = SongManager.getSongManager();
-  song3 = SongManager.getSongManager();
-  // AmericanRecordings = album1.searchByName('American Recordings');
-  let WhatAWorderfulWorld = album2.searchByName('What a wonderful world');
-  let WaterFromTheWellsOfHome = album3.searchByName('Water From The Wells Of Home');
-  let pop = genre.searchByName('Pop');
-  let LaVieEnRose = song1.searchByName('La Vie En Rose');
-  let DigoLoQuePienso = song2.searchByName('Digo lo que pienso');
-  let DriveOn = song3.searchByName('Drive On');
-  const AmericanRecordings = new Album('American', 'No se sabe', 2001, ['Rap'], [DigoLoQuePienso]);
-  const JhonnyCash = new Artist('Jhony Cash', [], ['Country'], [AmericanRecordings], [DigoLoQuePienso, DriveOn]);
-  const LouisArmtrong = new Artist('Erróneo', [], ['Rap'], [AmericanRecordings], [DriveOn] );
-  */
   let JhonnyCash: Artist;
   let grupo: string;
   let grupo2: string;
@@ -61,12 +36,12 @@ describe('Pruebas de la clase Artist', () => {
     cancion1 = songManager.searchByName('Digo lo que pienso');
     cancion2 = songManager.searchByName('Drive On');
     cancion3 = songManager.searchByName('Why Me Lord');
-    JhonnyCash = new Artist('Jhonny Cash', [grupo], [genero], [album], [cancion1, cancion2]);
+    JhonnyCash = new Artist('Johnny Cash', [grupo], [genero], [album], [cancion1, cancion2]);
   });
 
 
   it('Artist name', () => {
-    expect(JhonnyCash.getName()).to.be.equal('Jhonny Cash');
+    expect(JhonnyCash.getName()).to.be.equal('Johnny Cash');
   });
   it('Groups to belong it the artist', () => {
     expect(JhonnyCash.getGroups()).to.be.eql([grupo]);
@@ -81,9 +56,9 @@ describe('Pruebas de la clase Artist', () => {
     expect(JhonnyCash.getSongs()).to.be.eql([cancion1, cancion2]);
   });
   it('Edit name the artist', () => {
-    JhonnyCash.setName('Jhonny Cash set');
-    expect(JhonnyCash.getName()).to.be.equal('Jhonny Cash set');
-    JhonnyCash.setName('Jhonny Cash');
+    JhonnyCash.setName('Johnny Cash set');
+    expect(JhonnyCash.getName()).to.be.equal('Johnny Cash set');
+    JhonnyCash.setName('Johnny Cash');
   });
   it('Edit Groups to belong it the artist', () => {
     JhonnyCash.setGroups([grupo2]);
@@ -138,8 +113,8 @@ describe('Pruebas de la clase Artist', () => {
     expect(JhonnyCash.getGroups()).to.be.eql(['-']);
   });
   it('ShowInfo', () => {
-    expect(JhonnyCash.showInfo()).to.be.equal(`ARTISTA Jhonny Cash
-    -Nombre: Jhonny Cash
+    expect(JhonnyCash.showInfo()).to.be.equal(`ARTISTA Johnny Cash
+    -Nombre: Johnny Cash
     -Grupos: -
     -Genero/s: Country
     -Albums:
