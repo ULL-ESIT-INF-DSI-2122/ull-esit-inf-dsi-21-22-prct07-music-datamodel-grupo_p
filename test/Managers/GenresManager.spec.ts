@@ -1,4 +1,4 @@
-/* import 'mocha';
+import 'mocha';
 import {expect} from 'chai';
 import {Genre} from '../../src/Basics/Genre';
 import {GenreManager} from '../../src/Managers/GenreManager';
@@ -133,4 +133,4 @@ describe('Pruebas de la clase GenreManager', () => {
     genreManager.deleteGenre(testGenre4);
     expect(genreManager.searchByName('EditedGenre')).to.be.equal(undefined);
   });
-});*/
+});

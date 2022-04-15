@@ -28,21 +28,21 @@ export class Genre extends BasicData {
    * Getter para la propiedad `musicians`.
    * @returns Devuelve el valor de`musicians`.
    */
-  getMusicians(): (Group|Artist)[] {
+  public getMusicians(): (Group|Artist)[] {
     return this.musicians;
   }
   /**
    * Setter para la propiedad `musicians`.
    * @param musicians Nuevo valor de `musicians`.
    */
-  setMusicians(musicians: (Group|Artist)[]): void {
+  public setMusicians(musicians: (Group|Artist)[]): void {
     this.musicians = musicians;
   }
   /**
    * Agrega un grupo/artista al género.
    * @param newMusician Grupo/artista a agregar.
    */
-  addMusician(newMusician: Group|Artist): void {
+  public addMusician(newMusician: Group|Artist): void {
     if (this.musicians.find((m) => m === newMusician) === undefined) {
       this.musicians.push(newMusician);
     }
@@ -51,7 +51,7 @@ export class Genre extends BasicData {
    * Elimina un grupo/artista del género.
    * @param musician Grupo/artista a eliminar.
    */
-  deleteMusician(musician: Group|Artist): void {
+  public deleteMusician(musician: Group|Artist): void {
     const index = this.musicians.indexOf(musician);
     if (index !== -1) {
       this.musicians.splice(index, 1);
@@ -61,21 +61,21 @@ export class Genre extends BasicData {
    * Getter para la propiedad `albums`.
    * @returns Devuelve el valor de`albums`.
    */
-  getAlbums(): Album[] {
+  public getAlbums(): Album[] {
     return this.albums;
   }
   /**
    * Setter para la propiedad `albums`.
    * @param albums Nuevo valor de `albums`.
    */
-  setAlbums(albums: Album[]): void {
+  public setAlbums(albums: Album[]): void {
     this.albums = albums;
   }
   /**
    * Agrega un álbum al género.
    * @param newAlbum Álbum a agregar.
    */
-  addAlbum(newAlbum: Album): void {
+  public addAlbum(newAlbum: Album): void {
     if (this.albums.find((m) => m === newAlbum) === undefined) {
       this.albums.push(newAlbum);
     }
@@ -84,7 +84,7 @@ export class Genre extends BasicData {
    * Elimina un álbum del género.
    * @param album Álbum a eliminar.
    */
-  deleteAlbum(album: Album): void {
+  public deleteAlbum(album: Album): void {
     const index = this.albums.indexOf(album);
     if (index !== -1) {
       this.albums.splice(index, 1);
@@ -94,21 +94,21 @@ export class Genre extends BasicData {
    * Getter para la propiedad `songs`.
    * @returns Devuelve el valor de`songs`.
    */
-  getSongs(): Song[] {
+  public getSongs(): Song[] {
     return this.songs;
   }
   /**
    * Setter para la propiedad `songs`.
    * @param songs Nuevo valor de `songs`.
    */
-  setSongs(songs: Song[]): void {
+  public setSongs(songs: Song[]): void {
     this.songs = songs;
   }
   /**
    * Agrega una canción a al género.
    * @param newSong Canción a agregar.
    */
-  addSong(newSong: Song): void {
+  public addSong(newSong: Song): void {
     if (this.songs.find((m) => m === newSong) === undefined) {
       this.songs.push(newSong);
     }
@@ -118,17 +118,17 @@ export class Genre extends BasicData {
    * @param song Canción a eliminar.
    */
 
-  deleteSong(song: Song): void {
+  public deleteSong(song: Song): void {
     const index = this.songs.indexOf(song);
     if (index !== -1) {
       this.songs.splice(index, 1);
     }
   }
   /**
-   * Muestra la información de la playlist.
-   * @returns Devuelve una cadena con la información de la playlist.
+   * Muestra la información del género.
+   * @returns Devuelve una cadena con la información del género.
    */
-  showInfo(): string {
+  public showInfo(): string {
     const info: string = `GÉNERO ${this.name}
     -Grupos/Artistas:
       ${this.getMusiciansNames().join('\n      ')}
@@ -143,7 +143,7 @@ export class Genre extends BasicData {
    * Devuelve los nombres de los grupos/artistas del género.
    * @returns Devuelve un array con los nombres de los grupos/artistas del género.
    */
-  getMusiciansNames(): string[] {
+  public getMusiciansNames(): string[] {
     let musiciansNames: string[] = [];
     this.musicians.forEach((musician) => {
       musiciansNames.push(musician.getName());
@@ -154,7 +154,7 @@ export class Genre extends BasicData {
    * Devuelve los nombres de los álbumes del género.
    * @returns Devuelve un array con los nombres de los álbumes del género.
    */
-  getAlbumsNames(): string[] {
+  public getAlbumsNames(): string[] {
     let albumsNames: string[] = [];
     this.albums.forEach((album) => {
       albumsNames.push(album.getName());
@@ -165,7 +165,7 @@ export class Genre extends BasicData {
    * Devuelve los nombres de las canciones del género.
    * @returns Devuelve un array con los nombres de las canciones del género.
    */
-  getSongsNames(): string[] {
+  public getSongsNames(): string[] {
     let songsNames: string[] = [];
     this.songs.forEach((song) => {
       songsNames.push(song.getName());

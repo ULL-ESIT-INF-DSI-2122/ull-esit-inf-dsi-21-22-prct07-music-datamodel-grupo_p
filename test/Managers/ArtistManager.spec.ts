@@ -1,4 +1,4 @@
-/* import 'mocha';
+import 'mocha';
 import {expect} from 'chai';
 import {ArtistManager} from '../../src/Managers/ArtistManager';
 import {AlbumManager} from '../../src/Managers/AlbumManager';
@@ -14,16 +14,16 @@ describe('Pruebas de la clase Artist Manager', () => {
   let WhatAWorderfulWorld = albumManager.searchByName('What A Wonderful World');
   artistManager = ArtistManager.getArtistManager();
   LaVieEnRose = songManager.searchByName('La vie en rose');
-  const LouisArmstrong = new Artist('Louis Armstrong', ['Hot Five'], ['Jazz'], [WhatAWorderfulWorld], [LaVieEnRose] );
+  const testArtist = new Artist('TestArtist', ['Hot Five'], ['Jazz'], [WhatAWorderfulWorld], [LaVieEnRose] );
   it(`GenreManager.getGenreManager() is not equal null`, () => {
     expect(artistManager).not.to.be.equal(null);
   });
-  it(`Remove "Louis Armstrong" to collection`, () => {
-    artistManager.remove(LouisArmstrong);
-    expect(artistManager.getList().includes('Louis Armstrong')).to.be.eql(true);
-  });
   it(`Add "Louis armstrong" to collection`, () => {
-    artistManager.add(LouisArmstrong);
-    expect(artistManager.getList().includes('Louis Armstrong')).to.be.eql(true);
+    artistManager.add(testArtist);
+    expect(artistManager.getList().includes('TestArtist')).to.be.eql(true);
   });
-});*/
+  it(`Remove "Louis Armstrong" to collection`, () => {
+    artistManager.remove(testArtist);
+    expect(artistManager.getList().includes('TestArtist')).to.be.eql(false);
+  });
+});

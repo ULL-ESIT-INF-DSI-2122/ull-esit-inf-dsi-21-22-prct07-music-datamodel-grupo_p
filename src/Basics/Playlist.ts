@@ -43,14 +43,14 @@ export class Playlist extends BasicData {
    * Getter para la propiedad `songs`.
    * @returns Devuelve el valor de`songs`.
    */
-  getSongs(): Song[] {
+  public getSongs(): Song[] {
     return this.songs;
   }
   /**
    * Setter para la propiedad `songs`.
    * @param songs Nuevo valor de `songs`.
    */
-  setSongs(songs: Song[]): void {
+  public setSongs(songs: Song[]): void {
     this.songs = songs;
     this.recalculateDuration();
     this.updateGenres();
@@ -59,7 +59,7 @@ export class Playlist extends BasicData {
    * Agrega una canción a la playlist.
    * @param newSong Canción a agregar.
    */
-  addSong(newSong: Song): void {
+  public addSong(newSong: Song): void {
     if (this.songs.find((m) => m === newSong) === undefined) {
       this.songs.push(newSong);
     }
@@ -70,7 +70,7 @@ export class Playlist extends BasicData {
    * Elimina una canción de la playlist.
    * @param song Canción a eliminar.
    */
-  deleteSong(song: Song): void {
+  public deleteSong(song: Song): void {
     const index = this.songs.indexOf(song);
     this.songs.splice(index, 1);
     this.recalculateDuration();
@@ -80,34 +80,34 @@ export class Playlist extends BasicData {
    * Getter para la propiedad `duration`.
    * @returns Devuelve el valor de`duration`.
    */
-  getDuration(): Duration {
+  public getDuration(): Duration {
     return this.duration;
   }
   /**
    * Getter para la propiedad `genres`.
    * @returns Devuelve el valor de`genres`.
    */
-  getGenres(): Genre[] {
+  public getGenres(): Genre[] {
     return this.genres;
   }
   /**
    * Getter para la propiedad `systemPlaylist`.
    * @returns Devuelve el valor de`systemPlaylist`.
    */
-  getSystemPlaylist(): boolean {
+  public getSystemPlaylist(): boolean {
     return this.systemPlaylist;
   }
   /**
    * Setter para la propiedad `systemPlaylist`.
    * @param flag Nuevo valor de `systemPlaylist`.
    */
-  setSystemPlaylist(flag: boolean): void {
+  public setSystemPlaylist(flag: boolean): void {
     this.systemPlaylist = flag;
   }
   /**
    * Recalcula la duración total de la playlist.
    */
-  recalculateDuration(): void {
+  public recalculateDuration(): void {
     let minuts: number = 0;
     let seconds: number = 0;
     this.songs.forEach((song) => {
@@ -120,7 +120,7 @@ export class Playlist extends BasicData {
   /**
    * Actualiza los géneros de la playlist a partir de sus canciones.
    */
-  updateGenres() {
+  public updateGenres() {
     this.genres = [];
     this.songs.forEach((s) => {
       s.getGenres().forEach((g) => {
@@ -136,7 +136,7 @@ export class Playlist extends BasicData {
    * @param order Variable para indicar el orden.
    * @returns Devuelve un array con los nombres de las canciones en el orden indicado.
    */
-  getSongsNames(order: Order = 0): string[] {
+  public getSongsNames(order: Order = 0): string[] {
     switch (order) {
       case 0:
         this.songs.sort(function(a, b) {
@@ -277,7 +277,7 @@ export class Playlist extends BasicData {
    * Muestra la información de la playlist.
    * @returns Devuelve una cadena con la información de la playlist.
    */
-  showInfo(order: Order = 0): string {
+  public showInfo(order: Order = 0): string {
     const info: string = `PLAYLIST ${this.name}
     -Géneros: ${this.getGenresNames()}
     -Playlist original: ${(this.systemPlaylist ? 'Sí' : 'No')}
