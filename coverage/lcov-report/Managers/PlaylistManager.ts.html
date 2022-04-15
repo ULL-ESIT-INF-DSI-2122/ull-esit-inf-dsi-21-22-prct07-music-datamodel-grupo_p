@@ -23,30 +23,30 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">25% </span>
+                <span class="strong">65% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>5/20</span>
-            </div>
-        
-            
-            <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
-                <span class="quiet">Branches</span>
-                <span class='fraction'>0/4</span>
-            </div>
-        
-            
-            <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
-                <span class="quiet">Functions</span>
-                <span class='fraction'>0/6</span>
+                <span class='fraction'>13/20</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
                 <span class="strong">25% </span>
+                <span class="quiet">Branches</span>
+                <span class='fraction'>1/4</span>
+            </div>
+        
+            
+            <div class='fl pad1y space-right2'>
+                <span class="strong">50% </span>
+                <span class="quiet">Functions</span>
+                <span class='fraction'>3/6</span>
+            </div>
+        
+            
+            <div class='fl pad1y space-right2'>
+                <span class="strong">65% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>5/20</span>
+                <span class='fraction'>13/20</span>
             </div>
         
             
@@ -61,7 +61,7 @@
             </div>
         </template>
     </div>
-    <div class='status-line low'></div>
+    <div class='status-line medium'></div>
     <pre><table class="coverage">
 <tr><td class="line-count quiet"><a name='L1'></a><a href='#L1'>1</a>
 <a name='L2'></a><a href='#L2'>2</a>
@@ -158,11 +158,11 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -170,10 +170,10 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -223,23 +223,23 @@ export class PlaylistManager extends Manager&lt;Playlist&gt; {
   /**
    * Constructor de la clase `PlaylistManager`.
    */
-<span class="fstat-no" title="function not covered" >  private constructor() {</span>
-<span class="cstat-no" title="statement not covered" >    super();</span>
-<span class="cstat-no" title="statement not covered" >    this.database = lowdb(new FileSync('src/Data/Playlists.json'));</span>
-    let dbItems = <span class="cstat-no" title="statement not covered" >this.database.get('playlists').value();</span>
-<span class="cstat-no" title="statement not covered" >    dbItems.forEach(<span class="fstat-no" title="function not covered" >(i</span>tem) =&gt; {</span>
-<span class="cstat-no" title="statement not covered" >      this.collection.add(Playlist.deserialize(item));</span>
+  private constructor() {
+    super();
+    this.database = lowdb(new FileSync('src/Data/Playlists.json'));
+    let dbItems = this.database.get('playlists').value();
+    dbItems.forEach((item) =&gt; {
+      this.collection.add(Playlist.deserialize(item));
     });
   }
   /**
    * Devuelve la instancia de la clase `PlaylistManager`.
    * @returns Devuelve la única instancia de la clase.
    */
-  public <span class="fstat-no" title="function not covered" >static </span>getPlaylistManager(): PlaylistManager {
-<span class="cstat-no" title="statement not covered" >    if (!PlaylistManager.playlistsManager) {</span>
-<span class="cstat-no" title="statement not covered" >      PlaylistManager.playlistsManager = new PlaylistManager();</span>
+  public static getPlaylistManager(): PlaylistManager {
+    <span class="missing-if-branch" title="else path not taken" >E</span>if (!PlaylistManager.playlistsManager) {
+      PlaylistManager.playlistsManager = new PlaylistManager();
     }
-<span class="cstat-no" title="statement not covered" >    return PlaylistManager.playlistsManager;</span>
+    return PlaylistManager.playlistsManager;
   }
   /**
    * Actualiza los géneros de todas las playlists.
@@ -268,7 +268,7 @@ export class PlaylistManager extends Manager&lt;Playlist&gt; {
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at Thu Apr 14 2022 22:14:52 GMT+0000 (Coordinated Universal Time)
+                at Fri Apr 15 2022 09:15:00 GMT+0000 (Coordinated Universal Time)
             </div>
         <script src="../prettify.js"></script>
         <script>

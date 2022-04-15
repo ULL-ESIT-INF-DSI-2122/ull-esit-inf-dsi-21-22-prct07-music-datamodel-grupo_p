@@ -106,6 +106,9 @@ export class Artist extends BasicData {
     const index = this.groups.indexOf(groupDelete);
     if (index !== -1) {
       this.groups.splice(index, 1);
+      if (this.getGroups().length === 0) {
+        this.setGroups(['-']);
+      }
     }
   }
   public removeGenre(genre: string): void {

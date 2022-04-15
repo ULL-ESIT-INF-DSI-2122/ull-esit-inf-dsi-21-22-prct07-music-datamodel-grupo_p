@@ -58,7 +58,7 @@ describe('Pruebas de la clase Artist', () => {
     genero2 = genreManager.searchByName('Pop');
     album = albumManager.searchByName('American Recordings');
     album2 = albumManager.searchByName('Overexposed');
-    cancion1 = songManager.searchByName('Digo Lo Que Pienso');
+    cancion1 = songManager.searchByName('Digo lo que pienso');
     cancion2 = songManager.searchByName('Drive On');
     cancion3 = songManager.searchByName('Why Me Lord');
     JhonnyCash = new Artist('Jhonny Cash', [grupo], [genero], [album], [cancion1, cancion2]);
@@ -135,21 +135,21 @@ describe('Pruebas de la clase Artist', () => {
   });
   it('Delete group to which the artist belongs', () => {
     JhonnyCash.removeGroup('Landsberg Barbarians');
-    expect(JhonnyCash.getGroups()).to.be.eql([]);
+    expect(JhonnyCash.getGroups()).to.be.eql(['-']);
   });
   it('ShowInfo', () => {
-    expect(JhonnyCash.showInfo()).to.be.equal(`ARTISTA Jhonny Cash\n
+    expect(JhonnyCash.showInfo()).to.be.equal(`ARTISTA Jhonny Cash
     -Nombre: Jhonny Cash
     -Grupos: -
     -Genero/s: Country
     -Albums:
       American Recordings
     -Canciones:
-      Drive On
-      Why Me Lord`);
+      Digo lo que pienso
+      Drive On`);
   });
   it('showSongsOrder', () => {
-    expect(JhonnyCash.showSongsOrder()).to.be.equal(`Drive On\n Why Me Lord`);
+    expect(JhonnyCash.showSongsOrder()).to.be.equal(`Digo lo que pienso\n  Drive On`);
   });
   it('showAlbumOrder', () => {
     expect(JhonnyCash.showAlbumOrder()).to.be.equal(`American Recordings`);
@@ -158,10 +158,10 @@ describe('Pruebas de la clase Artist', () => {
     expect(JhonnyCash.showAlbumYearOrder()).to.be.equal(`American Recordings`);
   });
   it('showSingles', () => {
-    expect(JhonnyCash.showSingles()).to.be.equal('');
+    expect(JhonnyCash.showSingles()).to.be.equal('Digo lo que pienso');
   });
   it('showByReproductions', () => {
-    expect(JhonnyCash.showByReproductions()).to.be.equal(`Drive On\n  Why Me Lord`);
+    expect(JhonnyCash.showByReproductions()).to.be.equal(`Drive On\n  Digo lo que pienso`);
   });
   it('showPlayListAsociate', () => {
     expect(JhonnyCash.showPlayListAsociate()).to.be.equal(``);
