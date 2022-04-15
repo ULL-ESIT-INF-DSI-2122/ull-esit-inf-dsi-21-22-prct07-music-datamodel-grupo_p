@@ -145,8 +145,8 @@ export class Album extends BasicData {
   }
 
   /**
-   * Devuelve los nombres de las canciones del género.
-   * @returns Devuelve un array con los nombres de las canciones del género.
+   * Devuelve los nombres de las canciones del álbum.
+   * @returns Devuelve un array con los nombres de las canciones del álbum.
    */
   public getSongsNames(): string[] {
     let songsNames: string[] = [];

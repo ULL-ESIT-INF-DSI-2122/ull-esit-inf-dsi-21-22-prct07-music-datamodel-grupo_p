@@ -1,4 +1,4 @@
-import {Song, Duration} from '../Basics/Song';
+import {Song} from '../Basics/Song';
 import {Manager} from './Manager';
 import lowdb = require('lowdb');
 import FileSync = require('lowdb/adapters/FileSync');
@@ -8,16 +8,30 @@ import {GenreManager} from './GenreManager';
 import {AlbumManager} from './AlbumManager';
 import {PlaylistManager} from './PlaylistManager';
 import {GroupManager} from './GroupManager';
+import {Duration} from '../Basics/Playlist';
 
-
+/**
+ * Tipo para almacenar canciones mediante Lowdb.
+ */
 type schemaType = {
     songs: SongInterface[]
 };
 
-
+/**
+ * Clase para gestionar las canciones.
+ */
 export class SongManager extends Manager<Song> {
+  /**
+   * Instancia de la clase `SongManager`.
+   */
   private static SongManager: SongManager;
+  /**
+   * Base de datos de las canciones.
+   */
   private database: lowdb.LowdbSync<schemaType>;
+  /**
+   * Constructor de la clase `SongManager`.
+   */
   private constructor() {
     super();
     this.database = lowdb(new FileSync('src/Data/Songs.json'));
@@ -29,8 +43,8 @@ export class SongManager extends Manager<Song> {
     }
   }
   /**
-   * Patron Singlenton
-   * @returns la única instancia de la clase SongManager
+   * Devuelve la instancia de la clase `GroupManager`.
+   * @returns Devuelve la única instancia de la clase.
    */
   public static getSongManager(): SongManager {
     if (!SongManager.SongManager) {
@@ -39,13 +53,12 @@ export class SongManager extends Manager<Song> {
     return SongManager.SongManager;
   }
 
-
   /**
-   * Función que añade un canción a la base
-   * @param song que será agregado a la base
+   * Agrega una nueva canción a la colección.
+   * @param song Canción a agregar
    */
-  addSong(song: Song): void {
-    // add in artist
+  public addSong(song: Song): void {
+    // Artist
     let author = song.getAuthorName();
     let artistManager = ArtistManager.getArtistManager();
     artistManager.getCollection().forEach((artist) => {
@@ -54,7 +67,7 @@ export class SongManager extends Manager<Song> {
       }
     });
     artistManager.store();
-    // add in genre
+    // Genre
     let genreManager = GenreManager.getGenreManager();
     genreManager.getCollection().forEach((genre) => {
       if (song.getGenres().find((g) => g === genre.getName())) {
@@ -62,17 +75,17 @@ export class SongManager extends Manager<Song> {
       }
     });
     genreManager.store();
-
+    // Song
     this.add(song);
     this.store();
   }
 
   /**
-   * Elimina la canción de la colección
-   * @param song de tipo Song
+   * Elimina una canción de la colección.
+   * @param song Canción a eliminar.
    */
-  removeSong(song: Song): void {
-    // delete from album
+  public removeSong(song: Song): void {
+    // Album
     const albumManager: AlbumManager = AlbumManager.getAlbumManager();
     albumManager.getCollection().forEach((album) => {
       if (album.getSongs().find((s) => s === song) !== undefined) {
@@ -83,7 +96,7 @@ export class SongManager extends Manager<Song> {
       }
     });
     albumManager.store();
-    // delete in artist
+    // Artist
     const artistManager: ArtistManager = ArtistManager.getArtistManager();
     artistManager.getCollection().forEach((artist) => {
       if (artist.getSongs().find((s) => s === song) !== undefined) {
@@ -94,7 +107,7 @@ export class SongManager extends Manager<Song> {
       }
     });
     artistManager.store();
-    // delete in genre
+    // Genre
     const genreManager: GenreManager = GenreManager.getGenreManager();
     genreManager.getCollection().forEach((genre) => {
       if (genre.getSongs().find((s) => s === song) !== undefined) {
@@ -105,7 +118,7 @@ export class SongManager extends Manager<Song> {
       }
     });
     genreManager.store();
-    // delete from playlist
+    // Playlist
     const playlistManager: PlaylistManager = PlaylistManager.getPlaylistManager();
     playlistManager.getCollection().forEach((playlist) => {
       if (playlist.getSongs().find((s) => s === song) !== undefined) {
@@ -117,12 +130,23 @@ export class SongManager extends Manager<Song> {
     });
     playlistManager.update();
     playlistManager.store();
-
+    // Song
     this.remove(song);
     this.store();
   }
 
-  editSong(song: Song, newName: string, newAuthor: string, newDuration: Duration, newGenre: string[],
+  /**
+   * Edita una canción de la colección.
+   * @param song Canción a editar
+   * @param newName Nombre
+   * @param newAuthor Autor
+   * @param newDuration Duración
+   * @param newGenre Género
+   * @param newDAtePublication Fecha de publicación
+   * @param changeSingle Flag que indica si la canción es un single
+   * @param changeReproductions Número de reproducciones
+   */
+  public editSong(song: Song, newName: string, newAuthor: string, newDuration: Duration, newGenre: string[],
       newDAtePublication: Date, changeSingle: boolean, changeReproductions: number): void {
     song.setName(newName);
     song.setAuthorName(newAuthor);
@@ -131,7 +155,6 @@ export class SongManager extends Manager<Song> {
     song.setDatePublication(newDAtePublication);
     song.setIsSingle(changeSingle);
     song.setReproductions(changeReproductions);
-
     // Album
     AlbumManager.getAlbumManager().store();
     // Artist
@@ -170,10 +193,9 @@ export class SongManager extends Manager<Song> {
   }
 
   /**
-   * Alamacena la información de la canción de acuerdo a lo
-   * especificado en la schemaType.
+   * Guarda las canciones en la base de datos.
    */
-  store() {
+  public store(): void {
     this.database.set('songs', [...this.collection.values()]).write();
   }
 }
