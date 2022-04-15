@@ -27,6 +27,8 @@ Integrantes:
 </p>
 
 
+[GitHub Pages](https://ull-esit-inf-dsi-2122.github.io/ull-esit-inf-dsi-21-22-prct07-music-datamodel-grupo_p/)
+
 ## __Planteamiento__
 Para realizar esta práctica hemos planteado el siguiente esquema de clases:
 - Seis clases básicas de nuestro proyecto que representan canciones, álbumes, artistas, grupos, géneros musicales y playlists (todas estas heredan de la clase abstracta BasicData).
