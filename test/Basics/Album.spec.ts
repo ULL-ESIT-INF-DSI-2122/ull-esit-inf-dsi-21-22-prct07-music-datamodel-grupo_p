@@ -65,4 +65,11 @@ describe('Pruebas de la clase Album', () => {
     AmericanRecordings.addGenre(pop);
     expect(AmericanRecordings.getGenres().includes('Pop')).to.be.equal(true);
   });
+  it('Remove Genre to the album "American Recordings"', () => {
+    AmericanRecordings.removeGenre(pop.getName());
+    expect(AmericanRecordings.getGenres().includes('Pop')).to.be.equal(false);
+  });
+  it('Songs from the album "American Recordings"', () => {
+    expect(AmericanRecordings.getSongsNames()).to.be.eql(['Drive On']);
+  });
 });
