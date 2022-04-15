@@ -33,6 +33,10 @@ describe('Pruebas de la clase Album', () => {
   it('Return songs of Album "Entre los que quieran"', () => {
     expect(EntreLosQueQuieran.getSongs()).to.be.eql([LaVueltaAlMundo]);
   });
+  it('Return songs of Album "Entre los que quieran"', () => {
+    EntreLosQueQuieran.setSongs([LaVueltaAlMundo]);
+    expect(EntreLosQueQuieran.getSongs()).to.be.eql([LaVueltaAlMundo]);
+  });
   it('Edit name of album "American Recordings"', () => {
     AmericanRecordings.setName('American recordings');
     expect(AmericanRecordings.getName()).to.be.equal('American recordings');
@@ -57,6 +61,10 @@ describe('Pruebas de la clase Album', () => {
     AmericanRecordings.addSong(DriveOn);
     expect(AmericanRecordings.getSongs().includes(DriveOn)).to.be.equal(true);
   });
+  it('Not Add Song to the album "American Recordings"', () => {
+    AmericanRecordings.addSong(DriveOn);
+    expect(AmericanRecordings.getSongs().includes(DriveOn)).to.be.equal(true);
+  });
   it('Remove Song to the album "American Recordings"', () => {
     AmericanRecordings.removeSong(DigoLoQuePienso);
     expect(AmericanRecordings.getSongs().includes(DigoLoQuePienso)).to.be.equal(false);
@@ -64,5 +72,16 @@ describe('Pruebas de la clase Album', () => {
   it('Add Genre to the album "American Recordings"', () => {
     AmericanRecordings.addGenre(pop);
     expect(AmericanRecordings.getGenres().includes('Pop')).to.be.equal(true);
+  });
+  it('Not add Genre to the album "American Recordings"', () => {
+    AmericanRecordings.addGenre(pop);
+    expect(AmericanRecordings.getGenres().includes('Pop')).to.be.equal(true);
+  });
+  it('Remove Genre to the album "American Recordings"', () => {
+    AmericanRecordings.removeGenre(pop.getName());
+    expect(AmericanRecordings.getGenres().includes('Pop')).to.be.equal(false);
+  });
+  it('Songs from the album "American Recordings"', () => {
+    expect(AmericanRecordings.getSongsNames()).to.be.eql(['Drive On']);
   });
 });

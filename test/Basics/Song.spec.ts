@@ -2,11 +2,15 @@ import 'mocha';
 import {expect} from 'chai';
 import {Song} from '../../src/Basics/Song';
 import {Duration} from '../../src/Basics/Playlist';
+import {GenreManager} from '../../src/Managers/GenreManager';
 
 
 describe('Pruebas de la clase Song', () => {
   let MarshallMatter: Song;
   let LaVieEnRose: Song;
+  let genre: GenreManager;
+  genre = GenreManager.getGenreManager();
+  const pop = genre.searchByName('Pop');
   before( function() {
     const dateMarshall = new Date('2000-05-23');
     const durationMarshall: Duration = [3, 53];
@@ -48,9 +52,9 @@ describe('Pruebas de la clase Song', () => {
     LaVieEnRose.setDuration(durationLaVieEnRose);
     expect(LaVieEnRose.getDuration()).to.be.eql([2, 55]);
   });
-  it(`Edit genre of the song La vie en rose. From "Rap" to "Jazz"'`, () => {
-    LaVieEnRose.setGenres(['Jazz']);
-    expect(LaVieEnRose.getGenres()).to.be.eql(['Jazz']);
+  it(`Edit genre of the song "La vie en rose". Add genre "Jazz"'`, () => {
+    LaVieEnRose.setGenres(['Rap', 'Jazz']);
+    expect(LaVieEnRose.getGenres()).to.be.eql(['Rap', 'Jazz']);
   });
   it(`Edit date publication of the song La vie en rose.`, () => {
     const dateLaVieEnRose = new Date('1950-06-20');
@@ -65,8 +69,25 @@ describe('Pruebas de la clase Song', () => {
     LaVieEnRose.setReproductions(50000);
     expect(LaVieEnRose.getReproductions()).to.be.equal(50000);
   });
+  it(`Delete genre the song "La Vie En Rose"`, () => {
+    LaVieEnRose.removeGenre('Rap');
+    expect(LaVieEnRose.getGenres()).to.be.eql(['Jazz']);
+  });
+  it(`Add genre the song "La Vie En Rose"`, () => {
+    LaVieEnRose.addGenre(pop);
+    expect(LaVieEnRose.getGenres()).to.be.eql(['Jazz', 'Pop']);
+  });
+  it(`Not add genre the song "La Vie En Rose"`, () => {
+    LaVieEnRose.addGenre(pop);
+    expect(LaVieEnRose.getGenres()).to.be.eql(['Jazz', 'Pop']);
+  });
   it(`Show info of the song La vie en rose.`, () => {
     expect(LaVieEnRose.showInfo()).to.be.equal(`CANCIÓN La vie en rose\n    -Autor: Louis Armstrong\n    -Duración: 2min 55s\n`+
-    `    -Género/s: Jazz\n    -Single: Si\n    -Numero de reproducciones: 50000`);
+    `    -Género/s: Jazz,Pop\n    -Single: Si\n    -Numero de reproducciones: 50000`);
+  });
+  it(`Show info of the song La vie en rose.`, () => {
+    LaVieEnRose.setIsSingle(false);
+    expect(LaVieEnRose.showInfo()).to.be.equal(`CANCIÓN La vie en rose\n    -Autor: Louis Armstrong\n    -Duración: 2min 55s\n`+
+    `    -Género/s: Jazz,Pop\n    -Single: No\n    -Numero de reproducciones: 50000`);
   });
 });
