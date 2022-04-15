@@ -13,7 +13,7 @@ import {Duration} from '../Basics/Playlist';
 /**
  * Tipo para almacenar canciones mediante Lowdb.
  */
-type schemaType = {
+export type schemaType = {
     songs: SongInterface[]
 };
 

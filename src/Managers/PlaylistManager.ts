@@ -7,7 +7,7 @@ import {PlaylistInterface} from '../Interfaces/PlaylistInterface';
 /**
  * Tipo para almacenar playlists mediante Lowdb.
  */
-type schemaType = {
+export type schemaType = {
     playlists: PlaylistInterface[]
 };
 

@@ -1,4 +1,9 @@
 {
-    "entryPoints": ["src/index.ts"],
+    "entryPoints": ["src/Basics/Album.ts", "src/Basics/Artist.ts", "src/Basics/BasicData.ts", "src/Basics/Genre.ts",
+        "src/Basics/Group.ts","src/Basics/Playlist.ts","src/Basics/Song.ts","src/Managers/AlbumManager.ts", "src/Managers/ArtistManager.ts",
+        "src/Managers/GenreManager.ts","src/Managers/GroupManager.ts","src/Managers/PlaylistManager.ts","src/Managers/SongManager.ts",
+        "src/Inquirer/AlbumMenu.ts", "src/Inquirer/ArtistMenu.ts", "src/Inquirer/GenresMenu.ts","src/Inquirer/GroupsMenu.ts",
+        "src/Inquirer/PlaylistsMenu.ts","src/Inquirer/SongMenu.ts","src/Interfaces/AlbumInterface.ts", "src/Interfaces/ArtistInterface.ts", "src/Interfaces/GenreInterface.ts","src/Interfaces/GroupInterface.ts",
+        "src/Interfaces/PlaylistInterface.ts","src/Interfaces/SongInterface.ts"],
     "out": "./docs"
 }

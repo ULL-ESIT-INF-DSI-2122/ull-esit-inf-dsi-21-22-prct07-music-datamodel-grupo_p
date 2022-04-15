@@ -14,7 +14,7 @@ import {PlaylistManager} from './PlaylistManager';
 /**
  * Tipo para almacenar artistas mediante Lowdb.
  */
-type schemaType = {
+export type schemaType = {
     artists: ArtistInterface[]
 };
 

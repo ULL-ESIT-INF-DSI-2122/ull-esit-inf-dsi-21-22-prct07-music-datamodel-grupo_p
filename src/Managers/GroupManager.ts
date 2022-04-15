@@ -14,7 +14,7 @@ import {PlaylistManager} from './PlaylistManager';
 /**
  * Tipo para almacenar grupos mediante Lowdb.
  */
-type schemaType = {
+export type schemaType = {
     groups: GroupInterface[]
 };
 /**

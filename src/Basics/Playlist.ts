@@ -305,7 +305,7 @@ export class Playlist extends BasicData {
    */
   private getGenresNames(): string[] {
     let genresNames: string[] = [];
-    this.genres.map((genre) => {
+    this.genres.forEach((genre) => {
       genresNames.push(genre.getName());
     });
     return genresNames;

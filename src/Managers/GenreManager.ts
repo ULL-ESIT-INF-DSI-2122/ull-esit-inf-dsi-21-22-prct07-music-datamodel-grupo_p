@@ -16,7 +16,7 @@ import {Artist} from '../Basics/Artist';
 /**
  * Tipo para almacenar géneros mediante Lowdb.
  */
-type schemaType = {
+export type schemaType = {
     genres: GenreInterface[]
 };
 

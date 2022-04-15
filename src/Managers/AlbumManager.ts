@@ -13,7 +13,7 @@ import {PlaylistManager} from './PlaylistManager';
 /**
  * Tipo para almacenar álbumes mediante Lowdb.
  */
-type schemaType = {
+export type schemaType = {
     albums: AlbumInterface[]
 };
 /**
