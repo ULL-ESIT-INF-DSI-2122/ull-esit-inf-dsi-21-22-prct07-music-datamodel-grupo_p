@@ -1,6 +1,7 @@
 import 'mocha';
 import {expect} from 'chai';
-import {Song, Duration} from '../../src/Basics/Song';
+import {Song} from '../../src/Basics/Song';
+import {Duration} from '../../src/Basics/Playlist';
 
 
 describe('Pruebas de la clase Song', () => {

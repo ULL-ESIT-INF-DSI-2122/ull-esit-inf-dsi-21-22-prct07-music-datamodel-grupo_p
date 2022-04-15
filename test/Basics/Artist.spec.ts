@@ -13,6 +13,7 @@ describe('Pruebas de la clase Artist', () => {
   let JhonnyCash: Artist;
   let grupo: string;
   let grupo2: string;
+  let grupo3: string;
   let album: Album;
   let album2: Album;
   let genero: string;
@@ -27,6 +28,7 @@ describe('Pruebas de la clase Artist', () => {
     genero = 'Country';
     grupo = '-';
     grupo2 = 'set';
+    grupo3 = 'grupo3';
     albumManager = AlbumManager.getAlbumManager();
     songManager = SongManager.getSongManager();
     genreManager = GenreManager.getGenreManager();
@@ -105,12 +107,16 @@ describe('Pruebas de la clase Artist', () => {
     expect(JhonnyCash.getAlbums()).to.be.eql([album]);
   });
   it('Add a new group to which the artist belongs', () => {
-    JhonnyCash.addGroup('Landsberg Barbarians');
-    expect(JhonnyCash.getGroups()).to.be.eql(['Landsberg Barbarians']);
+    JhonnyCash.addGroup(grupo2);
+    expect(JhonnyCash.getGroups()).to.be.eql([grupo2]);
+    JhonnyCash.addGroup(grupo3);
+    expect(JhonnyCash.getGroups()).to.be.eql([grupo2, grupo3]);
   });
   it('Delete group to which the artist belongs', () => {
-    JhonnyCash.removeGroup('Landsberg Barbarians');
-    expect(JhonnyCash.getGroups()).to.be.eql(['-']);
+    JhonnyCash.removeGroup(grupo2);
+    expect(JhonnyCash.getGroups()).to.be.eql([grupo3]);
+    JhonnyCash.removeGroup(grupo3);
+    expect(JhonnyCash.getGroups()).to.be.eql([grupo]);
   });
   it('ShowInfo', () => {
     expect(JhonnyCash.showInfo()).to.be.equal(`ARTISTA Johnny Cash
@@ -125,18 +131,22 @@ describe('Pruebas de la clase Artist', () => {
   });
   it('showSongsOrder', () => {
     expect(JhonnyCash.showSongsOrder()).to.be.equal(`Digo lo que pienso\n  Drive On`);
+    expect(JhonnyCash.showSongsOrder(false)).to.be.equal(`Drive On\n  Digo lo que pienso`);
   });
   it('showAlbumOrder', () => {
     expect(JhonnyCash.showAlbumOrder()).to.be.equal(`American Recordings`);
+    expect(JhonnyCash.showAlbumOrder(false)).to.be.equal(`American Recordings`);
   });
   it('showAlbumYearOrder', () => {
     expect(JhonnyCash.showAlbumYearOrder()).to.be.equal(`American Recordings`);
+    expect(JhonnyCash.showAlbumYearOrder(false)).to.be.equal(`American Recordings`);
   });
   it('showSingles', () => {
     expect(JhonnyCash.showSingles()).to.be.equal('Digo lo que pienso');
   });
   it('showByReproductions', () => {
     expect(JhonnyCash.showByReproductions()).to.be.equal(`Drive On\n  Digo lo que pienso`);
+    expect(JhonnyCash.showByReproductions(false)).to.be.equal(`Digo lo que pienso\n  Drive On`);
   });
   it('showPlayListAsociate', () => {
     expect(JhonnyCash.showPlayListAsociate()).to.be.equal(``);

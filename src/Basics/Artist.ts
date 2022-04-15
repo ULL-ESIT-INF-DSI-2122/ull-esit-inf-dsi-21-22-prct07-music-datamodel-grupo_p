@@ -232,12 +232,8 @@ export class Artist extends BasicData {
    * @returns Devuelve una cadena con los álbumes del artista ordenados por la fecha de lanzamiento.
    */
   public showAlbumYearOrder(ascending: boolean = true): string {
-    let albums = this.getAlbums().sort((albumA, albumB) => {
-      return albumA.getYear() - albumB.getYear();
-    });
-    let albumNames: string[] = albums.map((album) => {
-      return album.getName();
-    });
+    let albums = this.getAlbums().sort((albumA, albumB) => albumA.getYear() - albumB.getYear());
+    let albumNames: string[] = albums.map((album) => album.getName());
     if (ascending) {
       console.log('  '+albumNames.join('\n  '));
     } else {
@@ -284,9 +280,7 @@ export class Artist extends BasicData {
   public showPlayListAsociate(): string {
     const playLists: Playlist[] = Array.from(PlaylistManager.getPlaylistManager().getCollection());
     const playListsWithAuthor: Playlist[] = playLists.filter((playList) => playList.getMusicians().includes(this.getName()));
-    const asociatePlaylists: string[] = playListsWithAuthor.map((playlist) => {
-      return playlist.getName();
-    });
+    const asociatePlaylists: string[] = playListsWithAuthor.map((playlist) => playlist.getName());
     console.log('  '+asociatePlaylists.join('\n  '));
     return asociatePlaylists.join('\n  ');
   }
