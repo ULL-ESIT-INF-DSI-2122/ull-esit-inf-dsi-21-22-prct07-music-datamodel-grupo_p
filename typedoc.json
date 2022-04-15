@@ -5,5 +5,7 @@
         "src/Inquirer/AlbumMenu.ts", "src/Inquirer/ArtistMenu.ts", "src/Inquirer/GenresMenu.ts","src/Inquirer/GroupsMenu.ts",
         "src/Inquirer/PlaylistsMenu.ts","src/Inquirer/SongMenu.ts","src/Interfaces/AlbumInterface.ts", "src/Interfaces/ArtistInterface.ts", "src/Interfaces/GenreInterface.ts","src/Interfaces/GroupInterface.ts",
         "src/Interfaces/PlaylistInterface.ts","src/Interfaces/SongInterface.ts","src/Inquirer/MainMenu.ts","src/Managers/Manager.ts"],
-    "out": "./docs"
+    "out": "./docs",
+    "sort": "enum-value-ascending",
+    "name": "Informe Práctica 7"
 }
