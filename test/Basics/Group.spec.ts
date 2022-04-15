@@ -78,6 +78,10 @@ describe('Pruebas de la clase Groups', () => {
     TheHotFive.addGenre(genero2);
     expect(TheHotFive.getGenres()).to.be.eql(['Jazz', 'Rock']);
   });
+  it('Add Genre to belong it group', () => {
+    TheHotFive.addGenre(genero2);
+    expect(TheHotFive.getGenres()).to.be.eql(['Jazz', 'Rock']);
+  });
   it('Delete Genre to belong it group', () => {
     TheHotFive.removeGenre(genero2.getName());
     expect(TheHotFive.getGenres()).to.be.eql(['Jazz']);
@@ -101,6 +105,7 @@ describe('Pruebas de la clase Groups', () => {
   });
   it('showAlbumYearOrder', () => {
     expect(TheHotFive.showAlbumYearOrder()).to.be.equal(`  What A Wonderful World`);
+    expect(TheHotFive.showAlbumYearOrder(false)).to.be.equal(`  What A Wonderful World`);
   });
   it('showSongsOrder', () => {
     expect(TheHotFive.showSongsOrder()).to.be.equal(`  Cabaret
@@ -108,9 +113,15 @@ describe('Pruebas de la clase Groups', () => {
   The Home Fire
   The Sunshine Of Love
   There Must Be A Way`);
+    expect(TheHotFive.showSongsOrder(false)).to.be.equal(`  There Must Be A Way
+  The Sunshine Of Love
+  The Home Fire
+  Give Me Your Kisses
+  Cabaret`);
   });
   it('showAlbumOrder', () => {
     expect(TheHotFive.showAlbumOrder()).to.be.equal(`  What A Wonderful World`);
+    expect(TheHotFive.showAlbumOrder(false)).to.be.equal(`  What A Wonderful World`);
   });
   it('showSingles', () => {
     expect(TheHotFive.showSingles()).to.be.equal('  ');
@@ -121,6 +132,11 @@ describe('Pruebas de la clase Groups', () => {
   Give Me Your Kisses - 2120000
   There Must Be A Way - 5420000
   Cabaret - 6420000`);
+    expect(TheHotFive.showByReproductions(false)).to.be.equal(`  Cabaret - 6420000
+  There Must Be A Way - 5420000
+  Give Me Your Kisses - 2120000
+  The Home Fire - 820000
+  The Sunshine Of Love - 620000`);
   });
   it('showPlayListAsociate', () => {
     expect(TheHotFive.showPlayListAsociate()).to.be.equal(`  `);

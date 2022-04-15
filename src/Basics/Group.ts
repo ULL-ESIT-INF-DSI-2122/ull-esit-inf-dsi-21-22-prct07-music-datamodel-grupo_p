@@ -206,9 +206,7 @@ export class Group extends BasicData {
   public showPlayListAsociate(): string {
     const playLists: Playlist[] = [...PlaylistManager.getPlaylistManager().getCollection().values()];
     const playListsWithAuthor: Playlist[] = Array.from(playLists).filter((playList) => playList.getMusicians().includes(this.getName()));
-    const asociatePlaylists: string[] = playListsWithAuthor.map((playlist) => {
-      return playlist.getName();
-    });
+    const asociatePlaylists: string[] = playListsWithAuthor.map((playlist) => playlist.getName());
     const info = '  '+asociatePlaylists.join('\n  ');
     console.log(info);
     return info;
@@ -219,9 +217,7 @@ export class Group extends BasicData {
    */
   showSongsOrder(ascending: boolean = true): string {
     let info:string;
-    let nameList: string[] = this.getSongs().map((song) => {
-      return song.getName();
-    });
+    let nameList: string[] = this.getSongs().map((song) => song.getName());
     nameList = nameList.sort();
     if (ascending) {
       info = '  '+nameList.join('\n  ');
@@ -237,9 +233,7 @@ export class Group extends BasicData {
    */
   showAlbumOrder(ascending: boolean = true): string {
     let info: string;
-    let nameList: string[] = this.getAlbums().map((album) => {
-      return album.getName();
-    });
+    let nameList: string[] = this.getAlbums().map((album) => album.getName());
     nameList = nameList.sort();
     if (ascending) {
       info = '  '+nameList.join('\n  ');
@@ -255,12 +249,8 @@ export class Group extends BasicData {
    */
   showAlbumYearOrder(ascending: boolean = true): string {
     let info: string;
-    let albums = this.getAlbums().sort((albumA, albumB) => {
-      return albumA.getYear() - albumB.getYear();
-    });
-    let albumNames: string[] = albums.map((album) => {
-      return album.getName();
-    });
+    let albums = this.getAlbums().sort((albumA, albumB) => albumA.getYear() - albumB.getYear());
+    let albumNames: string[] = albums.map((album) => album.getName());
     if (ascending) {
       info = '  '+albumNames.join('\n  ');
     } else {
