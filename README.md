@@ -26,8 +26,18 @@ Integrantes:
     </a>
 </p>
 
+## __Índice de desarrollo__
 
-[GitHub Pages](https://ull-esit-inf-dsi-2122.github.io/ull-esit-inf-dsi-21-22-prct07-music-datamodel-grupo_p/)
+- [Planteamiento](#item1)
+- [Interfaces](#item2)
+- [Clases Básicas](#item3)
+- [Clases Gestoras](#item4)
+- [Menús](#item5)
+- [Diagramas UML](#item6)
+- [Conclusión](#item7)
+- **[GitHub Pages](https://ull-esit-inf-dsi-2122.github.io/ull-esit-inf-dsi-21-22-prct07-music-datamodel-grupo_p/)**
+
+<a name=item1></a>
 
 ## __Planteamiento__
 Para realizar esta práctica hemos planteado el siguiente esquema de clases:
@@ -80,6 +90,7 @@ src/Data:
   - Playlists.JSON
   
 
+<a name=item2></a>
 
 ## __Interfaces__
 
@@ -107,6 +118,7 @@ export interface GroupInterface {
   albums: AlbumInterface[]
 }
 ```
+<a name=item3></a>
 
 ## __Clases básicas__
   Estas clases representan los objetos que sirven como base del programa y de los cuáles se quiere poder gestionar sus datos. Para almacenar de manera correcta las propiedades principales de las clases básicas en sus respectivos ficheros JSON debemos elegir que atributos alamacenarán los propios objetos o simplemente una referencia a ellos, en nuestro caso utilizaremos un string con el nombre del objeto. Para ello hemos diseñado el siguiente esquema de almacenamiento para las clases básicas:
@@ -568,6 +580,7 @@ export class Playlist extends BasicData {
   }
 }
 ```
+<a name=item4></a>
 
  ## __Clases gestoras__
  Estas clases contienen las colecciones de cada objeto básico y se encargan de gestionar su funcionamiento. De esta manera las clases mánager gestionan el almacenamiento de datos mediante Lowdb, las operaciones de eliminación, creación y edición de los objetos correspondientes. Estas clases están desarrolladas siguiendo el patrón de diseño __Singleton__ para impedir que se cree más de una estancia de cada una de ellas.
@@ -771,6 +784,7 @@ export class PlaylistManager extends Manager<Playlist> {
   }
 }
 ```
+<a name=item5></a>
 
 ## __Menús__
 
@@ -1416,3 +1430,18 @@ function promptShowPlayList(artist: Artist) {
   });
 }
 ```
+<a name=item6></a>
+
+## __Diagramas UML__
+Para un mejor desarrollo y trabajo grupal hemos realizado los siguientes diagramas:
+
+- [Diagrama para las clases básicas](https://drive.google.com/file/d/132cqiMETumh8OX66JA3YTWGHB8jc_PtJ/view?usp=sharing)
+- [Diagrama para los manager](https://drive.google.com/file/d/19McW-2O4jKB-lqQvq7LbxABNje4yCDHb/view?usp=sharing)
+- [Diagrama para los menús](https://drive.google.com/file/d/1I3ZJPCh-jNuYGdeFds-wdSZKQ-iwNb3I/view?usp=sharing)
+
+<a name=item7></a>
+
+## __Conclusión__
+
+La elaboración de la práctica ha sido un poco compleja. 
+Nos hemos sumergido en el aprendizaje de Lowdb y el uso del módulo Inquirer para desarrollar lo que se nos había solicitado, previamente teniendo una buena base de las clases básicas. Estas `clases básicas` tomó tiempo desarrollarlas, cuando hablamos de que "nos tomó tiempo", fué porque se tenía que tener claramente definidos los tipos de los atributos de cada clase, entonces estas clases sufrieron varias modificaciones ya que dependian unas de otras, sin embargo creemos que hemos encontrado una solución factible para cumplir con los requisitos expuestos en el enunciado. No obstante, hemos utilizado herramientas de apoyo para el trabajo en equipo como **Live Share** de VSCode. También podemos decir que el desarrollo del código se ha trabajado con distintas ramas, que al final tenían que fusionarse con la rama **"terminado"**, la cual significaba como una rama de desarrollo. Una vez teniendo el código listo se fusionó con la rama **master** para que las **GitHubActions** se ejecuten como desde el principio se había configurado.
