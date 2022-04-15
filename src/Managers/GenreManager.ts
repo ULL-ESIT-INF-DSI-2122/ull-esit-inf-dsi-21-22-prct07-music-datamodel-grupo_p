@@ -56,7 +56,7 @@ export class GenreManager extends Manager<Genre> {
    * Elimina un género de la colección.
    * @param genre Género a eliminar.
    */
-  deleteGenre(genre: Genre) {
+  public deleteGenre(genre: Genre): void {
     // Song
     const songManager: SongManager = SongManager.getSongManager();
     songManager.getCollection().forEach((song) => {
@@ -112,7 +112,7 @@ export class GenreManager extends Manager<Genre> {
    * Agrega un nuevo género a la colección.
    * @param genre Género a agregar
    */
-  addGenre(genre: Genre): void {
+  public addGenre(genre: Genre): void {
     // Song
     const songManager: SongManager = SongManager.getSongManager();
     songManager.getCollection().forEach((song) => {
@@ -161,7 +161,7 @@ export class GenreManager extends Manager<Genre> {
    * @param albums Álbumes
    * @param songs Canciones
    */
-  editGenre(genre: Genre, name: string, musicians: (Group|Artist)[],
+  public editGenre(genre: Genre, name: string, musicians: (Group|Artist)[],
       albums: Album[], songs: Song[]): void {
     let oldName: string = genre.getName();
     genre.setName(name);
@@ -229,7 +229,7 @@ export class GenreManager extends Manager<Genre> {
   /**
    * Guarda los géneros en la base de datos.
    */
-  store() {
+  public store(): void {
     this.database.set('genres', [...this.collection.values()]).write();
   }
 }

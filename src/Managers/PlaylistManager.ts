@@ -47,7 +47,7 @@ export class PlaylistManager extends Manager<Playlist> {
   /**
    * Actualiza los géneros de todas las playlists.
    */
-  update(): void {
+  public update(): void {
     this.collection.forEach((playlist) => {
       playlist.updateGenres();
       playlist.recalculateDuration();
@@ -60,7 +60,7 @@ export class PlaylistManager extends Manager<Playlist> {
   /**
    * Guarda las playlists en la base de datos.
    */
-  store() {
+  public store(): void {
     this.database.set('playlists', [...this.collection.values()]).write();
   }
 }

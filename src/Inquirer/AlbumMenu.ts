@@ -8,6 +8,9 @@ import {ArtistManager} from '../Managers/ArtistManager';
 import {GroupManager} from '../Managers/GroupManager';
 import {Song} from '../Basics/Song';
 
+/**
+ * Despliega el menú de los álbumes.
+ */
 export function promptAlbumPrincipal(): void {
   const manager: AlbumManager = AlbumManager.getAlbumManager();
   let options: string[] = ['Nuevo Album +'];
@@ -34,7 +37,10 @@ export function promptAlbumPrincipal(): void {
     }
   });
 }
-
+/**
+ * Despliega el menú de un álbum en concreto.
+ * @param album Álbum del cuál se despliega el menú.
+ */
 function promptAlbum(album: Album): void {
   console.clear();
   album.showInfo();
@@ -58,7 +64,10 @@ function promptAlbum(album: Album): void {
   },
   );
 }
-
+/**
+ * Muestra una pregunta de confirmación para eliminar un álbum.
+ * @param album Álbum a eliminar.
+ */
 function promptRemoveAlbum(album: Album) {
   const manager: AlbumManager = AlbumManager.getAlbumManager();
   console.clear();
@@ -76,6 +85,9 @@ function promptRemoveAlbum(album: Album) {
       });
 }
 
+/**
+ * Despliega el menú para crear un nuevo álbum.
+ */
 function promptAddAlbum(): void {
   const manager: AlbumManager = AlbumManager.getAlbumManager();
   const artists: string[] = ArtistManager.getArtistManager().getList();
@@ -158,6 +170,10 @@ function promptAddAlbum(): void {
   });
 }
 
+/**
+ * Despliega el menú para editar un álbum.
+ * @param album Álbum a editar.
+ */
 function promptEditAlbum(album: Album): void {
   const manager: AlbumManager = AlbumManager.getAlbumManager();
   const artists: string[] = ArtistManager.getArtistManager().getList();

@@ -11,12 +11,28 @@ import {SongManager} from './SongManager';
 import {Song} from '../Basics/Song';
 import {PlaylistManager} from './PlaylistManager';
 
+/**
+ * Tipo para almacenar artistas mediante Lowdb.
+ */
 type schemaType = {
     artists: ArtistInterface[]
 };
+
+/**
+ * Clase para gestionar los artistas.
+ */
 export class ArtistManager extends Manager<Artist> {
+  /**
+   * Instancia de la clase `ArtistManager`.
+   */
   private static artistManager: ArtistManager;
+  /**
+   * Base de datos de los artistas.
+   */
   private database: lowdb.LowdbSync<schemaType>;
+  /**
+   * Constructor de la clase `ArtistManager`.
+   */
   private constructor() {
     super();
     this.database = lowdb(new FileSync('src/Data/Artists.json'));
@@ -25,35 +41,31 @@ export class ArtistManager extends Manager<Artist> {
       dbItems.forEach((item) => this.collection.add(Artist.deserialize(item)));
     }
   }
-
+  /**
+   * Devuelve la instancia de la clase `ArtistManager`.
+   * @returns Devuelve la única instancia de la clase.
+   */
   public static getArtistManager(): ArtistManager {
     if (!ArtistManager.artistManager) {
       ArtistManager.artistManager = new ArtistManager();
     }
     return ArtistManager.artistManager;
   }
-  /*
-  recalculateListeners(): void {
-    this.collection.forEach((artist) => {
-      artist.recalculateListeners();
-    });
-    this.store();
-  }*/
 
-  store() {
-    this.database.set('artists', [...this.collection.values()]).write();
-  }
-
-
+  /**
+   * Elimina un artista de la colección.
+   * @param artist Artista a eliminar.
+   * @param deleteSongs Flag que indica si hay que eliminar las canciones.
+   */
   public deleteArtist(artist: Artist, deleteSongs: boolean = true): void {
-    // Delete artists albums
+    // Album
     const objAlbumManager:AlbumManager = AlbumManager.getAlbumManager();
     artist.getAlbums().forEach((album) => {
       if (artist.getName() === album.getPublisher()) {
         objAlbumManager.removeAlbum(album);
       }
     });
-    // Delete artists songs
+    // Song
     if (deleteSongs) {
       const objSongManager:SongManager = SongManager.getSongManager();
       artist.getSongs().forEach((song) => {
@@ -62,7 +74,7 @@ export class ArtistManager extends Manager<Artist> {
         }
       });
     }
-    // Grupos
+    // Group
     const objGroupManager: GroupManager = GroupManager.getGroupManager();
     objGroupManager.getCollection().forEach((group) => {
       if (artist.getGroups().find((groupName) => groupName === group.getName()) !== undefined) {
@@ -73,8 +85,7 @@ export class ArtistManager extends Manager<Artist> {
       }
     });
     objGroupManager.store();
-
-    // Genres
+    // Genre
     const objGenresManager: GenreManager = GenreManager.getGenreManager();
     objGenresManager.getCollection().forEach((genre) => {
       if (artist.getGenres().find((genreName) => genreName === genre.getName()) !== undefined) {
@@ -85,14 +96,22 @@ export class ArtistManager extends Manager<Artist> {
       }
     });
     objGenresManager.store();
-
     // Playlist
     PlaylistManager.getPlaylistManager().update();
-    // Delete from artist collection
+    // Artist
     this.remove(artist);
     this.store();
   }
 
+  /**
+   * Edita un artista de la colección.
+   * @param artist Artista a editar.
+   * @param name Nombre
+   * @param groups Grupos
+   * @param genres Géneros
+   * @param albums Álbumes
+   * @param songs Canciones
+   */
   public editArtist(artist: Artist, name: string, groups: string[],
       genres: string[], albums: Album[], songs: Song[]): void {
     artist.setName(name);
@@ -147,8 +166,11 @@ export class ArtistManager extends Manager<Artist> {
     PlaylistManager.getPlaylistManager().update();
     this.store();
   }
-
-  addArtist(artist: Artist): void {
+  /**
+   * Agrega un nuevo artista a la colección.
+   * @param artist Artista a agregar
+   */
+  public addArtist(artist: Artist): void {
     // Group
     const groupManager: GroupManager = GroupManager.getGroupManager();
     groupManager.getCollection().forEach((group) => {
@@ -168,5 +190,12 @@ export class ArtistManager extends Manager<Artist> {
     // Artist
     this.add(artist);
     this.store();
+  }
+
+  /**
+   * Guarda los artistas en la base de datos.
+   */
+  public store(): void {
+    this.database.set('artists', [...this.collection.values()]).write();
   }
 }
